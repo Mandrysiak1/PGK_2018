@@ -22,9 +22,10 @@ public class TableScript : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         //PLAYER HAS TO HAVE TAG PLAYER
-        if (other.CompareTag("player"))
+        if (other.CompareTag("Player"))
         {
-            
+            // Messenger.Broadcast("Press E");
+            Debug.Log("Press E to interact");
             if(Input.GetKeyDown(KeyCode.E))
             {
                 if (myTable != null)

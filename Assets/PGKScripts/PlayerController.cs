@@ -16,11 +16,14 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("some")) //CURRENTLY OBJECTS TO INTERACT WITH, HAVE TAG SOME
+        if (other.gameObject.CompareTag("Table"))
         {
             Messenger.Broadcast("show id"); //TESTS
         }
-
+        if (other.gameObject.CompareTag("Bar"))
+        {
+            Messenger.Broadcast("show id"); //TESTS
+        }
         //other.gameObject.SetActive(false);
     }
 }
