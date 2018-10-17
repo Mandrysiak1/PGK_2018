@@ -6,24 +6,33 @@ namespace Assets
 {
     public class Order
     {
-        public string ID { get; private set; } 
+        public string ID { get; private set; }
         private float startTime = 0;
         private float endTime = 0;
         private int orderSize = 0;
-        private Table currTable;
+       
+        public float getStartTime()
+        {
+            return startTime;
+        }
+        public float getEndTime()
+        {
+            return endTime;
+        }
+        public float getOrderSize()
+        {
+            return orderSize;
+        }
 
-
-        public Order()
+        public Order(float startTime, float endTime,int orderSize)
         {
             ID = System.Guid.NewGuid().ToString();
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.orderSize = orderSize;
         }
 
-        public void AssignOrder(Table table, int ordSize = 1)
-        {
-            startTime = Time.time;
-            orderSize = ordSize;
-            currTable = table;
-        }
+    
 
         public override bool Equals(object obj)
         {
