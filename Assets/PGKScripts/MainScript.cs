@@ -23,12 +23,13 @@ public class MainScript : MonoBehaviour
 
     public MainScript()
     {
-        freeTables.Add(table1);
-        freeTables.Add(table2);
-        freeTables.Add(table3);
     }
 
-
+    public void AddFreeTable(object table)
+    {
+        Debug.Log("Added table " + ((Table)table).ID);
+        freeTables.Add((Table)table);
+    }
 
     // Use this for initialization
     void Start()
