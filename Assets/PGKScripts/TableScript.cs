@@ -6,7 +6,9 @@ public class TableScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         myTable = new Table();
-        Messenger.AddListener("show id", DebugID);
+        Messenger.AddListener("Table show", DebugID);
+        var x = FindObjectOfType(typeof(MainScript));
+        ((MainScript)x).SendMessage("AddFreeTable", myTable);
 	}
 	
 	// Update is called once per frame
