@@ -39,7 +39,7 @@ public class CameraScript : MonoBehaviour {
             prevRotY = rotationY;
         }
     }
-    private void FixedUpdate()
+    private void Update()
     {
         //transform.position = player.position + new Vector3(distanceX, distanceY, distanceZ);
         transform.position = Vector3.SmoothDamp(player.position, player.position + 
