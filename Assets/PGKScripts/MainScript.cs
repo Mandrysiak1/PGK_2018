@@ -35,6 +35,7 @@ public class MainScript : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("assda");
         time += Time.deltaTime;
         ControlOrders();
        
