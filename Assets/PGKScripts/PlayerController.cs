@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Table"))
         {
-            Messenger.Broadcast("show id"); //TESTS
+            //Messenger.Broadcast("show id"); //TESTS
         }
         if (other.gameObject.CompareTag("Bar"))
         {
-            Messenger.Broadcast("show id"); //TESTS
+           // Messenger.Broadcast("show id"); //TESTS
         }
         //other.gameObject.SetActive(false);
     }
