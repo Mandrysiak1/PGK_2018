@@ -6,9 +6,9 @@ public class CameraScript : MonoBehaviour {
 
     public Transform player;
 
-    public float smoothSpeed = 10f;
+    public float smoothSpeed = 0.9f;
 
-    public Vector3 cameraOffset = new Vector3(0, 7, 6);
+    public Vector3 cameraOffset = new Vector3(0, 9, 7);
 
     public Vector3 currentVelocity;
 
