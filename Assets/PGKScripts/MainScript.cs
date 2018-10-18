@@ -1,4 +1,5 @@
 ﻿using Assets;
+using Assets.PGKScripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 public class MainScript : MonoBehaviour
 {
-
+    public static Player player = new Player();
     private float time = 0f;
     private float nextOrderTime = 0f;
     private float orderDeadline = 10f;
@@ -26,13 +27,12 @@ public class MainScript : MonoBehaviour
         freeTables.Add((Table)table);
     }
 
-    // Use this for initialization
-    void Start()
-    { 
-
+    public Player GetPlayer()
+    {
+        return player;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         time += Time.deltaTime;
@@ -42,15 +42,13 @@ public class MainScript : MonoBehaviour
         {
             GenerateOrder();
             calculateNextOrderTime();
- 
-
         }
 
     }
 
     void calculateNextOrderTime()
     {
-        int offset = randomNum.Next(3, 6);
+        int offset = randomNum.Next(7, 9);
         nextOrderTime = time + offset;
         //TODO:Wymyśleć jakiś sposób na zmiane czasu;
     }
@@ -61,27 +59,37 @@ public class MainScript : MonoBehaviour
         if (freeTables.Count != 0)
         {
 
-            Debug.Log("Wygenerowano zamówienie");
+            
             int randomTable = randomNum.Next(0, freeTables.Count);
             int sizeOfOrder = randomNum.Next(1, 4);
-
+            Debug.Log("  #SYSINFO: Wygenerowano zamówienie o rozmiarze: " + sizeOfOrder);
             freeTables[randomTable].CurrOrder = new Order(time, time + orderDeadline, sizeOfOrder);
-            freeTables[randomTable].TableAwaiting = true;
 
             awaitingTables.Add(freeTables[randomTable]);
 
             freeTables.Remove(freeTables[randomTable]);
 
-
-
+         }else
+        {
+            Debug.Log("  #SYSINFO: Nie wygenerowano zamówienia,wszystkie stoliki zajęte!");
         }
     }
 
+
     public void ControlOrders()
-    {   
-        foreach(Table x in awaitingTables)
+    {
+        for (int i = 0; i < awaitingTables.Count; i++)
         {
+            Table x = awaitingTables[i];
             x.ControlOrder(time);
+            if(x.shouldBeFree == true)
+            {
+                Debug.Log("  #SYSINFO: Zwolniono stolik");
+                awaitingTables.Remove(x);
+                freeTables.Add(x);
+                x.shouldBeFree = false;
+                
+            }
         }
     }
 }

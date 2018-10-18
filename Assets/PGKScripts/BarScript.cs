@@ -1,22 +1,42 @@
-﻿using System.Collections;
+﻿using Assets.PGKScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bar : MonoBehaviour {
+public class BarScript : MonoBehaviour {
 
-    /* Bar is going to hand beer according to your plate size / capacity
-     * 
-     * 
-     * 
-     * 
-     */
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private Player myPlayer;
+    private bool hasPlayer = false;
+
+
+    void Start () {
+        var x = FindObjectOfType(typeof(MainScript));
+        myPlayer = ((MainScript)x).GetPlayer();
+       
+    }
 	
-	// Update is called once per frame
+
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true)
+        {
+            myPlayer.addBeer();
+        }
+
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            hasPlayer = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            hasPlayer = false;
+        }
+    }
 }
