@@ -12,7 +12,7 @@ public class Table : INotifyPropertyChanged
         private Order currOrder;
         private bool imWaiting = false;
         public event PropertyChangedEventHandler PropertyChanged;
-        private int beersOnTable = 0;
+        public int beersOnTable = 0;
         public bool shouldBeFree = false;
         public float Mood = 20;
 

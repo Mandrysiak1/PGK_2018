@@ -29,7 +29,7 @@ public class UIupdater : MonoBehaviour
     {
         if (tableScript.MyTable.IsThereOrder() == true)
         {
-            howmany.text = "x " + tableScript.MyTable.CurrOrder.getOrderSize();
+            howmany.text = "x " + (tableScript.MyTable.CurrOrder.getOrderSize() - tableScript.MyTable.beersOnTable);
             if (beer.enabled == false) beer.enabled = true;
         }
         else beer.enabled = false;
