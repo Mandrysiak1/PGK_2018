@@ -8,11 +8,11 @@ public class CameraScript : MonoBehaviour {
 
     public float smoothSpeed = 0.9f;
 
-    public Vector3 cameraOffset = new Vector3(0, 9, 7);
+    public Vector3 cameraOffset = new Vector3(0, 12, 8);
 
     public Vector3 currentVelocity;
 
-    public float maxSpeed = 10;
+    public float maxSpeed = 25;
 
 	// Use this for initialization
 	void Start () {

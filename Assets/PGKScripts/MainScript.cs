@@ -1,7 +1,5 @@
 ﻿using Assets;
 using Assets.PGKScripts;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,19 +33,17 @@ public class MainScript : MonoBehaviour
 
     void Update()
     {
-    
         time += Time.deltaTime;
         ControlOrders();
        
         if (time >= nextOrderTime)
         {
             GenerateOrder();
-            calculateNextOrderTime();
+            CalculateNextOrderTime();
         }
-
     }
 
-    void calculateNextOrderTime()
+    void CalculateNextOrderTime()
     {
         int offset = randomNum.Next(7, 9);
         nextOrderTime = time + offset;
@@ -56,21 +52,17 @@ public class MainScript : MonoBehaviour
 
     public void GenerateOrder()
     {
-
         if (freeTables.Count != 0)
         {
-
-            
             int randomTable = randomNum.Next(0, freeTables.Count);
             int sizeOfOrder = randomNum.Next(1, 4);
             Debug.Log("  #SYSINFO: Wygenerowano zamówienie o rozmiarze: " + sizeOfOrder);
             freeTables[randomTable].CurrOrder = new Order(time, time + orderDeadline, sizeOfOrder);
 
             awaitingTables.Add(freeTables[randomTable]);
-
             freeTables.Remove(freeTables[randomTable]);
-
-         }else
+        }
+        else
         {
             Debug.Log("  #SYSINFO: Nie wygenerowano zamówienia,wszystkie stoliki zajęte!");
         }
@@ -79,19 +71,16 @@ public class MainScript : MonoBehaviour
 
     public void ControlOrders()
     {
-        for (int i = 0; i < awaitingTables.Count; i++)
+        for (int i = awaitingTables.Count - 1; i >= 0; i--)
         {
             Table x = awaitingTables[i];
-            x.Mood -= Time.deltaTime;
-            x.ControlOrder(time);
-            if(x.shouldBeFree == true)
+            var shouldBeFree = x.ControlOrder(time);
+            if (shouldBeFree == true)
             {
-                Debug.Log("  #SYSINFO: Zwolniono stolik");
-                awaitingTables.Remove(x);
-                freeTables.Add(x);
-                x.shouldBeFree = false;
                 x.Mood = 20;
-                
+                Debug.Log("  #SYSINFO: Zwolniono stolik");
+                awaitingTables.RemoveAt(i);
+                freeTables.Add(x);
             }
         }
     }

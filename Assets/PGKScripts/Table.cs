@@ -13,7 +13,7 @@ public class Table : INotifyPropertyChanged
         private bool imWaiting = false;
         public event PropertyChangedEventHandler PropertyChanged;
         public int beersOnTable = 0;
-        public bool shouldBeFree = false;
+        //public bool shouldBeFree = false;
         public float Mood = 20;
 
     public bool TableAwaiting
@@ -94,7 +94,8 @@ public class Table : INotifyPropertyChanged
             }
         }
 
-        public void ControlOrder(float currentTime)  {
+    public bool ControlOrder(float currentTime)
+    {
         if (currOrder != null )
         {
             if (beersOnTable < currOrder.getOrderSize())
@@ -108,18 +109,19 @@ public class Table : INotifyPropertyChanged
                 {
                     //DO NOTHING
                 }
+                return false;
             }
             else if (beersOnTable >= currOrder.getOrderSize())
             {
                 Debug.Log("DODANO PUNKTY I WIN STEAK");
                 CurrOrder = null;
-                shouldBeFree = true;
+                //shouldBeFree = true;
                 beersOnTable = 0;
-                
+                return true;
                 //DODAJ PUNKTY I WIN STREAKA
             }
         }
-        
+        return false;
     }
 
 }
