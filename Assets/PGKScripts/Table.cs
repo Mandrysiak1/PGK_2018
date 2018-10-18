@@ -9,15 +9,30 @@ using UnityEngine;
     {
         public string ID { get; private set; }
         private Order currOrder;
+        private bool imWaiting = false;
         public event PropertyChangedEventHandler PropertyChanged;
         private int beersOnTable = 0;
-        
+
+        public bool TableAwaiting
+        {
+            get
+            {
+                return imWaiting;
+            }
+
+            set
+            {
+                this.imWaiting = value;
+                //PERHAPS THROW ORDER HERE TO UI HANDLER?
+                OnPropertyChanged("TableAwaiting");
+            }
+        }
         public Table()
         {
             ID = System.Guid.NewGuid().ToString();
         }
 
-        public Order CurrentOrder
+        public Order CurrOrder
     {
         get
         {
@@ -33,8 +48,8 @@ using UnityEngine;
      
         public void NullifyOrder()
         {
-            this.SetOrder(null);
-            OnPropertyChanged("CurrOrder");
+            //        this.SetOrder(null);
+
         }
 
         public bool IsThereOrder()
