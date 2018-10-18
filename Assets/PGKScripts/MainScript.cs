@@ -82,6 +82,7 @@ public class MainScript : MonoBehaviour
         for (int i = 0; i < awaitingTables.Count; i++)
         {
             Table x = awaitingTables[i];
+            x.Mood -= Time.deltaTime;
             x.ControlOrder(time);
             if(x.shouldBeFree == true)
             {
@@ -89,6 +90,7 @@ public class MainScript : MonoBehaviour
                 awaitingTables.Remove(x);
                 freeTables.Add(x);
                 x.shouldBeFree = false;
+                x.Mood = 20;
                 
             }
         }

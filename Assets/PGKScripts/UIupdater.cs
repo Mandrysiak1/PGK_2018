@@ -33,7 +33,7 @@ public class UIupdater : MonoBehaviour
             if (beer.enabled == false) beer.enabled = true;
         }
         else beer.enabled = false;
-        if (tableScript.MyTable.Mood >= 8)
+        if (tableScript.MyTable.Mood >= 16)
         {
             if (one.enabled == false) one.enabled = true;
             if (two.enabled == true) two.enabled = false;
@@ -41,7 +41,7 @@ public class UIupdater : MonoBehaviour
             if (four.enabled == true) four.enabled = false;
             if (five.enabled == true) five.enabled = false;
         }
-        if (tableScript.MyTable.Mood >= 6 && tableScript.MyTable.Mood < 8)
+        if (tableScript.MyTable.Mood >= 12 && tableScript.MyTable.Mood < 16)
         {
             if (one.enabled == true) one.enabled = false;
             if (two.enabled == false) two.enabled = true;
@@ -49,7 +49,7 @@ public class UIupdater : MonoBehaviour
             if (four.enabled == true) four.enabled = false;
             if (five.enabled == true) five.enabled = false;
         }
-        if (tableScript.MyTable.Mood >= 4 && tableScript.MyTable.Mood < 6)
+        if (tableScript.MyTable.Mood >= 8 && tableScript.MyTable.Mood < 12)
         {
             if (one.enabled == true) one.enabled = false;
             if (two.enabled == true) two.enabled = false;
@@ -57,7 +57,7 @@ public class UIupdater : MonoBehaviour
             if (four.enabled == true) four.enabled = false;
             if (five.enabled == true) five.enabled = false;
         }
-        if (tableScript.MyTable.Mood >= 2 && tableScript.MyTable.Mood < 4)
+        if (tableScript.MyTable.Mood >= 4 && tableScript.MyTable.Mood < 8)
         {
             if (one.enabled == true) one.enabled = false;
             if (two.enabled == true) two.enabled = false;
@@ -65,7 +65,7 @@ public class UIupdater : MonoBehaviour
             if (four.enabled == false) four.enabled = true;
             if (five.enabled == true) five.enabled = false;
         }
-        if (tableScript.MyTable.Mood >= 0 && tableScript.MyTable.Mood < 2)
+        if (tableScript.MyTable.Mood < 4)
         {
             if (one.enabled == true) one.enabled = false;
             if (two.enabled == true) two.enabled = false;

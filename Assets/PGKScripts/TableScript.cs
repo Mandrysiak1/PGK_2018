@@ -1,13 +1,15 @@
 ﻿using Assets.PGKScripts;
 using UnityEngine;
 
-public class TableScript : MonoBehaviour {
+public class TableScript : MonoBehaviour
+{
 
     private Player myPlayer;
     public Table MyTable { get; set; }
     private bool hasPlayer = false;
 
-	void Start () {
+    void Start()
+    {
 
         MyTable = new Table();
 
@@ -24,37 +26,39 @@ public class TableScript : MonoBehaviour {
     // wywoływał się kilkanaście razy. GetKeyDown, zgodnie z dokumentacją powinien być 
     // używany tylko w update i fixeUpdate. Pisze tak jakby się ktoś pytał :)
 
-    void Update () {
-      
+    void Update()
+    {
+
         if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true)
 
+        {
+            if (MyTable != null)
             {
-                if (MyTable != null)
+
+                if (MyTable.IsThereOrder())
                 {
 
-                    if (MyTable.IsThereOrder())
+                    if (myPlayer.getBOP() > 0)
                     {
-                       
-                        if (myPlayer.getBOP() > 0)
-                        {
-                            myPlayer.removeBeer();
-                            MyTable.putBeer();
+                        myPlayer.removeBeer();
+                        MyTable.putBeer();
                         int x = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
-                        Debug.Log("Połozono piwo, potrzeba jeszcze: " + x );
+                        Debug.Log("Połozono piwo, potrzeba jeszcze: " + x);
 
                     }
                     else
-                         Debug.Log("Nie masz przy sobie piwa!");
-                     
-                    }
-                    else
-                    {
+                        Debug.Log("Nie masz przy sobie piwa!");
+                    
+
+                }
+                else
+                {
                     Debug.Log("Aktualnie nie ma zamówienia na tym stoliku!");
                 }
 
-                }
             }
-        
+        }
+
     }
 
     public void DebugID()
@@ -66,7 +70,7 @@ public class TableScript : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-           Debug.Log("Jesteś przy stoliku");
+            Debug.Log("Jesteś przy stoliku");
             hasPlayer = true;
         }
     }
