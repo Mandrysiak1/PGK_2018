@@ -16,11 +16,6 @@ public class MainScript : MonoBehaviour
     List<Table> awaitingTables = new List<Table>();
     List<Table> freeTables = new List<Table>();
 
-
-    private Table table1 = new Table();
-    private Table table2 = new Table();
-    private Table table3 = new Table();
-
     public MainScript()
     {
     }
