@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class UIupdater : MonoBehaviour
 {
-
-    public Slider slider;
-    float Satisfaction;
+    public TableScript tableScript;
+    //public Slider slider;
     public Canvas one;
     public Canvas two;
     public Canvas three;
@@ -15,10 +14,77 @@ public class UIupdater : MonoBehaviour
     public Canvas five;
     public Canvas beer;
     public Text howmany;
-    public void StartFillingUpBar()
+
+    private void Start()
     {
-        slider.value = 0;
+        if (one.enabled == false) one.enabled = true;
+        if (two.enabled == true) two.enabled = false;
+        if (three.enabled == true) three.enabled = false;
+        if (four.enabled == true) four.enabled = false;
+        if (five.enabled == true) five.enabled = false;
+        if (beer.enabled == true) beer.enabled = false;
+    }
+
+    void Update()
+    {
+        if (tableScript.MyTable.IsThereOrder() == true)
+        {
+            howmany.text = "x " + tableScript.MyTable.CurrOrder.getOrderSize();
+            if (beer.enabled == false) beer.enabled = true;
+        }
+        else beer.enabled = false;
+        if (tableScript.MyTable.Mood >= 8)
+        {
+            if (one.enabled == false) one.enabled = true;
+            if (two.enabled == true) two.enabled = false;
+            if (three.enabled == true) three.enabled = false;
+            if (four.enabled == true) four.enabled = false;
+            if (five.enabled == true) five.enabled = false;
+        }
+        if (tableScript.MyTable.Mood >= 6 && tableScript.MyTable.Mood < 8)
+        {
+            if (one.enabled == true) one.enabled = false;
+            if (two.enabled == false) two.enabled = true;
+            if (three.enabled == true) three.enabled = false;
+            if (four.enabled == true) four.enabled = false;
+            if (five.enabled == true) five.enabled = false;
+        }
+        if (tableScript.MyTable.Mood >= 4 && tableScript.MyTable.Mood < 6)
+        {
+            if (one.enabled == true) one.enabled = false;
+            if (two.enabled == true) two.enabled = false;
+            if (three.enabled == false) three.enabled = true;
+            if (four.enabled == true) four.enabled = false;
+            if (five.enabled == true) five.enabled = false;
+        }
+        if (tableScript.MyTable.Mood >= 2 && tableScript.MyTable.Mood < 4)
+        {
+            if (one.enabled == true) one.enabled = false;
+            if (two.enabled == true) two.enabled = false;
+            if (three.enabled == true) three.enabled = false;
+            if (four.enabled == false) four.enabled = true;
+            if (five.enabled == true) five.enabled = false;
+        }
+        if (tableScript.MyTable.Mood >= 0 && tableScript.MyTable.Mood < 2)
+        {
+            if (one.enabled == true) one.enabled = false;
+            if (two.enabled == true) two.enabled = false;
+            if (three.enabled == true) three.enabled = false;
+            if (four.enabled == true) four.enabled = false;
+            if (five.enabled == false) five.enabled = true;
+            //StartCoroutine(FillBarAsync());
+        }
+    }
+
+    /*public void StartFillingUpBar()
+    {
+        //slider.value = 0;
         StartCoroutine(FillBarAsync());
+    }
+
+    public void StopFillingUpBar()
+    {
+        StopCoroutine(FillBarAsync());
     }
 
     public void StartTestOrder()
@@ -89,11 +155,11 @@ public class UIupdater : MonoBehaviour
                 if (three.enabled == true) three.enabled = false;
                 if (four.enabled == true) four.enabled = false;
                 if (five.enabled == false) five.enabled = true;
-                StartCoroutine(FillBarAsync());
+                //StartCoroutine(FillBarAsync());
                 break;
             }
             yield return null;
         }
-    }
+    }*/
 
 }

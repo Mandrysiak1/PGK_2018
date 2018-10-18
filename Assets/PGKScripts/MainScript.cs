@@ -66,6 +66,7 @@ public class MainScript : MonoBehaviour
             int sizeOfOrder = randomNum.Next(1, 4);
 
             freeTables[randomTable].CurrOrder = new Order(time, time + orderDeadline, sizeOfOrder);
+            freeTables[randomTable].TableAwaiting = true;
 
             awaitingTables.Add(freeTables[randomTable]);
 

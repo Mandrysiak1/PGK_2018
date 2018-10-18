@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 
 public class TableScript : MonoBehaviour {
-
-    private Table myTable;
-	// Use this for initialization
-	void Start () {
-        myTable = new Table();
+    public Table MyTable { get; set; }
+    // Use this for initialization
+    void Start () {
+        MyTable = new Table();
         Messenger.AddListener("Table show", DebugID);
         var x = FindObjectOfType(typeof(MainScript));
-        ((MainScript)x).SendMessage("AddFreeTable", myTable);
+        ((MainScript)x).SendMessage("AddFreeTable", MyTable);
 	}
+
+    
 	
 	// Update is called once per frame
 	void Update () {
-		//PERHAPS WE SHOULD UPDATE OUR MOOD HERE? :D
+        if (MyTable.TableAwaiting == true) MyTable.Mood -= Time.deltaTime;
+        Debug.Log(MyTable.TableAwaiting);
+        Debug.Log("update poszet");
 	}
 
     public void DebugID()
     {
-        Debug.Log(myTable.ID);
+        Debug.Log(MyTable.ID);
     }
 
     private void OnTriggerStay(Collider other)
@@ -30,21 +33,21 @@ public class TableScript : MonoBehaviour {
             Debug.Log("Press E to interact");
             if(Input.GetKeyDown(KeyCode.E))
             {
-                if (myTable != null)
+                if (MyTable != null)
                 {
-                    if(myTable.IsThereOrder())
+                    if(MyTable.IsThereOrder())
                     {
                         //SEND OBJECT HERE
                         //PICK UP ORDER
                         Debug.Log("Object picked, E clicked :D");
-                        myTable.TableAwaiting = true;
+                        MyTable.TableAwaiting = true;
                     } else
                     {
-                        if (myTable.TableAwaiting == true)
+                        if (MyTable.TableAwaiting == true)
                         {
                             //GIVE BEERS :D BUT FIRST CHECK IF I HAVE IT, OFCOURSE
                             Debug.Log("Gave tha beer :D");
-                            myTable.TableAwaiting = false;
+                            MyTable.TableAwaiting = false;
                             //GOTTA HAVE TO CHANGE THIS TABLE AWAITING FOR THE AMOUNT OF BEERS AFTER
                             // PROTOTYPING OF COURSE
                         }
