@@ -1,26 +1,54 @@
 ﻿using Assets;
 using Assets.PGKScripts;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class MainScript : MonoBehaviour
+public class MainScript : MonoBehaviour, INotifyPropertyChanged
 {
-    public static Player player = new Player();
-    public Text HowManyBeers;
+    public static readonly Player player = new Player();
+    //
+    private string _beerCount;
+    public string BeerCount
+    {
+        get
+        {
+            return _beerCount;
+        }
+        private set
+        {
+            _beerCount = value;
+            OnPropertyChanged("BeerCount");
+        }
+    }
+    private float _dissatisfactionValue;
+    public float DissatisfactionValue
+    {
+        get
+        {
+            return _dissatisfactionValue;
+        }
+        private set
+        {
+            _dissatisfactionValue = value;
+            OnPropertyChanged("DissatisfactionValue");
+        }
+    }
     private float time = 0f;
     private float nextOrderTime = 0f;
     private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego
     System.Random randomNum = new System.Random();
-    public Slider BigBar;
+    
     List<Table> awaitingTables = new List<Table>();
     List<Table> freeTables = new List<Table>();
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public MainScript()
     {
     }
-
     public void AddFreeTable(object table)
     {
         Debug.Log("Added table " + ((Table)table).ID);
@@ -36,8 +64,6 @@ public class MainScript : MonoBehaviour
     {
         return time;
     }
-
-
     void Update()
     {
         time += Time.deltaTime;
@@ -48,8 +74,8 @@ public class MainScript : MonoBehaviour
             GenerateOrder();
             CalculateNextOrderTime();
         }
-        FillTheBAR();
-        BeerCountDisplay();
+        ChangeDissatisfactionValue();
+        BeerCountChange();
     }
 
     void CalculateNextOrderTime()
@@ -58,7 +84,6 @@ public class MainScript : MonoBehaviour
         nextOrderTime = time + offset;
         //TODO:Wymyśleć jakiś sposób na zmiane czasu;
     }
-
     public void GenerateOrder()
     {
         if (freeTables.Count != 0)
@@ -77,7 +102,6 @@ public class MainScript : MonoBehaviour
         }
     }
 
-
     public void ControlOrders()
     {
         for (int i = awaitingTables.Count - 1; i >= 0; i--)
@@ -94,7 +118,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    private void FillTheBAR()
+    private void ChangeDissatisfactionValue()
     {
         int i = 0;
         int threshold = 4;
@@ -102,13 +126,19 @@ public class MainScript : MonoBehaviour
         {
             if (t.Mood < threshold) i++;
         }
-        BigBar.value += Time.deltaTime * i;
+        DissatisfactionValue += Time.deltaTime * i;
     }
-
-    private void BeerCountDisplay()
+    private void BeerCountChange()
     {
-        HowManyBeers.text = player.getBOP() + " x";
+       BeerCount = player.GetBeersOnPlateQuantity() + " x";
     }
-
+    protected void OnPropertyChanged(string name)
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null)
+        {
+            handler(this, new PropertyChangedEventArgs(name));
+        }
+    }
 }
 

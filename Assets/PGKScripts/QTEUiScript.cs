@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.PGKScripts.Interfaces;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class QTE_UI_Script : MonoBehaviour {
+public class QTEUiScript : MonoBehaviour, IQteUI {
 
  
-
     public Canvas q;
     public Canvas e;
     public Canvas x;
     public Canvas c;
+
+    private IQteScript[] qteScripts;
 
     // Use this for initialization
     void Start () {
@@ -18,15 +17,24 @@ public class QTE_UI_Script : MonoBehaviour {
         e.enabled = false;
         x.enabled = false;
         c.enabled = false;
+        qteScripts = (QTEScript[])FindObjectsOfType(typeof(QTEScript));
+        foreach(var s in qteScripts)
+            s.PropertyChanged += QteScript_PropertyChanged;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void QteScript_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        var qteScript = (QTEScript)sender;
+        this.SetImage(qteScript.CurrentChar);
+    }
+
+    // Update is called once per frame
+    void Update () {
         Vector3 namePos = Camera.main.WorldToScreenPoint(this.transform.position);
         
 	}
 
-    public void setImage(string image)
+    public void SetImage(string image)
     {
         if (image == "q")
         {

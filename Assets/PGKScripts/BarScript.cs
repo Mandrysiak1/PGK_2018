@@ -14,15 +14,11 @@ public class BarScript : MonoBehaviour {
         myPlayer = ((MainScript)x).GetPlayer();
        
     }
-	
-
 	void Update () {
         if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true)
         {
-            myPlayer.addBeer();
+            myPlayer.AddBeer();
         }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +28,7 @@ public class BarScript : MonoBehaviour {
             hasPlayer = true;
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

@@ -1,10 +1,11 @@
 ﻿using Assets.PGKScripts;
-using System.Collections;
+using Assets.PGKScripts.Interfaces;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class QTE_Script : MonoBehaviour {
+public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
 
     private List<string> charList  = new List<string>();
 
@@ -20,10 +21,21 @@ public class QTE_Script : MonoBehaviour {
 
     float qteEndTime;
 
-    private QTE_UI_Script script;
+    public event PropertyChangedEventHandler PropertyChanged;
 
-
-
+    private string _currentChar = "0";
+    public string CurrentChar
+    {
+        get
+        {
+            return _currentChar;
+        }
+        private set
+        {
+            _currentChar = value;
+            OnPropertyChanged("CurrentChar");
+        }
+    }
 
     void Start () {
         charList.Add("q");
@@ -34,63 +46,63 @@ public class QTE_Script : MonoBehaviour {
         var x = FindObjectOfType(typeof(MainScript));
         time = ((MainScript)x).GetTime();
         myPlayer = ((MainScript)x).GetPlayer();
-        script = (QTE_UI_Script) FindObjectOfType(typeof(QTE_UI_Script));
-
     }
-	
+	private void ResetUI()
+    {
+        CurrentChar = "0";
+    }
 
 	void Update () {
         var x = FindObjectOfType(typeof(MainScript));
         time = ((MainScript)x).GetTime();
 
-        for (int i = 0; i < 1; i++) //If something is silly but it works it is not silly anymore XD
+        if (isWaitingForKey)
         {
-
-            if (isWaitingForKey == true)
+            if (time <= qteEndTime)
             {
-                if (time <= qteEndTime)
+                if (!(Input.GetKeyDown("w") || Input.GetKeyDown("a") 
+                || Input.GetKeyDown("d") || Input.GetKeyDown("s")))
                 {
-                    if (Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("d") || Input.GetKeyDown("s"))
-                    {
-                        break;
-                    }
                     if (Input.anyKeyDown)
                     {
-
                         if (Input.GetKeyDown(randomChar))
                         {
                             isWaitingForKey = false;
                             Debug.Log("Dobrze");
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
-                            script.setImage("0");
+                            ResetUI();
 
                         }
                         else
                         {
                             Debug.Log("Źle");
-                            myPlayer.setBOP(0);
+                            myPlayer.SetBeersOnPlateQuantity(0);
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
                             isWaitingForKey = false;
-                            script.setImage("0");
+                            ResetUI();
                         }
-
                     }
-
-                } else
-                {
-                    Debug.Log("Czas minął");
-                    myPlayer.setBOP(0);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
-                    isWaitingForKey = false;
-                    script.setImage("0");
                 }
-
+            }
+            else
+            {
+                Debug.Log("Czas minął");
+                myPlayer.SetBeersOnPlateQuantity(0);
+                
+                GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
+                isWaitingForKey = false;
+                ResetUI();
             }
         }
 
  
     }
-
+    /*
+     * 
+     * 
+     * PREVIOUS VERSION
+     * 
+     * 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -103,6 +115,31 @@ public class QTE_Script : MonoBehaviour {
             Debug.Log("Naciśnij: " + randomChar);
             script.setImage(randomChar);
             qteEndTime = time + 2f;
+        }
+    }
+    */
+    private void OnCollisionEnter(Collision collision)
+    {
+        var other = collision.gameObject;
+        if (other.CompareTag("Player"))
+        {
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0);
+            Debug.Log("QTE");
+            isWaitingForKey = true;
+            randomChar = charList[Random.Range(0, 3)];
+            Debug.Log("Naciśnij: " + randomChar);
+            //UIScript.SetImage(randomChar);
+            CurrentChar = randomChar;
+            qteEndTime = time + 2f;
+        }
+    }
+    protected void OnPropertyChanged(string name)
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null)
+        {
+            handler(this, new PropertyChangedEventArgs(name));
         }
     }
 }

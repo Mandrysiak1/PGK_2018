@@ -24,12 +24,7 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
         Vector3 nextPosition = player.position + cameraOffset;
-		/*
-        Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, nextPosition, 
-            ref currentVelocity, smoothSpeed, maxSpeed);
-			
-        transform.position = smoothedPosition;
-		*/
+
         if(!rotationVector.Equals(prevRotation))
         {
             transform.rotation = Quaternion.Euler(rotationVector);
@@ -44,6 +39,5 @@ public class CameraScript : MonoBehaviour {
     }
     private void Update()
     {
-        //transform.position = player.position + new Vector3(distanceX, distanceY, distanceZ);
     }
 }

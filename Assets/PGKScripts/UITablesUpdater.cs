@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIupdater : MonoBehaviour
+public class UITablesUpdater : MonoBehaviour
 {
     public TableScript tableScript;
+    public MainScript mainScript;
     //public Slider slider;
     public Canvas one;
     public Canvas two;
@@ -17,6 +16,7 @@ public class UIupdater : MonoBehaviour
 
     private void Start()
     {
+        
         if (one.enabled == false) one.enabled = true;
         if (two.enabled == true) two.enabled = false;
         if (three.enabled == true) three.enabled = false;

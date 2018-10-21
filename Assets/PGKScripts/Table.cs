@@ -6,12 +6,11 @@ using System.ComponentModel;
 using UnityEngine;
 
 
-public class Table : INotifyPropertyChanged
+public class Table
     {
         public string ID { get; private set; }
         private Order currOrder;
         private bool imWaiting = false;
-        public event PropertyChangedEventHandler PropertyChanged;
         public int beersOnTable = 0;
         //public bool shouldBeFree = false;
         public float Mood = 20;
@@ -27,7 +26,6 @@ public class Table : INotifyPropertyChanged
             {
                 this.imWaiting = value;
                 //PERHAPS THROW ORDER HERE TO UI HANDLER?
-                OnPropertyChanged("TableAwaiting");
             }
         }
         public Table()
@@ -45,7 +43,6 @@ public class Table : INotifyPropertyChanged
         set
         {
             this.currOrder = value;
-            OnPropertyChanged("CurrOrder");
         }
     }
    
@@ -81,18 +78,6 @@ public class Table : INotifyPropertyChanged
         return beersOnTable;
         }
 
-
-
-    protected void OnPropertyChanged(string name)
-        {
-          
-        PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-               
-            }
-        }
 
     public bool ControlOrder(float currentTime)
     {

@@ -38,7 +38,7 @@ public class TableScript : MonoBehaviour
                 if (MyTable.IsThereOrder())
                 {
 
-                    if (myPlayer.getBOP() > 0)
+                    if (myPlayer.GetBeersOnPlateQuantity() > 0)
                     {
                         myPlayer.removeBeer();
                         MyTable.putBeer();

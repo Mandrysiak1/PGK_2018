@@ -31,16 +31,12 @@ namespace Assets
             this.endTime = endTime;
             this.orderSize = orderSize;
         }
-
-    
-
         public override bool Equals(object obj)
         {
             var order = obj as Order;
             return order != null &&
                    ID == order.ID;
         }
-
         public override int GetHashCode()
         {
             var hashCode = 196815894;
