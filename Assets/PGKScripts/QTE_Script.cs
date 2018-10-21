@@ -20,6 +20,8 @@ public class QTE_Script : MonoBehaviour {
 
     float qteEndTime;
 
+    private QTE_UI_Script script;
+
 
 
 
@@ -32,6 +34,7 @@ public class QTE_Script : MonoBehaviour {
         var x = FindObjectOfType(typeof(MainScript));
         time = ((MainScript)x).GetTime();
         myPlayer = ((MainScript)x).GetPlayer();
+        script = (QTE_UI_Script) FindObjectOfType(typeof(QTE_UI_Script));
 
     }
 	
@@ -59,6 +62,7 @@ public class QTE_Script : MonoBehaviour {
                             isWaitingForKey = false;
                             Debug.Log("Dobrze");
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
+                            script.setImage("0");
 
                         }
                         else
@@ -67,6 +71,7 @@ public class QTE_Script : MonoBehaviour {
                             myPlayer.setBOP(0);
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
                             isWaitingForKey = false;
+                            script.setImage("0");
                         }
 
                     }
@@ -77,6 +82,7 @@ public class QTE_Script : MonoBehaviour {
                     myPlayer.setBOP(0);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
                     isWaitingForKey = false;
+                    script.setImage("0");
                 }
 
             }
@@ -95,6 +101,7 @@ public class QTE_Script : MonoBehaviour {
             isWaitingForKey = true;
             randomChar = charList[Random.Range(0, 3)];
             Debug.Log("Naciśnij: " + randomChar);
+            script.setImage(randomChar);
             qteEndTime = time + 2f;
         }
     }

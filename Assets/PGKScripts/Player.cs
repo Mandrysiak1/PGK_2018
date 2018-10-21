@@ -17,7 +17,11 @@ namespace Assets.PGKScripts
         }
         public void addBeer()
         {
-            beersOnPlate += 1;
+            if(beersOnPlate <= 4)
+            {
+                beersOnPlate += 1;
+            }
+            
             Debug.Log("Na tacy znajduje sie: " + beersOnPlate + " piw");
         }
         public int getBOP()
