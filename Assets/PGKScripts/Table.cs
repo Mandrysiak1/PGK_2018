@@ -104,6 +104,8 @@ public class Table : INotifyPropertyChanged
                 {
                     //Obniż stopień zadowolenia stolika i ogólego z zależności od różnicy
                     //wyzeruj winstreak;
+                    //tymczasowo dodane.
+                    Mood -= Time.deltaTime;
                 }
                 else if (currOrder.getEndTime() <= currentTime)
                 {

@@ -2,16 +2,18 @@
 using Assets.PGKScripts;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class MainScript : MonoBehaviour
 {
     public static Player player = new Player();
+    public Text HowManyBeers;
     private float time = 0f;
     private float nextOrderTime = 0f;
-    private float orderDeadline = 10f;
+    private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego
     System.Random randomNum = new System.Random();
-
+    public Slider BigBar;
     List<Table> awaitingTables = new List<Table>();
     List<Table> freeTables = new List<Table>();
 
@@ -41,6 +43,8 @@ public class MainScript : MonoBehaviour
             GenerateOrder();
             CalculateNextOrderTime();
         }
+        FillTheBAR();
+        BeerCountDisplay();
     }
 
     void CalculateNextOrderTime()
@@ -84,5 +88,22 @@ public class MainScript : MonoBehaviour
             }
         }
     }
+
+    private void FillTheBAR()
+    {
+        int i = 0;
+        int threshold = 4;
+        foreach(Table t in awaitingTables)
+        {
+            if (t.Mood < threshold) i++;
+        }
+        BigBar.value += Time.deltaTime * i;
+    }
+
+    private void BeerCountDisplay()
+    {
+        HowManyBeers.text = "Trzymasz " + player.getBOP() + " piw.";
+    }
+
 }
 
