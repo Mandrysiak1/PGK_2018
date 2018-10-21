@@ -24,6 +24,11 @@ namespace Assets.PGKScripts
         {
             return beersOnPlate;
         }
+        public void setBOP(int x)
+        {
+            beersOnPlate = x;
+            Debug.Log("Ustawiono ilośc piw na: " + beersOnPlate);
+        }
 
     
 

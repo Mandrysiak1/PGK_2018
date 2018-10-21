@@ -30,6 +30,11 @@ public class MainScript : MonoBehaviour
         return player;
     }
 
+    public float GetTime()
+    {
+        return time;
+    }
+
 
     void Update()
     {

@@ -42,8 +42,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
+        public void setm_MoveSpeedMultiplie(float x)
+        {
+            m_MoveSpeedMultiplier = x;
+        }
+        public void setm_AnimSpeedMultiplier(float x)
+        {
+            m_AnimSpeedMultiplier = x;
+        }
 
-		public void Move(Vector3 move, bool crouch, bool jump)
+
+        public void Move(Vector3 move, bool crouch, bool jump)
 		{
 
 			// convert the world relative moveInput vector into a local-relative
