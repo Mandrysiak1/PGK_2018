@@ -17,8 +17,15 @@ public class UIMain : MonoBehaviour {
     int x = 2;
     float y = 4;
 
+    public AudioSource backgroundSong;
+
     // Use this for initialization
     void Start () {
+
+        this.backgroundSong = GetComponent<AudioSource>();
+        this.backgroundSong.Play(0);
+
+
         Time.timeScale = 1;
         EndGameCanvas.enabled = false;
         mainScript = (MainScript)FindObjectOfType(typeof(MainScript));
