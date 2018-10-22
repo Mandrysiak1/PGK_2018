@@ -166,7 +166,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0);
             Debug.Log("QTE");
             isWaitingForKey = true;
-            randomChar = charList[Random.Range(0, 3)];
+            randomChar = charList[Random.Range(0, 4)];
             Debug.Log("Naciśnij: " + randomChar);
             //UIScript.SetImage(randomChar);
             CurrentChar = randomChar;
