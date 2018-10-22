@@ -1,5 +1,6 @@
 ﻿using Assets;
 using Assets.PGKScripts;
+using Assets.PGKScripts.Enums;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
@@ -9,6 +10,20 @@ using UnityEngine;
 public class MainScript : MonoBehaviour, INotifyPropertyChanged
 {
     public static readonly Player player = new Player();
+
+    private GameState gameState = GameState.Playing;
+    public GameState CurrentGameState
+    {
+        get
+        {
+            return gameState;
+        }
+        private set
+        {
+            this.gameState = value;
+            OnPropertyChanged("CurrentGameState");
+        }
+    }
 
     private string _beerCount;
     public string BeerCount
@@ -23,6 +38,22 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             OnPropertyChanged("BeerCount");
         }
     }
+    public int BeersHandedOut
+    {
+        get
+        {
+            return player.BeersHandedOut;
+        }
+    }
+
+    public int Score
+    {
+        get
+        {
+            return (int)(100 - DissatisfactionValue) + 2 * BeersHandedOut;
+        }
+    }       
+
     private float _dissatisfactionValue;
     public float DissatisfactionValue
     {
@@ -36,35 +67,6 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             OnPropertyChanged("DissatisfactionValue");
         }
     }
-
-    private bool _GG;
-    public bool GG
-    {
-        get
-        {
-            return _GG;
-        }
-        private set
-        {
-            _GG = value;
-            OnPropertyChanged("GG");
-        }
-    }
-
-    private bool _BG;
-    public bool BG
-    {
-        get
-        {
-            return _BG;
-        }
-        private set
-        {
-            _BG = value;
-            OnPropertyChanged("BG");
-        }
-    }
-
 
     private float time = 0f;
     private float nextOrderTime = 0f;
@@ -177,13 +179,13 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
     {
         if (DissatisfactionValue >= 100)
         {
-            BG = true;
+            CurrentGameState = GameState.Failure;
             player.SetBeersOnPlateQuantity(0);
         }
 
         if (time >= 124)
         {
-            GG = true;
+            CurrentGameState = GameState.Success;
             player.SetBeersOnPlateQuantity(0);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Assets.PGKScripts.Enums;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,18 +30,13 @@ public class UIMain : MonoBehaviour {
     private void MainScript_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName.Equals("BeerCount"))
-            this.howManyBeers.text = ((MainScript)sender).BeerCount + " x";
+            this.howManyBeers.text = mainScript.BeerCount + " x";
         if (e.PropertyName.Equals("DissatisfactionValue"))
-            this.bigBar.value = ((MainScript)sender).DissatisfactionValue;
-        if (e.PropertyName.Equals("GG"))
+            this.bigBar.value = mainScript.DissatisfactionValue;
+        if (e.PropertyName.Equals("CurrentGameState"))
         {
-            EndGameText.text = "You win : ^)";
-            Time.timeScale = 0;
-            EndGameCanvas.enabled = true;
-        }
-        if (e.PropertyName.Equals("BG"))
-        {
-            EndGameText.text = "You lose : ^(";
+            EndGameText.text = "You " + (mainScript.CurrentGameState == GameState.Success? "win" : "lose") 
+                + ". Your score: " + mainScript.Score;
             Time.timeScale = 0;
             EndGameCanvas.enabled = true;
         }
@@ -71,4 +67,6 @@ public class UIMain : MonoBehaviour {
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
+
+    
 }

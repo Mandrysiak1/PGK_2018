@@ -40,7 +40,7 @@ public class TableScript : MonoBehaviour
 
                     if (myPlayer.GetBeersOnPlateQuantity() > 0)
                     {
-                        myPlayer.removeBeer();
+                        myPlayer.RemoveBeer();
                         MyTable.putBeer();
                         int x = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
                         Debug.Log("Połozono piwo, potrzeba jeszcze: " + x);

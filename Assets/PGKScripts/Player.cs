@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.PGKScripts
 {
@@ -10,10 +6,18 @@ namespace Assets.PGKScripts
     {
         private int beersOnPlate = 0;
 
-        public void removeBeer()
+        public int BeersHandedOut { get; private set; }
+
+        public Player()
+        {
+            BeersHandedOut = 0;
+        }
+
+        public void RemoveBeer()
         {
             beersOnPlate -= 1;
             Debug.Log("Na tacy znajduje sie: " + beersOnPlate + " piw");
+            BeersHandedOut += 1;
         }
         public void AddBeer()
         {
