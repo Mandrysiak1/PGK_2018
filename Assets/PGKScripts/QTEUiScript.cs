@@ -30,22 +30,21 @@ public class QTEUiScript : MonoBehaviour, IQteUI {
     private void QteScript_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         var qteScript = (QTEScript)sender;
-        this.SetImage(qteScript.CurrentChar);
+        if(e.PropertyName.Equals("CurrentChar")
+            this.SetImage(qteScript.CurrentChar);
+        if(e.PropertyName.Equals("Success")
+        {
+            if (qteScript.Success)
+                success.enabled = true;
+            else
+                success.enabled = false;
+        }
     }
 
     // Update is called once per frame
-    void Update () {
-        foreach (var s in qteScripts)
-        {
-            if (s.Success == true)
-            {
-                success.enabled = true;
-
-            }
-            else success.enabled = false;
-        }
+    void Update()
+    {
             Vector3 namePos = Camera.main.WorldToScreenPoint(this.transform.position);
-        
 	}
 
     public void SetImage(string image)
