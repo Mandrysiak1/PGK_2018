@@ -113,7 +113,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
 
     void CalculateNextOrderTime()
     {
-        int offset = randomNum.Next(4, 7);
+        int offset = randomNum.Next(3, 7);
         nextOrderTime = time + offset;
         //TODO:Wymyśleć jakiś sposób na zmiane czasu;
     }

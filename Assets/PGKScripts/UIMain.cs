@@ -42,8 +42,8 @@ public class UIMain : MonoBehaviour {
             this.bigBar.value = mainScript.DissatisfactionValue;
         if (e.PropertyName.Equals("CurrentGameState"))
         {
-            EndGameText.text = "You " + (mainScript.CurrentGameState == GameState.Success? "win" : "lose") 
-                + ". Your score: " + mainScript.Score;
+            EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success? "win" : "lose") 
+                + ". your score: " + mainScript.Score;
             Time.timeScale = 0;
             EndGameCanvas.enabled = true;
         }
