@@ -175,7 +175,11 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
 
     private void GameOver()
     {
-        if (DissatisfactionValue >= 100) BG = true;
+        if (DissatisfactionValue >= 100)
+        {
+            BG = true;
+            player.SetBeersOnPlateQuantity(0);
+        }
 
         if (time >= 124)
         {
