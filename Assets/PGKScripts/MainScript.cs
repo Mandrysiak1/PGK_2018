@@ -130,7 +130,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
     }
     private void BeerCountChange()
     {
-       BeerCount = player.GetBeersOnPlateQuantity() + " x";
+       BeerCount = player.GetBeersOnPlateQuantity() + "";
     }
     protected void OnPropertyChanged(string name)
     {

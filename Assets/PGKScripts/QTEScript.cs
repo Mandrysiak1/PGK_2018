@@ -21,6 +21,8 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
 
     float qteEndTime;
 
+    
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     private string _currentChar = "0";
@@ -34,6 +36,20 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
         {
             _currentChar = value;
             OnPropertyChanged("CurrentChar");
+        }
+    }
+
+    private bool _success = false;
+    public bool Success
+    {
+        get
+        {
+            return _success;
+        }
+        private set
+        {
+            _success = value;
+            OnPropertyChanged("Success");
         }
     }
 
@@ -52,7 +68,8 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
         CurrentChar = "0";
     }
 
-	void Update () {
+	void Update ()
+    {
         var x = FindObjectOfType(typeof(MainScript));
         time = ((MainScript)x).GetTime();
 
@@ -67,6 +84,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                     {
                         if (Input.GetKeyDown(randomChar))
                         {
+                            _success = true;
                             isWaitingForKey = false;
                             Debug.Log("Dobrze");
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
@@ -75,6 +93,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                         }
                         else
                         {
+                            _success = false;
                             Debug.Log("Źle");
                             myPlayer.SetBeersOnPlateQuantity(0);
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
@@ -93,6 +112,8 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                 isWaitingForKey = false;
                 ResetUI();
             }
+
+                
         }
 
  
@@ -142,4 +163,5 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
             handler(this, new PropertyChangedEventArgs(name));
         }
     }
+ 
 }
