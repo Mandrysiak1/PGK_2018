@@ -36,6 +36,36 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             OnPropertyChanged("DissatisfactionValue");
         }
     }
+
+    private bool _GG;
+    public bool GG
+    {
+        get
+        {
+            return _GG;
+        }
+        private set
+        {
+            _GG = value;
+            OnPropertyChanged("GG");
+        }
+    }
+
+    private bool _BG;
+    public bool BG
+    {
+        get
+        {
+            return _BG;
+        }
+        private set
+        {
+            _BG = value;
+            OnPropertyChanged("BG");
+        }
+    }
+
+
     private float time = 0f;
     private float nextOrderTime = 0f;
     private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego
@@ -75,6 +105,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             CalculateNextOrderTime();
         }
         ChangeDissatisfactionValue();
+        GameOver();
         BeerCountChange();
     }
 
@@ -127,6 +158,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             if (t.Mood < threshold) i++;
         }
         DissatisfactionValue += Time.deltaTime * i;
+        
     }
     private void BeerCountChange()
     {
@@ -140,5 +172,13 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             handler(this, new PropertyChangedEventArgs(name));
         }
     }
+
+    private void GameOver()
+    {
+        if (DissatisfactionValue >= 100) BG = true;
+
+        if (time >= 120) GG = true;
+    }
+
 }
 
