@@ -84,7 +84,8 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                     {
                         if (Input.GetKeyDown(randomChar))
                         {
-                            _success = true;
+                            Success = true;
+                            //_success = true;
                             isWaitingForKey = false;
                             Debug.Log("Dobrze");
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
@@ -93,7 +94,8 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                         }
                         else
                         {
-                            _success = false;
+                            Success = false;
+                            //_success = false;
                             Debug.Log("Źle");
                             myPlayer.SetBeersOnPlateQuantity(0);
                             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
