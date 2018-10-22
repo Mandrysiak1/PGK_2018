@@ -53,6 +53,20 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
         }
     }
 
+    private bool _failure = false;
+    public bool Failure
+    {
+        get
+        {
+            return _failure;
+        }
+        private set
+        {
+            _failure = value;
+            OnPropertyChanged("Failure");
+        }
+    }
+
     void Start () {
         charList.Add("q");
         charList.Add("e");
@@ -85,6 +99,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                         if (Input.GetKeyDown(randomChar))
                         {
                             Success = true;
+                            Failure = false;
                             //_success = true;
                             isWaitingForKey = false;
                             Debug.Log("Dobrze");
@@ -95,6 +110,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
                         else
                         {
                             Success = false;
+                            Failure = true;
                             //_success = false;
                             Debug.Log("Źle");
                             myPlayer.SetBeersOnPlateQuantity(0);

@@ -11,5 +11,6 @@ namespace Assets.PGKScripts.Interfaces
         string CurrentChar { get; }
         event PropertyChangedEventHandler PropertyChanged;
         bool Success { get; }
+        bool Failure { get; }
     }
 }

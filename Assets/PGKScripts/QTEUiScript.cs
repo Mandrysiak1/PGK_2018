@@ -1,4 +1,6 @@
-﻿using Assets.PGKScripts.Interfaces;
+﻿using System;
+using System.Collections;
+using Assets.PGKScripts.Interfaces;
 using UnityEngine;
 
 public class QTEUiScript : MonoBehaviour, IQteUI {
@@ -17,6 +19,7 @@ public class QTEUiScript : MonoBehaviour, IQteUI {
     // Use this for initialization
     void Start () {
         success.enabled = false;
+        failure.enabled = false;
         q.enabled = false;
         e.enabled = false;
         x.enabled = false;
@@ -30,15 +33,37 @@ public class QTEUiScript : MonoBehaviour, IQteUI {
     private void QteScript_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         var qteScript = (QTEScript)sender;
-        if(e.PropertyName.Equals("CurrentChar")
+        if(e.PropertyName.Equals("CurrentChar"))
             this.SetImage(qteScript.CurrentChar);
-        if(e.PropertyName.Equals("Success")
+        if(e.PropertyName.Equals("Success"))
         {
             if (qteScript.Success)
+            {
                 success.enabled = true;
+                StartCoroutine(Wait("success"));
+            }
             else
                 success.enabled = false;
         }
+        if (e.PropertyName.Equals("Failure"))
+        {
+            if (qteScript.Failure)
+            {
+                failure.enabled = true;
+                StartCoroutine(Wait("failure"));
+            }
+            else
+                failure.enabled = false;
+        }
+    }
+
+    IEnumerator Wait(string type)
+    {
+        yield return new WaitForSeconds(1);
+        if (type == "success")
+            success.enabled = false;
+        else if (type == "failure")
+            failure.enabled = false;
     }
 
     // Update is called once per frame
@@ -52,7 +77,7 @@ public class QTEUiScript : MonoBehaviour, IQteUI {
         if (image == "q")
         {
             qteBackground.enabled = true;
-            q.enabled=true;
+            q.enabled = true;
             e.enabled = false;
             x.enabled = false;
             c.enabled = false;
