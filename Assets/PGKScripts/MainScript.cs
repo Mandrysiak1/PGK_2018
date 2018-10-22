@@ -9,7 +9,7 @@ using UnityEngine;
 public class MainScript : MonoBehaviour, INotifyPropertyChanged
 {
     public static readonly Player player = new Player();
-    //
+
     private string _beerCount;
     public string BeerCount
     {
@@ -177,7 +177,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
     {
         if (DissatisfactionValue >= 100) BG = true;
 
-        if (time >= 120)
+        if (time >= 124)
         {
             GG = true;
             player.SetBeersOnPlateQuantity(0);

@@ -14,7 +14,7 @@ public class UIMain : MonoBehaviour {
     public Button MainMenu;
     public Text timer;
     int x = 2;
-    float y = 0;
+    float y = 4;
 
     // Use this for initialization
     void Start () {
