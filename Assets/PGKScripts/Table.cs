@@ -12,7 +12,6 @@ public class Table
         private Order currOrder;
         private bool imWaiting = false;
         public int beersOnTable = 0;
-        //public bool shouldBeFree = false;
         public float Mood = 20;
 
     public bool TableAwaiting
@@ -90,7 +89,7 @@ public class Table
                     //Obniż stopień zadowolenia stolika i ogólego z zależności od różnicy
                     //wyzeruj winstreak;
                     //tymczasowo dodane.
-                    Mood -= Time.deltaTime;
+                    Mood -=  1.3f * Time.deltaTime;
                 }
                 else if (currOrder.getEndTime() <= currentTime)
                 {

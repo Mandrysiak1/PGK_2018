@@ -3,7 +3,7 @@ using Assets.PGKScripts;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 
 public class MainScript : MonoBehaviour, INotifyPropertyChanged
@@ -68,9 +68,9 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
 
     private float time = 0f;
     private float nextOrderTime = 0f;
-    private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego
+    private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też 
     System.Random randomNum = new System.Random();
-    
+
     List<Table> awaitingTables = new List<Table>();
     List<Table> freeTables = new List<Table>();
 
@@ -98,7 +98,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
     {
         time += Time.deltaTime;
         ControlOrders();
-       
+
         if (time >= nextOrderTime)
         {
             GenerateOrder();
@@ -111,7 +111,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
 
     void CalculateNextOrderTime()
     {
-        int offset = randomNum.Next(7, 9);
+        int offset = randomNum.Next(4, 7);
         nextOrderTime = time + offset;
         //TODO:Wymyśleć jakiś sposób na zmiane czasu;
     }
@@ -153,16 +153,16 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
     {
         int i = 0;
         int threshold = 4;
-        foreach(Table t in awaitingTables)
+        foreach (Table t in awaitingTables)
         {
             if (t.Mood < threshold) i++;
         }
-        DissatisfactionValue += Time.deltaTime * i;
-        
+        DissatisfactionValue += Time.deltaTime * 5 * i;
+
     }
     private void BeerCountChange()
     {
-       BeerCount = player.GetBeersOnPlateQuantity() + "";
+        BeerCount = player.GetBeersOnPlateQuantity() + "";
     }
     protected void OnPropertyChanged(string name)
     {
@@ -177,8 +177,13 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
     {
         if (DissatisfactionValue >= 100) BG = true;
 
-        if (time >= 120) GG = true;
-    }
+        if (time >= 120)
+        {
+            GG = true;
+            player.SetBeersOnPlateQuantity(0);
+        }
 
+    }
 }
+
 

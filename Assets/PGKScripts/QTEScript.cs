@@ -19,7 +19,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
 
     bool isWaitingForKey;
 
-    float qteEndTime;
+    float qteEndTime = 0;
 
     
 
@@ -160,7 +160,7 @@ public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
     private void OnCollisionEnter(Collision collision)
     {
         var other = collision.gameObject;
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && (time > qteEndTime + 0.5f )) //teraz nie można wejśc odrazu w kolizje z tym samym obiektem
         {
 
             GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0);
