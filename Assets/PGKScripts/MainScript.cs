@@ -45,7 +45,6 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
             return player.BeersHandedOut;
         }
     }
-
     public int Score
     {
         get
@@ -80,6 +79,11 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged
 
     public MainScript()
     {
+    }
+    internal void ResetScore()
+    {
+        DissatisfactionValue = 0;
+        player.ResetBeersHandedOut();
     }
     public void AddFreeTable(object table)
     {

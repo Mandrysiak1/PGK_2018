@@ -12,7 +12,10 @@ namespace Assets.PGKScripts
         {
             BeersHandedOut = 0;
         }
-
+        internal void ResetBeersHandedOut()
+        {
+            this.BeersHandedOut = 0;
+        }
         public void RemoveBeer()
         {
             beersOnPlate -= 1;

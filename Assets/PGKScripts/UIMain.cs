@@ -44,6 +44,7 @@ public class UIMain : MonoBehaviour {
         {
             EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success? "win" : "lose") 
                 + ". your score: " + mainScript.Score;
+            mainScript.ResetScore();
             Time.timeScale = 0;
             EndGameCanvas.enabled = true;
         }
