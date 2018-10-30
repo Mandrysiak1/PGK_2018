@@ -78,7 +78,7 @@ public class Table
         }
 
 
-    public bool ControlOrder(float currentTime)
+    public bool ControlOrder(float currentTime, float moodDecreaseValue)
     {
         if (currOrder != null )
         {
@@ -89,22 +89,19 @@ public class Table
                     //Obniż stopień zadowolenia stolika i ogólego z zależności od różnicy
                     //wyzeruj winstreak;
                     //tymczasowo dodane.
-                    Mood -=  1.3f * Time.deltaTime;
-                }
+                    Mood -= moodDecreaseValue * Time.deltaTime;
+                }/*
                 else if (currOrder.getEndTime() <= currentTime)
                 {
                     //DO NOTHING
-                }
+                }*/
                 return false;
             }
             else if (beersOnTable >= currOrder.getOrderSize())
             {
-                Debug.Log("DODANO PUNKTY I WIN STEAK");
                 CurrOrder = null;
-                //shouldBeFree = true;
                 beersOnTable = 0;
                 return true;
-                //DODAJ PUNKTY I WIN STREAKA
             }
         }
         return false;

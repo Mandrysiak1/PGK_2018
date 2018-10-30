@@ -48,8 +48,6 @@ public class TableScript : MonoBehaviour
                     }
                     else
                         Debug.Log("Nie masz przy sobie piwa!");
-                    
-
                 }
                 else
                 {
