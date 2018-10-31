@@ -2,17 +2,13 @@
 using Assets.PGKScripts;
 using Assets.PGKScripts.Enums;
 using Assets.PGKScripts.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.Events;
-
 
 public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSource
 {
     public static readonly Player player = new Player();
-
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
     {

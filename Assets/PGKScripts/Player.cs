@@ -7,10 +7,12 @@ namespace Assets.PGKScripts
         private int beersOnPlate = 0;
 
         public int BeersHandedOut { get; private set; }
+        public int MaxBeers { get; set; }
 
         public Player()
         {
             BeersHandedOut = 0;
+            MaxBeers = 5;
         }
         internal void ResetBeersHandedOut()
         {
@@ -24,7 +26,7 @@ namespace Assets.PGKScripts
         }
         public void AddBeer()
         {
-            if(beersOnPlate <= 4)
+            if(beersOnPlate < MaxBeers)
             {
                 beersOnPlate += 1;
             }

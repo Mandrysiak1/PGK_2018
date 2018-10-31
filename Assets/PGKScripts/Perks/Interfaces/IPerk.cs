@@ -4,5 +4,6 @@ public interface IPerk<TVal>
 {
     int Quantity { get; set; }
     IModifiableByPerk<TVal> UnderlyingObject { get;}
+    void Invoke(TVal val);
 
 }

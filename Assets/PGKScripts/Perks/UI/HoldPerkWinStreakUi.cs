@@ -7,14 +7,16 @@ using UnityEngine.UI;
 
 namespace Assets.PGKScripts.Perks.UI
 {
-    public class HoldPerkWinStreakUi : MonoBehaviour, IPerksUi<string>
+    public class HoldPerkWinStreakUi : MonoBehaviour, IPerksUi<string, Color>
     {
         public RawImage icon;
         public Text caption;
+        private Color textColor;
         public void Start()
         {
             icon.enabled = false;
             caption.enabled = false;
+            textColor = caption.color;
         }
 
         public void Update()
@@ -29,11 +31,16 @@ namespace Assets.PGKScripts.Perks.UI
             caption.text = "";
         }
 
-        public void Show(string status)
+        public void Show(string status, Color color)
         {
             icon.enabled = true;
             caption.enabled = true;
             caption.text = status.ToString();
+            if(!color.Equals(this.textColor))
+            {
+                this.textColor = color;
+                caption.color = color;
+            }
         }
     }
 }
