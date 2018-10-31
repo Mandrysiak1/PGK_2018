@@ -107,6 +107,7 @@ public class WinStreak : MonoBehaviour {
             if (Input.GetKey("1"))
             {
                 StartCoroutine(SpeedPerkRoutine());
+                initialWinStreak = winStreakSource.WinStreak;
             }
         }
         if(holdPerkAvailible)
@@ -114,6 +115,7 @@ public class WinStreak : MonoBehaviour {
             if (Input.GetKey("2"))
             {
                 StartCoroutine(HoldPerkRoutine());
+                initialWinStreak = winStreakSource.WinStreak;
             }
         }
     }
