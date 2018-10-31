@@ -6,10 +6,10 @@ public class CameraScript : MonoBehaviour {
 
     public Transform player;
 
-    public float smoothSpeed = 0.3f;
+    public float smoothSpeed = 0.7f;
 
-    public Vector3 cameraOffset = new Vector3(0, 8, 8);
-	public Vector3 rotationVector = new Vector3(45, 180, 0);
+    public Vector3 cameraOffset = new Vector3(0, 8, -15);
+	public Vector3 rotationVector = new Vector3(43, 0, 0);
     private Vector3 prevRotation;
     public Vector3 currentVelocity;
 
