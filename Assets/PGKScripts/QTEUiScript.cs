@@ -25,19 +25,8 @@ public class QTEUiScript : MonoBehaviour, IQteUI {
         x.enabled = false;
         c.enabled = false;
         qteBackground.enabled = false;
-
-        var obstgen = FindObjectOfType<ObstacleGenerator>();
-        obstgen.OnGenerateObstacle += HandleObstacleGenerator;
-
         qteScripts = (QTEScript[])FindObjectsOfType(typeof(QTEScript));
            foreach(var s in qteScripts)
-            s.PropertyChanged += QteScript_PropertyChanged;
-    }
-
-    private void HandleObstacleGenerator()
-    {
-        qteScripts = (QTEScript[])FindObjectsOfType(typeof(QTEScript));
-        foreach (var s in qteScripts)
             s.PropertyChanged += QteScript_PropertyChanged;
     }
 
