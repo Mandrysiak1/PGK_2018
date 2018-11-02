@@ -9,6 +9,8 @@ using UnityEngine;
 public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSource
 {
     public static readonly Player player = new Player();
+
+
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
     {
@@ -83,20 +85,26 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też 
     System.Random randomNum = new System.Random();
 
-    List<Table> awaitingTables = new List<Table>();
+    private List<Table> _awaitingTables = new List<Table>();
+    public List<Table> AwaitingTables
+    {
+        get
+        {
+            return _awaitingTables;
+        }
+
+    }
     List<Table> freeTables = new List<Table>();
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    /*public MainScript()
-    {
-        
-    }*/
+
     public void Start()
     {
         if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
         else moodDecreaseValue = 0.3f;
         PropertyChanged += DissatisfactionValueListener;
+        
     }
     internal void ResetScore()
     {
@@ -152,7 +160,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
             Debug.Log("  #SYSINFO: Wygenerowano zamówienie o rozmiarze: " + sizeOfOrder);
             freeTables[randomTable].CurrOrder = new Order(time, time + orderDeadline, sizeOfOrder);
 
-            awaitingTables.Add(freeTables[randomTable]);
+            _awaitingTables.Add(freeTables[randomTable]);
             freeTables.Remove(freeTables[randomTable]);
         }
         else
@@ -163,9 +171,9 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
 
     public void ControlOrders()
     {
-        for (int i = awaitingTables.Count - 1; i >= 0; i--)
+        for (int i = _awaitingTables.Count - 1; i >= 0; i--)
         {
-            Table x = awaitingTables[i];
+            Table x = _awaitingTables[i];
             var shouldBeFree = x.ControlOrder(time, moodDecreaseValue);
             if (shouldBeFree == true)
             {
@@ -174,7 +182,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
                 // +++++++++++++ ADD TO WINSTREAK
                 WinStreak += 1;
                 // ++++++++++++++++++++++++++++++
-                awaitingTables.RemoveAt(i);
+                _awaitingTables.RemoveAt(i);
                 freeTables.Add(x);
             }
         }
@@ -184,7 +192,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     {
         int i = 0;
         int threshold = 4;
-        foreach (Table t in awaitingTables)
+        foreach (Table t in _awaitingTables)
         {
             if (t.Mood < threshold) i++;
         }
