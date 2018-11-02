@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSource
 {
-    public static readonly Player player = new Player();
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
     {
@@ -23,19 +22,6 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
     }
 
-    private string _beerCount;
-    public string BeerCount
-    {
-        get
-        {
-            return _beerCount;
-        }
-        private set
-        {
-            _beerCount = value;
-            OnPropertyChanged("BeerCount");
-        }
-    }
     public int BeersHandedOut
     {
         get
@@ -85,6 +71,9 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
 
     List<Table> awaitingTables = new List<Table>();
     List<Table> freeTables = new List<Table>();
+    private Player player;
+    [SerializeField]
+    private PlayerPlate PlayerPlate;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,6 +81,12 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     {
         
     }*/
+
+    private void Awake()
+    {
+        player = new Player(PlayerPlate);
+    }
+
     public void Start()
     {
         if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
@@ -130,7 +125,6 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         ChangeDissatisfactionValue();
         GameOver();
-        BeerCountChange();
     }
     private void DissatisfactionValueListener(object sender, PropertyChangedEventArgs e)
     {
@@ -192,10 +186,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
             DissatisfactionValue += Time.deltaTime * 5 * i;
 
     }
-    private void BeerCountChange()
-    {
-        BeerCount = player.GetBeersOnPlateQuantity() + "";
-    }
+
     protected void OnPropertyChanged(string name)
     {
         PropertyChangedEventHandler handler = PropertyChanged;

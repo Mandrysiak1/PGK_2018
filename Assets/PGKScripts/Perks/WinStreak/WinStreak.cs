@@ -34,10 +34,11 @@ public class WinStreak : MonoBehaviour {
 	void Start () {
         speedPerkUi = this.gameObject.GetComponent<SpeedPerkWinStreakUI>();
         holdPerkUi = this.gameObject.GetComponent<HoldPerkWinStreakUi>();
-        winStreakSource = FindObjectOfType<MainScript>();
+	    MainScript mainScript = FindObjectOfType<MainScript>();
+	    winStreakSource = mainScript;
         winStreakSource.PropertyChanged += WinStreakChanged;
 
-        var player = MainScript.player;
+        var player = mainScript.GetPlayer();
         playerStandardHold = player.MaxBeers;
         holdPerk = new HoldPerk(
             new HoldModif(player));

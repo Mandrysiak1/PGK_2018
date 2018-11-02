@@ -38,8 +38,6 @@ public class UIMain : MonoBehaviour {
 
     private void MainScript_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName.Equals("BeerCount"))
-            this.howManyBeers.text = mainScript.BeerCount + " x";
         if (e.PropertyName.Equals("DissatisfactionValue"))
             this.bigBar.value = mainScript.DissatisfactionValue;
         if (e.PropertyName.Equals("CurrentGameState"))
