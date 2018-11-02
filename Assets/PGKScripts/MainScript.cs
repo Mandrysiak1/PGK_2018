@@ -77,7 +77,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
     }
 
-    public float moodDecreaseValue = 1.3f;
+    public float moodDecreaseValue;
     private float time = 0f;
     private float nextOrderTime = 0f;
     private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też 
@@ -94,6 +94,8 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     }*/
     public void Start()
     {
+        if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
+        else moodDecreaseValue = 0.3f;
         PropertyChanged += DissatisfactionValueListener;
     }
     internal void ResetScore()
@@ -132,7 +134,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     }
     private void DissatisfactionValueListener(object sender, PropertyChangedEventArgs e)
     {
-        if(e.PropertyName.Equals("DissatisfactionValue"))
+        if (e.PropertyName.Equals("DissatisfactionValue"))
             this.WinStreak = 0;
     }
     void CalculateNextOrderTime()
@@ -186,7 +188,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         {
             if (t.Mood < threshold) i++;
         }
-        if(i != 0)
+        if (i != 0)
             DissatisfactionValue += Time.deltaTime * 5 * i;
 
     }

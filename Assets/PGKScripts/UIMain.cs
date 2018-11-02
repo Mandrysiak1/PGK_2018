@@ -14,6 +14,8 @@ public class UIMain : MonoBehaviour {
     public Button Restart;
     public Button MainMenu;
     public Text timer;
+    public Canvas PauseCanvas;
+    bool gamePaused = false;
     int x = 2;
     float y = 4;
 
@@ -24,7 +26,7 @@ public class UIMain : MonoBehaviour {
 
         this.backgroundSong = GetComponent<AudioSource>();
         this.backgroundSong.Play(0);
-
+        PauseCanvas.enabled = false;
 
         Time.timeScale = 1;
         EndGameCanvas.enabled = false;
@@ -48,6 +50,27 @@ public class UIMain : MonoBehaviour {
             Time.timeScale = 0;
             EndGameCanvas.enabled = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            if (!gamePaused)
+            {
+                gamePaused = true;
+                EndGameCanvas.enabled = true;
+                EndGameCanvas.GetComponent<Image>().enabled = false;
+                PauseCanvas.enabled = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                gamePaused = false;
+                PauseCanvas.enabled = false;
+                EndGameCanvas.enabled = false;
+                EndGameCanvas.GetComponent<Image>().enabled = true;
+                Time.timeScale = 1;
+            }
+        }
+
     }
 
     // Update is called once per frame
