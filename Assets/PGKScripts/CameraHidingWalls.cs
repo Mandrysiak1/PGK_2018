@@ -9,6 +9,8 @@ public class CameraHidingWalls : MonoBehaviour
     [SerializeField]
     private GameObject Player;
     [SerializeField]
+    private float PlayerWidth = 0.3f;
+    [SerializeField]
     private float Opacity = 0.1f;
     [SerializeField]
     private float FadingTime = 0.15f;
@@ -17,10 +19,16 @@ public class CameraHidingWalls : MonoBehaviour
 
 	void Update ()
     {
-        RaycastHit[] hits;
+        List<RaycastHit> hits = new List<RaycastHit>();
         Vector3 position = this.transform.position;
         Vector3 direction = Player.transform.position - position;
-        hits = Physics.RaycastAll(position, direction);
+
+        // raycast position
+        hits.AddRange(Physics.RaycastAll(position, direction));
+        // raycast left
+        hits.AddRange(Physics.RaycastAll(position, new Vector3(direction.x - PlayerWidth / 2f, direction.y, direction.z)));
+        // raycast right
+        hits.AddRange(Physics.RaycastAll(position, new Vector3(direction.x + PlayerWidth / 2f, direction.y, direction.z)));
 
         List<GameObject> currentCollidingObjects = new List<GameObject>();
         foreach(RaycastHit hit in hits)
