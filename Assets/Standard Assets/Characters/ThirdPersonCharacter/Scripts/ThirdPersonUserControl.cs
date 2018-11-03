@@ -7,6 +7,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof (ThirdPersonCharacter))]
     public class ThirdPersonUserControl : MonoBehaviour
     {
+        [SerializeField]
+        private float Acceleration = 2.0f;
+
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Transform m_Cam;                  // A reference to the main camera in the scenes transform
         private Vector3 m_CamForward;             // The current forward direction of the camera
@@ -35,8 +38,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void FixedUpdate()
         {
             // read inputs
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
+            float h = CrossPlatformInputManager.GetAxis("Horizontal") * Acceleration;
+            float v = CrossPlatformInputManager.GetAxis("Vertical") * Acceleration;
             m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             bool crouch = Input.GetKey(KeyCode.C);
 

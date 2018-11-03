@@ -16725,7 +16725,7 @@ MonoBehaviour:
   m_StationaryTurnSpeed: 1400
   m_JumpPower: 7
   m_GravityMultiplier: 3
-  m_RunCycleLegOffset: 0.2
+  m_RunCycleLegOffset: 0.1
   m_MoveSpeedMultiplier: 0.85
   m_AnimSpeedMultiplier: 0.85
   m_GroundCheckDistance: 0.3
@@ -16741,6 +16741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Acceleration: 2.3
 --- !u!136 &2075440672
 CapsuleCollider:
   m_ObjectHideFlags: 0
