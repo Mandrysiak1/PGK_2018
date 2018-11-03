@@ -2,12 +2,26 @@
 using Assets.PGKScripts;
 using Assets.PGKScripts.Enums;
 using Assets.PGKScripts.Interfaces;
+using Assets.PGKScripts.Perks.WinStreak;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSource
+public class MainScript : MonoBehaviour, IWinStreakSource
 {
+    #region EventClasses
+    //event classes
+    public class GameStatusEvent : UnityEvent<GameState, GameState> { }
+    public class DissatisfactionEvent : UnityEvent<float, float> { }
+
+    //end of event classes
+    #endregion
+    public GameStatusEvent GameStatusChanged { get; set; }
+    public WinStreakEvent WinStreakChanged { get; set; }
+    public DissatisfactionEvent DissatisfactionChanged { get; set; }
+
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
     {
@@ -17,8 +31,10 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         private set
         {
+            var temp = this.gameState;
             this.gameState = value;
-            OnPropertyChanged("CurrentGameState");
+            GameStatusChanged.Invoke(temp, value);
+            //OnPropertyChanged("CurrentGameState");
         }
     }
 
@@ -45,8 +61,10 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         private set
         {
+            var temp = this._winStreak;
             _winStreak = value;
-            OnPropertyChanged("WinStreak");
+            WinStreakChanged.Invoke(temp, value);
+            //OnPropertyChanged("WinStreak");
         }
     }
     private float _dissatisfactionValue;
@@ -58,8 +76,10 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         private set
         {
+            var temp = this._dissatisfactionValue;
             _dissatisfactionValue = value;
-            OnPropertyChanged("DissatisfactionValue");
+            DissatisfactionChanged.Invoke(temp, value);
+            //OnPropertyChanged("DissatisfactionValue");
         }
     }
 
@@ -75,12 +95,15 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     [SerializeField]
     private PlayerPlate PlayerPlate;
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    /*public MainScript()
+    public MainScript()
     {
-        
-    }*/
+        if (DissatisfactionChanged == null)
+            DissatisfactionChanged = new DissatisfactionEvent();
+        if (GameStatusChanged == null)
+            GameStatusChanged = new GameStatusEvent();
+        if (WinStreakChanged == null)
+            WinStreakChanged = new WinStreakEvent();
+    }
 
     private void Awake()
     {
@@ -89,10 +112,12 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
 
     public void Start()
     {
+        
         if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
         else moodDecreaseValue = 0.3f;
-        PropertyChanged += DissatisfactionValueListener;
+        DissatisfactionChanged.AddListener(DissatisfactionValueListener);
     }
+
     internal void ResetScore()
     {
         DissatisfactionValue = 0;
@@ -126,11 +151,11 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         ChangeDissatisfactionValue();
         GameOver();
     }
-    private void DissatisfactionValueListener(object sender, PropertyChangedEventArgs e)
+    private void DissatisfactionValueListener(float arg0, float arg1)
     {
-        if (e.PropertyName.Equals("DissatisfactionValue"))
-            this.WinStreak = 0;
+        WinStreak = 0;
     }
+
     void CalculateNextOrderTime()
     {
         int offset = randomNum.Next(3, 7);
@@ -186,16 +211,6 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
             DissatisfactionValue += Time.deltaTime * 5 * i;
 
     }
-
-    protected void OnPropertyChanged(string name)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null)
-        {
-            handler(this, new PropertyChangedEventArgs(name));
-        }
-    }
-
     private void GameOver()
     {
         if (DissatisfactionValue >= 100)

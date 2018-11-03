@@ -36,7 +36,7 @@ public class WinStreak : MonoBehaviour {
         holdPerkUi = this.gameObject.GetComponent<HoldPerkWinStreakUi>();
 	    MainScript mainScript = FindObjectOfType<MainScript>();
 	    winStreakSource = mainScript;
-        winStreakSource.PropertyChanged += WinStreakChanged;
+        winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
         playerStandardHold = player.MaxBeers;
@@ -55,35 +55,33 @@ public class WinStreak : MonoBehaviour {
     {
         speedPerk.Invoke(playerStandardSpeed * speedMultiplier);
         StartCoroutine(CountDown(10, speedPerkUi));
+        DisablePerk(holdPerkUi, out holdPerkAvailible);
         while (duringCountdown)
             yield return new WaitForSeconds(0.1f);
-        speedPerk.Invoke(1 / speedMultiplier);
-        DisablePerk(holdPerkUi, out holdPerkAvailible);
+        speedPerk.Invoke(playerStandardSpeed);
         DisablePerk(speedPerkUi, out speedPerkAvailible);
     }
     private IEnumerator HoldPerkRoutine()
     {
         holdPerk.Invoke(holdNewValue);
         StartCoroutine(CountDown(30, holdPerkUi));
+        DisablePerk(speedPerkUi, out speedPerkAvailible);
         while (duringCountdown)
             yield return new WaitForSeconds(0.1f);
         holdPerk.Invoke(playerStandardHold);
         DisablePerk(holdPerkUi, out holdPerkAvailible);
-        DisablePerk(speedPerkUi, out speedPerkAvailible);
     }
 
-    private void WinStreakChanged(object sender, PropertyChangedEventArgs e)
+    private void WinStreakChanged(int oldWs, int newWs)
     {
-        if(e.PropertyName.Equals("WinStreak"))
-        {
-            if (winStreakSource.WinStreak >= speedPerkActivateMinimum + initialWinStreak)
+            if (newWs >= speedPerkActivateMinimum + initialWinStreak)
             {
                 if(!speedPerkAvailible)
                     speedPerkUi.Show("1", new Color(0, 255, 0));
                 speedPerkAvailible = true;
                 Debug.Log("###### WINSTREAK ##### Speed Multiplier Active");
             }
-            if (winStreakSource.WinStreak >= holdPerkActivateMinimum + initialWinStreak)
+            if (newWs >= holdPerkActivateMinimum + initialWinStreak)
             {
                 if(!holdPerkAvailible)
                     holdPerkUi.Show("2", new Color(0, 255, 0));
@@ -91,14 +89,13 @@ public class WinStreak : MonoBehaviour {
                 Debug.Log("###### WINSTREAK ##### Max Hold Add Active");
 
             }
-            if (winStreakSource.WinStreak.Equals(0))
+            if (newWs == 0)
             {
                 speedPerkAvailible = false;
                 holdPerkAvailible = false;
                 holdPerkUi.Disable();
                 speedPerkUi.Disable();
             }
-        }
     }
 
     // Update is called once per frame

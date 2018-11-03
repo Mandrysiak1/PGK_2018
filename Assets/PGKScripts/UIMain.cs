@@ -1,4 +1,5 @@
 ﻿using Assets.PGKScripts.Enums;
+using System;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 public class UIMain : MonoBehaviour {
 
-    MainScript mainScript;
+    public MainScript mainScript;
     public Text howManyBeers;
     public Slider bigBar;
     public Text EndGameText;
@@ -30,26 +31,31 @@ public class UIMain : MonoBehaviour {
 
         Time.timeScale = 1;
         EndGameCanvas.enabled = false;
-        mainScript = (MainScript)FindObjectOfType(typeof(MainScript));
-        mainScript.PropertyChanged += MainScript_PropertyChanged;
+        if(mainScript == null)
+            mainScript = (MainScript)FindObjectOfType(typeof(MainScript));
+        mainScript.DissatisfactionChanged.AddListener(DissatisfactionChanged);
+        mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
     }
 
-    private void MainScript_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void GameStateChanged(GameState arg0, GameState arg1)
     {
-        if (e.PropertyName.Equals("DissatisfactionValue"))
-            this.bigBar.value = mainScript.DissatisfactionValue;
-        if (e.PropertyName.Equals("CurrentGameState"))
-        {
-            EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success? "win" : "lose") 
-                + ". your score: " + mainScript.Score;
-            mainScript.ResetScore();
-            Time.timeScale = 0;
-            EndGameCanvas.enabled = true;
-        }
+        EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
+                        + ". your score: " + mainScript.Score;
+        mainScript.ResetScore();
+        Time.timeScale = 0;
+        EndGameCanvas.enabled = true;
+    }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+    private void DissatisfactionChanged(float arg0, float arg1)
+    {
+        this.bigBar.value = mainScript.DissatisfactionValue;
+    }
+
+    // Update is called once per frame
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gamePaused)
             {
@@ -68,11 +74,6 @@ public class UIMain : MonoBehaviour {
                 Time.timeScale = 1;
             }
         }
-
-    }
-
-    // Update is called once per frame
-    void Update () {
         if (y >= 10)
             timer.text = x + ":" + (int)y;
         else timer.text = x + ":0" + (int)y;
