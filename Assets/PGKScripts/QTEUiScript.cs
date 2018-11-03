@@ -28,6 +28,17 @@ public class QTEUiScript : MonoBehaviour, IQteUI {
         qteScripts = (QTEScript[])FindObjectsOfType(typeof(QTEScript));
            foreach(var s in qteScripts)
             s.PropertyChanged += QteScript_PropertyChanged;
+
+        var obstgen = FindObjectOfType<ObstacleGenerator>();
+        obstgen.OnGenerateObstacle += HandleObstacleGenerator;
+    }
+
+    private void HandleObstacleGenerator()
+    {
+        qteScripts = (QTEScript[])FindObjectsOfType(typeof(QTEScript));
+        foreach (var s in qteScripts)
+            s.PropertyChanged += QteScript_PropertyChanged;
+
     }
 
     private void QteScript_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

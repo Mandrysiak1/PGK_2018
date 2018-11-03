@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427182, b: 0.5645241, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11902,6 +11902,46 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!1 &1473159249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473159251}
+  - component: {fileID: 1473159250}
+  m_Layer: 0
+  m_Name: OnMapEventHandeler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1473159250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1473159249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7758f37b403b8af49936749218420854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1473159251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1473159249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.586466, y: 10.610357, z: -53.496975}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 225
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1477337787
 Prefab:
   m_ObjectHideFlags: 0
@@ -13486,6 +13526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3383c3cc192d54cb4acdc4083b24ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 0}
   howManyBeers: {fileID: 0}
   bigBar: {fileID: 1547977922}
   EndGameText: {fileID: 41662382}
@@ -16817,6 +16858,7 @@ GameObject:
   - component: {fileID: 2078970092}
   - component: {fileID: 2078970091}
   - component: {fileID: 2078970096}
+  - component: {fileID: 2078970097}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -16921,6 +16963,23 @@ MonoBehaviour:
     m_TypeName: PlayerPlate+BeerCountEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   StartingBeers: 0
+--- !u!114 &2078970097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2078970090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8afd0fb869a02489e97f86778658ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimalDelayBetweenEvents: 3
+  State5ChanceIndex: 40
+  State4ChanceIndex: 25
+  State3ChanceIndex: 2
+  State2ChanceIndex: 0
+  State1ChanceIndex: 0
 --- !u!1001 &2080204721
 Prefab:
   m_ObjectHideFlags: 0
