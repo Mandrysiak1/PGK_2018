@@ -10,6 +10,8 @@ public class CameraHidingWalls : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private float Opacity = 0.1f;
+    [SerializeField]
+    private float FadingTime = 0.15f;
 
     private List<GameObject> lastCollidingObjects = new List<GameObject>();
 
@@ -32,7 +34,8 @@ public class CameraHidingWalls : MonoBehaviour
                 {
                     if (collidedObject != Player)
                     {
-                        SetTransparent(collidedObject);
+                        if (!lastCollidingObjects.Contains(collidedObject))
+                            SetTransparency(collidedObject);
                         currentCollidingObjects.Add(collidedObject);
                     }
                 }
@@ -41,24 +44,41 @@ public class CameraHidingWalls : MonoBehaviour
         List<GameObject> notCollidingObjects = lastCollidingObjects.Except(currentCollidingObjects).ToList();
         foreach(GameObject nonCollidingObject in notCollidingObjects)
         {
-            SetTransparent(nonCollidingObject, false);
+            SetTransparency(nonCollidingObject, false);
         }
         lastCollidingObjects = currentCollidingObjects;
 	}
-    void SetTransparent(GameObject gameObject, bool transparent = true)
+
+    void SetTransparency(GameObject gameObject, bool transparent = true)
     {
         if(gameObject != null)
         {
             Renderer renderer = gameObject.GetComponent<Renderer>();
             if (renderer != null)
             {
-                if (transparent)
-                    foreach(Material material in renderer.materials)
-                        material.color = new Color(material.color.r, material.color.g, material.color.b, Opacity);
-                else
-                    foreach (Material material in renderer.materials)
-                        material.color = new Color(material.color.r, material.color.g, material.color.b, 1f);
+                StartCoroutine(FadingCoroutine(renderer.materials, transparent));
             }
+        }
+    }
+
+    IEnumerator FadingCoroutine(Material[] materials, bool fadeTo = true)
+    {
+        float startAlpha = materials[0].color.a;
+        float endAlpha = 1.0f;
+        if (fadeTo)
+        {
+            endAlpha = Opacity;
+        }
+        for(float i = 0.0f; i < 1.0f; i += Time.deltaTime / FadingTime)
+        {
+            foreach (Material material in materials)
+                material.color = new Color(
+                    material.color.r, 
+                    material.color.g, 
+                    material.color.b, 
+                    Mathf.Lerp(startAlpha, endAlpha, i)
+                    );
+            yield return null;
         }
     }
 }
