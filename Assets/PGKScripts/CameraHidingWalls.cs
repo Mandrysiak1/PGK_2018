@@ -53,9 +53,11 @@ public class CameraHidingWalls : MonoBehaviour
             if (renderer != null)
             {
                 if (transparent)
-                    renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, Opacity);
+                    foreach(Material material in renderer.materials)
+                        material.color = new Color(material.color.r, material.color.g, material.color.b, Opacity);
                 else
-                    renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f);
+                    foreach (Material material in renderer.materials)
+                        material.color = new Color(material.color.r, material.color.g, material.color.b, 1f);
             }
         }
     }
