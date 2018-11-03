@@ -32,22 +32,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
 
-
-        private void Update()
-        {
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
-        }
-
-
-        // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
             // read inputs
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
+            m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             bool crouch = Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character
