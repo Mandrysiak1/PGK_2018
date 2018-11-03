@@ -61,11 +61,12 @@ public class CameraHidingWalls : MonoBehaviour
     {
         if(gameObject != null)
         {
-            Renderer renderer = gameObject.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                StartCoroutine(FadingCoroutine(renderer.materials, transparent));
-            }
+            List<Material> materials = new List<Material>();
+            Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer rendererr in renderers)
+                materials.AddRange(rendererr.materials);
+
+            StartCoroutine(FadingCoroutine(materials.ToArray(), transparent));
         }
     }
 
