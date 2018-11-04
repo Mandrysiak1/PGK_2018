@@ -4,13 +4,14 @@ namespace Assets.PGKScripts
 {
    public class Player
     {
-        private int beersOnPlate = 0;
-
         public int BeersHandedOut { get; private set; }
         public int MaxBeers { get; set; }
 
-        public Player()
+        private PlayerPlate Plate;
+
+        public Player(PlayerPlate plate)
         {
+            Plate = plate;
             BeersHandedOut = 0;
             MaxBeers = 5;
         }
@@ -20,27 +21,27 @@ namespace Assets.PGKScripts
         }
         public void RemoveBeer()
         {
-            beersOnPlate -= 1;
-            Debug.Log("Na tacy znajduje sie: " + beersOnPlate + " piw");
-            BeersHandedOut += 1;
+            Plate.Beers--;
+            Debug.Log("Na tacy znajduje sie: " + Plate.Beers + " piw");
+            BeersHandedOut++;
         }
         public void AddBeer()
         {
-            if(beersOnPlate < MaxBeers)
+            if(Plate.Beers < MaxBeers)
             {
-                beersOnPlate += 1;
+                Plate.Beers += 1;
             }
-            
-            Debug.Log("Na tacy znajduje sie: " + beersOnPlate + " piw");
+
+            Debug.Log("Na tacy znajduje sie: " + Plate.Beers + " piw");
         }
         public int GetBeersOnPlateQuantity()
         {
-            return beersOnPlate;
+            return Plate.Beers;
         }
         public void SetBeersOnPlateQuantity(int x)
         {
-            beersOnPlate = x;
-            Debug.Log("Ustawiono ilośc piw na: " + beersOnPlate);
+            Plate.Beers = x;
+            Debug.Log("Ustawiono ilośc piw na: " + x);
         }
     }
 }

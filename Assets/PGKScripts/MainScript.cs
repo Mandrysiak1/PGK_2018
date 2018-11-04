@@ -2,13 +2,26 @@
 using Assets.PGKScripts;
 using Assets.PGKScripts.Enums;
 using Assets.PGKScripts.Interfaces;
+using Assets.PGKScripts.Perks.WinStreak;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSource
+public class MainScript : MonoBehaviour, IWinStreakSource
 {
-    public static readonly Player player = new Player();
+    #region EventClasses
+    //event classes
+    public class GameStatusEvent : UnityEvent<GameState, GameState> { }
+    public class DissatisfactionEvent : UnityEvent<float, float> { }
+
+    //end of event classes
+    #endregion
+    public GameStatusEvent GameStatusChanged { get; set; }
+    public WinStreakEvent WinStreakChanged { get; set; }
+    public DissatisfactionEvent DissatisfactionChanged { get; set; }
+
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
     {
@@ -18,24 +31,13 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         private set
         {
+            var temp = this.gameState;
             this.gameState = value;
-            OnPropertyChanged("CurrentGameState");
+            GameStatusChanged.Invoke(temp, value);
+            //OnPropertyChanged("CurrentGameState");
         }
     }
 
-    private string _beerCount;
-    public string BeerCount
-    {
-        get
-        {
-            return _beerCount;
-        }
-        private set
-        {
-            _beerCount = value;
-            OnPropertyChanged("BeerCount");
-        }
-    }
     public int BeersHandedOut
     {
         get
@@ -59,8 +61,10 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         private set
         {
+            var temp = this._winStreak;
             _winStreak = value;
-            OnPropertyChanged("WinStreak");
+            WinStreakChanged.Invoke(temp, value);
+            //OnPropertyChanged("WinStreak");
         }
     }
     private float _dissatisfactionValue;
@@ -72,30 +76,61 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         private set
         {
+            var temp = this._dissatisfactionValue;
             _dissatisfactionValue = value;
-            OnPropertyChanged("DissatisfactionValue");
+            DissatisfactionChanged.Invoke(temp, value);
+            //OnPropertyChanged("DissatisfactionValue");
         }
     }
 
-    public float moodDecreaseValue = 1.3f;
+    public float moodDecreaseValue;
     private float time = 0f;
     private float nextOrderTime = 0f;
     private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też 
     System.Random randomNum = new System.Random();
 
-    List<Table> awaitingTables = new List<Table>();
-    List<Table> freeTables = new List<Table>();
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    /*public MainScript()
-    {
+    List<Table> _awaitingTables = new List<Table>();
+    public List<Table> AwaitingTables {
+        get
+        {
+            return _awaitingTables;
+        }
+        set
+        {
+            AwaitingTables = _awaitingTables;
+        }
         
-    }*/
+    }
+
+    List<Table> freeTables = new List<Table>();
+    private Player player;
+    [SerializeField]
+    private PlayerPlate PlayerPlate;
+
+    public MainScript()
+    {
+        if (DissatisfactionChanged == null)
+            DissatisfactionChanged = new DissatisfactionEvent();
+        if (GameStatusChanged == null)
+            GameStatusChanged = new GameStatusEvent();
+        if (WinStreakChanged == null)
+            WinStreakChanged = new WinStreakEvent();
+    }
+
+    private void Awake()
+    {
+        player = new Player(PlayerPlate);
+    }
+
     public void Start()
     {
-        PropertyChanged += DissatisfactionValueListener;
+        
+        if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
+        else moodDecreaseValue = 0.3f;
+        DissatisfactionChanged.AddListener(DissatisfactionValueListener);
     }
+
     internal void ResetScore()
     {
         DissatisfactionValue = 0;
@@ -128,13 +163,12 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
         }
         ChangeDissatisfactionValue();
         GameOver();
-        BeerCountChange();
     }
-    private void DissatisfactionValueListener(object sender, PropertyChangedEventArgs e)
+    private void DissatisfactionValueListener(float arg0, float arg1)
     {
-        if(e.PropertyName.Equals("DissatisfactionValue"))
-            this.WinStreak = 0;
+        WinStreak = 0;
     }
+
     void CalculateNextOrderTime()
     {
         int offset = randomNum.Next(3, 7);
@@ -150,7 +184,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
             Debug.Log("  #SYSINFO: Wygenerowano zamówienie o rozmiarze: " + sizeOfOrder);
             freeTables[randomTable].CurrOrder = new Order(time, time + orderDeadline, sizeOfOrder);
 
-            awaitingTables.Add(freeTables[randomTable]);
+            _awaitingTables.Add(freeTables[randomTable]);
             freeTables.Remove(freeTables[randomTable]);
         }
         else
@@ -161,9 +195,9 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
 
     public void ControlOrders()
     {
-        for (int i = awaitingTables.Count - 1; i >= 0; i--)
+        for (int i = _awaitingTables.Count - 1; i >= 0; i--)
         {
-            Table x = awaitingTables[i];
+            Table x = _awaitingTables[i];
             var shouldBeFree = x.ControlOrder(time, moodDecreaseValue);
             if (shouldBeFree == true)
             {
@@ -172,7 +206,7 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
                 // +++++++++++++ ADD TO WINSTREAK
                 WinStreak += 1;
                 // ++++++++++++++++++++++++++++++
-                awaitingTables.RemoveAt(i);
+                _awaitingTables.RemoveAt(i);
                 freeTables.Add(x);
             }
         }
@@ -182,27 +216,14 @@ public class MainScript : MonoBehaviour, INotifyPropertyChanged, IWinStreakSourc
     {
         int i = 0;
         int threshold = 4;
-        foreach (Table t in awaitingTables)
+        foreach (Table t in _awaitingTables)
         {
             if (t.Mood < threshold) i++;
         }
-        if(i != 0)
+        if (i != 0)
             DissatisfactionValue += Time.deltaTime * 5 * i;
 
     }
-    private void BeerCountChange()
-    {
-        BeerCount = player.GetBeersOnPlateQuantity() + "";
-    }
-    protected void OnPropertyChanged(string name)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null)
-        {
-            handler(this, new PropertyChangedEventArgs(name));
-        }
-    }
-
     private void GameOver()
     {
         if (DissatisfactionValue >= 100)
