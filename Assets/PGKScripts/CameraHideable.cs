@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
 public class CameraHideable : MonoBehaviour
 {
     [SerializeField]
     private float Opacity = 0.03f;
     [SerializeField]
-    private float FadingTime = 0.15f;
+    private float FadingTime = 0.10f;
 
-    private List<Material> materials;
-    private List<Renderer> renderers;
+    private List<Material> materials = new List<Material>();
+    private List<Renderer> renderers = new List<Renderer>();
 
     void Start()
     {
-        renderers = gameObject.GetComponentsInChildren<Renderer>().ToList();
+        foreach (Transform child in this.transform)
+        {
+            renderers.AddRange(child.GetComponentsInChildren<Renderer>());
+        }
+        Renderer thisRenderer = GetComponent<Renderer>();
+        if (thisRenderer != null)
+            renderers.Add(thisRenderer);
         foreach (Renderer renderer in renderers)
         {
-            materials = renderer.materials.ToList();
+            materials.AddRange(renderer.materials.ToList());
         }
     }
 
