@@ -2,184 +2,29 @@
 using Assets.PGKScripts.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel;
+using QTE;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class QTEScript : MonoBehaviour, INotifyPropertyChanged, IQteScript {
+public class QTEScript : MonoBehaviour
+{
+    [SerializeField]
+    private QTEController QTE;
 
-    private List<string> charList  = new List<string>();
-
-    private System.Random randomNum = new System.Random();
-
-    private float time = 0;
-
-    private Player myPlayer;
-
-    private string randomChar;
-
-    bool isWaitingForKey;
-
-    float qteEndTime = 0;
-
-    
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    private string _currentChar = "0";
-    public string CurrentChar
+    void Start ()
     {
-        get
-        {
-            return _currentChar;
-        }
-        private set
-        {
-            _currentChar = value;
-            OnPropertyChanged("CurrentChar");
-        }
+        if (QTE == null)
+            QTE = FindObjectOfType<QTEController>();
     }
 
-    private bool _success = false;
-    public bool Success
-    {
-        get
-        {
-            return _success;
-        }
-        private set
-        {
-            _success = value;
-            OnPropertyChanged("Success");
-        }
-    }
 
-    private bool _failure = false;
-    public bool Failure
-    {
-        get
-        {
-            return _failure;
-        }
-        private set
-        {
-            _failure = value;
-            OnPropertyChanged("Failure");
-        }
-    }
-
-    void Start () {
-        charList.Add("q");
-        charList.Add("e");
-        charList.Add("x");
-        charList.Add("c");
-
-        var x = FindObjectOfType(typeof(MainScript));
-        time = ((MainScript)x).GetTime();
-        myPlayer = ((MainScript)x).GetPlayer();
-    }
-	private void ResetUI()
-    {
-        CurrentChar = "0";
-    }
-
-	void Update ()
-    {
-        var x = FindObjectOfType(typeof(MainScript));
-        time = ((MainScript)x).GetTime();
-
-        if (isWaitingForKey)
-        {
-            if (time <= qteEndTime)
-            {
-                if (!(Input.GetKeyDown("w") || Input.GetKeyDown("a") 
-                || Input.GetKeyDown("d") || Input.GetKeyDown("s")))
-                {
-                    if (Input.anyKeyDown)
-                    {
-                        if (Input.GetKeyDown(randomChar))
-                        {
-                            Success = true;
-                            Failure = false;
-                            //_success = true;
-                            isWaitingForKey = false;
-                            Debug.Log("Dobrze");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
-                            ResetUI();
-
-                        }
-                        else
-                        {
-                            Success = false;
-                            Failure = true;
-                            //_success = false;
-                            Debug.Log("Źle");
-                            myPlayer.SetBeersOnPlateQuantity(0);
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
-                            isWaitingForKey = false;
-                            ResetUI();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                Debug.Log("Czas minął");
-                myPlayer.SetBeersOnPlateQuantity(0);
-                
-                GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.8f);
-                isWaitingForKey = false;
-                ResetUI();
-            }
-
-                
-        }
-
- 
-    }
-    /*
-     * 
-     * 
-     * PREVIOUS VERSION
-     * 
-     * 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-
-            GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0);
-            Debug.Log("QTE");
-            isWaitingForKey = true;
-            randomChar = charList[Random.Range(0, 3)];
-            Debug.Log("Naciśnij: " + randomChar);
-            script.setImage(randomChar);
-            qteEndTime = time + 2f;
-        }
-    }
-    */
     private void OnCollisionEnter(Collision collision)
     {
         var other = collision.gameObject;
-        if (other.CompareTag("Player") && (time > qteEndTime )) //teraz nie można wejśc odrazu w kolizje z tym samym obiektem
+        if (other.CompareTag("Player") && !QTE.IsRunning)
         {
+            QTE.TryRun();
+        }
+    }
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0);
-            Debug.Log("QTE");
-            isWaitingForKey = true;
-            randomChar = charList[Random.Range(0, 4)];
-            Debug.Log("Naciśnij: " + randomChar);
-            //UIScript.SetImage(randomChar);
-            CurrentChar = randomChar;
-            qteEndTime = time + 2f;
-        }
-    }
-    protected void OnPropertyChanged(string name)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null)
-        {
-            handler(this, new PropertyChangedEventArgs(name));
-        }
-    }
- 
 }
