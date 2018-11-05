@@ -8033,6 +8033,24 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0317d1736c8360418370bd5dd25470a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &490558315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 185286, guid: 8ed1fa325ca228645ad26dd6eff14768,
+    type: 2}
+  m_PrefabInternal: {fileID: 823450005}
+--- !u!114 &490558319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 490558315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1913f028d57bbc44b8d410a079e9247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Opacity: 0.03
+  FadingTime: 0.15
 --- !u!1001 &491761548
 Prefab:
   m_ObjectHideFlags: 0
@@ -14815,7 +14833,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 04e643a00918e6048b759d023460edc6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000003953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 04e643a00918e6048b759d023460edc6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26458,7 +26476,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1416592718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 5, z: -60}
+  m_LocalPosition: {x: 4.67, y: 5, z: -60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37645,13 +37663,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 1080
-  m_StationaryTurnSpeed: 720
-  m_JumpPower: 0
-  m_GravityMultiplier: 4
+  m_MovingTurnSpeed: 2000
+  m_StationaryTurnSpeed: 1400
+  m_JumpPower: 7
+  m_GravityMultiplier: 3
   m_RunCycleLegOffset: 0.1
-  m_MoveSpeedMultiplier: 0.8
-  m_AnimSpeedMultiplier: 0.8
+  m_MoveSpeedMultiplier: 0.85
+  m_AnimSpeedMultiplier: 0.85
   m_GroundCheckDistance: 0.3
 --- !u!114 &2075440671
 MonoBehaviour:
@@ -37665,7 +37683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 2
+  Acceleration: 2.3
   SlowWalkMultiplier: 0.4
   Camera: {fileID: 0}
 --- !u!136 &2075440672
