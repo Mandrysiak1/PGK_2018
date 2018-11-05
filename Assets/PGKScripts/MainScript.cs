@@ -163,6 +163,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         }
         ChangeDissatisfactionValue();
         GameOver();
+        if(Input.GetKeyDown("p"))
+        {
+            WinStreak += 1;
+        }
     }
     private void DissatisfactionValueListener(float arg0, float arg1)
     {

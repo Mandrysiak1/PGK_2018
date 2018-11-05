@@ -410,7 +410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 235, y: -62.499756}
+  m_AnchoredPosition: {x: 157.4, y: -62.499756}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &12067757
@@ -6960,7 +6960,7 @@ GameObject:
   - component: {fileID: 532528704}
   - component: {fileID: 532528703}
   m_Layer: 0
-  m_Name: HoldingBeers
+  m_Name: SpeedPerkText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6981,8 +6981,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -84, y: -15.294117}
-  m_SizeDelta: {x: 58, y: 34}
+  m_AnchoredPosition: {x: -50.6, y: -0.3}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532528703
 MonoBehaviour:
@@ -7023,8 +7023,8 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 5
+    m_MaxSize: 20
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -8097,7 +8097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 159.90039, y: -41}
+  m_AnchoredPosition: {x: 58.2, y: -41}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601207967
@@ -17666,7 +17666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 12067757}
-  caption: {fileID: 532528704}
+  caption: {fileID: 1407138456}
 --- !u!114 &1315712815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17679,7 +17679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 601207967}
-  caption: {fileID: 1407138456}
+  caption: {fileID: 532528704}
 --- !u!114 &1315712816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19454,7 +19454,7 @@ GameObject:
   - component: {fileID: 1407138456}
   - component: {fileID: 1407138455}
   m_Layer: 0
-  m_Name: HoldingBeers
+  m_Name: HoldPerkText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19475,8 +19475,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63, y: -15.294117}
-  m_SizeDelta: {x: 30.6, y: 34}
+  m_AnchoredPosition: {x: -51, y: -1.4}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1407138455
 MonoBehaviour:
@@ -19517,8 +19517,8 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 5
+    m_MaxSize: 20
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
