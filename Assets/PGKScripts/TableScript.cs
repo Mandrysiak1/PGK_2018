@@ -1,16 +1,19 @@
 ﻿using Assets.PGKScripts;
+using QTE;
 using UnityEngine;
 
 public class TableScript : MonoBehaviour
 {
-
+    [SerializeField]
+    private QTEController QTE;
     private Player myPlayer;
     public Table MyTable { get; set; }
     private bool hasPlayer = false;
 
     void Start()
     {
-
+        if (QTE == null)
+            QTE = FindObjectOfType<QTEController>();
         MyTable = new Table();
 
         Messenger.AddListener("Table show", DebugID);
@@ -23,13 +26,13 @@ public class TableScript : MonoBehaviour
 
     // Musiało zostac zmienione, bo OnTriggerStay nie działa z GetKeyDown.
     // Kiedy to było używane wszyskie piwa kładły sie naraz, bo GetKeyDown
-    // wywoływał się kilkanaście razy. GetKeyDown, zgodnie z dokumentacją powinien być 
+    // wywoływał się kilkanaście razy. GetKeyDown, zgodnie z dokumentacją powinien być
     // używany tylko w update i fixeUpdate. Pisze tak jakby się ktoś pytał :)
 
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true)
+        if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true && !QTE.IsRunning)
 
         {
             if (MyTable != null)
