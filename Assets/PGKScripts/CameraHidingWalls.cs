@@ -78,7 +78,7 @@ public class CameraHidingWalls : MonoBehaviour
         {
             endAlpha = Opacity;
         }
-        for(float i = 0.0f; i < 1.0f; i += Time.deltaTime / FadingTime)
+        for(float i = 0.0f; i <= 1.0f; i += Time.deltaTime / FadingTime)
         {
             foreach (Material material in materials)
                 material.color = new Color(
@@ -89,5 +89,13 @@ public class CameraHidingWalls : MonoBehaviour
                     );
             yield return null;
         }
+        foreach (Material material in materials)
+            material.color = new Color(
+                material.color.r,
+                material.color.g,
+                material.color.b,
+                endAlpha
+                );
+        yield return null;
     }
 }
