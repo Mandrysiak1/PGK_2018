@@ -3,7 +3,6 @@ using Assets.PGKScripts.Perks.UI;
 using Assets.PGKScripts.Perks.WinStreak;
 using Assets.PGKScripts.Perks.WinStreak.ModifWrappers;
 using System.Collections;
-using System.ComponentModel;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
