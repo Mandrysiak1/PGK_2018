@@ -19,6 +19,9 @@ public class CameraHideable : MonoBehaviour
         {
             renderers.AddRange(child.GetComponentsInChildren<Renderer>());
         }
+        Renderer thisRenderer = GetComponent<Renderer>();
+        if (thisRenderer != null)
+            renderers.Add(thisRenderer);
         foreach (Renderer renderer in renderers)
         {
             materials.AddRange(renderer.materials.ToList());
