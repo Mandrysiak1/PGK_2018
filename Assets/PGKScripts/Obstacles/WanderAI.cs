@@ -13,7 +13,7 @@ public class WanderAI : MonoBehaviour
     void Start()
     {
        
-        anim = GetComponent<Animator>();
+      anim = GetComponent<Animator>();
       anim.SetBool("isWalking", true);
     }
 
@@ -28,7 +28,6 @@ public class WanderAI : MonoBehaviour
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
             Vector3 pos = Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
-            //GetComponent<Rigidbody>().MovePosition(pos);
             transform.position = pos;
             
         }
