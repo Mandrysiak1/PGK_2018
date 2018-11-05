@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject DiffMenu;
     public GameObject Tutorial;
+    public GameObject Level;
 
     public void PlayGame()
     {
@@ -27,5 +28,12 @@ public class MainMenu : MonoBehaviour {
     {
         gameObject.SetActive(false);
         DiffMenu.SetActive(true);
+
+    }
+
+    public void ChangeLevel()
+    {
+        gameObject.SetActive(false);
+        Level.SetActive(true);
     }
 }

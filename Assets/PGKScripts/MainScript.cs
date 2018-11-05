@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class MainScript : MonoBehaviour, IWinStreakSource
 {
@@ -240,6 +241,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         {
             CurrentGameState = GameState.Success;
             player.SetBeersOnPlateQuantity(0);
+
+            
         }
 
     }
