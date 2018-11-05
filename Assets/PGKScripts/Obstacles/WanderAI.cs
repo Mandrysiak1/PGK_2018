@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WalkingScript : MonoBehaviour
+public class WanderAI : MonoBehaviour
 {
     // The target marker.
     public Transform[] target;
