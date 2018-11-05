@@ -14,7 +14,7 @@ public class WalkingScript : MonoBehaviour
     {
        
         anim = GetComponent<Animator>();
-        anim.SetBool("isWalking", true);
+      anim.SetBool("isWalking", true);
     }
 
 
@@ -22,24 +22,22 @@ public class WalkingScript : MonoBehaviour
     {
        
 
-        if (GetComponent<Rigidbody>().position != target[current].position)
+        if (transform.position != target[current].position)
         {
-
-
+            Vector3 direction = target[current].position - this.transform.position;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
             Vector3 pos = Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
-            GetComponent<Rigidbody>().MovePosition(pos);
-  Vector3 direction = target[current].position - this.transform.position;
-
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+            //GetComponent<Rigidbody>().MovePosition(pos);
+            transform.position = pos;
+            
         }
         else
         {
-
-          
-
             current = (current + 1) % target.Length;
         }
         
     }
+
+ 
 }
