@@ -4,24 +4,42 @@ using System.Collections;
 public class WalkingScript : MonoBehaviour
 {
     // The target marker.
-    public Transform target;
+    public Transform[] target;
     private Animator anim; 
-
-    // Speed in units per sec.
     public float speed;
+
+    private int current;
 
     void Start()
     {
+       
         anim = GetComponent<Animator>();
+        anim.SetBool("isWalking", true);
     }
+
 
     void Update()
     {
-        // The step size is equal to speed times frame time.
-        float step = speed * Time.deltaTime;
+       
 
-        // Move our position a step closer to the target.
-        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        if (GetComponent<Rigidbody>().position != target[current].position)
+        {
+
+
+
+            Vector3 pos = Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+  Vector3 direction = target[current].position - this.transform.position;
+
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+        }
+        else
+        {
+
+          
+
+            current = (current + 1) % target.Length;
+        }
         
     }
 }

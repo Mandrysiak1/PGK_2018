@@ -25,7 +25,6 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void CalculateChanceOfEvent()
     {
-        Debug.Log("INVOKE");
 
         ChanceOfEvent = 0;
 
