@@ -26258,6 +26258,7 @@ GameObject:
   - component: {fileID: 1416592720}
   - component: {fileID: 1416592719}
   - component: {fileID: 1416592722}
+  - component: {fileID: 1416592723}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -26342,6 +26343,21 @@ MonoBehaviour:
   rotationVector: {x: 43, y: 0, z: 0}
   currentVelocity: {x: 0, y: 0, z: 0}
   maxSpeed: 4.5
+--- !u!114 &1416592723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1416592718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309df913911db1a498a647ed2ff8502f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 2075440669}
+  PlayerWidth: 0.3
+  Opacity: 0.02
+  FadingTime: 0.15
 --- !u!1001 &1417824286
 Prefab:
   m_ObjectHideFlags: 0
