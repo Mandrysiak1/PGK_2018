@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarScript : MonoBehaviour {
+public class BarScript : MonoBehaviour
+{
 
     private Player myPlayer;
     private bool hasPlayer = false;
 
 
-    void Start () {
+    void Start ()
+    {
         var x = FindObjectOfType(typeof(MainScript));
         myPlayer = ((MainScript)x).GetPlayer();
        
     }
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true)
+	void Update ()
+    {
+        if (Input.GetButtonDown("Submit") && hasPlayer == true)
         {
             myPlayer.AddBeer();
         }
