@@ -14,8 +14,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private ThirdPersonCharacter Character;
 
-        private Vector3 CamForward;             // The current forward direction of the camera
-        private Vector3 MoveVector;
         private bool Jump;
         
         private void Start()
@@ -26,18 +24,26 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void FixedUpdate()
         {
-            // read inputs
-            float horizontalAcceleration = CrossPlatformInputManager.GetAxis("Horizontal") * Acceleration;
-            float verticalAcceleration = CrossPlatformInputManager.GetAxis("Vertical") * Acceleration;
-            Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            bool crouch = CrossPlatformInputManager.GetButton("Crouch");
 
-            MoveVector = verticalAcceleration*Vector3.forward + horizontalAcceleration*Vector3.right;
+            float joyX = Input.GetAxis("Horizontal");
+            float joyY = Input.GetAxis("Vertical");
 
-	        if (CrossPlatformInputManager.GetButton("SlowWalk"))
-                MoveVector *= SlowWalkMultiplier;
+            // mapping square position from joystick potentiometers to circle
+            Vector2 movementVector = new Vector2(
+                joyX * Mathf.Sqrt(1 - joyY * joyY * 0.5f),
+                joyY * Mathf.Sqrt(1 - joyX * joyX * 0.5f)
+                );
+            
 
-            Character.Move(MoveVector, crouch, Jump);
+            Jump = Input.GetButtonDown("Jump");
+            bool crouch = Input.GetButton("Crouch");
+
+            Vector3 move3dVector = movementVector.y * Vector3.forward + movementVector.x * Vector3.right;
+
+	        if (Input.GetButton("SlowWalk"))
+                move3dVector *= SlowWalkMultiplier;
+
+            Character.Move(move3dVector, crouch, Jump);
 
             Jump = false;
         }
