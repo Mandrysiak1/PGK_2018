@@ -16,16 +16,14 @@ public class CameraHideable : MonoBehaviour
     void Start()
     {
         foreach (Transform child in this.transform)
-        {
             renderers.AddRange(child.GetComponentsInChildren<Renderer>());
-        }
         Renderer thisRenderer = GetComponent<Renderer>();
         if (thisRenderer != null)
             renderers.Add(thisRenderer);
         foreach (Renderer renderer in renderers)
-        {
             materials.AddRange(renderer.materials.ToList());
-        }
+        foreach (Material material in materials)
+            SetMaterialTypeTransparent(material, false);
     }
 
     private void SetMaterialTypeTransparent(Material material, bool transparent = true)
@@ -51,7 +49,14 @@ public class CameraHideable : MonoBehaviour
             material.renderQueue = -1;
         }
     }
-    
+    private void SetMaterialsTypeTransparent(bool transparent = true)
+    {
+        foreach (Material material in materials)
+        {
+            SetMaterialTypeTransparent(material, transparent);
+        }
+    }
+
     public void SetTransparency(bool transparent = true)
     {
         StartCoroutine(FadingCoroutine(transparent));
@@ -61,12 +66,8 @@ public class CameraHideable : MonoBehaviour
     {
         // change type to transparent to make fading available
         if (fadeTo)
-        {
-            foreach (Material material in materials)
-            {
-                SetMaterialTypeTransparent(material, true);
-            }
-        }
+            SetMaterialsTypeTransparent(fadeTo);
+
         float startAlpha = materials[0].color.a;
         float endAlpha = 1.0f;
         if (fadeTo)
@@ -91,15 +92,11 @@ public class CameraHideable : MonoBehaviour
                 material.color.b,
                 endAlpha
                 );
-        yield return null;
+
         // change type back if it is no longer needed to be transparent
         if (!fadeTo)
-        {
-            foreach (Material material in materials)
-            {
-                SetMaterialTypeTransparent(material, false);
-            }
-        }
+            SetMaterialsTypeTransparent(fadeTo);
+            
         yield return null;
     }
 }
