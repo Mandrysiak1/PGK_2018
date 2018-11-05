@@ -24,15 +24,10 @@ public class TableScript : MonoBehaviour
         myPlayer = ((MainScript)x).GetPlayer();
     }
 
-    // Musiało zostac zmienione, bo OnTriggerStay nie działa z GetKeyDown.
-    // Kiedy to było używane wszyskie piwa kładły sie naraz, bo GetKeyDown
-    // wywoływał się kilkanaście razy. GetKeyDown, zgodnie z dokumentacją powinien być
-    // używany tylko w update i fixeUpdate. Pisze tak jakby się ktoś pytał :)
-
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E) && hasPlayer == true && !QTE.IsRunning)
+        if (Input.GetButtonDown("Submit") && hasPlayer == true && !QTE.IsRunning)
 
         {
             if (MyTable != null)
