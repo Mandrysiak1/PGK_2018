@@ -7,10 +7,19 @@ namespace QTE
     {
         public class AnalogWrapper : UnityEvent<float> { };
 
+        public enum AnalogInputMode
+        {
+            All,
+            OnlyPositive,
+            OnlyNegative
+        }
+
         [SerializeField]
         public string InputName;
         [SerializeField]
         private float Dead = 0.08f;
+        [SerializeField]
+        private AnalogInputMode InputMode = AnalogInputMode.All;
 
         private UnityEvent<float> InputEvent = new AnalogWrapper();
 
@@ -22,8 +31,14 @@ namespace QTE
         private void Update()
         {
             float position = Input.GetAxis(InputName);
-            if(Mathf.Abs(position) > Dead)
-                InputEvent.Invoke(Input.GetAxis(InputName));
+            if (Mathf.Abs(position) > Dead)
+            {
+                if((InputMode == AnalogInputMode.OnlyNegative && position < 0f)
+                    || (InputMode == AnalogInputMode.OnlyPositive && position > 0f)
+                    || (InputMode == AnalogInputMode.All)
+                    )
+                    InputEvent.Invoke(Input.GetAxis(InputName));
+            }
         }
     }
 }

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 61812554816826374}
   - component: {fileID: 114615243056473392}
   - component: {fileID: 114704465283328396}
+  - component: {fileID: 114490451038325526}
   m_Layer: 5
   m_Name: Catcher
   m_TagString: Untagged
@@ -223,6 +224,7 @@ GameObject:
   - component: {fileID: 61304023103458990}
   - component: {fileID: 114104895467299036}
   - component: {fileID: 114497910162497044}
+  - component: {fileID: 114304929195571212}
   m_Layer: 5
   m_Name: Catcher (1)
   m_TagString: Untagged
@@ -581,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonInput: {fileID: 114497910162497044}
+  AnalogInput: {fileID: 114304929195571212}
   OnCatchAttempt:
     m_PersistentCalls:
       m_Calls: []
@@ -733,6 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonInput: {fileID: 114494063643028878}
+  AnalogInput: {fileID: 0}
   OnCatchAttempt:
     m_PersistentCalls:
       m_Calls: []
@@ -774,6 +778,20 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114304929195571212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879954549725554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ba50ef958677f41ab2519d4dbfb04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: QTE_DPAD_H
+  Dead: 0.9
+  InputMode: 1
 --- !u!114 &114402465481205900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1024,6 +1042,20 @@ MonoBehaviour:
   - {fileID: 114167090506579280}
   CatchedText: {fileID: 114684853010287566}
   CatchersGroup: {fileID: 114691885919554528}
+--- !u!114 &114490451038325526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1223860472075150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ba50ef958677f41ab2519d4dbfb04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: QTE_DPAD_H
+  Dead: 0.9
+  InputMode: 2
 --- !u!114 &114494063643028878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1086,6 +1118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonInput: {fileID: 114127214744183620}
+  AnalogInput: {fileID: 0}
   OnCatchAttempt:
     m_PersistentCalls:
       m_Calls: []
@@ -1113,6 +1146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonInput: {fileID: 114704465283328396}
+  AnalogInput: {fileID: 114490451038325526}
   OnCatchAttempt:
     m_PersistentCalls:
       m_Calls: []

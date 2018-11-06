@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 114564676190790120}
   - component: {fileID: 114709243000811776}
   - component: {fileID: 114077388735586644}
+  - component: {fileID: 114120746083057656}
   m_Layer: 5
   m_Name: QTE_Hodl
   m_TagString: Untagged
@@ -242,6 +243,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114120746083057656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1657995883464128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ba50ef958677f41ab2519d4dbfb04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: QTE_ANALOG_H
+  Dead: 0.08
+  InputMode: 0
 --- !u!114 &114174821194755148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -648,6 +663,7 @@ MonoBehaviour:
   AnimationTime: 0.5
   Left: {fileID: 114709243000811776}
   Right: {fileID: 114077388735586644}
+  AnalogHorizontal: {fileID: 114120746083057656}
   Timer: {fileID: 114656741305640886}
   Mug: {fileID: 224806194923198254}
   Good: {fileID: 224347522890283570}

@@ -8,6 +8,8 @@ namespace QTE
     {
         [SerializeField]
         private MonoButtonInput ButtonInput;
+        [SerializeField]
+        private MonoAnalogInput AnalogInput;
 
         [Serializable]
         public class CatchPossibleEvent : UnityEvent<GameObject> {}
@@ -20,6 +22,8 @@ namespace QTE
         private void Start()
         {
             ButtonInput.Subscribe(InvokeOnCatch);
+            if(AnalogInput != null)
+                AnalogInput.Subscribe((float dummy) => InvokeOnCatch());
         }
 
         private void InvokeOnCatch()
