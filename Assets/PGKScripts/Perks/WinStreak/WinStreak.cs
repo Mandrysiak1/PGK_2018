@@ -101,7 +101,7 @@ public class WinStreak : MonoBehaviour {
     void Update () {
         if (speedPerkAvailible)
         {
-            if (Input.GetKey("1"))
+            if (Input.GetButton("Perk_1"))
             {
                 StartCoroutine(SpeedPerkRoutine());
                 initialWinStreak = winStreakSource.WinStreak;
@@ -109,7 +109,7 @@ public class WinStreak : MonoBehaviour {
         }
         if(holdPerkAvailible)
         {
-            if (Input.GetKey("2"))
+            if (Input.GetButton("Perk_2"))
             {
                 StartCoroutine(HoldPerkRoutine());
                 initialWinStreak = winStreakSource.WinStreak;
