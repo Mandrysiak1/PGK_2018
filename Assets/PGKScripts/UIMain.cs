@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIMain : MonoBehaviour {
+public class UIMain : MonoBehaviour
+{
 
     public MainScript mainScript;
     public Text howManyBeers;
@@ -14,6 +15,8 @@ public class UIMain : MonoBehaviour {
     public Canvas EndGameCanvas;
     public Button Restart;
     public Button MainMenu;
+    public Canvas NextLvlCanv;
+    public Button NextLevel;
     public Text timer;
     public Canvas PauseCanvas;
     bool gamePaused = false;
@@ -23,7 +26,8 @@ public class UIMain : MonoBehaviour {
     public AudioSource backgroundSong;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         this.backgroundSong = GetComponent<AudioSource>();
         this.backgroundSong.Play(0);
@@ -31,21 +35,37 @@ public class UIMain : MonoBehaviour {
 
         Time.timeScale = 1;
         EndGameCanvas.enabled = false;
-        if(mainScript == null)
+        if (mainScript == null)
             mainScript = (MainScript)FindObjectOfType(typeof(MainScript));
         mainScript.DissatisfactionChanged.AddListener(DissatisfactionChanged);
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            NextLevel.onClick.AddListener(LoadNextLvl);
     }
 
     private void GameStateChanged(GameState arg0, GameState arg1)
     {
         EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
                         + ". your score: " + mainScript.Score;
+
         mainScript.ResetScore();
         Time.timeScale = 0;
+
         EndGameCanvas.enabled = true;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (mainScript.CurrentGameState == GameState.Success)
+            {
+                NextLvlCanv.enabled = true;
+            }
+            else
+            {
+                NextLvlCanv.enabled = false;
+            }
+        }
+
     }
 
     private void DissatisfactionChanged(float arg0, float arg1)
@@ -54,7 +74,8 @@ public class UIMain : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gamePaused)
@@ -84,19 +105,24 @@ public class UIMain : MonoBehaviour {
         }
         y -= Time.deltaTime;
 
-	}
+    }
 
     void RestartTheGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void ExitToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    
+    void LoadNextLvl()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }
