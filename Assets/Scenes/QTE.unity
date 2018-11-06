@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,6 +179,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &443491663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1657995883464128, guid: 16934a4479e12419986d9c55ebd078b3,
+    type: 2}
+  m_PrefabInternal: {fileID: 2045568925}
+--- !u!114 &443491664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443491663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ba50ef958677f41ab2519d4dbfb04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: QTE_ANALOG_H
+  Dead: 0.08
 --- !u!1 &534171590
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +499,11 @@ Prefab:
       propertyPath: Button
       value: QTE3
       objectReference: {fileID: 0}
+    - target: {fileID: 114564676190790120, guid: 16934a4479e12419986d9c55ebd078b3,
+        type: 2}
+      propertyPath: AnalogHorizontal
+      value: 
+      objectReference: {fileID: 443491664}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16934a4479e12419986d9c55ebd078b3, type: 2}
   m_IsPrefabAsset: 0

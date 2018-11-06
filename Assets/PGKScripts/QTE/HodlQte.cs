@@ -19,6 +19,8 @@ namespace QTE
         public float AnimationTime = 0.5f;
 
         public MonoButtonInput Left, Right;
+        public MonoAnalogInput AnalogHorizontal;
+
 
         [SerializeField]
         private Timer Timer;
@@ -48,6 +50,7 @@ namespace QTE
 
             Left.Subscribe(() => Move(-1.0f));
             Right.Subscribe(() => Move(1.0f));
+            AnalogHorizontal.Subscribe((float value) => Move(value));
         }
 
         private void TimeOver()
