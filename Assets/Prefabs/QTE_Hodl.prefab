@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 114709243000811776}
   - component: {fileID: 114077388735586644}
   - component: {fileID: 114120746083057656}
+  - component: {fileID: 114412446416851342}
   m_Layer: 5
   m_Name: QTE_Hodl
   m_TagString: Untagged
@@ -321,7 +322,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -531,6 +532,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114412446416851342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1657995883464128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ba50ef958677f41ab2519d4dbfb04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: QTE_ANALOG_H
+  Dead: 0.08
+  InputMode: 0
 --- !u!114 &114475846464920458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -663,7 +678,7 @@ MonoBehaviour:
   AnimationTime: 0.5
   Left: {fileID: 114709243000811776}
   Right: {fileID: 114077388735586644}
-  AnalogHorizontal: {fileID: 114120746083057656}
+  AnalogHorizontal: {fileID: 114412446416851342}
   Timer: {fileID: 114656741305640886}
   Mug: {fileID: 224806194923198254}
   Good: {fileID: 224347522890283570}
@@ -955,7 +970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 75}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224143766723427176
@@ -996,7 +1011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 800, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224347522890283570
@@ -1102,11 +1117,11 @@ RectTransform:
   m_Father: {fileID: 224975247738318082}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 800, y: 50}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -100, y: 150}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224806194923198254
 RectTransform:
   m_ObjectHideFlags: 1
