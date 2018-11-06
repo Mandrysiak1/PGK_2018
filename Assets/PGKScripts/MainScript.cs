@@ -6,6 +6,7 @@ using Assets.PGKScripts.Perks.WinStreak;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using QTE;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -101,13 +102,15 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         {
             AwaitingTables = _awaitingTables;
         }
-        
+
     }
 
     List<Table> freeTables = new List<Table>();
     private Player player;
     [SerializeField]
     private PlayerPlate PlayerPlate;
+    [SerializeField]
+    private QTEController QTE;
 
     public MainScript()
     {
@@ -121,6 +124,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
     private void Awake()
     {
+        if (QTE == null)
+            QTE = FindObjectOfType<QTEController>();
         player = new Player(PlayerPlate);
     }
 
@@ -162,7 +167,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
             GenerateOrder();
             CalculateNextOrderTime();
         }
-        ChangeDissatisfactionValue();
+        if(!QTE.IsRunning)
+            ChangeDissatisfactionValue();
         GameOver();
         if(Input.GetKeyDown("p"))
         {
