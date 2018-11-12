@@ -28,6 +28,12 @@ public class GameFlowController : ScriptableObject
         StartCurrentLevel();
     }
 
+    public void StartLevel(GameLevel level)
+    {
+        CurrentLevel = level;
+        StartCurrentLevel();
+    }
+
     public void RestartCurrentLevel()
     {
         StartCurrentLevel();
