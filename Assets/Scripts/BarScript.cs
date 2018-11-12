@@ -5,22 +5,20 @@ using UnityEngine;
 
 public class BarScript : MonoBehaviour
 {
-
-    private Player myPlayer;
     private bool hasPlayer = false;
+    private LevelScene LevelScene;
 
 
     void Start ()
     {
-        var x = FindObjectOfType(typeof(MainScript));
-        myPlayer = ((MainScript)x).GetPlayer();
-       
+        LevelScene = FindObjectOfType<LevelScene>();
     }
+
 	void Update ()
     {
         if (Input.GetButtonDown("Submit") && hasPlayer == true)
         {
-            myPlayer.AddBeer();
+            LevelScene.Player.AddBeer();
         }
     }
 

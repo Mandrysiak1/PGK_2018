@@ -131,6 +131,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         Music.clip = level.Music;
         Music.time = 0;
         Music.Play();
+
+        scene.Player = player;
+        scene.Main = this;
+
         Player.gameObject.SetActive(true);
         Player.transform.position = scene.PlayerStartingPosition.transform.position;
         foreach (var listener in FindObjectsOfType<LevelLoadListener>())

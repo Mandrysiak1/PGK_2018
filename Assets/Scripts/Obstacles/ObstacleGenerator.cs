@@ -10,14 +10,20 @@ public class ObstacleGenerator : MonoBehaviour
     private float ChanceOfEvent = 0;
     private float NormalizedChanceOfEvent;
 
+    [SerializeField]
+    private LevelScene LevelScene;
+
     public delegate void GenerateObstacle();
     public event GenerateObstacle OnGenerateObstacle;
 
 
     void Start()
     {
+        if (LevelScene == null)
+            LevelScene = FindObjectOfType<LevelScene>();
 
-        awaitingTables = GameObject.Find("GameManager").GetComponent<MainScript>().AwaitingTables;
+        if(LevelScene.Main != null)
+            awaitingTables = LevelScene.Main.AwaitingTables;
 
         InvokeRepeating("CalculateChanceOfEvent", 1f, 1f);
     }
@@ -48,7 +54,7 @@ public class ObstacleGenerator : MonoBehaviour
             }
             if (x.Mood < 4)
             {
-                ChanceOfEvent += State5ChanceIndex; 
+                ChanceOfEvent += State5ChanceIndex;
 
             }
             else
@@ -62,14 +68,14 @@ public class ObstacleGenerator : MonoBehaviour
         {
             CheckIfEventHappens();
         }
-        
+
     }
 
     private void NormalizeChanceOfEvent()
     {
 
         NormalizedChanceOfEvent = (ChanceOfEvent / (40 * (float)awaitingTables.Count)) * 100;
-       
+
     }
 
     private void CheckIfEventHappens()

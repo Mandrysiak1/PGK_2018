@@ -6,22 +6,27 @@ public class TableScript : MonoBehaviour
 {
     [SerializeField]
     private QTEController QTE;
-    private Player myPlayer;
+    [SerializeField]
+    private LevelScene LevelScene;
+
     public Table MyTable { get; set; }
     private bool hasPlayer = false;
+
 
     void Start()
     {
         if (QTE == null)
             QTE = FindObjectOfType<QTEController>();
+        if(LevelScene == null)
+            LevelScene = FindObjectOfType<LevelScene>();
+
         MyTable = new Table();
 
         Messenger.AddListener("Table show", DebugID);
+
         var x = FindObjectOfType(typeof(MainScript));
-        ((MainScript)x).SendMessage("AddFreeTable", MyTable);
-
-
-        myPlayer = ((MainScript)x).GetPlayer();
+        if(x != null)
+            ((MainScript)x).SendMessage("AddFreeTable", MyTable);
     }
 
     void Update()
@@ -36,9 +41,9 @@ public class TableScript : MonoBehaviour
                 if (MyTable.IsThereOrder())
                 {
 
-                    if (myPlayer.GetBeersOnPlateQuantity() > 0)
+                    if (LevelScene.Player.GetBeersOnPlateQuantity() > 0)
                     {
-                        myPlayer.RemoveBeer();
+                        LevelScene.Player.RemoveBeer();
                         MyTable.putBeer();
                         int x = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
                         Debug.Log("Połozono piwo, potrzeba jeszcze: " + x);
