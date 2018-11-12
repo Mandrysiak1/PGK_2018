@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,11 @@ public class TutorialScript : MonoBehaviour
     public TextMeshProUGUI ButtonText;
     int counter = 1;
     List<Canvas> canvases = new List<Canvas>();
+
+    private Action StartFirstLevel;
+
+
+
     // Use this for initialization
     public void Start()
     {
@@ -47,7 +53,7 @@ public class TutorialScript : MonoBehaviour
         if (counter == 8)
         {
             ButtonText.text = "play";
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            StartFirstLevel();
         }
         else
         {
@@ -56,5 +62,11 @@ public class TutorialScript : MonoBehaviour
             canvases[counter].enabled = true;
         }
 
+    }
+
+    public void Show(Action startFirstLevel)
+    {
+        gameObject.SetActive(true);
+        StartFirstLevel = startFirstLevel;
     }
 }

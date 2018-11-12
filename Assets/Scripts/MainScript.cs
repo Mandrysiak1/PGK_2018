@@ -88,7 +88,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     public float moodDecreaseValue;
     private float time = 0f;
     private float nextOrderTime = 0f;
-    private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też 
+    private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też
     System.Random randomNum = new System.Random();
 
 
@@ -111,6 +111,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     private PlayerPlate PlayerPlate;
     [SerializeField]
     private QTEController QTE;
+    [SerializeField]
+    private AudioSource Music;
+    [SerializeField]
+    private GameObject Player;
 
     public MainScript()
     {
@@ -122,16 +126,30 @@ public class MainScript : MonoBehaviour, IWinStreakSource
             WinStreakChanged = new WinStreakEvent();
     }
 
+    public void Setup(GameLevel level, LevelScene scene)
+    {
+        Music.clip = level.Music;
+        Music.time = 0;
+        Music.Play();
+        Player.gameObject.SetActive(true);
+        Player.transform.position = scene.PlayerStartingPosition.transform.position;
+        foreach (var listener in FindObjectsOfType<LevelLoadListener>())
+        {
+            listener.LevelLoaded.Invoke(level, scene);
+        }
+    }
+
     private void Awake()
     {
         if (QTE == null)
             QTE = FindObjectOfType<QTEController>();
         player = new Player(PlayerPlate);
+        Player.gameObject.SetActive(false);
     }
 
     public void Start()
     {
-        
+
         if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
         else moodDecreaseValue = 0.3f;
         DissatisfactionChanged.AddListener(DissatisfactionValueListener);
@@ -248,7 +266,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
             CurrentGameState = GameState.Success;
             player.SetBeersOnPlateQuantity(0);
 
-            
+
         }
 
     }

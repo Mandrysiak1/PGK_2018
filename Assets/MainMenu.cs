@@ -2,23 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour
+{
+
+    [SerializeField]
+    private GameFlowController Flow;
 
     public GameObject DiffMenu;
-    public GameObject Tutorial;
+    public TutorialScript Tutorial;
     public GameObject Level;
 
     public void PlayGame()
     {
-        if(PlayerPrefs.HasKey("isTutorialEnabled") && PlayerPrefs.GetInt("isTutorialEnabled")==0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (PlayerPrefs.HasKey("isTutorialEnabled") && PlayerPrefs.GetInt("isTutorialEnabled") == 0)
+        {
+            StartFirstLevel();
+        }
         else
         {
             gameObject.SetActive(false);
-            Tutorial.SetActive(true);
+            Tutorial.Show(StartFirstLevel);
         }
     }
-	
+
+    private void StartFirstLevel()
+    {
+        Flow.StartFirstLevel();
+    }
+
     public void QuitGame()
     {
         Application.Quit();

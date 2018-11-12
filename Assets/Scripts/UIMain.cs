@@ -1,12 +1,15 @@
 ﻿using Assets.PGKScripts.Enums;
 using System;
 using System.ComponentModel;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIMain : MonoBehaviour
 {
+    [SerializeField]
+    private GameFlowController Flow;
 
     public MainScript mainScript;
     public Text howManyBeers;
@@ -23,14 +26,11 @@ public class UIMain : MonoBehaviour
     int x = 2;
     float y = 4;
 
-    public AudioSource backgroundSong;
-
     // Use this for initialization
     void Start()
     {
 
-        this.backgroundSong = GetComponent<AudioSource>();
-        this.backgroundSong.Play(0);
+
         PauseCanvas.enabled = false;
 
         Time.timeScale = 1;
@@ -41,8 +41,15 @@ public class UIMain : MonoBehaviour
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (Flow.HasNextLevel())
+        {
             NextLevel.onClick.AddListener(LoadNextLvl);
+            NextLevel.gameObject.SetActive(true);
+        }
+        else
+        {
+            NextLevel.gameObject.SetActive(false);
+        }
     }
 
     private void GameStateChanged(GameState arg0, GameState arg1)
@@ -110,19 +117,19 @@ public class UIMain : MonoBehaviour
     void RestartTheGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Flow.RestartCurrentLevel();
     }
 
     void ExitToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Flow.LoadMainMenu();
     }
 
     void LoadNextLvl()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Flow.StartNextLevel();
     }
 
 }
