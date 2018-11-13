@@ -14,7 +14,10 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
         Scene[] scenes = new Scene[SceneManager.sceneCount];
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
+           // Debug.Log(SceneManager.sceneCount);
             scenes[i] = SceneManager.GetSceneAt(i);
+            Debug.Log(scenes[i].name + " z obstacle");
+
             if (scenes[i].name == "level2")
             {
                 prefabs = Resources.LoadAll("ObjectGeneratorStuff");

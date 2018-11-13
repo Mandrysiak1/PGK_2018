@@ -97,7 +97,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     System.Random randomNum = new System.Random();
 
     private Table _witchTable = new Table();
-    public Table WitchTable
+    public Table WitchTable // for testing
     {
         get
         {
