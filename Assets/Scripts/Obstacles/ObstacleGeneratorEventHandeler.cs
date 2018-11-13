@@ -10,7 +10,8 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
 
     void Start()
     {
-        prefabs = Resources.LoadAll("Prefabs");
+       // prefabs = Resources.LoadAll("Prefabs");
+        prefabs = Resources.LoadAll("ObjectGeneratorStuff");
 
         var x = FindObjectOfType<ObstacleGenerator>();
         x.OnGenerateObstacle += HandleObstacleGenerator;
