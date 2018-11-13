@@ -1,22 +1,38 @@
 ﻿using Assets.PGKScripts;
+using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class ObstacleGeneratorEventHandeler : MonoBehaviour
 {
-
+    private Scene currentScene;
     private Vector3 Position;
     private Object[] prefabs;
 
     void Start()
     {
-       // prefabs = Resources.LoadAll("Prefabs");
-        prefabs = Resources.LoadAll("ObjectGeneratorStuff");
-
+        Scene[] scenes = new Scene[SceneManager.sceneCount];
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            scenes[i] = SceneManager.GetSceneAt(i);
+            if (scenes[i].name == "level2")
+            {
+                prefabs = Resources.LoadAll("ObjectGeneratorStuff");
+            }
+            else if (scenes[i].name == "fortnit")
+            {
+                prefabs = Resources.LoadAll("ObjectGeneratorStuffFortnit");
+            }
+            else
+            {
+                //do nothing xd
+            }
+        }
         var x = FindObjectOfType<ObstacleGenerator>();
         x.OnGenerateObstacle += HandleObstacleGenerator;
 
     }
+
     private void HandleObstacleGenerator()
     {
         CalculatePosition();
