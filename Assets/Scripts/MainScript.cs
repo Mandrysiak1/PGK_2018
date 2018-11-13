@@ -61,7 +61,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         {
             return _winStreak;
         }
-        private set
+         set
         {
             var temp = this._winStreak;
             _winStreak = value;
@@ -86,12 +86,31 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
 
     public float moodDecreaseValue;
-    private float time = 0f;
-    private float nextOrderTime = 0f;
-    private float orderDeadline = 9999f; //IMHO niepotrzebne do niczego //IMOH też
+    private float _time = 0f;
+    public float GameTime
+    {
+        get
+        {
+            return _time;
+        }
+    }
     System.Random randomNum = new System.Random();
 
+    private Table _witchTable = new Table();
+    public Table WitchTable
+    {
+        get
+        {
+            return _witchTable;
+        }
+        
+        set
+        {
 
+            _witchTable = value;
+        }
+               
+    }
     List<Table> _awaitingTables = new List<Table>();
     public List<Table> AwaitingTables {
         get
@@ -100,12 +119,24 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         }
         set
         {
-            AwaitingTables = _awaitingTables;
+            _awaitingTables = value;
         }
 
     }
 
-    List<Table> freeTables = new List<Table>();
+    List<Table> _freeTables = new List<Table>();
+    public List<Table> FreeTables
+    {
+        get
+        {
+            return _freeTables;
+        }
+        set
+        {
+             _freeTables = value;
+        }
+
+    }
     private Player player;
     [SerializeField]
     private PlayerPlate PlayerPlate;
@@ -167,7 +198,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     public void AddFreeTable(object table)
     {
         Debug.Log("Added table " + ((Table)table).ID);
-        freeTables.Add((Table)table);
+        _freeTables.Add((Table)table);
     }
 
     public Player GetPlayer()
@@ -177,18 +208,11 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
     public float GetTime()
     {
-        return time;
+        return _time;
     }
     void Update()
     {
-        time += Time.deltaTime;
-        ControlOrders();
-
-        if (time >= nextOrderTime)
-        {
-            GenerateOrder();
-            CalculateNextOrderTime();
-        }
+        _time += Time.deltaTime;
         if(!QTE.IsRunning)
             ChangeDissatisfactionValue();
         GameOver();
@@ -202,48 +226,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         WinStreak = 0;
     }
 
-    void CalculateNextOrderTime()
-    {
-        int offset = randomNum.Next(3, 7);
-        nextOrderTime = time + offset;
-        //TODO:Wymyśleć jakiś sposób na zmiane czasu;
-    }
-    public void GenerateOrder()
-    {
-        if (freeTables.Count != 0)
-        {
-            int randomTable = randomNum.Next(0, freeTables.Count);
-            int sizeOfOrder = randomNum.Next(1, 4);
-            Debug.Log("  #SYSINFO: Wygenerowano zamówienie o rozmiarze: " + sizeOfOrder);
-            freeTables[randomTable].CurrOrder = new Order(time, time + orderDeadline, sizeOfOrder);
 
-            _awaitingTables.Add(freeTables[randomTable]);
-            freeTables.Remove(freeTables[randomTable]);
-        }
-        else
-        {
-            Debug.Log("  #SYSINFO: Nie wygenerowano zamówienia,wszystkie stoliki zajęte!");
-        }
-    }
-
-    public void ControlOrders()
-    {
-        for (int i = _awaitingTables.Count - 1; i >= 0; i--)
-        {
-            Table x = _awaitingTables[i];
-            var shouldBeFree = x.ControlOrder(time, moodDecreaseValue);
-            if (shouldBeFree == true)
-            {
-                x.Mood = 20;
-                Debug.Log("  #SYSINFO: Zwolniono stolik");
-                // +++++++++++++ ADD TO WINSTREAK
-                WinStreak += 1;
-                // ++++++++++++++++++++++++++++++
-                _awaitingTables.RemoveAt(i);
-                freeTables.Add(x);
-            }
-        }
-    }
 
     private void ChangeDissatisfactionValue()
     {
@@ -265,7 +248,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
             player.SetBeersOnPlateQuantity(0);
         }
 
-        if (time >= 124)
+        if (_time >= 124)
         {
             CurrentGameState = GameState.Success;
             player.SetBeersOnPlateQuantity(0);

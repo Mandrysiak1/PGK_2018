@@ -1,4 +1,6 @@
 ﻿using Assets;
+using Assets.PGKScripts.Enums;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,30 +9,43 @@ namespace Assets
     public class Order
     {
         public string ID { get; private set; }
-        private float startTime = 0;
-        private float endTime = 0;
+        private float startTime;
+        private OrderType Type;
         private int orderSize = 0;
        
         public float getStartTime()
         {
             return startTime;
         }
-        public float getEndTime()
-        {
-            return endTime;
-        }
+   
         public float getOrderSize()
         {
             return orderSize;
         }
 
-        public Order(float startTime, float endTime,int orderSize)
+        public Order(float startTime, OrderType orderType)
         {
             ID = System.Guid.NewGuid().ToString();
             this.startTime = startTime;
-            this.endTime = endTime;
-            this.orderSize = orderSize;
+
+            this.Type = orderType;
+
+            CalculateOrderSize();
+           
         }
+
+        private void CalculateOrderSize()
+        {
+            if (Type == OrderType.WitchOrder)
+            {
+                orderSize = 1;
+            }
+            else
+            {
+                orderSize = UnityEngine.Random.Range(1, 4);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             var order = obj as Order;

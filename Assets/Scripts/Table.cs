@@ -82,27 +82,17 @@ public class Table
     {
         if (currOrder != null )
         {
-            if (beersOnTable < currOrder.getOrderSize())
-            {
-                if (currOrder.getEndTime() > currentTime)
-                {
-                    //Obniż stopień zadowolenia stolika i ogólego z zależności od różnicy
-                    //wyzeruj winstreak;
-                    //tymczasowo dodane.
-                    Mood -= moodDecreaseValue * Time.deltaTime;
-                }/*
-                else if (currOrder.getEndTime() <= currentTime)
-                {
-                    //DO NOTHING
-                }*/
-                return false;
-            }
-            else if (beersOnTable >= currOrder.getOrderSize())
+            if (beersOnTable >= currOrder.getOrderSize())
             {
                 CurrOrder = null;
                 beersOnTable = 0;
                 return true;
             }
+            else
+            {
+                Mood -= moodDecreaseValue * Time.deltaTime;
+            }
+
         }
         return false;
     }
