@@ -16,6 +16,9 @@ namespace QTE
         [SerializeField]
         private HodlQte HodlQte;
 
+        [SerializeField]
+        private MainScript main;
+
         public KeyCode Key;
         public bool IsRunning { get; private set; }
 
@@ -27,6 +30,8 @@ namespace QTE
             {
                 Character = FindObjectOfType<ThirdPersonCharacter>();
             }
+            if (main == null)
+                main = FindObjectOfType<MainScript>();
         }
 
         private void Update()
@@ -36,11 +41,20 @@ namespace QTE
                 TryRun();
             }
         }
-
+        /// <summary>
+        /// ADRIAN: Added this if statement but we will have to work with Player to be more independent script itself
+        /// so we'll be able to assign it with no need of dependency to MainScript
+        /// </summary>
         public void TryRun()
         {
-            if(Plate.Beers > 0)
+            if(Plate.Beers > 0 && !main.GetPlayer().Vulnerable)
+            {
                 Run(Plate.Beers);
+            }
+            else
+            {
+                Plate.Beers = 0;
+            }
         }
 
         public void Run(int beers)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Assets.PGKScripts.Perks.Interfaces;
+﻿using Assets.PGKScripts.Perks.Interfaces;
 
 namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
 {

@@ -26,7 +26,7 @@ namespace Assets.Scripts.Perks.UI
             icon.enabled = false;
             caption.enabled = false;
             caption.text = "";
-            keyButton.enabled = false;
+            keyButton.gameObject.SetActive(false);
             textColor = caption.color;
         }
 
@@ -34,7 +34,7 @@ namespace Assets.Scripts.Perks.UI
         {
             icon.enabled = true;
             caption.enabled = true;
-            keyButton.enabled = true;
+            keyButton.gameObject.SetActive(true);
             caption.text = status.ToString();
             if (!color.Equals(textColor))
             {

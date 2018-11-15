@@ -23,25 +23,20 @@ public class WinStreak : MonoBehaviour
 
     // SPEED PERK
     public static int speedPerkActivateMinimum = 2;
-    //IPerk<float> speedPerk;
-    //public IPerksUi<string, Color> speedPerkUi;
     public float speedMultiplier = 1.5f;
     // HOLD PERK
-    public static int holdPerkActivateMinimum = 5;
-    //IPerk<int> holdPerk;
-    //public IPerksUi<string, Color> holdPerkUi;
     public int holdNewValue = 10;
+    public int holdPerkActivateMinimum = 5;
     //
     // NO LOSE PERK
     public static int noLoseActivateMinimum = 8;
-    //IPerk<bool> noLosePerk;
-    //public IPerksUi<string, Color> noLosePerkUi;
     //
     public int perkMaxTime = 10;
     private float playerStandardSpeed = 0f;
     private int playerStandardHold = 5;
     private int initialWinStreak = 0;
     private bool duringCountdown = false;
+
     // Use this for initialization
     void Start()
     {
@@ -55,17 +50,20 @@ public class WinStreak : MonoBehaviour
         var holdPerk = new HoldPerk(
             new HoldModif(player));
         holdPerk.Name = "HoldPerk";
+        holdPerk.Quantity = 30;
         perksUiBind.Add(holdPerk, holdPerkUI);
 
         playerStandardSpeed = character.getm_MoveSpeedMultiplier();
         var speedPerk = new SpeedPerk(
             new SpeedModif(character));
         speedPerk.Name = "SpeedPerk";
+        speedPerk.Quantity = 15;
         perksUiBind.Add(speedPerk, speedPerkUI);
 
         var noDropPerk = new NoLosePerk(
             new NoLoseModif(player));
         noDropPerk.Name = "NoDropPerk";
+        noDropPerk.Quantity = 20;
         perksUiBind.Add(noDropPerk, noDropPerkUI);
     }
     private void DisablePerk(IPerk perk)
@@ -76,7 +74,7 @@ public class WinStreak : MonoBehaviour
     private IEnumerator PerkRoutine(IPerk perk, object original_val, object modified)
     {
         perk.Invoke(modified);
-        StartCoroutine(CountDown(20, perksUiBind[perk]));
+        StartCoroutine(CountDown(perk.Quantity, perksUiBind[perk]));
         foreach (var kv in perksUiBind)
         {
             if(perk.Name != kv.Key.Name && kv.Key.Availible)
