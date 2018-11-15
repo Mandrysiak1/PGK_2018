@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Assets.PGKScripts.Perks.Interfaces
 {
-    public interface IModifiableByPerk<TVal>
+    public interface IModifiableByPerk
     {
-        void Modify(TVal newValue);
-        TVal GetCurrent();
+        void Modify(object newValue);
+        object GetCurrent();
     }
 }

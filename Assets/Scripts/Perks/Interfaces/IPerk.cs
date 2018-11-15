@@ -1,9 +1,11 @@
 ﻿using Assets.PGKScripts.Perks.Interfaces;
 
-public interface IPerk<TVal>
+public interface IPerk
 {
+    string Name { get; set; }
     int Quantity { get; set; }
-    IModifiableByPerk<TVal> UnderlyingObject { get;}
-    void Invoke(TVal val);
+    bool Availible { get; set; }
+    IModifiableByPerk UnderlyingObject { get;}
+    void Invoke(object val);
 
 }

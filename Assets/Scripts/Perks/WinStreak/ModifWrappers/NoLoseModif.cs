@@ -6,21 +6,21 @@ using Assets.PGKScripts.Perks.Interfaces;
 
 namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
 {
-    public class HoldModif : IModifiableByPerk
+    public class NoLoseModif : IModifiableByPerk
     {
         Player player;
-        public HoldModif(Player player)
+        public NoLoseModif(Player player)
         {
             this.player = player;
         }
         public object GetCurrent()
         {
-            return player.MaxBeers;
+            return this.player.Vulnerable;
         }
 
         public void Modify(object newValue)
         {
-            this.player.MaxBeers = (int)newValue;
+            this.player.Vulnerable = (bool)newValue;
         }
     }
 }

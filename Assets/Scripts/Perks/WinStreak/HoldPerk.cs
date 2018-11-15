@@ -6,8 +6,9 @@ using System.Text;
 
 namespace Assets.PGKScripts.Perks.WinStreak
 {
-    public class HoldPerk : IPerk<int>
+    public class HoldPerk : IPerk
     {
+        public bool Availible { get; set; }
         int _q;
         public int Quantity
         {
@@ -22,14 +23,17 @@ namespace Assets.PGKScripts.Perks.WinStreak
             }
         }
 
-        public IModifiableByPerk<int> UnderlyingObject { get; private set; }
-        public HoldPerk(IModifiableByPerk<int> underlyingObject)
+        public IModifiableByPerk UnderlyingObject { get; private set; }
+
+        public string Name { get; set; }
+
+        public HoldPerk(IModifiableByPerk underlyingObject)
         {
             this.UnderlyingObject = underlyingObject;
         }
-        public void Invoke(int val)
+        public void Invoke(object val)
         {
-            UnderlyingObject.Modify(val);
+            UnderlyingObject.Modify((int)val);
         }
     }
 }

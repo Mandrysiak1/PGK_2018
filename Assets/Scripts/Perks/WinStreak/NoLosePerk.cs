@@ -3,7 +3,7 @@ using Assets.PGKScripts.Perks.WinStreak.ModifWrappers;
 
 namespace Assets.PGKScripts.Perks.WinStreak
 {
-    public class SpeedPerk : IPerk
+    public class NoLosePerk : IPerk
     {
         public string Name { get; set; }
         public bool Availible { get; set; }
@@ -24,7 +24,7 @@ namespace Assets.PGKScripts.Perks.WinStreak
         }
 
         public IModifiableByPerk UnderlyingObject { get; private set; }
-        public SpeedPerk(IModifiableByPerk underlyingObject)
+        public NoLosePerk(IModifiableByPerk underlyingObject)
         {
             this.UnderlyingObject = underlyingObject;
         }

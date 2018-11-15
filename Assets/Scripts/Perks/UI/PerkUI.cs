@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.PGKScripts.Perks.UI
+namespace Assets.Scripts.Perks.UI
 {
-    public class HoldPerkWinStreakUi : MonoBehaviour, IPerksUi<string, Color>
+    public class PerkUI : MonoBehaviour, IPerkUi
     {
         public RawImage icon;
         public Text caption;
         private Color textColor;
+        public Button keyButton;
+        public string Name { get; set; }
+
         public void Start()
         {
-            icon.enabled = false;
-            caption.enabled = false;
-            textColor = caption.color;
+            Disable();
         }
 
         public void Update()
@@ -29,19 +26,21 @@ namespace Assets.PGKScripts.Perks.UI
             icon.enabled = false;
             caption.enabled = false;
             caption.text = "";
+            keyButton.enabled = false;
+            textColor = caption.color;
         }
 
         public void Show(string status, Color color)
         {
             icon.enabled = true;
             caption.enabled = true;
+            keyButton.enabled = true;
             caption.text = status.ToString();
-            if(!color.Equals(this.textColor))
+            if (!color.Equals(textColor))
             {
-                this.textColor = color;
+                textColor = color;
                 caption.color = color;
             }
         }
     }
 }
-
