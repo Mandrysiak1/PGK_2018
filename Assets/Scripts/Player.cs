@@ -32,7 +32,7 @@ namespace Assets.PGKScripts
 
                 //Plate.Beers--;
 
-                BeersHandedOut++; //to fix i guess;
+                BeersHandedOut++; 
             }
             
              Debug.Log("na tacy zostało: " + Plate.orderItemsOnPlate[x]+" " + x.name );
@@ -43,12 +43,12 @@ namespace Assets.PGKScripts
       
                 if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
                 {
-                      if (Plate.orderItemsOnPlate[x] < MaxItems)
-                    Plate.orderItemsOnPlate[x] += 1;
+                    if (Plate.orderItemsOnPlate[x] < MaxItems)
+                        Plate.orderItemsOnPlate[x] += 1;
                 }
                 else
                 {
-                    Plate.orderItemsOnPlate.Add(x, 1);
+                        Plate.orderItemsOnPlate.Add(x, 1);
                 }
 
             
@@ -59,10 +59,12 @@ namespace Assets.PGKScripts
         {
             Plate.orderItemsOnPlate[x] -= 1;
         }
+
         public int GetItemOrderOnPlateQuantity(OrderItem x)
         {
             return Plate.orderItemsOnPlate[x];
         }
+
         public void SetBeersOnPlateQuantity(int x)
         {
             Plate.Beers = x;

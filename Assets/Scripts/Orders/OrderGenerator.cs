@@ -5,11 +5,7 @@ using Assets;
 
 public class OrderGenerator : MonoBehaviour
 {
-
-    
     private List<OrderItem> possibleRequests = new List<OrderItem>();
-
-
 
     private  MainScript mainScript;
 

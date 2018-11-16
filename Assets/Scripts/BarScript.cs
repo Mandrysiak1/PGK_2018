@@ -24,9 +24,8 @@ public class BarScript : MonoBehaviour
     {
         if(Input.GetButtonDown("Submit") && hasPlayer)
         {
-            //Debug.Log(LevelScene.Player.MaxBeers);
-            LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
-            //LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[1]);
+           LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
+           
         }
             
     }

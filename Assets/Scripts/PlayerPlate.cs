@@ -13,12 +13,6 @@ public class PlayerPlate : MonoBehaviour
     public class BeerCountEvent : UnityEvent<int, int> {}
     public BeerCountEvent OnBeerCountChanged;
     public Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
-    
-    void Start()
-    { 
-        
-    }
-
  
 
     public int StartingBeers = 0;
