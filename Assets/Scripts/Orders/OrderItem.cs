@@ -10,10 +10,6 @@ public class OrderItem : ScriptableObject
 
     public int MaximumSize;
 
-    public float Frequency;
-
-    public Image Image; // ?????
-
     public Sprite Sprite;
 
 }

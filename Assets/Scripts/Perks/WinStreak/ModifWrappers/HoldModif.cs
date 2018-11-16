@@ -15,12 +15,12 @@ namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
         }
         public object GetCurrent()
         {
-            return player.MaxBeers;
+            return player.MaxItems;
         }
 
         public void Modify(object newValue)
         {
-            this.player.MaxBeers = (int)newValue;
+            this.player.MaxItems = (int)newValue;
         }
     }
 }

@@ -45,7 +45,7 @@ public class WinStreak : MonoBehaviour
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
-        playerStandardHold = player.MaxBeers;
+        playerStandardHold = player.MaxItems;
 
         var holdPerk = new HoldPerk(
             new HoldModif(player));

@@ -15,10 +15,8 @@ public class PlayerPlate : MonoBehaviour
     public Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
     
     void Start()
-    {
-        var x = FindObjectOfType<OrderGenerator>();
-
-
+    { 
+        
     }
 
  

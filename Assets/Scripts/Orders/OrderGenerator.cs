@@ -17,14 +17,15 @@ public class OrderGenerator : MonoBehaviour
 
     void Start()
     {
-        
-   
+        mainScript = FindObjectOfType<MainScript>();
+        CalculateNextOrderTime();
+
     }
 
     
     private void CalculateNextOrderTime()
     {
-        nextOrderTime = Random.Range(3, 7);
+        nextOrderTime  = mainScript.GetTime() +  Random.Range(4, 10);
     }
 
     void Update()
@@ -36,8 +37,9 @@ public class OrderGenerator : MonoBehaviour
 
     private void ChechIfOrderNeeded()
     {
-        if(mainScript.GetTime() >= mainScript.GetTime() + nextOrderTime)
+        if(mainScript.GetTime() >=  nextOrderTime)
         {
+            CalculateNextOrderTime();
             GenerateOrder();
         }
 
@@ -46,20 +48,20 @@ public class OrderGenerator : MonoBehaviour
 
     private void GenerateOrder()
     {
-
-        if(mainScript.FreeTables.Count != 0)
+        
+        if (mainScript.FreeTables.Count != 0)
         {
             int randomTable = Random.Range(0, mainScript.FreeTables.Count);
-            Debug.Log(randomTable);
-            Debug.Log(mainScript.FreeTables[0].possibleOrders.Count);
+
             OrderItem RandomOrder = mainScript.FreeTables[randomTable].possibleOrders[Random.Range(0, mainScript.FreeTables[randomTable].possibleOrders.Count)];
-
-
+            
             mainScript.FreeTables[randomTable].CurrOrder = new Order(mainScript.GetTime(), RandomOrder);
 
             mainScript.AwaitingTables.Add(mainScript.FreeTables[randomTable]);
 
             mainScript.FreeTables.RemoveAt(randomTable);
+
+            Debug.Log("Wygenerowano zamówienie :" + RandomOrder.name);
         }
 
         

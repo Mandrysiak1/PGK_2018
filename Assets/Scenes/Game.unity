@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427182, b: 0.5645241, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3604,7 +3604,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1755516344}
-  - component: {fileID: 1755516343}
   - component: {fileID: 1755516342}
   - component: {fileID: 1755516341}
   m_Layer: 0
@@ -3634,17 +3633,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd6bac76492eedd40b68e3323381228a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1755516343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1755516340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b46b7287f926b9e40a3f0001bdbba8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1755516344
@@ -4282,6 +4270,7 @@ MonoBehaviour:
   noDropPerkUI: {fileID: 793251719}
   speedMultiplier: 1.2
   holdNewValue: 10
+  holdPerkActivateMinimum: 5
   perkMaxTime: 10
 --- !u!4 &2059631943
 Transform:
@@ -4596,6 +4585,7 @@ MonoBehaviour:
   CatchBeerQte: {fileID: 114482264494314532, guid: 4decadec7344f4db4a7ecab033588c7e,
     type: 2}
   HodlQte: {fileID: 114564676190790120, guid: 16934a4479e12419986d9c55ebd078b3, type: 2}
+  main: {fileID: 0}
   Key: 107
 --- !u!82 &2078970099
 AudioSource:

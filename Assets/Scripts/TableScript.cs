@@ -72,15 +72,13 @@ public class TableScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Jesteś przy stoliku");
             hasPlayer = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
-            Debug.Log("Opuszczasz stolik");
+        {;
             hasPlayer = false;
         }
     }

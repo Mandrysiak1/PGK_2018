@@ -5,7 +5,7 @@ namespace Assets.PGKScripts
    public class Player
     {
         public int BeersHandedOut { get; private set; }
-        public int MaxBeers { get; set; }
+        public int MaxItems { get; set; }
 
         public bool Vulnerable { get; set; }
 
@@ -17,7 +17,7 @@ namespace Assets.PGKScripts
                 Debug.Log("NULL");
             Plate = plate;
             BeersHandedOut = 0;
-            MaxBeers = 5;
+            MaxItems = 5;
             Vulnerable = true;
         }
         internal void ResetBeersHandedOut()
@@ -26,23 +26,34 @@ namespace Assets.PGKScripts
         }
         public void RemoveBeer(OrderItem x)
         {
+            if(Plate.orderItemsOnPlate[x] > 0)
+            {
+                Plate.orderItemsOnPlate[x] -= 1;
 
-            Plate.orderItemsOnPlate[x] -= 1;
+                //Plate.Beers--;
 
-            //Plate.Beers--;
-           // Debug.Log("Na tacy znajduje sie: " + Plate.Beers + " piw");
-            BeersHandedOut++; //to fix i guess;
+                BeersHandedOut++; //to fix i guess;
+            }
+            
+             Debug.Log("na tacy zostało: " + Plate.orderItemsOnPlate[x]+" " + x.name );
         }
         public void AddOrderItemOnPlate(OrderItem x ){
-            
-            if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
-            {
-                Plate.orderItemsOnPlate[x] += 1;
-            }else
-            {
-                Plate.orderItemsOnPlate.Add(x, 1);
-            }
+
            
+      
+                if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
+                {
+                      if (Plate.orderItemsOnPlate[x] < MaxItems)
+                    Plate.orderItemsOnPlate[x] += 1;
+                }
+                else
+                {
+                    Plate.orderItemsOnPlate.Add(x, 1);
+                }
+
+            
+            Debug.Log("Na tacy jest : " + Plate.orderItemsOnPlate[x] + " " + x.name);
+
         }
         public void RemoveOrderItemOnPlate(OrderItem x)
         {
