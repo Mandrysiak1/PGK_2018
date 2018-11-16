@@ -5,7 +5,7 @@ namespace Assets.PGKScripts
    public class Player
     {
         public int BeersHandedOut { get; private set; }
-        public int MaxItems { get; set; }
+        public int maxOrderSizeModifier { get; set; }
 
         public bool Vulnerable { get; set; }
 
@@ -17,7 +17,7 @@ namespace Assets.PGKScripts
                 Debug.Log("NULL");
             Plate = plate;
             BeersHandedOut = 0;
-            MaxItems = 5;
+            maxOrderSizeModifier = 0;
             Vulnerable = true;
         }
         internal void ResetBeersHandedOut()
@@ -43,7 +43,7 @@ namespace Assets.PGKScripts
       
                 if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
                 {
-                    if (Plate.orderItemsOnPlate[x] < MaxItems)
+                    if (Plate.orderItemsOnPlate[x] < x.MaximumOrderSize + maxOrderSizeModifier)
                         Plate.orderItemsOnPlate[x] += 1;
                 }
                 else

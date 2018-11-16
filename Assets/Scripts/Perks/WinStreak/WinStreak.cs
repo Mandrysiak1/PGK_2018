@@ -45,7 +45,7 @@ public class WinStreak : MonoBehaviour
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
-        playerStandardHold = player.MaxItems;
+        playerStandardHold = player.maxOrderSizeModifier;
 
         var holdPerk = new HoldPerk(
             new HoldModif(player));
