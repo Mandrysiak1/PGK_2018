@@ -9,7 +9,8 @@ public class BarScript : MonoBehaviour
     private bool hasPlayer = false;
     private LevelScene LevelScene;
     private MainScript MainScript;
-    public List<OrderItem> OrdersToPick = new List<OrderItem>();
+    // public List<OrderItem> OrdersToPick = new List<OrderItem>();
+    public OrderItem orderToPick;
 
 
     void Start()
@@ -24,8 +25,11 @@ public class BarScript : MonoBehaviour
     {
         if(Input.GetButtonDown("Submit") && hasPlayer)
         {
-           LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
-           
+
+            // LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
+            LevelScene.Player.AddOrderItemOnPlate(orderToPick);
+
+
         }
             
     }
