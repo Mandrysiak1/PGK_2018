@@ -7,8 +7,10 @@ namespace Assets.PGKScripts
         public int BeersHandedOut { get; private set; }
         public int MaxBeers { get; set; }
 
-        private PlayerPlate Plate;
+        public bool Vulnerable { get; set; }
 
+
+        private PlayerPlate Plate;
         public Player(PlayerPlate plate)
         {
             if (plate == null)
@@ -16,6 +18,7 @@ namespace Assets.PGKScripts
             Plate = plate;
             BeersHandedOut = 0;
             MaxBeers = 5;
+            Vulnerable = true;
         }
         internal void ResetBeersHandedOut()
         {
