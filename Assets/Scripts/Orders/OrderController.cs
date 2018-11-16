@@ -6,44 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class OrderController : MonoBehaviour {
 
-    private  MainScript mainScript;
-    private Scene currentScene;
-    public OrderController()
-    {
+    private MainScript MainScript;
 
-    }
 
     void Start () {
-        mainScript = FindObjectOfType<MainScript>();
+
+        MainScript = FindObjectOfType<MainScript>();
         
     }
 
     void Update()
     {
+       
         CheckNormalTables();
-       // CheckAdnitionalTables();
 
     }
 
-    private void CheckAdnitionalTables()
-    {
-        throw new NotImplementedException();
-    }
 
     private void CheckNormalTables()
     {
-        for (int i = mainScript.AwaitingTables.Count - 1; i >= 0; i--)
+        if(MainScript.AwaitingTables.Count != 0)
         {
-            Table y = mainScript.AwaitingTables[i];
-            if (y.ControlOrder(mainScript.GameTime, mainScript.moodDecreaseValue))
+            for (int i = MainScript.AwaitingTables.Count - 1; i >= 0; i--)
             {
-                y.Mood = 20;
-                mainScript.WinStreak += 1;
-                mainScript.AwaitingTables.RemoveAt(i);
-                mainScript.FreeTables.Add(y);
+                Table y = MainScript.AwaitingTables[i];
+                if (y.ControlOrder(MainScript.GameTime, MainScript.moodDecreaseValue))
+                {
+                    y.Mood = 20;
+                    MainScript.WinStreak += 1;
+                    MainScript.AwaitingTables.RemoveAt(i);
+                    MainScript.FreeTables.Add(y);
+                }
+
             }
 
         }
+       
          
     }
 

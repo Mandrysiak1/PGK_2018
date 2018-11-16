@@ -96,21 +96,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
     System.Random randomNum = new System.Random();
 
-    private Table _witchTable = new Table();
-    public Table WitchTable // for testing
-    {
-        get
-        {
-            return _witchTable;
-        }
-        
-        set
-        {
-
-            _witchTable = value;
-        }
-               
-    }
+ 
     List<Table> _awaitingTables = new List<Table>();
     public List<Table> AwaitingTables {
         get

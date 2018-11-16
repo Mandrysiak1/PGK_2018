@@ -11,6 +11,8 @@ namespace Assets.PGKScripts
 
         public Player(PlayerPlate plate)
         {
+            if (plate == null)
+                Debug.Log("NULL");
             Plate = plate;
             BeersHandedOut = 0;
             MaxBeers = 5;
@@ -19,24 +21,33 @@ namespace Assets.PGKScripts
         {
             this.BeersHandedOut = 0;
         }
-        public void RemoveBeer()
+        public void RemoveBeer(OrderItem x)
         {
-            Plate.Beers--;
-            Debug.Log("Na tacy znajduje sie: " + Plate.Beers + " piw");
-            BeersHandedOut++;
-        }
-        public void AddBeer()
-        {
-            if(Plate.Beers < MaxBeers)
-            {
-                Plate.Beers += 1;
-            }
 
-            Debug.Log("Na tacy znajduje sie: " + Plate.Beers + " piw");
+            Plate.orderItemsOnPlate[x] -= 1;
+
+            //Plate.Beers--;
+           // Debug.Log("Na tacy znajduje sie: " + Plate.Beers + " piw");
+            BeersHandedOut++; //to fix i guess;
         }
-        public int GetBeersOnPlateQuantity()
+        public void AddOrderItemOnPlate(OrderItem x ){
+            
+            if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
+            {
+                Plate.orderItemsOnPlate[x] += 1;
+            }else
+            {
+                Plate.orderItemsOnPlate.Add(x, 1);
+            }
+           
+        }
+        public void RemoveOrderItemOnPlate(OrderItem x)
         {
-            return Plate.Beers;
+            Plate.orderItemsOnPlate[x] -= 1;
+        }
+        public int GetItemOrderOnPlateQuantity(OrderItem x)
+        {
+            return Plate.orderItemsOnPlate[x];
         }
         public void SetBeersOnPlateQuantity(int x)
         {

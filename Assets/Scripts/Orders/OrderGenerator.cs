@@ -1,116 +1,67 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Assets;
 
 public class OrderGenerator : MonoBehaviour
 {
 
+    
+    private List<OrderItem> possibleRequests = new List<OrderItem>();
 
-    private bool isWitchOrderEnable;
 
-    public delegate void GenerateBeerOrderEvent();
-    public event GenerateBeerOrderEvent OnGenerateBeerOrder;
 
-    public delegate void GenerateWitchOrderEvent();
-    public event GenerateWitchOrderEvent OnGenerateWitchOrderEvent;
+    private  MainScript mainScript;
 
-    private MainScript mainScript;
-    private float nextOrderTime;
-
+    private float nextOrderTime = 0;
 
     void Start()
     {
-      
-
-            //currentScene = SceneManager.GetActiveScene();
-            //isWitchOrderEnable = CheckScene();
-            mainScript = FindObjectOfType<MainScript>();
-            CalculateNextOrderTime();
-            //  Debug.Log(isWitchOrderEnable.ToString());
-
         
+   
     }
 
-
+    
+    private void CalculateNextOrderTime()
+    {
+        nextOrderTime = Random.Range(3, 7);
+    }
 
     void Update()
     {
-        isWitchOrderEnable = CheckScene(); //TODO: to change, cant do it better now
-       // Debug.Log(isWitchOrderEnable);
-        BeerOrder();
-        WitchOrder();
+        mainScript = FindObjectOfType<MainScript>();
+        ChechIfOrderNeeded();
+      
     }
 
-    private void WitchOrder()
+    private void ChechIfOrderNeeded()
     {
-        if(isWitchOrderEnable == true)
-        {
-            if (UnityEngine.Random.Range(0, 100) < 10) //TODO: change it, its just for testing 
-            {
-                if (OnGenerateWitchOrderEvent != null)
-                {
-                    OnGenerateWitchOrderEvent();
-                }
-            }
-        }
-
-    }
-
-    private void BeerOrder()
-    {
-        if (CheckIfOrderNeeded())
+        if(mainScript.GetTime() >= mainScript.GetTime() + nextOrderTime)
         {
             GenerateOrder();
         }
-    }
 
-    private bool CheckIfOrderNeeded()
-    {
-        if (mainScript.GameTime >= nextOrderTime)
-        {
-            CalculateNextOrderTime();
-            return true;
 
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    void CalculateNextOrderTime()
-    {
-        int offset = UnityEngine.Random.Range(3, 7);
-        nextOrderTime = mainScript.GameTime + offset;
-        //TODO:Wymyśleć jakiś sposób na zmiane czasu;
     }
 
     private void GenerateOrder()
     {
-        if (OnGenerateBeerOrder != null)
+
+        if(mainScript.FreeTables.Count != 0)
         {
-            OnGenerateBeerOrder();
+            int randomTable = Random.Range(0, mainScript.FreeTables.Count);
+            Debug.Log(randomTable);
+            Debug.Log(mainScript.FreeTables[0].possibleOrders.Count);
+            OrderItem RandomOrder = mainScript.FreeTables[randomTable].possibleOrders[Random.Range(0, mainScript.FreeTables[randomTable].possibleOrders.Count)];
+
+
+            mainScript.FreeTables[randomTable].CurrOrder = new Order(mainScript.GetTime(), RandomOrder);
+
+            mainScript.AwaitingTables.Add(mainScript.FreeTables[randomTable]);
+
+            mainScript.FreeTables.RemoveAt(randomTable);
         }
-    }
 
-    private bool CheckScene() //TODO: to change
-    {
-        bool val = false;
-        Scene[] scenes = new Scene[SceneManager.sceneCount];
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            scenes[i] = SceneManager.GetSceneAt(i);
-     
-
-            if (scenes[i].name == "level2")
-            {
-                val = true;
-
-            }
-     
-        }       
-        return val;
+        
     }
 }

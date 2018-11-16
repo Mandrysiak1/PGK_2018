@@ -9,10 +9,11 @@ using UnityEngine;
 public class Table
     {
         public string ID { get; private set; }
-        private Order currOrder;
+        public Order currOrder { get; set; }
+        public List<OrderItem> possibleOrders;
         private bool imWaiting = false;
         public int beersOnTable = 0;
-        public float Mood = 20;
+        public float Mood = 20;        
 
     public bool TableAwaiting
         {
@@ -24,16 +25,18 @@ public class Table
             set
             {
                 this.imWaiting = value;
-                //PERHAPS THROW ORDER HERE TO UI HANDLER?
+              
             }
         }
-        public Table()
+        public Table(List<OrderItem> items)
         {
             ID = System.Guid.NewGuid().ToString();
+            possibleOrders = items;
+
         }
 
         public Order CurrOrder
-    {
+         {
         get
         {
             return currOrder;
@@ -43,7 +46,7 @@ public class Table
         {
             this.currOrder = value;
         }
-    }
+         }
    
      
 

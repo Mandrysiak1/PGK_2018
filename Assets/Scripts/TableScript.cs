@@ -8,6 +8,7 @@ public class TableScript : MonoBehaviour
     private QTEController QTE;
     [SerializeField]
     private LevelScene LevelScene;
+    
 
     public Table MyTable { get; set; }
     private bool hasPlayer = false;
@@ -20,7 +21,7 @@ public class TableScript : MonoBehaviour
         if(LevelScene == null)
             LevelScene = FindObjectOfType<LevelScene>();
 
-        MyTable = new Table();
+        MyTable = new Table(GetComponent<OrderSource>().possibleRequests);
 
         Messenger.AddListener("Table show", DebugID);
 
@@ -41,9 +42,9 @@ public class TableScript : MonoBehaviour
                 if (MyTable.IsThereOrder())
                 {
 
-                    if (LevelScene.Player.GetBeersOnPlateQuantity() > 0)
+                    if (LevelScene.Player.GetItemOrderOnPlateQuantity(MyTable.currOrder.orderType) > 0)
                     {
-                        LevelScene.Player.RemoveBeer();
+                        LevelScene.Player.RemoveBeer(MyTable.currOrder.orderType);
                         MyTable.putBeer();
                         int x = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
                         Debug.Log("Połozono piwo, potrzeba jeszcze: " + x);

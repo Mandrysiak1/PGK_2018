@@ -1,4 +1,5 @@
 ﻿using Assets.PGKScripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,20 +8,29 @@ public class BarScript : MonoBehaviour
 {
     private bool hasPlayer = false;
     private LevelScene LevelScene;
+    private MainScript MainScript;
+    public List<OrderItem> OrdersToPick = new List<OrderItem>();
 
 
-    void Start ()
+    void Start()
     {
+        MainScript = FindObjectOfType<MainScript>();
         LevelScene = FindObjectOfType<LevelScene>();
     }
 
-	void Update ()
+
+
+    void Update ()
     {
-        if (Input.GetButtonDown("Submit") && hasPlayer == true)
+        if(Input.GetButtonDown("Submit") && hasPlayer)
         {
-            LevelScene.Player.AddBeer();
+            //Debug.Log(LevelScene.Player.MaxBeers);
+            LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
+            //LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[1]);
         }
+            
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

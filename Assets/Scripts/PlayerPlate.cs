@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,16 @@ public class PlayerPlate : MonoBehaviour
     [Serializable]
     public class BeerCountEvent : UnityEvent<int, int> {}
     public BeerCountEvent OnBeerCountChanged;
+    public Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
+    
+    void Start()
+    {
+        var x = FindObjectOfType<OrderGenerator>();
+
+
+    }
+
+ 
 
     public int StartingBeers = 0;
 
@@ -28,9 +39,5 @@ public class PlayerPlate : MonoBehaviour
         }
     }
     private int _Beers;
-
-    private void Start()
-    {
-        Beers = StartingBeers;
-    }
+    
 }

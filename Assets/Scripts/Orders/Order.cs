@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class Order
+    public class Order 
     {
         public string ID { get; private set; }
         private float startTime;
-        private OrderType Type;
+        public OrderItem orderType { get; set; }
         private int orderSize = 0;
        
         public float getStartTime()
@@ -23,27 +23,20 @@ namespace Assets
             return orderSize;
         }
 
-        public Order(float startTime, OrderType orderType)
+        public Order(float startTime, OrderItem orderType)
         {
             ID = System.Guid.NewGuid().ToString();
             this.startTime = startTime;
 
-            this.Type = orderType;
+            this.orderType = orderType;
 
             CalculateOrderSize();
            
         }
 
         private void CalculateOrderSize()
-        {
-            if (Type == OrderType.WitchOrder)
-            {
-                orderSize = 1;
-            }
-            else
-            {
-                orderSize = UnityEngine.Random.Range(1, 4);
-            }
+        {            
+                orderSize = UnityEngine.Random.Range(1, orderType.MaximumSize);           
         }
 
         public override bool Equals(object obj)

@@ -22,15 +22,17 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
-        if(CurrentLevel != null)
+        if (CurrentLevel != null)
             Level = CurrentLevel;
         Loading = SceneManager.LoadSceneAsync(Level.Scene.SceneName, LoadSceneMode.Additive);
-        Loading.completed += SetupScene;
+        Loading.completed += op => SetupScene(op, Level.Scene);
     }
 
-    private void SetupScene(AsyncOperation obj)
+    private void SetupScene(AsyncOperation op, SceneReference scene)
     {
         LevelScene levelScene = FindObjectOfType<LevelScene>();
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.SceneName));
+
         Main.Setup(Level, levelScene);
     }
 }
