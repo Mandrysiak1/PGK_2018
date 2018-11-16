@@ -37,10 +37,8 @@ namespace Assets.PGKScripts
             
              Debug.Log("na tacy zostało: " + Plate.orderItemsOnPlate[x]+" " + x.name );
         }
-        public void AddOrderItemOnPlate(OrderItem x ){
-
-           
-      
+        public void AddOrderItemOnPlate(OrderItem x )
+        {
                 if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
                 {
                     if (Plate.orderItemsOnPlate[x] < x.MaximumOrderSize + maxOrderSizeModifier)

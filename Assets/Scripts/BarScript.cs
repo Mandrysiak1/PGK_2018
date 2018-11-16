@@ -1,8 +1,4 @@
-﻿using Assets.PGKScripts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BarScript : MonoBehaviour
 {
@@ -19,8 +15,6 @@ public class BarScript : MonoBehaviour
         LevelScene = FindObjectOfType<LevelScene>();
     }
 
-
-
     void Update ()
     {
         if(Input.GetButtonDown("Submit") && hasPlayer)
@@ -28,13 +22,8 @@ public class BarScript : MonoBehaviour
 
             // LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
             LevelScene.Player.AddOrderItemOnPlate(orderToPick);
-
-
         }
-            
     }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

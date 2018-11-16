@@ -14,7 +14,6 @@ public class WinStreak : MonoBehaviour
     public ThirdPersonCharacter character;
     public IWinStreakSource winStreakSource;
     //PERKS_LIST
-    //List<IPerk> perksList = new List<IPerk>();
     Dictionary<IPerk, IPerkUi> perksUiBind = new Dictionary<IPerk, IPerkUi>();
 
     public PerkUI speedPerkUI;
@@ -41,26 +40,27 @@ public class WinStreak : MonoBehaviour
     void Start()
     {
         MainScript mainScript = FindObjectOfType<MainScript>();
+        OrderSource orderSource = FindObjectOfType<OrderSource>();
         winStreakSource = mainScript;
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
         playerStandardHold = player.maxOrderSizeModifier;
 
-        var holdPerk = new HoldPerk(
-            new HoldModif(player));
+        var holdPerk = new Perk(
+            new HoldModif(OrderMediator.Instance));
         holdPerk.Name = "HoldPerk";
         holdPerk.Quantity = 30;
         perksUiBind.Add(holdPerk, holdPerkUI);
 
         playerStandardSpeed = character.getm_MoveSpeedMultiplier();
-        var speedPerk = new SpeedPerk(
+        var speedPerk = new Perk(
             new SpeedModif(character));
         speedPerk.Name = "SpeedPerk";
         speedPerk.Quantity = 15;
         perksUiBind.Add(speedPerk, speedPerkUI);
 
-        var noDropPerk = new NoLosePerk(
+        var noDropPerk = new Perk(
             new NoLoseModif(player));
         noDropPerk.Name = "NoDropPerk";
         noDropPerk.Quantity = 20;

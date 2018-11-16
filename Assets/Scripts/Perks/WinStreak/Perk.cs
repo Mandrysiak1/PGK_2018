@@ -1,15 +1,15 @@
 ﻿using Assets.PGKScripts.Perks.Interfaces;
-using Assets.PGKScripts.Perks.WinStreak.ModifWrappers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Assets.PGKScripts.Perks.WinStreak
 {
-    public class SpeedPerk : IPerk
+    public class Perk : IPerk
     {
-        public string Name { get; set; }
         public bool Availible { get; set; }
         int _q;
-        private SpeedModif speedModif;
-
         public int Quantity
         {
             get
@@ -24,7 +24,10 @@ namespace Assets.PGKScripts.Perks.WinStreak
         }
 
         public IModifiableByPerk UnderlyingObject { get; private set; }
-        public SpeedPerk(IModifiableByPerk underlyingObject)
+
+        public string Name { get; set; }
+
+        public Perk(IModifiableByPerk underlyingObject)
         {
             this.UnderlyingObject = underlyingObject;
         }
