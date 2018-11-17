@@ -3,7 +3,8 @@
 public class OrderMediator
 {
     private static OrderMediator lazyInstance;
-    public static OrderMediator Instance {
+    public static OrderMediator Instance
+    {
         get
         {
             if (lazyInstance == null)

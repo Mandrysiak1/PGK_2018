@@ -2,7 +2,7 @@
 
 namespace Assets.PGKScripts
 {
-   public class Player
+    public class Player
     {
         public int BeersHandedOut { get; private set; }
         public int maxOrderSizeModifier { get; set; }
@@ -26,41 +26,22 @@ namespace Assets.PGKScripts
         }
         public void RemoveBeer(OrderItem x)
         {
-            if(Plate.orderItemsOnPlate[x] > 0)
-            {
-                Plate.orderItemsOnPlate[x] -= 1;
+            Plate.RemoveItem(x);
 
-                //Plate.Beers--;
 
-                BeersHandedOut++; 
-            }
-            
-             Debug.Log("na tacy zostało: " + Plate.orderItemsOnPlate[x]+" " + x.name );
         }
-        public void AddOrderItemOnPlate(OrderItem x )
+        public void AddOrderItemOnPlate(OrderItem x)
         {
-                if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
-                {
-                    if (Plate.orderItemsOnPlate[x] < x.MaximumOrderSize + maxOrderSizeModifier)
-                        Plate.orderItemsOnPlate[x] += 1;
-                }
-                else
-                {
-                        Plate.orderItemsOnPlate.Add(x, 1);
-                }
+            Plate.AddItem(x);
 
-            
-            Debug.Log("Na tacy jest : " + Plate.orderItemsOnPlate[x] + " " + x.name);
+            Debug.Log("Na tacy jest : " + Plate.GetItemQuantityOnPlate(x) + " " + x.name);
 
         }
-        public void RemoveOrderItemOnPlate(OrderItem x)
-        {
-            Plate.orderItemsOnPlate[x] -= 1;
-        }
+
 
         public int GetItemOrderOnPlateQuantity(OrderItem x)
         {
-            return Plate.orderItemsOnPlate[x];
+            return Plate.GetItemQuantityOnPlate(x);
         }
 
         public void SetBeersOnPlateQuantity(int x)

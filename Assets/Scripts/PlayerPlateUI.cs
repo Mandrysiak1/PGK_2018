@@ -1,5 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerPlateUI : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class PlayerPlateUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Text;
 
+    [SerializeField]
+    private GameObject SpecialItem;
+
+
+
     private float Timer = 0.0f;
     private bool Animate = false;
     private Color TargetColor;
@@ -25,10 +32,15 @@ public class PlayerPlateUI : MonoBehaviour
 
     private void Start()
     {
+        SpecialItem.GetComponent<RawImage>().enabled = false;
+
         Plate.OnBeerCountChanged.AddListener(BeerCountChanged);
         TextTransform = Text.transform;
         InitialTextScale = TextTransform.localScale;
         SetBeerCount(Plate.Beers);
+
+
+
     }
 
     private void Update()
@@ -42,23 +54,45 @@ public class PlayerPlateUI : MonoBehaviour
             TextTransform.localScale = Vector3.Lerp(InitialTextScale, InitialTextScale * Scale, t);
             if (Timer > AnimationTime)
                 Animate = false;
+
         }
     }
 
-    private void BeerCountChanged(int current, int old)
+    private void BeerCountChanged(OrderItem x, int current, int old)
     {
-        Color color;
-        if (current < old)
+        if (x.name != "Beer")
         {
-            color = LoseColor;
+            if (current == 1)
+            {
+                SpecialItem.GetComponent<RawImage>().enabled = true;
+                SpecialItem.GetComponent<RawImage>().texture = x.Sprite.texture;
+
+
+            }
+            else
+            {
+
+                SpecialItem.GetComponent<RawImage>().enabled = false;
+            }
+
         }
         else
         {
-            color = GainColor;
+            Color color;
+            if (current < old)
+            {
+                color = LoseColor;
+            }
+            else
+            {
+                color = GainColor;
+            }
+
+            SetBeerCount(current);
+            StartAnimation(color);
         }
 
-        SetBeerCount(current);
-        StartAnimation(color);
+
     }
 
     private void SetBeerCount(int current)

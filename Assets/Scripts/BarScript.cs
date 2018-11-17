@@ -4,20 +4,18 @@ public class BarScript : MonoBehaviour
 {
     private bool hasPlayer = false;
     private LevelScene LevelScene;
-    private MainScript MainScript;
     // public List<OrderItem> OrdersToPick = new List<OrderItem>();
     public OrderItem orderToPick;
 
 
     void Start()
     {
-        MainScript = FindObjectOfType<MainScript>();
         LevelScene = FindObjectOfType<LevelScene>();
     }
 
-    void Update ()
+    void Update()
     {
-        if(Input.GetButtonDown("Submit") && hasPlayer)
+        if (Input.GetButtonDown("Submit") && hasPlayer && orderToPick != null)
         {
 
             // LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);

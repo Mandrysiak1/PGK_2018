@@ -77,7 +77,7 @@ public class WinStreak : MonoBehaviour
         StartCoroutine(CountDown(perk.Quantity, perksUiBind[perk]));
         foreach (var kv in perksUiBind)
         {
-            if(perk.Name != kv.Key.Name && kv.Key.Availible)
+            if (perk.Name != kv.Key.Name && kv.Key.Availible)
                 DisablePerk(kv.Key);
         }
         while (duringCountdown)

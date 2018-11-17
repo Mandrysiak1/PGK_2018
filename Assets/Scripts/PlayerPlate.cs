@@ -10,12 +10,53 @@ public class PlayerPlate : MonoBehaviour
     /// <para>previous beer amount</para>
     /// </summary>
     [Serializable]
-    public class BeerCountEvent : UnityEvent<int, int> {}
+    public class BeerCountEvent : UnityEvent<OrderItem, int, int> { }
     public BeerCountEvent OnBeerCountChanged;
-    public Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
- 
+    private Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
+
 
     public int StartingBeers = 0;
+
+    public void RemoveItem(OrderItem x)
+    {
+        if (orderItemsOnPlate.ContainsKey(x))
+        {
+            int old = orderItemsOnPlate[x];
+            if (orderItemsOnPlate[x] > 0)
+            {
+                orderItemsOnPlate[x] -= 1;
+                OnBeerCountChanged.Invoke(x, orderItemsOnPlate[x], old);
+            }
+
+        }
+    }
+
+    public void AddItem(OrderItem x)
+    {
+        if (orderItemsOnPlate.ContainsKey(x) == true)
+        {
+            int old = orderItemsOnPlate[x];
+            if (orderItemsOnPlate[x] < x.MaximumOrderSize)
+                orderItemsOnPlate[x] += 1;
+            OnBeerCountChanged.Invoke(x, orderItemsOnPlate[x], old);
+        }
+        else
+        {
+            int old = 0;
+            orderItemsOnPlate.Add(x, 1);
+            OnBeerCountChanged.Invoke(x, orderItemsOnPlate[x], old);
+        }
+
+    }
+
+    public int GetItemQuantityOnPlate(OrderItem x)
+    {
+        if (orderItemsOnPlate.ContainsKey(x))
+        {
+            return orderItemsOnPlate[x];
+        }
+        else return 0;
+    }
 
     public int Beers
     {
@@ -26,10 +67,10 @@ public class PlayerPlate : MonoBehaviour
             if (value != old)
             {
                 _Beers = value;
-                OnBeerCountChanged.Invoke(_Beers, old);
+                // OnBeerCountChanged.Invoke(_Beers, old);
             }
         }
     }
     private int _Beers;
-    
+
 }
