@@ -133,4 +133,12 @@ public class RandomWandering : MonoBehaviour {
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.gameObject.tag == "Player")
+        {
+            Debug.Log("@^%&!*");
+        }
+    }
 }
