@@ -7,7 +7,8 @@ public class GlowingScript : MonoBehaviour {
     private bool hasPlayer = false;
     public GameObject[] objects;
     private Outline[] outlines;
-    // Use this for initialization
+    public Color color;
+
     void Start () {
         outlines = new Outline[objects.Length];
         Debug.Log(objects.Length);
@@ -16,7 +17,7 @@ public class GlowingScript : MonoBehaviour {
             outlines[i] = objects[i].GetComponent<Outline>();
             if(objects[i].tag == "Obstacle")
             {
-                outlines[i].OutlineColor = Color.black;
+                outlines[i].OutlineColor = color;
                 outlines[i].OutlineWidth = 1f;
             }
             else
@@ -25,8 +26,7 @@ public class GlowingScript : MonoBehaviour {
             }
         }
     }
-	
-	// Update is called once per frame
+
 	void Update () {
 		if(hasPlayer)
         {
@@ -41,13 +41,14 @@ public class GlowingScript : MonoBehaviour {
                     outlines[i].enabled = true;
                 }
             }
-        }else if(hasPlayer != true)
+        }
+        else if(hasPlayer != true)
         {
             for (int i = 0; i < objects.Length; i++)
             {
                 if (objects[i].tag == "Obstacle")
                 {
-                    outlines[i].OutlineColor = Color.black;
+                    outlines[i].OutlineColor = color;
                     outlines[i].OutlineWidth = 1f;
                 }
                 else
