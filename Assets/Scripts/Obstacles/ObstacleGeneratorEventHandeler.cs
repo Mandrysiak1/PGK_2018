@@ -20,7 +20,8 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
 
             if (scenes[i].name == "level2")
             {
-                prefabs = Resources.LoadAll("ObjectGeneratorStuff");
+                //prefabs = Resources.LoadAll("ObjectGeneratorStuff");
+                prefabs = Resources.LoadAll("ObjectGeneratorStuffFortnit");
             }
             else if (scenes[i].name == "fortnit")
             {

@@ -42,7 +42,7 @@ public class GlowingScript : MonoBehaviour {
                 }
             }
         }
-         else if(hasPlayer != true)
+        else if(hasPlayer != true)
         {
             for (int i = 0; i < objects.Length; i++)
             {
