@@ -2,10 +2,10 @@
 
 namespace Assets.PGKScripts
 {
-   public class Player
+    public class Player
     {
         public int BeersHandedOut { get; private set; }
-        public int MaxItems { get; set; }
+        public int maxOrderSizeModifier { get; set; }
 
         public bool Vulnerable { get; set; }
 
@@ -17,7 +17,7 @@ namespace Assets.PGKScripts
                 Debug.Log("NULL");
             Plate = plate;
             BeersHandedOut = 0;
-            MaxItems = 5;
+            maxOrderSizeModifier = 0;
             Vulnerable = true;
         }
         internal void ResetBeersHandedOut()
@@ -26,43 +26,24 @@ namespace Assets.PGKScripts
         }
         public void RemoveBeer(OrderItem x)
         {
-            if(Plate.orderItemsOnPlate[x] > 0)
-            {
-                Plate.orderItemsOnPlate[x] -= 1;
+            Plate.RemoveItem(x);
 
-                //Plate.Beers--;
-
-                BeersHandedOut++; //to fix i guess;
-            }
-            
-             Debug.Log("na tacy zostało: " + Plate.orderItemsOnPlate[x]+" " + x.name );
-        }
-        public void AddOrderItemOnPlate(OrderItem x ){
-
-           
-      
-                if (Plate.orderItemsOnPlate.ContainsKey(x) == true)
-                {
-                      if (Plate.orderItemsOnPlate[x] < MaxItems)
-                    Plate.orderItemsOnPlate[x] += 1;
-                }
-                else
-                {
-                    Plate.orderItemsOnPlate.Add(x, 1);
-                }
-
-            
-            Debug.Log("Na tacy jest : " + Plate.orderItemsOnPlate[x] + " " + x.name);
 
         }
-        public void RemoveOrderItemOnPlate(OrderItem x)
+        public void AddOrderItemOnPlate(OrderItem x)
         {
-            Plate.orderItemsOnPlate[x] -= 1;
+            Plate.AddItem(x);
+
+            Debug.Log("Na tacy jest : " + Plate.GetItemQuantityOnPlate(x) + " " + x.name);
+
         }
+
+
         public int GetItemOrderOnPlateQuantity(OrderItem x)
         {
-            return Plate.orderItemsOnPlate[x];
+            return Plate.GetItemQuantityOnPlate(x);
         }
+
         public void SetBeersOnPlateQuantity(int x)
         {
             Plate.Beers = x;

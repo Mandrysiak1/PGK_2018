@@ -8,7 +8,7 @@ public class OrderItem : ScriptableObject
 
     public string Name;
 
-    public int MaximumSize;
+    public int MaximumOrderSize;
 
     public Sprite Sprite;
 

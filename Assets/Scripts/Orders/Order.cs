@@ -36,7 +36,7 @@ namespace Assets
 
         private void CalculateOrderSize()
         {            
-                orderSize = UnityEngine.Random.Range(1, orderType.MaximumSize);           
+                orderSize = UnityEngine.Random.Range(1, orderType.MaximumOrderSize);           
         }
 
         public override bool Equals(object obj)

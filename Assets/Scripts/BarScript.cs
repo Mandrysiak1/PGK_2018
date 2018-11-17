@@ -1,37 +1,27 @@
-﻿using Assets.PGKScripts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BarScript : MonoBehaviour
 {
     private bool hasPlayer = false;
     private LevelScene LevelScene;
-    private MainScript MainScript;
-    public List<OrderItem> OrdersToPick = new List<OrderItem>();
+    // public List<OrderItem> OrdersToPick = new List<OrderItem>();
+    public OrderItem orderToPick;
 
 
     void Start()
     {
-        MainScript = FindObjectOfType<MainScript>();
         LevelScene = FindObjectOfType<LevelScene>();
     }
 
-
-
-    void Update ()
+    void Update()
     {
-        if(Input.GetButtonDown("Submit") && hasPlayer)
+        if (Input.GetButtonDown("Submit") && hasPlayer && orderToPick != null)
         {
-            //Debug.Log(LevelScene.Player.MaxBeers);
-            LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
-            //LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[1]);
+
+            // LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
+            LevelScene.Player.AddOrderItemOnPlate(orderToPick);
         }
-            
     }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

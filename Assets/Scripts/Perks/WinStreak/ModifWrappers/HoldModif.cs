@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Assets.PGKScripts.Perks.Interfaces;
+﻿using Assets.PGKScripts.Perks.Interfaces;
 
 namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
 {
     public class HoldModif : IModifiableByPerk
     {
-        Player player;
-        public HoldModif(Player player)
+        OrderMediator orderMediator;
+        public HoldModif(OrderMediator orderMediator)
         {
-            this.player = player;
+            this.orderMediator = orderMediator;
         }
         public object GetCurrent()
         {
-            return player.MaxItems;
+            return 0;
         }
 
         public void Modify(object newValue)
         {
-            this.player.MaxItems = (int)newValue;
+            this.orderMediator.MaxBeer = (int)newValue;
         }
     }
 }
