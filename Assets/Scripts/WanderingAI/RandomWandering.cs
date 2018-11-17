@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RandomWandering : MonoBehaviour {
+public class RandomWandering : MonoBehaviour, IWandering {
     public NavMeshAgent agent;
     private Renderer ren;
     public float wandererRadius = 7f;

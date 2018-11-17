@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WaypointWandering : MonoBehaviour {
+public class WaypointWandering : MonoBehaviour, IWandering {
 
     public NavMeshAgent agent;
     private Renderer ren;
@@ -34,7 +34,7 @@ public class WaypointWandering : MonoBehaviour {
         Wander();
 	}
 
-    void Wander()
+    public void Wander()
     {
         if (Vector3.Distance(transform.position, wayPoints[currentWayPoint].position) < 2f)
         {
