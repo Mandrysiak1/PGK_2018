@@ -24,7 +24,7 @@ public class PlayerPlate : MonoBehaviour
 
     public int MaximumCapacity
     {
-        get { return _MaximumCapacity; }
+        get { return _MaximumCapacity + UpgradeClass.BeerModif; }
         set
         {
             int old = _MaximumCapacity;
