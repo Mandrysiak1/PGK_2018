@@ -35,38 +35,7 @@ public class PlayerPlate : MonoBehaviour
         }
     }
 
-    internal void RemoveRandomItem()
-    {
-        if(orderItemsOnPlate.Count != 0)
-        {
-            var values = orderItemsOnPlate.Values.ToList();
-            bool PlateIsEmpty = true;
-            foreach (var x in values)
-            {
-                if (x != 0)
-                {
-                    PlateIsEmpty = false;
-                }
-            }
 
-
-            if (PlateIsEmpty != true)
-            {
-                var Keys = orderItemsOnPlate.Keys.ToList();
-                OrderItem RandomItem;
-                do
-                {
-                    RandomItem = Keys[UnityEngine.Random.Range(0, Keys.Count)];
-
-                } while (orderItemsOnPlate[RandomItem] == 0);
-
-
-                RemoveItem(RandomItem);
-            }
-        }
-       
-
-    }
 
     public int CurrentCapacity { get; private set; }
 
@@ -92,8 +61,6 @@ public class PlayerPlate : MonoBehaviour
             }
         }
 
-        //to remove:
-        Debug.Log("Na tacy znajduje się: " + orderItemsOnPlate[item] + " " + item.name);
     }
 
     public void AddItem(OrderItem item)
@@ -131,5 +98,37 @@ public class PlayerPlate : MonoBehaviour
         {
             RemoveItem(kv.Key, kv.Value);
         }
+    }
+    internal void RemoveRandomItem()
+    {
+        if (orderItemsOnPlate.Count != 0)
+        {
+            var values = orderItemsOnPlate.Values.ToList();
+            bool PlateIsEmpty = true;
+            foreach (var x in values)
+            {
+                if (x != 0)
+                {
+                    PlateIsEmpty = false;
+                }
+            }
+
+
+            if (PlateIsEmpty != true)
+            {
+                var Keys = orderItemsOnPlate.Keys.ToList();
+                OrderItem RandomItem;
+                do
+                {
+                    RandomItem = Keys[UnityEngine.Random.Range(0, Keys.Count)];
+
+                } while (orderItemsOnPlate[RandomItem] == 0);
+
+
+                RemoveItem(RandomItem);
+            }
+        }
+
+
     }
 }
