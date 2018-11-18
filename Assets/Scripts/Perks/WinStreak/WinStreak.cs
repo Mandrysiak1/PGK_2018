@@ -48,20 +48,23 @@ public class WinStreak : MonoBehaviour
         playerStandardHold = player.maxOrderSizeModifier;
 
         var holdPerk = new Perk(
-            new HoldModif(OrderMediator.Instance));
+            new HoldModif(OrderMediator.Instance),
+            holdPerkActivateMinimum);
         holdPerk.Name = "HoldPerk";
         holdPerk.Quantity = 30;
         perksUiBind.Add(holdPerk, holdPerkUI);
 
         playerStandardSpeed = character.getm_MoveSpeedMultiplier();
         var speedPerk = new Perk(
-            new SpeedModif(character));
+            new SpeedModif(character),
+            speedPerkActivateMinimum);
         speedPerk.Name = "SpeedPerk";
         speedPerk.Quantity = 15;
         perksUiBind.Add(speedPerk, speedPerkUI);
 
         var noDropPerk = new Perk(
-            new NoLoseModif(player));
+            new NoLoseModif(player),
+            noLoseActivateMinimum);
         noDropPerk.Name = "NoDropPerk";
         noDropPerk.Quantity = 20;
         perksUiBind.Add(noDropPerk, noDropPerkUI);
@@ -70,9 +73,11 @@ public class WinStreak : MonoBehaviour
     {
         perk.Availible = false;
         perksUiBind[perk].Disable();
+        perk.Active = false;
     }
     private IEnumerator PerkRoutine(IPerk perk, object original_val, object modified)
     {
+        perk.Active = true;
         perk.Invoke(modified);
         StartCoroutine(CountDown(perk.Quantity, perksUiBind[perk]));
         foreach (var kv in perksUiBind)
@@ -89,27 +94,14 @@ public class WinStreak : MonoBehaviour
     {
         foreach (var kv in perksUiBind)
         {
-            if (newWs >= speedPerkActivateMinimum + initialWinStreak && kv.Key.Name == "SpeedPerk")
+            if(kv.Key.MinimumToActivate + initialWinStreak <= newWs)
             {
-                if (!kv.Key.Availible)
-                    kv.Value.Show("0", new Color(0, 255, 0));
-                kv.Key.Availible = true;
-                Debug.Log("###### WINSTREAK ##### Speed Multiplier Active");
-            }
-            if (newWs >= holdPerkActivateMinimum + initialWinStreak && kv.Key.Name == "HoldPerk")
-            {
-                if (!kv.Key.Availible)
-                    kv.Value.Show("0", new Color(0, 255, 0));
-                kv.Key.Availible = true;
-                Debug.Log("###### WINSTREAK ##### Max Hold Add Active");
-
-            }
-            if (newWs >= noLoseActivateMinimum + initialWinStreak && kv.Key.Name == "NoDropPerk")
-            {
-                if (!kv.Key.Availible)
-                    kv.Value.Show("0", new Color(0, 255, 0));
-                kv.Key.Availible = true;
-                Debug.Log("###### WINSTREAK ##### No Lose Add Active");
+                if (!kv.Key.Availible && !kv.Key.Active)
+                {
+                    kv.Value.Show("", new Color(0, 255, 0));
+                    kv.Key.Availible = true;
+                    Debug.Log("###### WINSTREAK ##### " + kv.Key.Name + " availible.");
+                }
             }
         }
         if (newWs == 0)
@@ -126,7 +118,7 @@ public class WinStreak : MonoBehaviour
     {
         foreach (var kv in perksUiBind)
         {
-            if (kv.Key.Availible == true)
+            if (kv.Key.Availible && !kv.Key.Active)
             {
                 if (kv.Key.Name == "SpeedPerk" && Input.GetButton("Perk_1"))
                 {
