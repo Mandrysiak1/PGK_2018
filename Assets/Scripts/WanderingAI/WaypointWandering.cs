@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class WaypointWandering : MonoBehaviour, IWandering {
 
     public NavMeshAgent agent;
-    private Renderer ren;
     public float wandererRadius = 3f;
 
     private Vector3 wanderPoint;
@@ -22,10 +21,9 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
     void Start () {
         agent = GetComponent<NavMeshAgent>();
-        ren = GetComponent<Renderer>();
-        ren.material.color = Color.yellow;
         originalSpeed = agent.speed;
         InvokeRepeating("AddDynamic", 5, 5);
+        transform.GetComponentInChildren<WanderingText>().text.enabled = false;
     }
 	
 	void Update () {
@@ -55,9 +53,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     {
         if (agent.speed != originalSpeed)
         {
-            Debug.Log("I'm slower!");
             agent.speed = originalSpeed;
-            ren.material.color = Color.yellow;
             isWalking = true;
             isRunning = false;
             luck = 0;
@@ -67,12 +63,10 @@ public class WaypointWandering : MonoBehaviour, IWandering {
             luck = Random.Range(1, 11);
             if (luck < 5 && luck != 0)
             {
-                Debug.Log("I'm faster!");
                 isWalking = false;
                 isRunning = true;
                 originalSpeed = agent.speed;
                 agent.speed = originalSpeed * speedMultiplier;
-                ren.material.color = Color.black;
             }
             /*
             else if (luck == 5)
@@ -87,4 +81,22 @@ public class WaypointWandering : MonoBehaviour, IWandering {
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.tag == "Player")
+        {
+            LevelScene levelScene = FindObjectOfType<LevelScene>();
+            levelScene.Player.ResetPlate();
+            transform.GetComponentInChildren<WanderingText>().text.enabled = true;
+            StartCoroutine(wait());
+        }
+    }
+
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        transform.GetComponentInChildren<WanderingText>().text.enabled = false;
+    }
+
 }

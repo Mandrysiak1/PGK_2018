@@ -9,7 +9,7 @@ public static class UpgradeClass {
     public static int preGameTip;
     public static int Tip=0;
     public static float SpeedModif = 0f;
-    public static int BeerModif = 1;
+    public static int BeerModif = 0;
     public static int BeerTimes = 1;
     public static int SpeedTimes = 1;
     public static bool nextlvlcanvas = false;
@@ -35,7 +35,7 @@ public static class UpgradeClass {
         if(Tip >= cost)
         {
             Tip -= cost;
-            OrderMediator.Instance.MaxBeer += 1;
+            BeerModif += 1;
             BeerTimes++;
         }
     }

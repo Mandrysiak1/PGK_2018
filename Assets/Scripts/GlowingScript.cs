@@ -36,6 +36,7 @@ public class GlowingScript : MonoBehaviour {
                 if (objects[i].tag == "Obstacle")
                 {
                     outlines[i].OutlineColor = Color.red;
+                    outlines[i].OutlineWidth = 2f;
                 }
                 else
                 {
