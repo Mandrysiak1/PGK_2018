@@ -15,10 +15,15 @@ public class BarScript : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetButtonDown("ReturnItemOnBar") && hasPlayer && orderToPick != null)
+        {
+           
+               LevelScene.Player.RemoveBeer(orderToPick);
+            
+        }
         if (Input.GetButtonDown("Submit") && hasPlayer && orderToPick != null)
         {
-
-            // LevelScene.Player.AddOrderItemOnPlate(OrdersToPick[0]);
+            
             LevelScene.Player.AddOrderItemOnPlate(orderToPick);
         }
     }
