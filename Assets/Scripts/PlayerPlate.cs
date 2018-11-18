@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,7 +20,7 @@ public class PlayerPlate : MonoBehaviour
     /// <para>old maximum capacity</para>
     /// </summary>
     [Serializable]
-    public class MaximumCapacityChanged : UnityEvent<int, int> {}
+    public class MaximumCapacityChanged : UnityEvent<int, int> { }
     public MaximumCapacityChanged OnMaximumCapacityChanged;
 
     public int MaximumCapacity
@@ -29,9 +30,42 @@ public class PlayerPlate : MonoBehaviour
         {
             int old = _MaximumCapacity;
             _MaximumCapacity = value;
-            if(old != _MaximumCapacity)
+            if (old != _MaximumCapacity)
                 OnMaximumCapacityChanged.Invoke(_MaximumCapacity, old);
         }
+    }
+
+    internal void RemoveRandomItem()
+    {
+        if(orderItemsOnPlate.Count != 0)
+        {
+            var values = orderItemsOnPlate.Values.ToList();
+            bool PlateIsEmpty = true;
+            foreach (var x in values)
+            {
+                if (x != 0)
+                {
+                    PlateIsEmpty = false;
+                }
+            }
+
+
+            if (PlateIsEmpty != true)
+            {
+                var Keys = orderItemsOnPlate.Keys.ToList();
+                OrderItem RandomItem;
+                do
+                {
+                    RandomItem = Keys[UnityEngine.Random.Range(0, Keys.Count)];
+
+                } while (orderItemsOnPlate[RandomItem] == 0);
+
+
+                RemoveItem(RandomItem);
+            }
+        }
+       
+
     }
 
     public int CurrentCapacity { get; private set; }
@@ -57,11 +91,14 @@ public class PlayerPlate : MonoBehaviour
                 OnItemAmountChanged.Invoke(item, amount, old);
             }
         }
+
+        //to remove:
+        Debug.Log("Na tacy znajduje się: " + orderItemsOnPlate[item] + " " + item.name);
     }
 
     public void AddItem(OrderItem item)
     {
-        if(CurrentCapacity < MaximumCapacity)
+        if (CurrentCapacity < MaximumCapacity)
         {
             int amount;
             if (!orderItemsOnPlate.TryGetValue(item, out amount))

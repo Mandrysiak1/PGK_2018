@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.PGKScripts
 {
@@ -30,6 +31,11 @@ namespace Assets.PGKScripts
             System.Random rnd = new System.Random();
             UpgradeClass.Tip += rnd.Next(3);
 
+        }
+
+        public void RemoveRandomItemFromPlate()
+        {
+            Plate.RemoveRandomItem();
         }
         public void AddOrderItemOnPlate(OrderItem x)
         {
