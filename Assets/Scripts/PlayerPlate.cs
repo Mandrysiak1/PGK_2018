@@ -86,7 +86,11 @@ public class PlayerPlate : MonoBehaviour
 
     public void RemoveAll()
     {
-        foreach (var kv in orderItemsOnPlate)
+        // We have to iterate over copy, because modifying the collection during iteration causes
+        // InvalidOperationException: out of sync
+
+        var copy = new Dictionary<OrderItem, int>(orderItemsOnPlate);
+        foreach (var kv in copy)
         {
             RemoveItem(kv.Key, kv.Value);
         }
