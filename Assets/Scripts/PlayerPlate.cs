@@ -81,11 +81,17 @@ public class PlayerPlate : MonoBehaviour
 
     public int GetItemQuantityOnPlate(OrderItem x)
     {
-        if (orderItemsOnPlate.ContainsKey(x))
+        if (x != null) // Quick fix for ArgumentNullException;
         {
-            return orderItemsOnPlate[x];
+            if (orderItemsOnPlate.ContainsKey(x))
+            {
+                return orderItemsOnPlate[x];
+            }
+            else return 0;
+
         }
-        else return 0;
+        else return 0; 
+
     }
 
     public void RemoveAll()
