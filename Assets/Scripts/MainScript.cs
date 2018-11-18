@@ -97,7 +97,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
     System.Random randomNum = new System.Random();
 
- 
+
     List<Table> _awaitingTables = new List<Table>();
     public List<Table> AwaitingTables {
         get
@@ -234,12 +234,12 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     {
         if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure)
         {
-            
+
             if (DissatisfactionValue >= 100)
             {
                 Player.SetActive(false);
                 CurrentGameState = GameState.Failure;
-                player.SetBeersOnPlateQuantity(0);
+                player.ResetPlate();
                 UpgradeClass.Tip = UpgradeClass.preGameTip;
             }
 
@@ -247,10 +247,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
             {
                 Player.SetActive(false);
                 CurrentGameState = GameState.Success;
-                player.SetBeersOnPlateQuantity(0);
+                player.ResetPlate();
             }
         }
-            
+
 
     }
 }

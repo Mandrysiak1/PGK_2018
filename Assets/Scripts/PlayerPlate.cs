@@ -14,9 +14,34 @@ public class PlayerPlate : MonoBehaviour
     public class ItemAmountChanged : UnityEvent<OrderItem, int, int> { }
     public ItemAmountChanged OnItemAmountChanged;
 
+    /// <summary>
+    /// <para>new maximum capacity</para>
+    /// <para>old maximum capacity</para>
+    /// </summary>
+    [Serializable]
+    public class MaximumCapacityChanged : UnityEvent<int, int> {}
+    public MaximumCapacityChanged OnMaximumCapacityChanged;
+
+    public int MaximumCapacity
+    {
+        get { return _MaximumCapacity; }
+        set
+        {
+            int old = _MaximumCapacity;
+            _MaximumCapacity = value;
+            if(old != _MaximumCapacity)
+                OnMaximumCapacityChanged.Invoke(_MaximumCapacity, old);
+        }
+    }
+
+    public int CurrentCapacity { get; private set; }
+
+    [SerializeField]
+    private int _MaximumCapacity = 5;
+
     private Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
 
-    public void RemoveItem(OrderItem item)
+    public void RemoveItem(OrderItem item, int removeAmount = 1)
     {
         int amount;
         if (orderItemsOnPlate.TryGetValue(item, out amount))
@@ -24,7 +49,9 @@ public class PlayerPlate : MonoBehaviour
             if (amount > 0)
             {
                 int old = amount;
-                --amount;
+                amount -= removeAmount;
+                CurrentCapacity -= removeAmount;
+
                 orderItemsOnPlate[item] = amount;
 
                 OnItemAmountChanged.Invoke(item, amount, old);
@@ -32,21 +59,18 @@ public class PlayerPlate : MonoBehaviour
         }
     }
 
-    private int GetMaximumItemAmount(OrderItem item)
-    {
-        return item.MaximumOrderSize;
-    }
-
     public void AddItem(OrderItem item)
     {
-        int amount;
-        if (!orderItemsOnPlate.TryGetValue(item, out amount))
-            amount = 0;
-        if(amount < GetMaximumItemAmount(item))
+        if(CurrentCapacity < MaximumCapacity)
         {
+            int amount;
+            if (!orderItemsOnPlate.TryGetValue(item, out amount))
+                amount = 0;
             int old = amount;
             ++amount;
+            ++CurrentCapacity;
             orderItemsOnPlate[item] = amount;
+
             OnItemAmountChanged.Invoke(item, amount, old);
         }
     }
@@ -60,19 +84,11 @@ public class PlayerPlate : MonoBehaviour
         else return 0;
     }
 
-    public int Beers
+    public void RemoveAll()
     {
-        get { return _Beers; }
-        set
+        foreach (var kv in orderItemsOnPlate)
         {
-            int old = _Beers;
-            if (value != old)
-            {
-                _Beers = value;
-                // OnBeerCountChanged.Invoke(_Beers, old);
-            }
+            RemoveItem(kv.Key, kv.Value);
         }
     }
-    private int _Beers;
-
 }

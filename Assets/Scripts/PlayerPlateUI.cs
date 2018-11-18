@@ -37,10 +37,6 @@ public class PlayerPlateUI : MonoBehaviour
         Plate.OnItemAmountChanged.AddListener(BeerCountChanged);
         TextTransform = Text.transform;
         InitialTextScale = TextTransform.localScale;
-        SetBeerCount(Plate.Beers);
-
-
-
     }
 
     private void Update()

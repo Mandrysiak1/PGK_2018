@@ -96,7 +96,6 @@ namespace QTE
                 tween.onPlay += () =>
                 {
                     beerImage.enabled = true;
-                    Plate.Beers--;
                 };
 
                 Catcher selfCatcher = catcher;
@@ -132,7 +131,6 @@ namespace QTE
 
         private void OnCatch(GameObject beerObj)
         {
-            ++Plate.Beers;
             ++Catched;
             --LeftToCatch;
             bool willEnd = LeftToCatch == 0;

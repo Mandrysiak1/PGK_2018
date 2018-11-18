@@ -15,6 +15,8 @@ namespace QTE
         private CatchBeerQTE CatchBeerQte;
         [SerializeField]
         private HodlQte HodlQte;
+        [SerializeField]
+        private OrderItem HoldQteItem;
 
         [SerializeField]
         private MainScript main;
@@ -47,13 +49,14 @@ namespace QTE
         /// </summary>
         public void TryRun()
         {
-            if(Plate.Beers > 0 && !main.GetPlayer().Vulnerable)
+            int holdItemAmount = Plate.GetItemQuantityOnPlate(HoldQteItem);
+            if(holdItemAmount > 0 && !main.GetPlayer().Vulnerable)
             {
-                Run(Plate.Beers);
+                Run(holdItemAmount);
             }
             else
             {
-                Plate.Beers = 0;
+                Plate.RemoveAll();
             }
         }
 
@@ -78,7 +81,10 @@ namespace QTE
             qte.Run((success) =>
             {
                 if (!success)
-                    Plate.Beers -= beers;
+                {
+                    int holdItemAmount = Plate.GetItemQuantityOnPlate(HoldQteItem);
+                    Plate.RemoveItem(HoldQteItem, holdItemAmount);
+                }
                 OnQteEnd();
             });
         }

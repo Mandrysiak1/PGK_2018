@@ -34,7 +34,7 @@ namespace Assets.PGKScripts
         public void AddOrderItemOnPlate(OrderItem x)
         {
             Plate.AddItem(x);
-            
+
             Debug.Log("Na tacy jest : " + Plate.GetItemQuantityOnPlate(x) + " " + x.name);
 
         }
@@ -45,10 +45,9 @@ namespace Assets.PGKScripts
             return Plate.GetItemQuantityOnPlate(x);
         }
 
-        public void SetBeersOnPlateQuantity(int x)
+        public void ResetPlate()
         {
-            Plate.Beers = x;
-            Debug.Log("Ustawiono ilośc piw na: " + x);
+            Plate.RemoveAll();
         }
     }
 }
