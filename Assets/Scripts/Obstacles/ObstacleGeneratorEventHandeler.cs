@@ -14,14 +14,12 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
         Scene[] scenes = new Scene[SceneManager.sceneCount];
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
-           // Debug.Log(SceneManager.sceneCount);
             scenes[i] = SceneManager.GetSceneAt(i);
             Debug.Log(scenes[i].name + " z obstacle");
 
             if (scenes[i].name == "level2")
             {
-                //prefabs = Resources.LoadAll("ObjectGeneratorStuff");
-                prefabs = Resources.LoadAll("ObjectGeneratorStuffFortnit");
+                prefabs = Resources.LoadAll("ObjectGeneratorStuff");
             }
             else if (scenes[i].name == "fortnit")
             {
@@ -29,7 +27,7 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
             }
             else
             {
-                //do nothing xd
+                ;
             }
         }
         var x = FindObjectOfType<ObstacleGenerator>();

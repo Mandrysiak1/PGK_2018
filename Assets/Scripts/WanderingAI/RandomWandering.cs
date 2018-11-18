@@ -28,7 +28,7 @@ public class RandomWandering : MonoBehaviour, IWandering {
         originalSpeed = agent.speed;
         currentPosition = transform.position;
         wanderPoint = RandomWanderPoint();
-        InvokeRepeating("ChangeDestination", 0, 0.5f);
+        InvokeRepeating("ChangeDestination", 0, 0.25f);
         InvokeRepeating("AddDynamic", 5, 5);
     }
 	
@@ -63,6 +63,7 @@ public class RandomWandering : MonoBehaviour, IWandering {
         lastPosition = transform.position;
         if (lastPosition == currentPosition)
         {
+            Debug.Log("I'm stuck, help me!");
             SetRandomWaypoint();
         }
         currentPosition = transform.position;
