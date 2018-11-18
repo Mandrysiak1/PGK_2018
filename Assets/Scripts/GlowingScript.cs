@@ -11,7 +11,6 @@ public class GlowingScript : MonoBehaviour {
 
     void Start () {
         outlines = new Outline[objects.Length];
-        Debug.Log(objects.Length);
         for(int i = 0; i < objects.Length; i++)
         {
             outlines[i] = objects[i].GetComponent<Outline>();
