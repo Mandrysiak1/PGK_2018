@@ -13,6 +13,7 @@ public class UIMain : MonoBehaviour
     private GameFlowController Flow;
 
     public MainScript mainScript;
+    public Canvas MainCanvas;
     public Text howManyBeers;
     public Slider bigBar;
     public Text EndGameText;
@@ -33,7 +34,7 @@ public class UIMain : MonoBehaviour
     void Start()
     {
 
-
+        
         PauseCanvas.enabled = false;
 
         Time.timeScale = 1;
@@ -88,6 +89,7 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Escape) && mainScript.CurrentGameState == GameState.Playing)
         {
             if (!gamePaused)
@@ -150,6 +152,17 @@ public class UIMain : MonoBehaviour
         UpgradeClass.nextlvlcanvas = NextLvlCanv.enabled;
         EndGameCanvas.enabled = false;
         NextLvlCanv.enabled = false;
+        MainCanvas.enabled = false;
+        GameObject Customers = GameObject.Find("Customers");
+        if (Customers != null)
+            Customers.SetActive(false);
+        GameObject Obstacles = GameObject.Find("Obstacles");
+        if (Obstacles != null)
+        {
+            Obstacles.SetActive(false);
+            Obstacles.GetComponent<ObstacleGenerator>().CancelInvoke();
+        }
+            
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }

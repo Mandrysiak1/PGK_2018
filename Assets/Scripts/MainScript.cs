@@ -87,6 +87,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
 
     public float moodDecreaseValue;
+    [SerializeField]
     private float _time = 0f;
     public float GameTime
     {
