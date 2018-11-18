@@ -174,6 +174,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     public void Start()
     {
         UpgradeClass.preGameTip = UpgradeClass.Tip;
+        UpgradeClass.exited = false;
         if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
         else moodDecreaseValue = 0.3f;
         DissatisfactionChanged.AddListener(DissatisfactionValueListener);
@@ -233,8 +234,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     {
         if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure)
         {
+            
             if (DissatisfactionValue >= 100)
             {
+                Player.SetActive(false);
                 CurrentGameState = GameState.Failure;
                 player.SetBeersOnPlateQuantity(0);
                 UpgradeClass.Tip = UpgradeClass.preGameTip;
@@ -242,6 +245,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
             if (_time >= 124)
             {
+                Player.SetActive(false);
                 CurrentGameState = GameState.Success;
                 player.SetBeersOnPlateQuantity(0);
             }

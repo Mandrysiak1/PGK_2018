@@ -7,7 +7,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
     public NavMeshAgent agent;
     private Renderer ren;
-    public float wandererRadius = 7f;
+    public float wandererRadius = 3f;
 
     private Vector3 wanderPoint;
     public Transform[] wayPoints;
@@ -20,7 +20,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private float originalSpeed;
     private readonly float speedMultiplier = 1.8f;
 
-    // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
         ren = GetComponent<Renderer>();
@@ -29,7 +28,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         InvokeRepeating("AddDynamic", 5, 5);
     }
 	
-	// Update is called once per frame
 	void Update () {
         Wander();
 	}
@@ -57,6 +55,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     {
         if (agent.speed != originalSpeed)
         {
+            Debug.Log("I'm slower!");
             agent.speed = originalSpeed;
             ren.material.color = Color.yellow;
             isWalking = true;
@@ -68,6 +67,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
             luck = Random.Range(1, 11);
             if (luck < 5 && luck != 0)
             {
+                Debug.Log("I'm faster!");
                 isWalking = false;
                 isRunning = true;
                 originalSpeed = agent.speed;

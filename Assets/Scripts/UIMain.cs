@@ -117,7 +117,12 @@ public class UIMain : MonoBehaviour
             y = 60;
         }
         y -= Time.deltaTime;
-
+        if (UpgradeClass.exited)
+        {
+            EndGameCanvas.enabled = true;
+            if (UpgradeClass.nextlvlcanvas) NextLvlCanv.enabled = true;
+            UpgradeClass.exited = false;
+        }
     }
 
     void RestartTheGame()
@@ -140,7 +145,11 @@ public class UIMain : MonoBehaviour
 
     void LoadShop()
     {
-        //Time.timeScale = 1;
+        UpgradeClass.endgamecanvas = EndGameCanvas.enabled;
+        UpgradeClass.nextlvlcanvas = NextLvlCanv.enabled;
+        EndGameCanvas.enabled = false;
+        NextLvlCanv.enabled = false;
+        Time.timeScale = 1;
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }
 

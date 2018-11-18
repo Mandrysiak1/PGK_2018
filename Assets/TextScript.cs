@@ -26,6 +26,7 @@ public class TextScript : MonoBehaviour {
     public void Return()
     {
         SceneManager.UnloadSceneAsync("Shop");
+        UpgradeClass.exited = true;
     }
     public void StarPurchase()
     {
