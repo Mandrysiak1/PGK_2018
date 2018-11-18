@@ -243,7 +243,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
                 UpgradeClass.Tip = UpgradeClass.preGameTip;
             }
 
-            if (_time >= 5)
+            if (_time >= 124)
             {
                 Player.SetActive(false);
                 CurrentGameState = GameState.Success;
