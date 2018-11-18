@@ -18,7 +18,7 @@ namespace Assets.PGKScripts
             Plate = plate;
             BeersHandedOut = 0;
             maxOrderSizeModifier = 0;
-            Vulnerable = true;
+            Vulnerable = UpgradeClass.Vulnerable;
         }
         internal void ResetBeersHandedOut()
         {
@@ -27,7 +27,7 @@ namespace Assets.PGKScripts
         public void RemoveBeer(OrderItem x)
         {
             Plate.RemoveItem(x);
-
+            UpgradeClass.Tip += 100;
 
         }
         public void AddOrderItemOnPlate(OrderItem x)

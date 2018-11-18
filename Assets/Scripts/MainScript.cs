@@ -10,6 +10,7 @@ using QTE;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class MainScript : MonoBehaviour, IWinStreakSource
 {
@@ -154,6 +155,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
         Player.gameObject.SetActive(true);
         Player.transform.position = scene.PlayerStartingPosition.transform.position;
+        Player.GetComponent<ThirdPersonCharacter>().setm_AnimSpeedMultiplier(0.85f + 0.25f * UpgradeClass.SpeedModif);
+        Player.GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.85f + 0.25f * UpgradeClass.SpeedModif);
         foreach (var listener in FindObjectsOfType<LevelLoadListener>())
         {
             listener.LevelLoaded.Invoke(level, scene);
@@ -170,7 +173,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
     public void Start()
     {
-
+        UpgradeClass.preGameTip = UpgradeClass.Tip;
         if (PlayerPrefs.HasKey("difficultyKey")) moodDecreaseValue = PlayerPrefs.GetFloat("difficultyKey");
         else moodDecreaseValue = 0.3f;
         DissatisfactionChanged.AddListener(DissatisfactionValueListener);
@@ -228,19 +231,22 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
     private void GameOver()
     {
-        if (DissatisfactionValue >= 100)
+        if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure)
         {
-            CurrentGameState = GameState.Failure;
-            player.SetBeersOnPlateQuantity(0);
+            if (DissatisfactionValue >= 100)
+            {
+                CurrentGameState = GameState.Failure;
+                player.SetBeersOnPlateQuantity(0);
+                UpgradeClass.Tip = UpgradeClass.preGameTip;
+            }
+
+            if (_time >= 5)
+            {
+                CurrentGameState = GameState.Success;
+                player.SetBeersOnPlateQuantity(0);
+            }
         }
-
-        if (_time >= 124)
-        {
-            CurrentGameState = GameState.Success;
-            player.SetBeersOnPlateQuantity(0);
-
-
-        }
+            
 
     }
 }

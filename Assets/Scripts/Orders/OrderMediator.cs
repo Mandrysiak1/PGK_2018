@@ -14,7 +14,7 @@ public class OrderMediator
     }
     private OrderMediator()
     {
-        MaxBeer = 5;
+        MaxBeer = 5 + UpgradeClass.BeerModif;
         MaxWitchPotion = 1;
     }
     public int MaxBeer { get; set; }

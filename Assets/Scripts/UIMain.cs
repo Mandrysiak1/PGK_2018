@@ -20,8 +20,10 @@ public class UIMain : MonoBehaviour
     public Button MainMenu;
     public Canvas NextLvlCanv;
     public Button NextLevel;
+    public Button GoToShop;
     public Text timer;
     public Canvas PauseCanvas;
+    public Canvas SuccessCanvas;
     bool gamePaused = false;
     int x = 2;
     float y = 4;
@@ -50,6 +52,8 @@ public class UIMain : MonoBehaviour
         {
             NextLevel.gameObject.SetActive(false);
         }
+        GoToShop.onClick.AddListener(LoadShop);
+
     }
 
     private void GameStateChanged(GameState arg0, GameState arg1)
@@ -83,11 +87,12 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && mainScript.CurrentGameState == GameState.Playing)
         {
             if (!gamePaused)
             {
                 gamePaused = true;
+                SuccessCanvas.enabled = false;
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
@@ -97,6 +102,7 @@ public class UIMain : MonoBehaviour
             {
                 gamePaused = false;
                 PauseCanvas.enabled = false;
+                SuccessCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
                 Time.timeScale = 1;
@@ -130,6 +136,12 @@ public class UIMain : MonoBehaviour
     {
         Time.timeScale = 1;
         Flow.StartNextLevel();
+    }
+
+    void LoadShop()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }
 
 }
