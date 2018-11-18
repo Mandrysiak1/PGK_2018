@@ -34,7 +34,7 @@ public class PlayerPlateUI : MonoBehaviour
     {
         SpecialItem.GetComponent<RawImage>().enabled = false;
 
-        Plate.OnBeerCountChanged.AddListener(BeerCountChanged);
+        Plate.OnItemAmountChanged.AddListener(BeerCountChanged);
         TextTransform = Text.transform;
         InitialTextScale = TextTransform.localScale;
         SetBeerCount(Plate.Beers);

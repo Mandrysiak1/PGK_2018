@@ -6,47 +6,49 @@ using UnityEngine.Events;
 public class PlayerPlate : MonoBehaviour
 {
     /// <summary>
-    /// <para>current beer amount</para>
-    /// <para>previous beer amount</para>
+    /// <para>item</para>
+    /// <para>current item amount</para>
+    /// <para>previous item amount</para>
     /// </summary>
     [Serializable]
-    public class BeerCountEvent : UnityEvent<OrderItem, int, int> { }
-    public BeerCountEvent OnBeerCountChanged;
+    public class ItemAmountChanged : UnityEvent<OrderItem, int, int> { }
+    public ItemAmountChanged OnItemAmountChanged;
+
     private Dictionary<OrderItem, int> orderItemsOnPlate = new Dictionary<OrderItem, int>();
 
-
-    public int StartingBeers = 0;
-
-    public void RemoveItem(OrderItem x)
+    public void RemoveItem(OrderItem item)
     {
-        if (orderItemsOnPlate.ContainsKey(x))
+        int amount;
+        if (orderItemsOnPlate.TryGetValue(item, out amount))
         {
-            int old = orderItemsOnPlate[x];
-            if (orderItemsOnPlate[x] > 0)
+            if (amount > 0)
             {
-                orderItemsOnPlate[x] -= 1;
-                OnBeerCountChanged.Invoke(x, orderItemsOnPlate[x], old);
-            }
+                int old = amount;
+                --amount;
+                orderItemsOnPlate[item] = amount;
 
+                OnItemAmountChanged.Invoke(item, amount, old);
+            }
         }
     }
 
-    public void AddItem(OrderItem x)
+    private int GetMaximumItemAmount(OrderItem item)
     {
-        if (orderItemsOnPlate.ContainsKey(x) == true)
-        {
-            int old = orderItemsOnPlate[x];
-            if (orderItemsOnPlate[x] < x.MaximumOrderSize)
-                orderItemsOnPlate[x] += 1;
-            OnBeerCountChanged.Invoke(x, orderItemsOnPlate[x], old);
-        }
-        else
-        {
-            int old = 0;
-            orderItemsOnPlate.Add(x, 1);
-            OnBeerCountChanged.Invoke(x, orderItemsOnPlate[x], old);
-        }
+        return item.MaximumOrderSize;
+    }
 
+    public void AddItem(OrderItem item)
+    {
+        int amount;
+        if (!orderItemsOnPlate.TryGetValue(item, out amount))
+            amount = 0;
+        if(amount < GetMaximumItemAmount(item))
+        {
+            int old = amount;
+            ++amount;
+            orderItemsOnPlate[item] = amount;
+            OnItemAmountChanged.Invoke(item, amount, old);
+        }
     }
 
     public int GetItemQuantityOnPlate(OrderItem x)
