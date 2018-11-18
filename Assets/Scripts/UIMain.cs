@@ -140,7 +140,7 @@ public class UIMain : MonoBehaviour
 
     void LoadShop()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }
 

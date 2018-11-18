@@ -27,13 +27,14 @@ namespace Assets.PGKScripts
         public void RemoveBeer(OrderItem x)
         {
             Plate.RemoveItem(x);
-            UpgradeClass.Tip += 100;
+            System.Random rnd = new System.Random();
+            UpgradeClass.Tip += rnd.Next(3);
 
         }
         public void AddOrderItemOnPlate(OrderItem x)
         {
             Plate.AddItem(x);
-
+            
             Debug.Log("Na tacy jest : " + Plate.GetItemQuantityOnPlate(x) + " " + x.name);
 
         }

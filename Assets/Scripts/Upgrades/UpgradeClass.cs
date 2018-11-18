@@ -7,7 +7,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public static class UpgradeClass {
 
     public static int preGameTip;
-    public static int Tip=10000;
+    public static int Tip=0;
     public static float SpeedModif = 0f;
     public static int BeerModif = 1;
     public static int BeerTimes = 1;
