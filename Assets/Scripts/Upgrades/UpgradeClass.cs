@@ -12,7 +12,9 @@ public static class UpgradeClass {
     public static int BeerModif = 1;
     public static int BeerTimes = 1;
     public static int SpeedTimes = 1;
-    public static bool isenabled = false;
+    public static bool nextlvlcanvas = false;
+    public static bool endgamecanvas = false;
+    public static bool exited = false;
     public static bool Vulnerable = true;
     public static bool invulnerabilityPurchased = false;
 
