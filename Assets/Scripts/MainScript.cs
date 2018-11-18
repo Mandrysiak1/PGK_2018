@@ -240,7 +240,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
                 UpgradeClass.Tip = UpgradeClass.preGameTip;
             }
 
-            if (_time >= 5)
+            if (_time >= 124)
             {
                 CurrentGameState = GameState.Success;
                 player.SetBeersOnPlateQuantity(0);
