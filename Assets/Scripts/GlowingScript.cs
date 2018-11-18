@@ -17,6 +17,7 @@ public class GlowingScript : MonoBehaviour {
             outlines[i] = objects[i].GetComponent<Outline>();
             if(objects[i].tag == "Obstacle")
             {
+                outlines[i].enabled = true;
                 outlines[i].OutlineColor = color;
                 outlines[i].OutlineWidth = 1f;
             }
