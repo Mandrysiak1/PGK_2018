@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class WaypointWandering : MonoBehaviour, IWandering {
 
@@ -19,8 +20,12 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private float originalSpeed;
     private readonly float speedMultiplier = 1.8f;
 
+    //animation
+    //public ThirdPersonCharacter character;
+
     void Start () {
         agent = GetComponent<NavMeshAgent>();
+        //agent.updateRotation = false;
         originalSpeed = agent.speed;
         InvokeRepeating("AddDynamic", 5, 5);
         transform.GetComponentInChildren<WanderingText>().text.enabled = false;
@@ -28,7 +33,17 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 	
 	void Update () {
         Wander();
-	}
+        /*
+        if(agent.remainingDistance > agent.stoppingDistance)
+        {
+            character.Move(agent.desiredVelocity, false, false);
+        }
+        else
+        {
+            character.Move(Vector3.zero, false, false);
+        }
+        */
+    }
 
     public void Wander()
     {
