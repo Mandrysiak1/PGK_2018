@@ -1,6 +1,7 @@
 ﻿using Assets.PGKScripts.Enums;
 using System;
 using System.ComponentModel;
+using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,7 +22,7 @@ public class UIMain : MonoBehaviour
     public Canvas NextLvlCanv;
     public Button NextLevel;
     public Button GoToShop;
-    public Text timer;
+    public TextMeshProUGUI timer;
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
     bool gamePaused = false;
