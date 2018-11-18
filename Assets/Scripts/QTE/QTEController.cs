@@ -56,7 +56,7 @@ namespace QTE
             }
             else
             {
-                Plate.RemoveAll();
+                Plate.RemoveRandomItem();
             }
         }
 
