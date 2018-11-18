@@ -5,7 +5,7 @@ namespace Assets.PGKScripts.Interfaces
 {
     public interface IWinStreakSource
     {
-        int WinStreak { get;  }
+        int WinStreak { get; set; }
         WinStreakEvent WinStreakChanged { get; }
     }
 }

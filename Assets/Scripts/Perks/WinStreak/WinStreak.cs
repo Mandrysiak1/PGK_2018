@@ -77,7 +77,6 @@ public class WinStreak : MonoBehaviour
     }
     private IEnumerator PerkRoutine(IPerk perk, object original_val, object modified)
     {
-        perk.Active = true;
         perk.Invoke(modified);
         StartCoroutine(CountDown(perk.Quantity, perksUiBind[perk]));
         foreach (var kv in perksUiBind)
@@ -108,7 +107,9 @@ public class WinStreak : MonoBehaviour
         {
             foreach (var kv in perksUiBind)
             {
-                DisablePerk(kv.Key);
+                if(!kv.Key.Active)
+                    DisablePerk(kv.Key);
+                initialWinStreak = 0;
             }
         }
     }
@@ -122,17 +123,23 @@ public class WinStreak : MonoBehaviour
             {
                 if (kv.Key.Name == "SpeedPerk" && Input.GetButton("Perk_1"))
                 {
+                    kv.Key.Availible = false;
+                    kv.Key.Active = true;
                     StartCoroutine(PerkRoutine(kv.Key, playerStandardSpeed,
                         playerStandardSpeed * speedMultiplier));
                     initialWinStreak = winStreakSource.WinStreak;
                 }
                 if (kv.Key.Name == "HoldPerk" && Input.GetButton("Perk_2"))
                 {
+                    kv.Key.Availible = false;
+                    kv.Key.Active = true;
                     StartCoroutine(PerkRoutine(kv.Key, playerStandardHold, holdNewValue));
                     initialWinStreak = winStreakSource.WinStreak;
                 }
                 if (kv.Key.Name == "NoDropPerk" && Input.GetButton("Perk_3"))
                 {
+                    kv.Key.Availible = false;
+                    kv.Key.Active = true;
                     StartCoroutine(PerkRoutine(kv.Key, true, false));
                     initialWinStreak = winStreakSource.WinStreak;
                 }
