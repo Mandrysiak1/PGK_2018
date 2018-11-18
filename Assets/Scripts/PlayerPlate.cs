@@ -99,6 +99,7 @@ public class PlayerPlate : MonoBehaviour
             RemoveItem(kv.Key, kv.Value);
         }
     }
+
     internal void RemoveRandomItem()
     {
         if (orderItemsOnPlate.Count != 0)
@@ -128,7 +129,18 @@ public class PlayerPlate : MonoBehaviour
                 RemoveItem(RandomItem);
             }
         }
+    }
 
-
+    public IEnumerable<OrderItem> Items
+    {
+        get
+        {
+            var copy = new Dictionary<OrderItem, int>(orderItemsOnPlate);
+            foreach (var kv in copy)
+            {
+                for (int i = 0; i < kv.Value; i++)
+                    yield return kv.Key;
+            }
+        }
     }
 }
