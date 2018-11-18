@@ -124,6 +124,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         }
 
     }
+
     private Player player;
     [SerializeField]
     private PlayerPlate PlayerPlate;
@@ -133,6 +134,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     private AudioSource Music;
     [SerializeField]
     private GameObject Player;
+    [SerializeField]
+    private Camera Camera;
 
     public MainScript()
     {
@@ -152,6 +155,9 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
         scene.Player = player;
         scene.Main = this;
+
+        Camera.transform.position = scene.CameraStartingPosition.position;
+        Camera.transform.rotation = scene.CameraStartingPosition.rotation;
 
         Player.gameObject.SetActive(true);
         Player.transform.position = scene.PlayerStartingPosition.transform.position;

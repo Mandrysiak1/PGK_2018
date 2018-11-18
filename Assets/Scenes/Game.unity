@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1253,7 +1253,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1416592718}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b669375b2f600441b2e7f086977e9a9, type: 3}
   m_Name: 
@@ -4960,6 +4960,7 @@ MonoBehaviour:
   QTE: {fileID: 0}
   Music: {fileID: 2078970099}
   Player: {fileID: 2075440669}
+  Camera: {fileID: 1416592720}
 --- !u!65 &2078970092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5079,7 +5080,7 @@ MonoBehaviour:
   CatchBeerQte: {fileID: 114482264494314532, guid: 4decadec7344f4db4a7ecab033588c7e,
     type: 2}
   HodlQte: {fileID: 114564676190790120, guid: 16934a4479e12419986d9c55ebd078b3, type: 2}
-  HoldQteItem: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
+  CatchQteItem: {fileID: 0}
   main: {fileID: 2078970091}
   Key: 107
 --- !u!82 &2078970099
