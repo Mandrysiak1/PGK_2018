@@ -1,78 +1,50 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class PlayerPlateUI : MonoBehaviour
 {
     public Color LoseColor = Color.red;
     public Color GainColor = Color.green;
-    public Color NormalColor = Color.white;
-    public float Scale = 1.5f;
-    public string TextFormat = "x {0}";
 
-    public float AnimationTime = 0.5f;
-    public AnimationCurve Curve;
-
+    [SerializeField]
+    private OrderItemWithAmountUI OrderItemUiPrefab;
     [SerializeField]
     private PlayerPlate Plate;
-    [SerializeField]
-    private TextMeshProUGUI Text;
 
     [SerializeField]
-    private GameObject SpecialItem;
+    private Transform Content;
 
-
-
-    private float Timer = 0.0f;
-    private bool Animate = false;
-    private Color TargetColor;
-    private Transform TextTransform;
-    private Vector3 InitialTextScale;
+    private Dictionary<OrderItem, OrderItemWithAmountUI> ItemUis = new Dictionary<OrderItem, OrderItemWithAmountUI>();
 
     private void Start()
     {
-        SpecialItem.GetComponent<RawImage>().enabled = false;
-
-        Plate.OnItemAmountChanged.AddListener(BeerCountChanged);
-        TextTransform = Text.transform;
-        InitialTextScale = TextTransform.localScale;
+        Plate.OnItemAmountChanged.AddListener(ItemChanged);
     }
 
-    private void Update()
+    public void IntroduceItem(OrderItem item)
     {
-        if (Animate)
+        if (!ItemUis.ContainsKey(item))
         {
-            Timer += Time.deltaTime;
-
-            float t = Curve.Evaluate(Timer / AnimationTime);
-            Text.color = Color.Lerp(NormalColor, TargetColor, t);
-            TextTransform.localScale = Vector3.Lerp(InitialTextScale, InitialTextScale * Scale, t);
-            if (Timer > AnimationTime)
-                Animate = false;
-
+            CreateUi(item);
         }
     }
 
-    private void BeerCountChanged(OrderItem x, int current, int old)
+    private void ItemChanged(OrderItem item, int current, int old)
     {
-        if (x.name != "Beer")
+        OrderItemWithAmountUI ui;
+        if (!ItemUis.TryGetValue(item, out ui))
         {
-            if (current == 1)
-            {
-                SpecialItem.GetComponent<RawImage>().enabled = true;
-                SpecialItem.GetComponent<RawImage>().texture = x.Sprite.texture;
-
-
-            }
-            else
-            {
-
-                SpecialItem.GetComponent<RawImage>().enabled = false;
-            }
-
+            ui = CreateUi(item);
         }
-        else
+
+        ui.Amount = current;
+        PlayAnimation(current, old, ui);
+    }
+
+    private void PlayAnimation(int current, int old, OrderItemWithAmountUI ui)
+    {
+        ItemChangedAnimation animation = ui.gameObject.GetComponent<ItemChangedAnimation>();
+        if (animation != null)
         {
             Color color;
             if (current < old)
@@ -84,22 +56,17 @@ public class PlayerPlateUI : MonoBehaviour
                 color = GainColor;
             }
 
-            SetBeerCount(current);
-            StartAnimation(color);
+            animation.StartAnimation(color);
         }
-
-
     }
 
-    private void SetBeerCount(int current)
+    private OrderItemWithAmountUI CreateUi(OrderItem item)
     {
-        Text.text = string.Format(TextFormat, current);
-    }
-
-    private void StartAnimation(Color color)
-    {
-        Animate = true;
-        Timer = 0.0f;
-        TargetColor = color;
+        OrderItemWithAmountUI ui;
+        ui = Instantiate(OrderItemUiPrefab.gameObject, Content).GetComponent<OrderItemWithAmountUI>();
+        ui.Item = item;
+        ui.Amount = 0;
+        ItemUis[item] = ui;
+        return ui;
     }
 }
