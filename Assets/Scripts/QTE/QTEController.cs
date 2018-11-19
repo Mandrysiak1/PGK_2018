@@ -6,6 +6,9 @@ namespace QTE
 {
     public class QTEController : MonoBehaviour
     {
+        public int TipQteChance = 5;
+        public int MinimumTipAmount = 3;
+        public int MaximumTipAmount = 6;
         [SerializeField]
         private PlayerPlate Plate;
         [SerializeField]
@@ -45,9 +48,19 @@ namespace QTE
             }
         }
 
-        public void RunTipQte(int tipAmount)
+        public void TryRunTipQte()
         {
-            TryRunCatchWithStrategy(TipCatchStrategy);
+            int tipAmount = Random.Range(MinimumTipAmount, MaximumTipAmount + 1);
+            TryRunTipQte(tipAmount);
+        }
+
+        public void TryRunTipQte(int tipAmount)
+        {
+            if (Random.Range(0, 100) < TipQteChance)
+            {
+                TipCatchStrategy.Amount = tipAmount;
+                TryRunCatchWithStrategy(TipCatchStrategy);
+            }
         }
 
         public void TryRunCollisionQte()
