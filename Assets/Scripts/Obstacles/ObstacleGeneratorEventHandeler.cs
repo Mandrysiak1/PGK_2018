@@ -46,7 +46,7 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
     {
         Position = new Vector3(Random.Range(-6, 8), -0.918f, Random.Range(-45, -35));
         NavMeshHit hit;
-        NavMesh.SamplePosition(Position, out hit, 10, 1);
+        NavMesh.SamplePosition(Position, out hit, 1, -1);
         Position = hit.position;
     }
 
