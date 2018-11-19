@@ -11,8 +11,6 @@ public class OrderItemWithAmountUI : OrderItemUI
     [SerializeField]
     private TextMeshProUGUI Text;
 
-    private bool Dirty = true;
-
     private void Update()
     {
         if (Dirty)

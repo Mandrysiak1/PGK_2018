@@ -8,7 +8,7 @@ public class OrderItemUI : MonoBehaviour
     [SerializeField]
     private Image Image;
 
-    private bool Dirty = true;
+    protected bool Dirty = true;
 
     private void Update()
     {
