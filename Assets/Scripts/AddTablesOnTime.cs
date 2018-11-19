@@ -16,9 +16,12 @@ public class AddTablesOnTime : MonoBehaviour {
     private GameObject Guest11, Guest12, Guest21, Guest22;
 
     private bool done = false;
-    
 
-	void Start () {
+
+
+
+
+    void Start () {
         
         table1.enabled = false;
         table2.enabled = false;
@@ -42,6 +45,9 @@ public class AddTablesOnTime : MonoBehaviour {
 
     private void AddTablesToScene()
     {
+
+        var x = FindObjectOfType<LevelScene>().Main.Guests = true;
+
         Guest11.SetActive(true);
         Guest12.SetActive(true);
         Guest21.SetActive(true);

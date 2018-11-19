@@ -36,6 +36,7 @@ public class TableScript : MonoBehaviour
         if (Input.GetButtonDown("Submit") && hasPlayer == true && !QTE.IsRunning)
 
         {
+            Debug.Log(UpgradeClass.Tip+"<- tipy");
             if (MyTable != null)
             {
 
@@ -50,6 +51,11 @@ public class TableScript : MonoBehaviour
                         Debug.Log("Połozono piwo, potrzeba jeszcze: " + remaining);
                         if (remaining == 0)
                         {
+                            if(MyTable.CurrOrder.orderType.name == "WitchPotion") //sorry for hardcoding i will fix it next week, i promise, for now its too much work :C
+                            {
+                                
+                                UpgradeClass.Tip += 10;
+                            }
                             QTE.TryRunTipQte();
                         }
 

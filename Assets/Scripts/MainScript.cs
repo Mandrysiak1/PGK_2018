@@ -19,11 +19,28 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     public class GameStatusEvent : UnityEvent<GameState, GameState> { }
     public class DissatisfactionEvent : UnityEvent<float, float> { }
 
+
     //end of event classes
     #endregion
     public GameStatusEvent GameStatusChanged { get; set; }
     public WinStreakEvent WinStreakChanged { get; set; }
     public DissatisfactionEvent DissatisfactionChanged { get; set; }
+    public delegate void GuestsArrived();
+    public event GuestsArrived OnguestsArrived;
+
+    private bool guests = false;
+    public bool Guests
+    {
+        get
+        {
+            return guests;
+        }
+        set
+        {
+            guests = value;
+            OnguestsArrived();
+        }
+    }
 
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState

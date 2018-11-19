@@ -1,5 +1,6 @@
 ﻿using Assets.PGKScripts.Enums;
 using System;
+using System.Collections;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class UIMain : MonoBehaviour
     public TextMeshProUGUI timer;
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
+    public Canvas GuestArrived;
     bool gamePaused = false;
     int x = 2;
     float y = 4;
@@ -35,6 +37,8 @@ public class UIMain : MonoBehaviour
 
         
         PauseCanvas.enabled = false;
+        GuestArrived.enabled = false;
+        mainScript.OnguestsArrived += handleGuestsArrived;
 
         Time.timeScale = 1;
         EndGameCanvas.enabled = false;
@@ -55,6 +59,20 @@ public class UIMain : MonoBehaviour
         }
         GoToShop.onClick.AddListener(LoadShop);
 
+       
+
+    }
+
+    private void handleGuestsArrived()
+    {
+        GuestArrived.enabled = true;
+        StartCoroutine(wait());
+    }
+
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(3.0f);
+        GuestArrived.enabled = false;
     }
 
     private void GameStateChanged(GameState arg0, GameState arg1)
@@ -88,7 +106,7 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape) && mainScript.CurrentGameState == GameState.Playing)
         {
             if (!gamePaused)

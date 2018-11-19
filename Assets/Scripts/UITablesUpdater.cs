@@ -17,6 +17,7 @@ public class UITablesUpdater : MonoBehaviour
     private List<Canvas> ListOfCanvases = new List<Canvas>();
     private void Start()
     {
+        beer.enabled = false;
         ListOfCanvases.Add(one);
         ListOfCanvases.Add(two);
         ListOfCanvases.Add(three);
