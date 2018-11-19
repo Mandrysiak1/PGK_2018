@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1253,7 +1253,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1598,6 +1598,7 @@ GameObject:
   - component: {fileID: 880907702}
   - component: {fileID: 880907701}
   - component: {fileID: 880907700}
+  - component: {fileID: 880907703}
   m_Layer: 0
   m_Name: NoLosePerkButton
   m_TagString: Untagged
@@ -1699,6 +1700,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 880907698}
   m_CullTransparentMesh: 0
+--- !u!114 &880907703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 880907698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteToBeSwapped: {fileID: 21300000, guid: df1cdba1d3b016d40820b5604b03b737, type: 3}
 --- !u!1 &898681918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,6 +2054,7 @@ GameObject:
   - component: {fileID: 1012961188}
   - component: {fileID: 1012961187}
   - component: {fileID: 1012961186}
+  - component: {fileID: 1012961189}
   m_Layer: 0
   m_Name: HoldPerkButton
   m_TagString: Untagged
@@ -2142,6 +2156,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1012961184}
   m_CullTransparentMesh: 0
+--- !u!114 &1012961189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1012961184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteToBeSwapped: {fileID: 21300000, guid: 3a32d4dc61eec2b4bb8cba10132a6380, type: 3}
 --- !u!1 &1054898956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,7 +2424,7 @@ RectTransform:
   - {fileID: 898681919}
   - {fileID: 1237744521}
   m_Father: {fileID: 1176121486}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2468,7 +2494,7 @@ RectTransform:
   - {fileID: 975171544}
   - {fileID: 1012961185}
   m_Father: {fileID: 1176121486}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2594,8 +2620,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 328174638}
-  - {fileID: 1134688756}
   - {fileID: 1118501539}
+  - {fileID: 1134688756}
   - {fileID: 351975371}
   - {fileID: 1547977921}
   - {fileID: 1209477367}
@@ -2776,6 +2802,7 @@ GameObject:
   - component: {fileID: 1237744524}
   - component: {fileID: 1237744523}
   - component: {fileID: 1237744522}
+  - component: {fileID: 1237744525}
   m_Layer: 0
   m_Name: SpeedPerkButton
   m_TagString: Untagged
@@ -2877,6 +2904,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1237744520}
   m_CullTransparentMesh: 0
+--- !u!114 &1237744525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1237744520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteToBeSwapped: {fileID: 21300000, guid: b2f01411aa6553045a8f1334466a8b3f, type: 3}
 --- !u!1 &1271767891
 GameObject:
   m_ObjectHideFlags: 0
