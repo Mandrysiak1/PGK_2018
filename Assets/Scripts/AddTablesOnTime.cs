@@ -12,6 +12,8 @@ public class AddTablesOnTime : MonoBehaviour {
     private TableScript table1, table2;
     [SerializeField]
     private GameObject UI1, UI2;
+    [SerializeField]
+    private GameObject Guest11, Guest12, Guest21, Guest22;
 
     private bool done = false;
     
@@ -20,8 +22,8 @@ public class AddTablesOnTime : MonoBehaviour {
         
         table1.enabled = false;
         table2.enabled = false;
-        UI1.active = false;
-        UI2.active = false;
+        UI1.SetActive(false);
+        UI2.SetActive(false);
     }
 
     void Update () {
@@ -40,11 +42,14 @@ public class AddTablesOnTime : MonoBehaviour {
 
     private void AddTablesToScene()
     {
-
+        Guest11.SetActive(true);
+        Guest12.SetActive(true);
+        Guest21.SetActive(true);
+        Guest22.SetActive(true);
         table1.enabled = true;
         table2.enabled = true;
-        UI1.active = true;
-        UI2.active = true;
+        UI1.SetActive(true);
+        UI2.SetActive(true);
 
     }
     
