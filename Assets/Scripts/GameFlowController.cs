@@ -16,6 +16,11 @@ public class GameFlowController : ScriptableObject
         SceneManager.LoadScene(MainMenu.SceneName);
     }
 
+    public void StartTutorial()
+    {
+        LevelLoader.StartTutorialLevel(Flow.GetFirstLevel());
+    }
+
     public void StartFirstLevel()
     {
         CurrentLevel = Flow.GetFirstLevel();
