@@ -16,7 +16,7 @@ public static class ListRandom
         if(count == 0)
             throw new ArgumentException("List is empty");
 
-        int idx = random.Next(count + 1);
+        int idx = random.Next(count);
         return list[idx];
     }
 }
