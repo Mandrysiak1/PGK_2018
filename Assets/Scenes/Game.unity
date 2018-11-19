@@ -5112,12 +5112,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55e5f83ed1a44128edcb7b780b0bda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TipQteChance: 5
+  MinimumTipAmount: 3
+  MaximumTipAmount: 6
   Plate: {fileID: 2078970096}
   Character: {fileID: 2075440670}
   CatchBeerQte: {fileID: 114482264494314532, guid: 4decadec7344f4db4a7ecab033588c7e,
     type: 2}
   HodlQte: {fileID: 114564676190790120, guid: 16934a4479e12419986d9c55ebd078b3, type: 2}
   PlateCatchStrategy: {fileID: 2078970100}
+  TipCatchStrategy: {fileID: 2078970101}
   main: {fileID: 2078970091}
   Key: 107
 --- !u!82 &2078970099
@@ -5241,7 +5245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 4
-  Prefab: {fileID: 1147720628874518, guid: aa284eb79161f4e3d997fd6f103a1eaa, type: 2}
+  Prefab: {fileID: 1147720628874518, guid: cb2385a90bc4a4995882fdf43afe4d3d, type: 2}
   Origin: {fileID: 1864875897}
 --- !u!1 &2106500766
 GameObject:

@@ -29,6 +29,7 @@ public class TipCatchQteStrategy : MonoCatchQteStrategy
 
     public override void Success(Transform item)
     {
+        UpgradeClass.Tip += 1;
         Destroy(item.gameObject);
     }
 

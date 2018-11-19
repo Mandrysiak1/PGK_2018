@@ -8,7 +8,7 @@ public class TableScript : MonoBehaviour
     private QTEController QTE;
     [SerializeField]
     private LevelScene LevelScene;
-    
+
 
     public Table MyTable { get; set; }
     private bool hasPlayer = false;
@@ -46,8 +46,12 @@ public class TableScript : MonoBehaviour
                     {
                         LevelScene.Player.RemoveBeer(MyTable.currOrder.orderType);
                         MyTable.putBeer();
-                        int x = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
-                        Debug.Log("Połozono piwo, potrzeba jeszcze: " + x);
+                        int remaining = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
+                        Debug.Log("Połozono piwo, potrzeba jeszcze: " + remaining);
+                        if (remaining == 0)
+                        {
+                            QTE.TryRunTipQte();
+                        }
 
                     }
                     else
