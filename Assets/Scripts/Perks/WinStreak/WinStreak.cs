@@ -13,6 +13,7 @@ public class WinStreak : MonoBehaviour
 
     public ThirdPersonCharacter character;
     public IWinStreakSource winStreakSource;
+    public PlayerPlate plate;
     //PERKS_LIST
     Dictionary<IPerk, IPerkUi> perksUiBind = new Dictionary<IPerk, IPerkUi>();
 
@@ -24,7 +25,7 @@ public class WinStreak : MonoBehaviour
     public static int speedPerkActivateMinimum = 2;
     public float speedMultiplier = 1.5f;
     // HOLD PERK
-    public int holdNewValue = 10;
+    public int holdMultiplier = 2;
     public int holdPerkActivateMinimum = 5;
     //
     // NO LOSE PERK
@@ -45,10 +46,10 @@ public class WinStreak : MonoBehaviour
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
-        playerStandardHold = player.maxOrderSizeModifier;
+        playerStandardHold = plate.maximumCapacityMultiplier;
 
         var holdPerk = new Perk(
-            new HoldModif(OrderMediator.Instance),
+            new HoldModif(plate),
             holdPerkActivateMinimum);
         holdPerk.Name = "HoldPerk";
         holdPerk.Quantity = 30;
@@ -133,7 +134,7 @@ public class WinStreak : MonoBehaviour
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
-                    StartCoroutine(PerkRoutine(kv.Key, playerStandardHold, holdNewValue));
+                    StartCoroutine(PerkRoutine(kv.Key, playerStandardHold, holdMultiplier));
                     initialWinStreak = winStreakSource.WinStreak;
                 }
                 if (kv.Key.Name == "NoDropPerk" && Input.GetButton("Perk_3"))

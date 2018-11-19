@@ -4,10 +4,10 @@ namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
 {
     public class HoldModif : IModifiableByPerk
     {
-        OrderMediator orderMediator;
-        public HoldModif(OrderMediator orderMediator)
+        PlayerPlate plate;
+        public HoldModif(PlayerPlate plate)
         {
-            this.orderMediator = orderMediator;
+            this.plate = plate;
         }
         public object GetCurrent()
         {
@@ -16,7 +16,7 @@ namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
 
         public void Modify(object newValue)
         {
-            this.orderMediator.MaxBeer = (int)newValue;
+            this.plate.maximumCapacityMultiplier = (int)newValue;
         }
     }
 }
