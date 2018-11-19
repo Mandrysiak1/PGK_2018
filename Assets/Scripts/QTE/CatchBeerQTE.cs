@@ -12,167 +12,127 @@ namespace QTE
 {
     public class CatchBeerQTE : MonoBehaviour
     {
-        public float AnimationTime = 0.5f;
-        public float Delay = 0.25f;
+        public float TextAnimationTime = 0.25f;
+        public float ItemWaitTime = 0.25f;
+        public float FromOriginToCenterTime = 0.33f;
+
         public float FallSpeed = 100.0f;
         public float InitialDelay = 0.75f;
+        public float ItemDelay = 0.33f;
 
         [SerializeField]
         private RectTransform BeersParent;
         [SerializeField]
-        private GameObject BeerPrefab;
-        [SerializeField]
         private List<Catcher> Catchers;
         [SerializeField]
         private TextMeshProUGUI CatchedText;
-        [SerializeField]
-        private HorizontalLayoutGroup CatchersGroup;
 
         private int Catched = 0;
         private int Missed = 0;
-        private Dictionary<GameObject, Catcher> BeerObjToCatcher;
-        private PlayerPlateUI PlateUI;
-        private PlayerPlate Plate;
+        private int AllToCatch;
 
-        private int LeftToCatch;
+        private ICatchQteStrategy _strategy;
+        private List<Transform> HandledItems = new List<Transform>();
+
         private UnityAction OnEnd;
 
-        public void Run(int beers, PlayerPlate plate, PlayerPlateUI ui, UnityAction onQteEnd)
+        public void Run(ICatchQteStrategy strategy, UnityAction onQteEnd)
         {
+            _strategy = strategy;
             OnEnd = onQteEnd;
-            ui.transform.SetAsLastSibling();
-            Plate = plate;
-            PlateUI = ui;
 
-            if (Catchers.Count < beers)
-            {
-                Debug.LogWarning("Beers count exceed Catchers count");
-                beers = Catchers.Count;
-            }
-
-            StartCoroutine(RunCo(beers));
+            StartCoroutine(RunCo());
         }
 
-        private IEnumerator RunCo(int beers)
+        private IEnumerator RunCo()
         {
             yield return new WaitForSeconds(InitialDelay);
-            CatchersGroup.enabled = true;
-            Catcher[] usedCatchers = Catchers.Take(beers).ToArray();
-            foreach (Catcher catcher in Catchers)
-            {
-                bool isCatcherActive = usedCatchers.Contains(catcher);
-                catcher.gameObject.SetActive(isCatcherActive);
-            }
-
-            LayoutRebuilder.ForceRebuildLayoutImmediate(CatchersGroup.GetComponent<RectTransform>());
-            CatchersGroup.enabled = false;
 
             Catched = Missed = 0;
-            LeftToCatch = beers;
+            AllToCatch = 0;
+            HandledItems.Clear();
 
-            BeerObjToCatcher = new Dictionary<GameObject, Catcher>();
+            Catchers.ForEach(InitializeCatcher);
 
-            List<float> delays = Enumerable.Range(0, beers).Select(i => (i + 1) * Delay * Random.Range(1, 2)).ToList();
-
-            foreach (Catcher catcher in usedCatchers)
+            foreach (Transform uiItem in _strategy.GetItems(BeersParent))
             {
-                GameObject beerObj = Instantiate(BeerPrefab, BeersParent);
-                RawImage beerImage = beerObj.GetComponent<RawImage>();
-                beerObj.SetActive(true);
-                beerObj.transform.localPosition = Vector3.zero;
-                Vector3 worldPos = beerObj.transform.position;
-                worldPos.x = catcher.transform.position.x;
-                beerObj.transform.position = worldPos;
+                ThrowItemTo(uiItem, Catchers.Random());
+                ++AllToCatch;
 
-                int delayIdx = UnityEngine.Random.Range(0, delays.Count);
-                float delay = delays[delayIdx];
-                delays.RemoveAt(delayIdx);
-
-                beerObj.GetComponent<Rigidbody2D>().simulated = false;
-                var tween = beerObj.transform.DOMove(PlateUI.transform.position, AnimationTime)
-                    .From()
-                    .SetDelay(delay);
-                beerImage.enabled = false;
-                tween.onPlay += () =>
-                {
-                    beerImage.enabled = true;
-                };
-
-                Catcher selfCatcher = catcher;
-                // Can't rely on foreach variable in closures
-                // because different compiler may handle it as it wishes
-                // So just copy it
-                tween.onComplete += () =>
-                {
-                    BeginFall(beerObj);
-                    selfCatcher.enabled = true;
-                    beerObj.GetComponent<Rigidbody2D>().simulated = true;
-                };
-
-                catcher.OnCatch.AddListener(OnCatch);
-                catcher.OnCatchAttempt.AddListener(() => OnCatchAttempt(selfCatcher));
-                catcher.OnFail.AddListener(OnFail);
-                BeerObjToCatcher[beerObj] = catcher;
+                yield return new WaitForSeconds(ItemDelay);
             }
         }
 
-        private void OnFail(GameObject obj)
+        private void InitializeCatcher(Catcher catcher)
         {
-            --LeftToCatch;
-            ++Missed;
-            Destroy(obj);
-            TryFinish();
+            catcher.OnCatch.RemoveAllListeners();
+            catcher.OnCatch.AddListener(obj => CatchItem(obj.transform));
         }
 
-        private void OnCatchAttempt(Catcher catcher)
+        private void ThrowItemTo(Transform uiTransform, Catcher catcher)
         {
-            catcher.gameObject.SetActive(false);
-        }
+            uiTransform.localPosition = Vector3.zero;
+            Sequence seq = DOTween.Sequence();
 
-        private void OnCatch(GameObject beerObj)
-        {
-            ++Catched;
-            --LeftToCatch;
-            bool willEnd = LeftToCatch == 0;
-            beerObj.GetComponent<Rigidbody2D>().simulated = false;
-            beerObj.transform.DOKill();
-            var tween = beerObj.transform.DOMove(PlateUI.transform.position, AnimationTime);
-            tween.onComplete += () =>
+            Vector3 originPosition;
+            Vector3 centerToCatcher = catcher.transform.position - uiTransform.position;
+            if(_strategy.TryGetOrigin(uiTransform, out originPosition))
             {
-                Destroy(beerObj);
-                if(willEnd)
-                    TryFinish();
-            };
+                var animateFromPlateToCenter = uiTransform
+                    .DOMove(originPosition, FromOriginToCenterTime)
+                    .From();
+                seq.Append(animateFromPlateToCenter);
+                seq.AppendInterval(ItemWaitTime);
+            }
+
+            float magnitude = centerToCatcher.magnitude;
+
+            var animateByDistanceToCatcherFromCenter = uiTransform
+                .DOBlendableMoveBy(centerToCatcher * 1.6f, magnitude / FallSpeed)
+                .SetEase(Ease.Linear);
+
+            seq.Append(animateByDistanceToCatcherFromCenter);
+            seq.AppendCallback(() =>
+            {
+                if (!HandledItems.Contains(uiTransform))
+                    ItemFailed(uiTransform);
+            });
+            seq.Play();
         }
 
-        private void BeginFall(GameObject beerObj)
+        private void CatchItem(Transform itemTransform)
         {
-            Vector3 targetPos = PlateUI.transform.position;
-            targetPos.x = beerObj.transform.position.x;
-            var tween = beerObj.transform.DOMove(targetPos, FallSpeed)
-                .SetEase(Ease.Linear)
-                .SetSpeedBased();
-            tween.onComplete += () => OnFail(beerObj);
+            Catched++;
+            _strategy.Success(itemTransform);
+            TryFinish();
+            HandledItems.Add(itemTransform);
+        }
+
+        private void ItemFailed(Transform itemTransform)
+        {
+            Missed++;
+            _strategy.Fail(itemTransform);
+            TryFinish();
+            HandledItems.Add(itemTransform);
         }
 
         private void TryFinish()
         {
-            if (LeftToCatch <= 0)
+            if (Catched + Missed >= AllToCatch)
             {
-                CatchedText.DOFade(1.0f, AnimationTime * 2);
-                if (Catched == 0)
-                    CatchedText.text = "LAME!";
-                else if(Missed == 0)
-                    CatchedText.text = "FINE!";
-                else
-                    CatchedText.text = "NOT BAD!";
-                var endTween = CatchedText.DOFade(0.0f, AnimationTime * 2)
-                    .SetDelay(AnimationTime * 4);
-                endTween.onComplete += () =>
+                var seq = DOTween.Sequence();
+
+                seq.Append(CatchedText.DOFade(1.0f, TextAnimationTime));
+
+                CatchedText.text = _strategy.GetFinalText(Catched, Missed);
+                seq.AppendInterval(TextAnimationTime * 3);
+                seq.Append(CatchedText .DOFade(0.0f, TextAnimationTime));
+                seq.AppendCallback(() =>
                 {
-                    Destroy(gameObject);
                     OnEnd.Invoke();
-                };
+                    Destroy(gameObject);
+                });
+                seq.Play();
             }
         }
     }

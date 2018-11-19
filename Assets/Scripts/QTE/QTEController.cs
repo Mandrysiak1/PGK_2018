@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -5,8 +6,6 @@ namespace QTE
 {
     public class QTEController : MonoBehaviour
     {
-        [SerializeField]
-        private PlayerPlateUI PlateUI;
         [SerializeField]
         private PlayerPlate Plate;
         [SerializeField]
@@ -16,7 +15,9 @@ namespace QTE
         [SerializeField]
         private HodlQte HodlQte;
         [SerializeField]
-        private OrderItem CatchQteItem;
+        private PlayerPlateCatchQteStrategy PlateCatchStrategy;
+        [SerializeField]
+        private TipCatchQteStrategy TipCatchStrategy;
 
         [SerializeField]
         private MainScript main;
@@ -40,60 +41,61 @@ namespace QTE
         {
             if (Debug.isDebugBuild && Input.GetKeyDown(Key))
             {
-                TryRun();
-            }
-        }
-        /// <summary>
-        /// ADRIAN: Added this if statement but we will have to work with Player to be more independent script itself
-        /// so we'll be able to assign it with no need of dependency to MainScript
-        /// </summary>
-        public void TryRun()
-        {
-            int holdItemAmount = Plate.GetItemQuantityOnPlate(CatchQteItem);
-            if(holdItemAmount > 0 && !main.GetPlayer().Vulnerable)
-            {
-                Run(holdItemAmount);
-            }
-            else
-            {
-                Plate.RemoveRandomItem();
+                TryRunCollisionQte();
             }
         }
 
-        public void Run(int beers)
+        public void RunTipQte(int tipAmount)
         {
-            IsRunning = true;
+            TryRunCatchWithStrategy(TipCatchStrategy);
+        }
+
+        public void TryRunCollisionQte()
+        {
+            TryRunCatchWithStrategy(PlateCatchStrategy);
+        }
+
+        private void TryRunCatchWithStrategy(ICatchQteStrategy strategy)
+        {
+            if (IsRunning)
+                return;
+
+            int holdItemAmount = Plate.Items.Count();
+            bool playerIsInvulnerable = main != null && !main.GetPlayer().Vulnerable;
+
+            if (holdItemAmount > 0 && !playerIsInvulnerable)
+            {
+                GameObject obj = Instantiate(CatchBeerQte.gameObject);
+                CatchBeerQTE qte = obj.GetComponent<CatchBeerQTE>();
+                obj.transform.SetAsLastSibling();
+
+                StopCharacter();
+                qte.Run(strategy, OnQteEnd);
+                IsRunning = true;
+            }
+        }
+
+        private void StopCharacter()
+        {
             SpeedMultiplier = Character.getm_MoveSpeedMultiplier();
             Character.setm_MoveSpeedMultiplie(0.0f);
-
-            if (Random.Range(0, 100) < 50)
-                RunCatchQte(beers);
-            else
-                RunHodlQte(beers);
         }
 
-        private void RunHodlQte(int beers)
+
+        private void RunHodlQte()
         {
             GameObject obj = Instantiate(HodlQte.gameObject);
             HodlQte qte = obj.GetComponent<HodlQte>();
             obj.transform.SetAsLastSibling();
 
-            qte.Run((success) =>
+            qte.Run(success =>
             {
                 if (!success)
                 {
-                    Plate.RemoveItem(CatchQteItem, beers);
+                    Plate.RemoveRandomItem();
                 }
                 OnQteEnd();
             });
-        }
-
-        private void RunCatchQte(int beers)
-        {
-            GameObject obj = Instantiate(CatchBeerQte.gameObject);
-            CatchBeerQTE qte = obj.GetComponent<CatchBeerQTE>();
-            obj.transform.SetAsLastSibling();
-            qte.Run(beers, Plate, PlateUI, OnQteEnd);
         }
 
         private void OnQteEnd()

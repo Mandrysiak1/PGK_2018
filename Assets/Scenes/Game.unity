@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1253,7 +1253,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2601,6 +2601,7 @@ RectTransform:
   - {fileID: 1209477367}
   - {fileID: 1456917309}
   - {fileID: 1988087358}
+  - {fileID: 1864875897}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4248,6 +4249,39 @@ MonoBehaviour:
   LevelLoaded: {fileID: 1830760822}
   Background: {fileID: 728364452}
   Text: {fileID: 1739005452}
+--- !u!1 &1864875896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864875897}
+  m_Layer: 0
+  m_Name: TipOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1864875897
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864875896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1176121486}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1866024857
 GameObject:
   m_ObjectHideFlags: 0
@@ -4938,6 +4972,8 @@ GameObject:
   - component: {fileID: 2078970098}
   - component: {fileID: 2078970099}
   - component: {fileID: 2078970097}
+  - component: {fileID: 2078970100}
+  - component: {fileID: 2078970101}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4957,6 +4993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moodDecreaseValue: 0.2
+  _time: 0
   PlayerPlate: {fileID: 2078970096}
   QTE: {fileID: 0}
   Music: {fileID: 2078970099}
@@ -5075,13 +5112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55e5f83ed1a44128edcb7b780b0bda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlateUI: {fileID: 1988087359}
   Plate: {fileID: 2078970096}
   Character: {fileID: 2075440670}
   CatchBeerQte: {fileID: 114482264494314532, guid: 4decadec7344f4db4a7ecab033588c7e,
     type: 2}
   HodlQte: {fileID: 114564676190790120, guid: 16934a4479e12419986d9c55ebd078b3, type: 2}
-  CatchQteItem: {fileID: 0}
+  PlateCatchStrategy: {fileID: 2078970100}
   main: {fileID: 2078970091}
   Key: 107
 --- !u!82 &2078970099
@@ -5179,6 +5215,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2078970100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2078970090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9c33e3d1804e0e97c4ee2aaa4b9c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 114721305437339630, guid: aa284eb79161f4e3d997fd6f103a1eaa, type: 2}
+  Plate: {fileID: 2078970096}
+  PlateUI: {fileID: 1988087359}
+--- !u!114 &2078970101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2078970090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032bf391abbe41d0ab56c59bba7897a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: 4
+  Prefab: {fileID: 1147720628874518, guid: aa284eb79161f4e3d997fd6f103a1eaa, type: 2}
+  Origin: {fileID: 1864875897}
 --- !u!1 &2106500766
 GameObject:
   m_ObjectHideFlags: 0

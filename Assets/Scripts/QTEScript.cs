@@ -23,7 +23,7 @@ public class QTEScript : MonoBehaviour
         var other = collision.gameObject;
         if (other.CompareTag("Player") && !QTE.IsRunning)
         {
-            QTE.TryRun();
+            QTE.TryRunCollisionQte();
         }
     }
 

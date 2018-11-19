@@ -1,6 +1,9 @@
 using System;
+using System.Net.Mime;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace QTE
 {
@@ -8,22 +11,32 @@ namespace QTE
     {
         [SerializeField]
         private MonoButtonInput ButtonInput;
+
+        public float AnimationTime = 0.15f;
+
+
+        public Color CanCatchColor = Color.green;
         [SerializeField]
-        private MonoAnalogInput AnalogInput;
+        private Image Background;
+
+        [SerializeField]
+        private Image Key;
 
         [Serializable]
         public class CatchPossibleEvent : UnityEvent<GameObject> {}
 
         public UnityEvent OnCatchAttempt;
-        public CatchPossibleEvent OnCatch, OnFail;
+        public CatchPossibleEvent OnCatch;
 
         private GameObject PossibleCatch;
+        private Tweener ShakeTweener;
+        private Color InitialBackgroundColor;
 
         private void Start()
         {
+            if(Background != null)
+                InitialBackgroundColor = Background.color;
             ButtonInput.Subscribe(InvokeOnCatch);
-            if(AnalogInput != null)
-                AnalogInput.Subscribe((float dummy) => InvokeOnCatch());
         }
 
         private void InvokeOnCatch()
@@ -43,6 +56,16 @@ namespace QTE
             if (!enabled)
                 return;
 
+            if (Background != null)
+            {
+                var sequence = DOTween.Sequence();
+                sequence.Append(Background.DOColor(CanCatchColor, AnimationTime));
+                sequence.AppendInterval(AnimationTime * 2);
+                sequence.Append(Background.DOColor(InitialBackgroundColor, AnimationTime));
+
+                Key.transform.DOScale(2.0f, AnimationTime);
+            }
+
             PossibleCatch = other.gameObject;
         }
 
@@ -50,6 +73,12 @@ namespace QTE
         {
             if (!enabled)
                 return;
+
+            if (Key != null)
+            {
+                Key.transform.DOScale(1.0f, AnimationTime);
+            }
+
             PossibleCatch = null;
         }
     }
