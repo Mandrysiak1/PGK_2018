@@ -9,13 +9,15 @@ public class SittingGuestAnimation : MonoBehaviour
     private TableScript TableScript;
     [SerializeField]
     private float AnimationSpeed = 1.0f;
+    [SerializeField]
+    private float AnimationSpeedVariation = 0.1f;
 
     private Animator animator;
 
     void Start ()
     {
         animator = GetComponent<Animator>();
-        animator.speed = AnimationSpeed;
+        animator.speed = AnimationSpeed + Random.Range(-AnimationSpeedVariation, AnimationSpeedVariation);
     }
 
     void Update ()
