@@ -9,21 +9,21 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class QTEScript : MonoBehaviour
 {
     [SerializeField]
-    private QTEController QTE;
+    private PlayerCollisionHandler PlayerCollisionHandler;
 
     void Start ()
     {
-        if (QTE == null)
-            QTE = FindObjectOfType<QTEController>();
+        if (PlayerCollisionHandler == null)
+            PlayerCollisionHandler = FindObjectOfType<PlayerCollisionHandler>();
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
         var other = collision.gameObject;
-        if (other.CompareTag("Player") && !QTE.IsRunning)
+        if (other.CompareTag("Player"))
         {
-            QTE.TryRunCollisionQte();
+            PlayerCollisionHandler.ItemCollision(gameObject);
         }
     }
 

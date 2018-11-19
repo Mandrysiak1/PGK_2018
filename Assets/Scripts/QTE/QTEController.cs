@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
+using Random = UnityEngine.Random;
 
 namespace QTE
 {
@@ -63,9 +65,18 @@ namespace QTE
             }
         }
 
-        public void TryRunCollisionQte()
+        public bool TryRunCollisionQte(bool allItems = true)
         {
-            TryRunCatchWithStrategy(PlateCatchStrategy);
+            int holdItemAmount = Plate.Items.Count();
+
+            if (holdItemAmount > 0)
+            {
+                PlateCatchStrategy.OnlyOneRandomItem = !allItems;
+                TryRunCatchWithStrategy(PlateCatchStrategy);
+                return true;
+            }
+
+            return false;
         }
 
         private void TryRunCatchWithStrategy(ICatchQteStrategy strategy)
@@ -73,19 +84,13 @@ namespace QTE
             if (IsRunning)
                 return;
 
-            int holdItemAmount = Plate.Items.Count();
-            bool playerIsInvulnerable = main != null && !main.GetPlayer().Vulnerable;
+            GameObject obj = Instantiate(CatchBeerQte.gameObject);
+            CatchBeerQTE qte = obj.GetComponent<CatchBeerQTE>();
+            obj.transform.SetAsLastSibling();
 
-            if (holdItemAmount > 0 && !playerIsInvulnerable)
-            {
-                GameObject obj = Instantiate(CatchBeerQte.gameObject);
-                CatchBeerQTE qte = obj.GetComponent<CatchBeerQTE>();
-                obj.transform.SetAsLastSibling();
-
-                StopCharacter();
-                qte.Run(strategy, OnQteEnd);
-                IsRunning = true;
-            }
+            StopCharacter();
+            qte.Run(strategy, OnQteEnd);
+            IsRunning = true;
         }
 
         private void StopCharacter()

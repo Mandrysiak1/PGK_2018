@@ -21,6 +21,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private float originalSpeed;
     private readonly float speedMultiplier = 1.8f;
     private QTEController QTE;
+    private PlayerCollisionHandler CollisionHandler;
 
     //animation
     //public ThirdPersonCharacter character;
@@ -29,6 +30,8 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     {
         if (QTE == null)
             QTE = FindObjectOfType<QTEController>();
+        if (CollisionHandler == null)
+            CollisionHandler = FindObjectOfType<PlayerCollisionHandler>();
         agent = GetComponent<NavMeshAgent>();
         //agent.updateRotation = false;
         originalSpeed = agent.speed;
@@ -106,8 +109,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     {
         if (collision.collider.gameObject.tag == "Player")
         {
-            LevelScene levelScene = FindObjectOfType<LevelScene>();
-            QTE.TryRunCollisionQte();
+            CollisionHandler.CustomerCollision(this);
             transform.GetComponentInChildren<WanderingText>().text.enabled = true;
             StartCoroutine(wait());
         }

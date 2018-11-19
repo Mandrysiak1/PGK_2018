@@ -1,21 +1,35 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerPlateCatchQteStrategy : MonoCatchQteStrategy
 {
+    [Tooltip("True means all items from plate")]
+    public bool OnlyOneRandomItem = false;
+
     [SerializeField]
     private OrderItemUI Prefab;
 
     [SerializeField]
-    private PlayerPlate Plate;
+    protected PlayerPlate Plate;
 
     [SerializeField]
     private PlayerPlateUI PlateUI;
 
+    protected virtual IEnumerable<OrderItem> Items
+    {
+        get
+        {
+            if (OnlyOneRandomItem)
+                return new[] { Plate.Items.ToList().Random() };
+            else
+                return Plate.Items;
+        }
+    }
 
     public override IEnumerable<Transform> GetItems(Transform parent)
     {
-        foreach (OrderItem item in Plate.Items)
+        foreach (OrderItem item in Items)
         {
             GameObject obj = Instantiate(Prefab.gameObject, parent);
             OrderItemUI itemUi = obj.GetComponent<OrderItemUI>();
