@@ -29,6 +29,11 @@ public class PlayerPlateUI : MonoBehaviour
         }
     }
 
+    public OrderItemWithAmountUI GetUiFor(OrderItem item)
+    {
+        return ItemUis[item];
+    }
+
     private void ItemChanged(OrderItem item, int current, int old)
     {
         OrderItemWithAmountUI ui;
