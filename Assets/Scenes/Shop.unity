@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 6287747}
   - component: {fileID: 6287746}
   - component: {fileID: 6287749}
-  - component: {fileID: 6287750}
   m_Layer: 0
   m_Name: BarScript
   m_TagString: Bar
@@ -212,21 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderToPick: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
---- !u!114 &6287750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 6287744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e9e3782827d9146b965ce081522103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 399047759}
-  - {fileID: 599462860}
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &11517048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4273688157869604, guid: 3161759af5fd0904f867f436ee0d91fc,
@@ -594,7 +578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187, y: 97.8}
+  m_AnchoredPosition: {x: 119.400024, y: 73.3}
   m_SizeDelta: {x: 271.76, y: 28.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117333240
@@ -1375,7 +1359,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 399047759}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -3652,7 +3636,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 599462860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -5832,7 +5816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187, y: 18.5}
+  m_AnchoredPosition: {x: 119.4, y: -6}
   m_SizeDelta: {x: 271.76, y: 28.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &852704088
@@ -9547,7 +9531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187, y: -59}
+  m_AnchoredPosition: {x: 119.400024, y: -83.5}
   m_SizeDelta: {x: 271.76, y: 28.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1894922101
