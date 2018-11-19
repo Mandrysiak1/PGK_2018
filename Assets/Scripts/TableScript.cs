@@ -14,7 +14,7 @@ public class TableScript : MonoBehaviour
     private bool hasPlayer = false;
 
 
-    public void Start()
+    void Start()
     {
         if (QTE == null)
             QTE = FindObjectOfType<QTEController>();
