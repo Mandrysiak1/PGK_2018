@@ -14,10 +14,9 @@ public class GamepadSpriteImageChanger : ButtonVisualization
     {
         image = GetComponent<Image>();
         keySprite = image.sprite;
-        //image.sprite = GamepadSprite;
     }
     protected override void Refresh()
     {
-        
+        image.sprite = GamepadMode ? GamepadSprite : keySprite;
     }
 }
