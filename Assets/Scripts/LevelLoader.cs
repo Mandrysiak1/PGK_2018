@@ -14,10 +14,15 @@ public class LevelLoader : MonoBehaviour
     // between scenes
     private static GameLevel CurrentLevel;
 
-    public static void StartLevel(GameLevel level)
+    public static void StartTutorialLevel(GameLevel level)
+    {
+        StartLevel(level, "Tutorial");
+    }
+
+    public static void StartLevel(GameLevel level, string gameScene = "Game")
     {
         CurrentLevel = level;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(gameScene);
     }
 
     void Start()
