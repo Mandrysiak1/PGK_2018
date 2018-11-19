@@ -1,6 +1,7 @@
 ﻿using Assets.PGKScripts;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class ObstacleGeneratorEventHandeler : MonoBehaviour
@@ -44,7 +45,9 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
     private void CalculatePosition()
     {
         Position = new Vector3(Random.Range(-6, 8), -0.918f, Random.Range(-45, -35));
-
+        NavMeshHit hit;
+        NavMesh.SamplePosition(Position, out hit, 10, 1);
+        Position = hit.position;
     }
 
     private void SpawnOnObject()
