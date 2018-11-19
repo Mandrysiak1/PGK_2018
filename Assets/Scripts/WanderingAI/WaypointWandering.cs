@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using QTE;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
@@ -19,18 +20,22 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private float luck = 0f;
     private float originalSpeed;
     private readonly float speedMultiplier = 1.8f;
+    private QTEController QTE;
 
     //animation
     //public ThirdPersonCharacter character;
 
-    void Start () {
+    void Start ()
+    {
+        if (QTE == null)
+            QTE = FindObjectOfType<QTEController>();
         agent = GetComponent<NavMeshAgent>();
         //agent.updateRotation = false;
         originalSpeed = agent.speed;
         InvokeRepeating("AddDynamic", 5, 5);
         transform.GetComponentInChildren<WanderingText>().text.enabled = false;
     }
-	
+
 	void Update () {
         Wander();
         /*
@@ -102,7 +107,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         if (collision.collider.gameObject.tag == "Player")
         {
             LevelScene levelScene = FindObjectOfType<LevelScene>();
-            levelScene.Player.ResetPlate();
+            QTE.TryRunCollisionQte();
             transform.GetComponentInChildren<WanderingText>().text.enabled = true;
             StartCoroutine(wait());
         }
