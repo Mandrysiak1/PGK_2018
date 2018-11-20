@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -121,6 +122,7 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        EventSystem.current.SetSelectedGameObject(null);
 
         if (Input.GetKeyDown(KeyCode.Escape) && mainScript.CurrentGameState == GameState.Playing)
         {

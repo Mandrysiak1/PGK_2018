@@ -56,7 +56,7 @@ public class OrderGenerator : MonoBehaviour
             
             if(RandomOrder.name == "WitchPotion")
             {
-                if(Random.Range(0,100) < 80)
+                if(Random.Range(0,100) < 50)
                 {
                     randomTable = Random.Range(0, mainScript.FreeTables.Count);
 
