@@ -7,10 +7,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ale Spaghetti
+
 public class UIMain : MonoBehaviour
 {
     [SerializeField]
     private GameFlowController Flow;
+
+    [SerializeField]
+    private GameObject EventSystem;
 
     public MainScript mainScript;
     public Canvas MainCanvas;
@@ -35,7 +40,7 @@ public class UIMain : MonoBehaviour
     void Start()
     {
 
-        
+        EventSystem.SetActive(false);
         PauseCanvas.enabled = false;
         GuestArrived.enabled = false;
         mainScript.OnguestsArrived += handleGuestsArrived;
@@ -83,6 +88,7 @@ public class UIMain : MonoBehaviour
         mainScript.ResetScore();
         Time.timeScale = 0;
 
+        EventSystem.SetActive(true);
         EndGameCanvas.enabled = true;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -111,6 +117,7 @@ public class UIMain : MonoBehaviour
         {
             if (!gamePaused)
             {
+                EventSystem.SetActive(true);
                 gamePaused = true;
                 SuccessCanvas.enabled = false;
                 EndGameCanvas.enabled = true;
@@ -120,6 +127,7 @@ public class UIMain : MonoBehaviour
             }
             else
             {
+                EventSystem.SetActive(false);
                 gamePaused = false;
                 PauseCanvas.enabled = false;
                 SuccessCanvas.enabled = true;
@@ -139,6 +147,7 @@ public class UIMain : MonoBehaviour
         y -= Time.deltaTime;
         if (UpgradeClass.exited)
         {
+            EventSystem.SetActive(true);
             EndGameCanvas.enabled = true;
             if (UpgradeClass.nextlvlcanvas) NextLvlCanv.enabled = true;
             UpgradeClass.exited = false;
