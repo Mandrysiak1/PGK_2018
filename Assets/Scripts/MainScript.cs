@@ -256,7 +256,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
     private void GameOver()
     {
-        if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure)
+        if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure && !QTE.IsRunning)
         {
 
             if (DissatisfactionValue >= 100)

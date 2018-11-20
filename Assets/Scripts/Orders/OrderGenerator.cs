@@ -23,12 +23,12 @@ public class OrderGenerator : MonoBehaviour
     
     private void CalculateNextOrderTime()
     {
-        nextOrderTime  = mainScript.GetTime() +  Random.Range(3, 10);
+        nextOrderTime  = mainScript.GetTime() +  Random.Range(4, 10);
     }
 
     void Update()
     {
-        //mainScript = FindObjectOfType<MainScript>();
+
         ChechIfOrderNeeded();
       
     }
