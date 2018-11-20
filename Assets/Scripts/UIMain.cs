@@ -57,12 +57,15 @@ public class UIMain : MonoBehaviour
         {
             NextLevel.onClick.AddListener(LoadNextLvl);
             NextLevel.gameObject.SetActive(true);
+            GoToShop.onClick.AddListener(LoadShop);
+            GoToShop.gameObject.SetActive(true);
         }
         else
         {
             NextLevel.gameObject.SetActive(false);
+            GoToShop.gameObject.SetActive(false);
         }
-        GoToShop.onClick.AddListener(LoadShop);
+
 
        
 

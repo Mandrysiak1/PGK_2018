@@ -22,14 +22,11 @@ public class UITuut : MonoBehaviour
     public Canvas EndGameCanvas;
     public Button Restart;
     public Button MainMenu;
-    public Canvas NextLvlCanv;
-    public Button NextLevel;
-    public Button GoToShop;
     public TextMeshProUGUI timer;
     public Canvas PauseCanvas;
-    public Canvas SuccessCanvas;
     public Canvas GuestArrived;
     public Canvas witchUI;
+    public Button gotonextlvl;
     bool gamePaused = false;
     int x = 2;
     float y = 4;
@@ -53,17 +50,7 @@ public class UITuut : MonoBehaviour
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
-        if (Flow.HasNextLevel())
-        {
-            NextLevel.onClick.AddListener(LoadNextLvl);
-            NextLevel.gameObject.SetActive(true);
-        }
-        else
-        {
-            NextLevel.gameObject.SetActive(false);
-        }
-        GoToShop.onClick.AddListener(LoadShop);
-
+        gotonextlvl.onClick.AddListener(NextLvlPls);
 
 
     }
@@ -96,17 +83,6 @@ public class UITuut : MonoBehaviour
         Time.timeScale = 0;
 
         EndGameCanvas.enabled = true;
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if (mainScript.CurrentGameState == GameState.Success)
-            {
-                NextLvlCanv.enabled = true;
-            }
-            else
-            {
-                NextLvlCanv.enabled = false;
-            }
-        }
 
     }
 
@@ -124,7 +100,6 @@ public class UITuut : MonoBehaviour
             if (!gamePaused)
             {
                 gamePaused = true;
-                SuccessCanvas.enabled = false;
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
@@ -134,7 +109,6 @@ public class UITuut : MonoBehaviour
             {
                 gamePaused = false;
                 PauseCanvas.enabled = false;
-                SuccessCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
                 Time.timeScale = 1;
@@ -149,12 +123,6 @@ public class UITuut : MonoBehaviour
             y = 60;
         }
         y -= Time.deltaTime;
-        if (UpgradeClass.exited)
-        {
-            EndGameCanvas.enabled = true;
-            if (UpgradeClass.nextlvlcanvas) NextLvlCanv.enabled = true;
-            UpgradeClass.exited = false;
-        }
     }
 
     void RestartTheGame()
@@ -174,28 +142,15 @@ public class UITuut : MonoBehaviour
     void LoadNextLvl()
     {
         Time.timeScale = 1;
-        Flow.StartNextLevel();
+        Flow.StartFirstLevel();
     }
 
-    void LoadShop()
-    {
-        UpgradeClass.endgamecanvas = EndGameCanvas.enabled;
-        UpgradeClass.nextlvlcanvas = NextLvlCanv.enabled;
-        EndGameCanvas.enabled = false;
-        NextLvlCanv.enabled = false;
-        MainCanvas.enabled = false;
-        GameObject Customers = GameObject.Find("Customers");
-        if (Customers != null)
-            Customers.SetActive(false);
-        GameObject Obstacles = GameObject.Find("Obstacles");
-        if (Obstacles != null)
-        {
-            Obstacles.SetActive(false);
-            Obstacles.GetComponent<ObstacleGenerator>().CancelInvoke();
-        }
 
+
+    public void NextLvlPls()
+    {
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
+        Flow.StartFirstLevel();
     }
 
 }
