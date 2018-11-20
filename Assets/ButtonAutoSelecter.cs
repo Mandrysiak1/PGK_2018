@@ -4,31 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-/*
-public class ButtonAutoSelecter : MonoBehaviour
-{
-    private List<Button> buttons;
 
-    void Start ()
-    {
-        buttons = FindObjectsOfType<Button>().ToList();
-    }
-    void Update ()
-    {
-        if (EventSystem.current.currentSelectedGameObject == null || EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-        {
-            foreach(Button button in buttons)
-            {
-                if (button.enabled)
-                {
-                    EventSystem.current.SetSelectedGameObject(button.gameObject);
-                    break;
-                }
-            }
-        }
-    }
-}
-*/
 public class ButtonAutoSelecter : MonoBehaviour
 {
     [SerializeField]
