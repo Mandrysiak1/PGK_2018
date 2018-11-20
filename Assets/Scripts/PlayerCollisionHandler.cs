@@ -12,6 +12,12 @@ public class PlayerCollisionHandler : MonoBehaviour
     [SerializeField]
     private PlayerPlate Plate;
 
+    public delegate void CollideWithItem();
+    public event CollideWithItem OnCollisionI;
+
+    public delegate void CollideWithClient();
+    public event CollideWithClient OnCollisionC;
+
     private bool HasQteChance
     {
         get
@@ -30,10 +36,14 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (HasQteChance)
         {
             QTE.TryRunCollisionQte(allItems: false);
+            if(OnCollisionI != null)
+            OnCollisionI();
         }
         else
         {
             Plate.RemoveRandomItem();
+            if (OnCollisionI != null)
+                OnCollisionI();
         }
     }
 
@@ -42,10 +52,14 @@ public class PlayerCollisionHandler : MonoBehaviour
         if(HasQteChance)
         {
             QTE.TryRunCollisionQte(allItems: true);
+            if (OnCollisionC != null)
+                OnCollisionC();
         }
         else
         {
             Plate.RemoveAll();
+            if (OnCollisionC != null)
+                OnCollisionC();
         }
     }
 }

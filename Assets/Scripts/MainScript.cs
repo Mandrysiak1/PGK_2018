@@ -26,6 +26,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     public WinStreakEvent WinStreakChanged { get; set; }
     public DissatisfactionEvent DissatisfactionChanged { get; set; }
     public delegate void GuestsArrived();
+    public bool tutorial = false;
     public event GuestsArrived OnguestsArrived;
 
     private bool guests = false;
@@ -229,7 +230,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         _time += Time.deltaTime;
         if(!QTE.IsRunning)
             ChangeDissatisfactionValue();
-        GameOver();
+        if(tutorial == false)
+            GameOver();
         if(Input.GetKeyDown("p"))
         {
             WinStreak += 1;

@@ -21,7 +21,8 @@ public class MainMenu : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-            Tutorial.Show(StartFirstLevel);
+            PlayerPrefs.SetInt("isTutorialEnabled", 0);
+            SceneManager.LoadScene("Tutorialv2");
         }
     }
 

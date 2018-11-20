@@ -58,6 +58,7 @@ namespace QTE
 
         public void TryRunTipQte(int tipAmount)
         {
+            if(main.tutorial != true)
             if (Random.Range(0, 100) < TipQteChance)
             {
                 TipCatchStrategy.Amount = tipAmount;
