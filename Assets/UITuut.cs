@@ -161,12 +161,14 @@ public class UITuut : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Tutorialv2");
+        UpgradeClass.Tip = 0;
     }
 
     void ExitToMainMenu()
     {
         Time.timeScale = 1;
         Flow.LoadMainMenu();
+        UpgradeClass.Tip = 0;
     }
 
     void LoadNextLvl()
