@@ -234,6 +234,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         {
             WinStreak += 1;
         }
+        if (Input.GetKeyDown("o"))
+        {
+            _time += 30;
+        }
     }
     private void DissatisfactionValueListener(float arg0, float arg1)
     {
