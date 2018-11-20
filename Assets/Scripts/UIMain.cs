@@ -29,6 +29,7 @@ public class UIMain : MonoBehaviour
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
     public Canvas GuestArrived;
+    public Canvas witchUI;
     bool gamePaused = false;
     int x = 2;
     float y = 4;
@@ -36,6 +37,10 @@ public class UIMain : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        var x = FindObjectOfType<OrderGenerator>();
+        x.OnWitchUI += HandleWitchUI;
+
+        witchUI.enabled = false;
         PauseCanvas.enabled = false;
         GuestArrived.enabled = false;
         mainScript.OnguestsArrived += handleGuestsArrived;
@@ -63,6 +68,12 @@ public class UIMain : MonoBehaviour
 
     }
 
+    private void HandleWitchUI()
+    {
+        witchUI.enabled = true;
+        StartCoroutine(wait());
+    }
+
     private void handleGuestsArrived()
     {
         GuestArrived.enabled = true;
@@ -73,6 +84,7 @@ public class UIMain : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         GuestArrived.enabled = false;
+        witchUI.enabled = false;
     }
 
     private void GameStateChanged(GameState arg0, GameState arg1)

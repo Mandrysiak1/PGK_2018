@@ -9,7 +9,8 @@ public class OrderGenerator : MonoBehaviour
 
     private  MainScript mainScript;
 
-  
+    public delegate void WitchUI();
+    public event WitchUI OnWitchUI;
 
     private float nextOrderTime = 0;
 
@@ -53,6 +54,21 @@ public class OrderGenerator : MonoBehaviour
 
             OrderItem RandomOrder = mainScript.FreeTables[randomTable].possibleOrders[Random.Range(0, mainScript.FreeTables[randomTable].possibleOrders.Count)];
             
+            if(RandomOrder.name == "WitchPotion")
+            {
+                if(Random.Range(0,100) < 80)
+                {
+                    randomTable = Random.Range(0, mainScript.FreeTables.Count);
+
+                    RandomOrder = mainScript.FreeTables[randomTable].possibleOrders[Random.Range(0, mainScript.FreeTables[randomTable].possibleOrders.Count)];
+
+                }
+            }
+            if (RandomOrder.name == "WitchPotion")
+            {
+                OnWitchUI();
+            }
+
             mainScript.FreeTables[randomTable].CurrOrder = new Order(mainScript.GetTime(), RandomOrder);
 
             mainScript.AwaitingTables.Add(mainScript.FreeTables[randomTable]);
