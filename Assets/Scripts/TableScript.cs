@@ -33,7 +33,7 @@ public class TableScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Submit") && hasPlayer == true && !QTE.IsRunning)
+        if (Input.GetButtonDown("ReturnItemOnBar") && hasPlayer == true && !QTE.IsRunning)
 
         {
             Debug.Log(UpgradeClass.Tip+"<- tipy");
