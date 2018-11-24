@@ -1,51 +1,51 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.PGKScripts
+public class Player : MonoBehaviour
 {
-    public class Player
+    public int BeersHandedOut { get; private set; }
+    public bool Vulnerable = true;
+
+    public PlayerPlate Plate
     {
-        public int BeersHandedOut { get; private set; }
-        public bool Vulnerable { get; set; }
+        get { return _Plate; }
+    }
 
-        private PlayerPlate Plate;
+    [SerializeField]
+    private PlayerPlate _Plate;
 
-        public Player(PlayerPlate plate)
-        {
-            if (plate == null)
-                Debug.Log("NULL");
-            Plate = plate;
-            BeersHandedOut = 0;
-            Vulnerable = UpgradeClass.Vulnerable;
-        }
+    void Awake()
+    {
+        if(_Plate == null)
+            Debug.LogWarning("Player has no plate!");
+        BeersHandedOut = 0;
+        Vulnerable = UpgradeClass.Vulnerable;
+    }
 
-        public void ResetBeersHandedOut()
-        {
-            this.BeersHandedOut = 0;
-        }
+    public void ResetBeersHandedOut()
+    {
+        this.BeersHandedOut = 0;
+    }
 
-        public void RemoveBeer(OrderItem x)
-        {
-            Plate.RemoveItem(x);
-            System.Random rnd = new System.Random();
-            UpgradeClass.Tip += rnd.Next(3);
+    public void RemoveBeer(OrderItem x)
+    {
+        Plate.RemoveItem(x);
+        System.Random rnd = new System.Random();
+        UpgradeClass.Tip += rnd.Next(3);
+    }
 
-        }
+    public void AddOrderItemOnPlate(OrderItem x)
+    {
+        Plate.AddItem(x);
+        Debug.Log("Na tacy jest : " + Plate.GetItemQuantityOnPlate(x) + " " + x.name);
+    }
 
-        public void AddOrderItemOnPlate(OrderItem x)
-        {
-            Plate.AddItem(x);
-            Debug.Log("Na tacy jest : " + Plate.GetItemQuantityOnPlate(x) + " " + x.name);
-        }
+    public int GetItemOrderOnPlateQuantity(OrderItem x)
+    {
+        return Plate.GetItemQuantityOnPlate(x);
+    }
 
-        public int GetItemOrderOnPlateQuantity(OrderItem x)
-        {
-            return Plate.GetItemQuantityOnPlate(x);
-        }
-
-        public void ResetPlate()
-        {
-            Plate.RemoveAll();
-        }
+    public void ResetPlate()
+    {
+        Plate.RemoveAll();
     }
 }

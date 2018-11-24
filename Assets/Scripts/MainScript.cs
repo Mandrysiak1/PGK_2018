@@ -63,7 +63,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     {
         get
         {
-            return player.BeersHandedOut;
+            return Player.BeersHandedOut;
         }
     }
     public int Score
@@ -144,15 +144,14 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
     }
 
-    private Player player;
     [SerializeField]
-    private PlayerPlate PlayerPlate;
+    private Player Player;
     [SerializeField]
     private QTEController QTE;
     [SerializeField]
     private AudioSource Music;
     [SerializeField]
-    private GameObject Player;
+    private ThirdPersonCharacter PlayerController;
     [SerializeField]
     private Camera Camera;
 
@@ -172,16 +171,17 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         Music.time = 0;
         Music.Play();
 
-        scene.Player = player;
+        scene.Player = Player;
         scene.Main = this;
 
         Camera.transform.position = scene.CameraStartingPosition.position;
         Camera.transform.rotation = scene.CameraStartingPosition.rotation;
 
-        Player.gameObject.SetActive(true);
-        Player.transform.position = scene.PlayerStartingPosition.transform.position;
-        Player.GetComponent<ThirdPersonCharacter>().setm_AnimSpeedMultiplier(0.85f + 0.25f * UpgradeClass.SpeedModif);
-        Player.GetComponent<ThirdPersonCharacter>().setm_MoveSpeedMultiplie(0.85f + 0.25f * UpgradeClass.SpeedModif);
+        PlayerController.gameObject.SetActive(true);
+        PlayerController.transform.position = scene.PlayerStartingPosition.transform.position;
+        PlayerController.setm_AnimSpeedMultiplier(0.85f + 0.25f * UpgradeClass.SpeedModif);
+        PlayerController.setm_MoveSpeedMultiplie(0.85f + 0.25f * UpgradeClass.SpeedModif);
+
         foreach (var listener in FindObjectsOfType<LevelLoadListener>())
         {
             listener.LevelLoaded.Invoke(level, scene);
@@ -192,8 +192,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     {
         if (QTE == null)
             QTE = FindObjectOfType<QTEController>();
-        player = new Player(PlayerPlate);
-        Player.gameObject.SetActive(false);
+        PlayerController.gameObject.SetActive(false);
     }
 
     public void Start()
@@ -208,7 +207,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     internal void ResetScore()
     {
         DissatisfactionValue = 0;
-        player.ResetBeersHandedOut();
+        Player.ResetBeersHandedOut();
     }
     public void AddFreeTable(object table)
     {
@@ -218,7 +217,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
     public Player GetPlayer()
     {
-        return player;
+        return Player;
     }
 
     public float GetTime()
@@ -267,17 +266,17 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
             if (DissatisfactionValue >= 100)
             {
-                Player.SetActive(false);
+                PlayerController.gameObject.SetActive(false);
                 CurrentGameState = GameState.Failure;
-                player.ResetPlate();
+                Player.ResetPlate();
                 UpgradeClass.Tip = UpgradeClass.preGameTip;
             }
 
             if (_time >= 124)
             {
-                Player.SetActive(false);
+                PlayerController.gameObject.SetActive(false);
                 CurrentGameState = GameState.Success;
-                player.ResetPlate();
+                Player.ResetPlate();
             }
         }
 

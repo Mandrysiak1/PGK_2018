@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1676,7 +1676,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6052,6 +6052,7 @@ GameObject:
   - component: {fileID: 2078970100}
   - component: {fileID: 2078970101}
   - component: {fileID: 2078970102}
+  - component: {fileID: 2078970103}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6073,10 +6074,10 @@ MonoBehaviour:
   tutorial: 0
   moodDecreaseValue: 0.2
   _time: 0
-  PlayerPlate: {fileID: 2078970096}
-  QTE: {fileID: 0}
+  Player: {fileID: 2078970103}
+  QTE: {fileID: 2078970098}
   Music: {fileID: 2078970099}
-  Player: {fileID: 2075440669}
+  PlayerController: {fileID: 2075440670}
   Camera: {fileID: 1416592720}
 --- !u!65 &2078970092
 BoxCollider:
@@ -6342,6 +6343,19 @@ MonoBehaviour:
   QTE: {fileID: 2078970098}
   Main: {fileID: 2078970091}
   Plate: {fileID: 2078970096}
+--- !u!114 &2078970103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2078970090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c444a20d2733cea4599605de0202a803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vulnerable: 1
+  _Plate: {fileID: 2078970096}
 --- !u!1 &2106500766
 GameObject:
   m_ObjectHideFlags: 0
