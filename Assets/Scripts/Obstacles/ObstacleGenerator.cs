@@ -11,7 +11,7 @@ public class ObstacleGenerator : MonoBehaviour
     private float NormalizedChanceOfEvent;
 
     [SerializeField]
-    private LevelScene LevelScene;
+    private GameContext Context;
 
     public delegate void GenerateObstacle();
     public event GenerateObstacle OnGenerateObstacle;
@@ -19,11 +19,10 @@ public class ObstacleGenerator : MonoBehaviour
 
     void Start()
     {
-        if (LevelScene == null)
-            LevelScene = FindObjectOfType<LevelScene>();
+        GameContext.FindIfNull(ref Context);
 
-        if(LevelScene.Main != null)
-            awaitingTables = LevelScene.Main.AwaitingTables;
+        if(Context.Main != null)
+            awaitingTables = Context.Main.AwaitingTables;
 
         InvokeRepeating("CalculateChanceOfEvent", 1f, 1f);
     }

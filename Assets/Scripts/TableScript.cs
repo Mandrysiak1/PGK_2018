@@ -1,25 +1,16 @@
-﻿using Assets.PGKScripts;
-using QTE;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TableScript : MonoBehaviour
 {
     [SerializeField]
-    private QTEController QTE;
-    [SerializeField]
-    private LevelScene LevelScene;
-
+    private GameContext Context;
 
     public Table MyTable { get; set; }
     private bool hasPlayer = false;
 
-
     void Start()
     {
-        if (QTE == null)
-            QTE = FindObjectOfType<QTEController>();
-        if(LevelScene == null)
-            LevelScene = FindObjectOfType<LevelScene>();
+        GameContext.FindIfNull(ref Context);
 
         MyTable = new Table(GetComponent<OrderSource>().possibleRequests);
 
@@ -33,7 +24,7 @@ public class TableScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Submit") && hasPlayer == true && !QTE.IsRunning)
+        if (Input.GetButtonDown("Submit") && hasPlayer == true && !Context.QTE.IsRunning)
 
         {
             Debug.Log(UpgradeClass.Tip+"<- tipy");
@@ -43,9 +34,9 @@ public class TableScript : MonoBehaviour
                 if (MyTable.IsThereOrder())
                 {
 
-                    if (LevelScene.Player.GetItemOrderOnPlateQuantity(MyTable.currOrder.orderType) > 0)
+                    if (Context.Player.GetItemOrderOnPlateQuantity(MyTable.currOrder.orderType) > 0)
                     {
-                        LevelScene.Player.RemoveBeer(MyTable.currOrder.orderType);
+                        Context.Player.RemoveBeer(MyTable.currOrder.orderType);
                         MyTable.putBeer();
                         int remaining = (int)MyTable.CurrOrder.getOrderSize() - MyTable.getBOT();
                         Debug.Log("Połozono piwo, potrzeba jeszcze: " + remaining);
@@ -53,10 +44,10 @@ public class TableScript : MonoBehaviour
                         {
                             if(MyTable.CurrOrder.orderType.name == "WitchPotion") //sorry for hardcoding i will fix it next week, i promise, for now its too much work :C
                             {
-                                
+
                                 UpgradeClass.Tip += 10;
                             }
-                            QTE.TryRunTipQte();
+                            Context.QTE.TryRunTipQte();
                         }
 
                     }

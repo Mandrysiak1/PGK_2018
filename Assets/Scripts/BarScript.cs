@@ -2,29 +2,26 @@
 
 public class BarScript : MonoBehaviour
 {
-    private bool hasPlayer = false;
-    private LevelScene LevelScene;
-    // public List<OrderItem> OrdersToPick = new List<OrderItem>();
-    public OrderItem orderToPick;
+    [SerializeField]
+    private GameContext Context;
 
+    private bool hasPlayer = false;
+    public OrderItem orderToPick;
 
     void Start()
     {
-        LevelScene = FindObjectOfType<LevelScene>();
+        GameContext.FindIfNull(ref Context);
     }
 
     void Update()
     {
         if(Input.GetButtonDown("ReturnItemOnBar") && hasPlayer && orderToPick != null)
         {
-           
-               LevelScene.Player.RemoveBeer(orderToPick);
-            
+            Context.Player.RemoveBeer(orderToPick);
         }
         if (Input.GetButtonDown("Submit") && hasPlayer && orderToPick != null)
         {
-            
-            LevelScene.Player.AddOrderItemOnPlate(orderToPick);
+            Context.Player.AddOrderItemOnPlate(orderToPick);
         }
     }
     private void OnTriggerEnter(Collider other)

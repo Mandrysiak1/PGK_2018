@@ -149,8 +149,6 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     [SerializeField]
     private QTEController QTE;
     [SerializeField]
-    private AudioSource Music;
-    [SerializeField]
     private ThirdPersonCharacter PlayerController;
     [SerializeField]
     private Camera Camera;
@@ -163,29 +161,6 @@ public class MainScript : MonoBehaviour, IWinStreakSource
             GameStatusChanged = new GameStatusEvent();
         if (WinStreakChanged == null)
             WinStreakChanged = new WinStreakEvent();
-    }
-
-    public void Setup(GameLevel level, LevelScene scene)
-    {
-        Music.clip = level.Music;
-        Music.time = 0;
-        Music.Play();
-
-        scene.Player = Player;
-        scene.Main = this;
-
-        Camera.transform.position = scene.CameraStartingPosition.position;
-        Camera.transform.rotation = scene.CameraStartingPosition.rotation;
-
-        PlayerController.gameObject.SetActive(true);
-        PlayerController.transform.position = scene.PlayerStartingPosition.transform.position;
-        PlayerController.setm_AnimSpeedMultiplier(0.85f + 0.25f * UpgradeClass.SpeedModif);
-        PlayerController.setm_MoveSpeedMultiplie(0.85f + 0.25f * UpgradeClass.SpeedModif);
-
-        foreach (var listener in FindObjectsOfType<LevelLoadListener>())
-        {
-            listener.LevelLoaded.Invoke(level, scene);
-        }
     }
 
     private void Awake()

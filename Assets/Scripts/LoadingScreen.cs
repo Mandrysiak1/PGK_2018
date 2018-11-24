@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Game.Initialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class LoadingScreen : MonoBehaviour
     public float AnimationTime = 0.33f;
 
     [SerializeField]
-    private LevelLoadListener LevelLoaded;
+    private LevelLoadEvent LevelLoaded;
 
     [SerializeField]
     private Image Background;

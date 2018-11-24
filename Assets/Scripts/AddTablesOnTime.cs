@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AddTablesOnTime : MonoBehaviour {
-
+public class AddTablesOnTime : MonoBehaviour
+{
+    [SerializeField]
+    private GameContext Context;
     [SerializeField]
     private float time = 0, activationTime;
     [SerializeField]
@@ -21,8 +23,10 @@ public class AddTablesOnTime : MonoBehaviour {
 
 
 
-    void Start () {
-        
+    void Start ()
+    {
+        GameContext.FindIfNull(ref Context);
+
         table1.enabled = false;
         table2.enabled = false;
         UI1.SetActive(false);
@@ -46,7 +50,7 @@ public class AddTablesOnTime : MonoBehaviour {
     private void AddTablesToScene()
     {
 
-        var x = FindObjectOfType<LevelScene>().Main.Guests = true;
+        var x = Context.Main.Guests = true;
 
         Guest11.SetActive(true);
         Guest12.SetActive(true);
@@ -58,5 +62,5 @@ public class AddTablesOnTime : MonoBehaviour {
         UI2.SetActive(true);
 
     }
-    
+
 }
