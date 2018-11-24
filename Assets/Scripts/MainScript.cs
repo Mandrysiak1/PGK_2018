@@ -25,23 +25,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     public GameStatusEvent GameStatusChanged { get; set; }
     public WinStreakEvent WinStreakChanged { get; set; }
     public DissatisfactionEvent DissatisfactionChanged { get; set; }
-    public delegate void GuestsArrived();
     public bool tutorial = false;
-    public event GuestsArrived OnguestsArrived;
-
-    private bool guests = false;
-    public bool Guests
-    {
-        get
-        {
-            return guests;
-        }
-        set
-        {
-            guests = value;
-            OnguestsArrived();
-        }
-    }
 
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
@@ -117,33 +101,8 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     System.Random randomNum = new System.Random();
 
 
-    List<Table> _awaitingTables = new List<Table>();
-    public List<Table> AwaitingTables {
-        get
-        {
-            return _awaitingTables;
-        }
-        set
-        {
-            _awaitingTables = value;
-        }
-
-    }
-
-    List<Table> _freeTables = new List<Table>();
-    public List<Table> FreeTables
-    {
-        get
-        {
-            return _freeTables;
-        }
-        set
-        {
-             _freeTables = value;
-        }
-
-    }
-
+    [SerializeField]
+    private OrderController Orders;
     [SerializeField]
     private Player Player;
     [SerializeField]
@@ -184,11 +143,6 @@ public class MainScript : MonoBehaviour, IWinStreakSource
         DissatisfactionValue = 0;
         Player.ResetBeersHandedOut();
     }
-    public void AddFreeTable(object table)
-    {
-        Debug.Log("Added table " + ((Table)table).ID);
-        _freeTables.Add((Table)table);
-    }
 
     public Player GetPlayer()
     {
@@ -225,10 +179,10 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     private void ChangeDissatisfactionValue()
     {
         int i = 0;
-        int threshold = 4;
-        foreach (Table t in _awaitingTables)
+        float threshold = 0.25f;
+        foreach (OrderSource source in Orders.AwaitingSources)
         {
-            if (t.Mood < threshold) i++;
+            if (source.Mood < threshold) i++;
         }
         if (i != 0)
             DissatisfactionValue += Time.deltaTime * 5 * i;

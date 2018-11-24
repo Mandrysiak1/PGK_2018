@@ -29,8 +29,6 @@ public class UIMain : MonoBehaviour
     public TextMeshProUGUI timer;
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
-    public Canvas GuestArrived;
-    public Canvas witchUI;
     bool gamePaused = false;
     int x = 2;
     float y = 4;
@@ -38,18 +36,12 @@ public class UIMain : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        var x = FindObjectOfType<OrderGenerator>();
-        x.OnWitchUI += HandleWitchUI;
-
-        witchUI.enabled = false;
         PauseCanvas.enabled = false;
-        GuestArrived.enabled = false;
-        mainScript.OnguestsArrived += handleGuestsArrived;
 
         Time.timeScale = 1;
         EndGameCanvas.enabled = false;
         if (mainScript == null)
-            mainScript = (MainScript)FindObjectOfType(typeof(MainScript));
+            mainScript = (MainScript) FindObjectOfType(typeof(MainScript));
         mainScript.DissatisfactionChanged.AddListener(DissatisfactionChanged);
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
@@ -67,29 +59,8 @@ public class UIMain : MonoBehaviour
             GoToShop.gameObject.SetActive(false);
         }
 
-
-       
-
     }
 
-    private void HandleWitchUI()
-    {
-        witchUI.enabled = true;
-        StartCoroutine(wait());
-    }
-
-    private void handleGuestsArrived()
-    {
-        GuestArrived.enabled = true;
-        StartCoroutine(wait());
-    }
-
-    private IEnumerator wait()
-    {
-        yield return new WaitForSeconds(3.0f);
-        GuestArrived.enabled = false;
-        witchUI.enabled = false;
-    }
 
     private void GameStateChanged(GameState arg0, GameState arg1)
     {
@@ -196,7 +167,7 @@ public class UIMain : MonoBehaviour
             Obstacles.SetActive(false);
             Obstacles.GetComponent<ObstacleGenerator>().CancelInvoke();
         }
-            
+
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }

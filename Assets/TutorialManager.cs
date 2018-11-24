@@ -1,6 +1,7 @@
 ﻿using QTE;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour {
@@ -43,7 +44,14 @@ public class TutorialManager : MonoBehaviour {
     public GameObject Tutall;
     public PlayerPlate PlayerPlate;
     public OrderItem orderToPick;
-    private Table AwaitingOne;
+    private OrderSource AwaitingOne;
+    private OrderController Orders;
+
+    private void Start()
+    {
+        Orders = FindObjectOfType<OrderController>();
+    }
+
     public void Update()
     {
 
@@ -53,17 +61,17 @@ public class TutorialManager : MonoBehaviour {
 
         if (welcome == false)
         {
-            Time.timeScale = 0;    
+            Time.timeScale = 0;
         }
-        
-            
+
+
         if (welcome == true && ordergenerated == true && ordersexplained == false)
         {
             Time.timeScale = 0;
             bg.gameObject.SetActive(true);
             Orders1.gameObject.SetActive(true);
-            
-            
+
+
         }
 
         if (ordercompleted == true && winstreakExplained == false)
@@ -72,7 +80,7 @@ public class TutorialManager : MonoBehaviour {
             bg.gameObject.SetActive(true);
             Winstreak1.gameObject.SetActive(true);
         }
-        
+
         if (qteexplained1 == false && winstreakExplained == true)
         {
             if(tajm())
@@ -82,10 +90,10 @@ public class TutorialManager : MonoBehaviour {
                 bg.gameObject.SetActive(true);
                 QTE1.gameObject.SetActive(true);
             }
-            
+
 
         }
-        
+
 
 
 
@@ -97,7 +105,7 @@ public class TutorialManager : MonoBehaviour {
             doit = true;
             bg.gameObject.SetActive(true);
             Tut.gameObject.SetActive(true);
-            
+
         }
 
     }
@@ -138,16 +146,16 @@ public class TutorialManager : MonoBehaviour {
     {
         if (ordergenerated == false)
         {
-            if (mainScript.AwaitingTables.Count > 0)
+            if (Orders.AwaitingSources.Any())
             {
                 ordergenerated = true;
-                AwaitingOne = mainScript.AwaitingTables[0];
+                AwaitingOne = Orders.AwaitingSources.First();
             }
         }
 
         if (ordergenerated == true)
         {
-            if (!mainScript.AwaitingTables.Contains(AwaitingOne))
+            if (!Orders.FreeSources.Contains(AwaitingOne))
             {
                 ordercompleted = true;
             }
@@ -161,8 +169,8 @@ public class TutorialManager : MonoBehaviour {
             Time.timeScale = 0;
             bg.gameObject.SetActive(true);
             ObstacleGenCanv.gameObject.SetActive(true);
-            
-            
+
+
         }
     }
 
@@ -173,10 +181,10 @@ public class TutorialManager : MonoBehaviour {
             Time.timeScale = 0;
             bg.gameObject.SetActive(true);
             ItemObstacle.gameObject.SetActive(true);
-            
+
         }
     }
-     
+
     public void HandleCollisionClient()
     {
         if (clientcollisionexplained == false && Tutall.active)
@@ -234,7 +242,7 @@ public class TutorialManager : MonoBehaviour {
     {
         Orders2.gameObject.SetActive(false);
         tips.gameObject.SetActive(true);
-        
+
     }
 
     public void NextTip()
@@ -269,7 +277,7 @@ public class TutorialManager : MonoBehaviour {
 
     public void NextQTE2()
     {
-        
+
         Time.timeScale = 1;
         QTE2.gameObject.SetActive(false);
         bg.gameObject.SetActive(false);
@@ -313,7 +321,7 @@ public class TutorialManager : MonoBehaviour {
         bg.gameObject.SetActive(false);
         Tut.gameObject.SetActive(false);
         Tutall.SetActive(false);
-        
+
     }
 
 }

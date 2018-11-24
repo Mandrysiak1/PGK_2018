@@ -12,7 +12,7 @@ namespace Game.Initialization
         {
             OrderSource[] sources = FindObjectsOfType<OrderSource>();
             var possibleItems = sources
-                .SelectMany(s => s.possibleRequests)
+                .SelectMany(s => s.PossibleRequests)
                 .Distinct();
 
             foreach (OrderItem item in possibleItems)

@@ -7,6 +7,7 @@ public class GameContext : MonoBehaviour
     public MainScript Main;
     public Player Player;
     public QTEController QTE;
+    public OrderController Orders;
 
     public static void FindIfNull(ref GameContext context)
     {

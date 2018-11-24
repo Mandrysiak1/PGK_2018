@@ -1,12 +1,14 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
     public float MinimalDelayBetweenEvents;
     public float State5ChanceIndex, State4ChanceIndex, State3ChanceIndex, State2ChanceIndex, State1ChanceIndex;
-    private List<Table> awaitingTables = new List<Table>();
     private float ChanceOfEvent = 0;
     private float NormalizedChanceOfEvent;
 
@@ -20,10 +22,6 @@ public class ObstacleGenerator : MonoBehaviour
     void Start()
     {
         GameContext.FindIfNull(ref Context);
-
-        if(Context.Main != null)
-            awaitingTables = Context.Main.AwaitingTables;
-
         InvokeRepeating("CalculateChanceOfEvent", 1f, 1f);
     }
 
@@ -33,7 +31,7 @@ public class ObstacleGenerator : MonoBehaviour
 
         ChanceOfEvent = 0;
 
-        foreach (var x in awaitingTables)
+        foreach (var x in Context.Orders.AwaitingSources)
         {
             if (x.Mood >= 16)
             {
@@ -72,8 +70,8 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void NormalizeChanceOfEvent()
     {
-
-        NormalizedChanceOfEvent = (ChanceOfEvent / (40 * (float)awaitingTables.Count)) * 100;
+        int tablesCount = Context.Orders.AwaitingSources.Count();
+        NormalizedChanceOfEvent = (ChanceOfEvent / (40 * (float)tablesCount)) * 100;
 
     }
 

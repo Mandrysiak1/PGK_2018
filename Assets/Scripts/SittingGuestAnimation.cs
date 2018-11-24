@@ -6,7 +6,7 @@ using UnityEngine;
 public class SittingGuestAnimation : MonoBehaviour
 {
     [SerializeField]
-    private TableScript TableScript;
+    private OrderSource OrderSource;
     [SerializeField]
     private float AnimationSpeed = 1.0f;
     [SerializeField]
@@ -16,12 +16,14 @@ public class SittingGuestAnimation : MonoBehaviour
 
     void Start ()
     {
+        if (OrderSource == null)
+            OrderSource = gameObject.GetComponentInParent<OrderSource>();
         animator = GetComponent<Animator>();
         animator.speed = AnimationSpeed + Random.Range(-AnimationSpeedVariation, AnimationSpeedVariation);
     }
 
     void Update ()
     {
-        animator.SetFloat("Mood", TableScript.MyTable.Mood);
+        animator.SetFloat("Mood", OrderSource.Mood * 100);
     }
 }
