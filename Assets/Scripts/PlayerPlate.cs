@@ -67,7 +67,14 @@ public class PlayerPlate : MonoBehaviour
                 amount -= removeAmount;
                 CurrentCapacity -= removeAmount;
 
-                orderItemsOnPlate[item] = amount;
+                if (amount >= 0)
+                {
+                    orderItemsOnPlate[item] = amount;
+                }
+                else
+                {
+                    orderItemsOnPlate.Remove(item);
+                }
 
                 OnItemAmountChanged.Invoke(item, amount, old);
             }
