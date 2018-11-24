@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = System.Random;
 
 public class PlayerPlate : MonoBehaviour
 {
@@ -125,34 +126,12 @@ public class PlayerPlate : MonoBehaviour
         }
     }
 
-    internal void RemoveRandomItem()
+    public void RemoveRandomItem(Random random = null)
     {
-        if (orderItemsOnPlate.Count != 0)
+        if (!Empty)
         {
-            var values = orderItemsOnPlate.Values.ToList();
-            bool PlateIsEmpty = true;
-            foreach (var x in values)
-            {
-                if (x != 0)
-                {
-                    PlateIsEmpty = false;
-                }
-            }
-
-
-            if (PlateIsEmpty != true)
-            {
-                var Keys = orderItemsOnPlate.Keys.ToList();
-                OrderItem RandomItem;
-                do
-                {
-                    RandomItem = Keys[UnityEngine.Random.Range(0, Keys.Count)];
-
-                } while (orderItemsOnPlate[RandomItem] == 0);
-
-
-                RemoveItem(RandomItem);
-            }
+            OrderItem randomItem = Items.ToList().Random(random);
+            RemoveItem(randomItem);
         }
     }
 
