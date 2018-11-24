@@ -33,23 +33,23 @@ public class ObstacleGenerator : MonoBehaviour
 
         foreach (var x in Context.Orders.AwaitingSources)
         {
-            if (x.Mood >= 16)
+            if (x.Mood >= 0.9f)
             {
                 ChanceOfEvent += State1ChanceIndex;
             }
-            if (x.Mood >= 12 && x.Mood < 16)
+            if (x.Mood >= 0.75f && x.Mood < 0.9f)
             {
                 ChanceOfEvent += State2ChanceIndex;
             }
-            if (x.Mood >= 8 && x.Mood < 12)
+            if (x.Mood >= 0.5f && x.Mood < 0.75f)
             {
                 ChanceOfEvent += State3ChanceIndex;
             }
-            if (x.Mood >= 4 && x.Mood < 8)
+            if (x.Mood >= 0.15f && x.Mood < 0.5f)
             {
                 ChanceOfEvent += State4ChanceIndex;
             }
-            if (x.Mood < 4)
+            if (x.Mood < 0.15f)
             {
                 ChanceOfEvent += State5ChanceIndex;
 
@@ -71,8 +71,8 @@ public class ObstacleGenerator : MonoBehaviour
     private void NormalizeChanceOfEvent()
     {
         int tablesCount = Context.Orders.AwaitingSources.Count();
-        NormalizedChanceOfEvent = (ChanceOfEvent / (40 * (float)tablesCount)) * 100;
 
+        NormalizedChanceOfEvent = (ChanceOfEvent / (40 * (float)tablesCount)) * 100;
     }
 
     private void CheckIfEventHappens()
