@@ -14,16 +14,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        if (PlayerPrefs.HasKey("isTutorialEnabled") && PlayerPrefs.GetInt("isTutorialEnabled") == 0)
-        {
-            StartFirstLevel();
-        }
-        else
-        {
-            gameObject.SetActive(false);
-            PlayerPrefs.SetInt("isTutorialEnabled", 0);
-            SceneManager.LoadScene("Tutorialv2");
-        }
+        StartFirstLevel();
     }
 
     private void StartFirstLevel()
