@@ -40,6 +40,16 @@ public class PlayerPlate : MonoBehaviour
 
     public int CurrentCapacity { get; private set; }
 
+    public int UniqueItemCount
+    {
+        get { return orderItemsOnPlate.Count; }
+    }
+
+    public bool Empty
+    {
+        get { return CurrentCapacity == 0; }
+    }
+
     [SerializeField]
     private int _MaximumCapacity = 5;
 
