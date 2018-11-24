@@ -52,6 +52,7 @@ public class PlayerPlate : MonoBehaviour
         {
             if (amount > 0)
             {
+                removeAmount = Math.Min(removeAmount, amount);
                 int old = amount;
                 amount -= removeAmount;
                 CurrentCapacity -= removeAmount;
