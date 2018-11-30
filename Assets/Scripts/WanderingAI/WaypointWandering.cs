@@ -19,7 +19,9 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private bool isStopped = false;
     private float luck = 0f;
     private float originalSpeed;
-    private readonly float speedMultiplier = 1.8f;
+    private readonly float speedMultiplier = 2.3f;
+    private readonly float startTime = 3.0f;
+    private readonly float repeatRate = 3.0f;
     private QTEController QTE;
     private PlayerCollisionHandler CollisionHandler;
 
@@ -35,7 +37,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         agent = GetComponent<NavMeshAgent>();
         //agent.updateRotation = false;
         originalSpeed = agent.speed;
-        InvokeRepeating("AddDynamic", 5, 5);
+        InvokeRepeating("AddDynamic", startTime, repeatRate);
         transform.GetComponentInChildren<WanderingText>().text.enabled = false;
     }
 
@@ -84,7 +86,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         else
         {
             luck = Random.Range(1, 11);
-            if (luck < 5 && luck != 0)
+            if (luck < 6 && luck != 0)
             {
                 isWalking = false;
                 isRunning = true;
