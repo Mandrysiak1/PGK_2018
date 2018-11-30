@@ -26,6 +26,7 @@ public class UIMain : MonoBehaviour
     public Canvas NextLvlCanv;
     public Button NextLevel;
     public Button GoToShop;
+    public Button Continue;
     public TextMeshProUGUI timer;
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
@@ -46,6 +47,7 @@ public class UIMain : MonoBehaviour
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
+        Continue.onClick.AddListener(ContinueGame);
         if (Flow.HasNextLevel())
         {
             NextLevel.onClick.AddListener(LoadNextLvl);
@@ -61,6 +63,7 @@ public class UIMain : MonoBehaviour
 
     }
 
+    
 
     private void GameStateChanged(GameState arg0, GameState arg1)
     {
@@ -95,7 +98,7 @@ public class UIMain : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
 
-        if (Input.GetKeyDown("PauseButton") && mainScript.CurrentGameState == GameState.Playing) //CHANGE FOR PAD
+        if (Input.GetButtonDown("PauseButton") && mainScript.CurrentGameState == GameState.Playing) //CHANGE FOR PAD
         {
             if (!gamePaused)
             {
@@ -104,6 +107,7 @@ public class UIMain : MonoBehaviour
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
+                Continue.gameObject.SetActive(false);
                 Time.timeScale = 0;
             }
             else
@@ -113,6 +117,7 @@ public class UIMain : MonoBehaviour
                 SuccessCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
+                Continue.gameObject.SetActive(true);
                 Time.timeScale = 1;
             }
         }
@@ -150,7 +155,11 @@ public class UIMain : MonoBehaviour
         Time.timeScale = 1;
         Flow.StartNextLevel();
     }
+    private void ContinueGame()
+    {
+        Time.timeScale = 1;
 
+    }
     void LoadShop()
     {
         UpgradeClass.endgamecanvas = EndGameCanvas.enabled;
