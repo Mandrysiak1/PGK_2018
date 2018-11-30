@@ -95,7 +95,7 @@ public class UIMain : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && mainScript.CurrentGameState == GameState.Playing)
+        if (Input.GetKeyDown("PauseButton") && mainScript.CurrentGameState == GameState.Playing) //CHANGE FOR PAD
         {
             if (!gamePaused)
             {

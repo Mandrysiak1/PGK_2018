@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 public class MainMenu : MonoBehaviour
 {
 
@@ -11,6 +11,24 @@ public class MainMenu : MonoBehaviour
     public GameObject DiffMenu;
     public TutorialScript Tutorial;
     public GameObject Level;
+
+    public Button DummyButton;
+    public GameObject standardSetObject;
+
+    public void ResetFirstButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(standardSetObject);
+    }
+    public void Start()
+    {
+        ResetFirstButton();
+    }
+
+    public void Awake()
+    {
+        ResetFirstButton();
+    }
 
     public void PlayGame()
     {
@@ -31,7 +49,6 @@ public class MainMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         DiffMenu.SetActive(true);
-
     }
 
     public void ChangeLevel()

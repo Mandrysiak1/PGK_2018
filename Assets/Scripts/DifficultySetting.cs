@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DifficultySetting : MonoBehaviour
 {
@@ -10,6 +12,20 @@ public class DifficultySetting : MonoBehaviour
 
     public TMPro.TextMeshProUGUI TutIndicator;
 
+    public GameObject standardSetObject;
+    public void ResetFirstButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(standardSetObject);
+    }
+    public void Start()
+    {
+        ResetFirstButton();
+    }
+    public void Awake()
+    {
+        ResetFirstButton();
+    }
     public void Update()
     {
         if (PlayerPrefs.HasKey("isTutorialEnabled"))
@@ -34,6 +50,7 @@ public class DifficultySetting : MonoBehaviour
     {
         gameObject.SetActive(false);
         MainMenu.SetActive(true);
+        MainMenu.GetComponent<MainMenu>().ResetFirstButton();
     }
 
     public void ToggleTutorial()
