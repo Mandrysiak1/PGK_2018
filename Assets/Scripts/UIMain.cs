@@ -27,7 +27,6 @@ public class UIMain : MonoBehaviour
     public Button NextLevel;
     public Button GoToShop;
     public Button Continue;
-    public TextMeshProUGUI timer;
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
     bool gamePaused = false;
@@ -115,15 +114,7 @@ public class UIMain : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
-        if (y >= 10)
-            timer.text = x + ":" + (int)y;
-        else timer.text = x + ":0" + (int)y;
-        if (y < 0)
-        {
-            x -= 1;
-            y = 60;
-        }
-        y -= Time.deltaTime;
+
         if (UpgradeClass.exited)
         {
             EndGameCanvas.enabled = true;

@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class FailGameWhenTimeIsOver : MonoBehaviour
@@ -7,6 +6,8 @@ public class FailGameWhenTimeIsOver : MonoBehaviour
 
     private float Timer;
 
+    [SerializeField]
+    private TimerUI UI;
     [SerializeField]
     private MainScript Main;
 
@@ -23,6 +24,10 @@ public class FailGameWhenTimeIsOver : MonoBehaviour
     private void Update()
     {
         Timer += Time.deltaTime;
+
+        float timeLeft = Mathf.Max(0, Limit - Timer);
+        UI.Value = timeLeft;
+
         if (Timer > Limit)
         {
             Main.GameOver();

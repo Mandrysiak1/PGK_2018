@@ -484,7 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9d21872df7487a904e0702bdcb65fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Limit: 124
+  Limit: 122
+  UI: {fileID: 1209477370}
   Main: {fileID: 2078970091}
 --- !u!114 &64088666
 MonoBehaviour:
@@ -512,7 +513,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AddWinstreakKey: 112
+  DecreaseTime: 111
+  TimeDecrease: 5
   WinStreak: {fileID: 2059631944}
+  Time: {fileID: 64088665}
 --- !u!114 &64088668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3517,6 +3521,7 @@ GameObject:
   - component: {fileID: 1209477367}
   - component: {fileID: 1209477369}
   - component: {fileID: 1209477368}
+  - component: {fileID: 1209477370}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -3662,6 +3667,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1209477366}
   m_CullTransparentMesh: 0
+--- !u!114 &1209477370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1209477366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc81abaf90c24a3aaf03b38068af4514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: {fileID: 1209477368}
 --- !u!1 &1237744520
 GameObject:
   m_ObjectHideFlags: 0
@@ -4865,7 +4882,6 @@ MonoBehaviour:
   NextLevel: {fileID: 401961477}
   GoToShop: {fileID: 658401242}
   Continue: {fileID: 0}
-  timer: {fileID: 1209477368}
   PauseCanvas: {fileID: 266725603}
   SuccessCanvas: {fileID: 984385461}
 --- !u!1 &1735976319
