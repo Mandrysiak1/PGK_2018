@@ -6,7 +6,6 @@ public class GameContext : MonoBehaviour
     // TODO: Remove MainScript entirely
     public MainScript Main;
     public Player Player;
-    public QTEController QTE;
     public OrderController Orders;
 
     public static void FindIfNull(ref GameContext context)

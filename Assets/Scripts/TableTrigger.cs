@@ -16,7 +16,7 @@ public class TableTrigger : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Submit") && PlayerInRange && !Context.QTE.IsRunning)
+        if (Input.GetButtonDown("Submit") && PlayerInRange)
         {
             Context.Orders.TryUpdateOrderSource(Source);
         }

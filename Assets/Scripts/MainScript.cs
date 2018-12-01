@@ -106,8 +106,6 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     [SerializeField]
     private Player Player;
     [SerializeField]
-    private QTEController QTE;
-    [SerializeField]
     private ThirdPersonCharacter PlayerController;
     [SerializeField]
     private Camera Camera;
@@ -124,8 +122,6 @@ public class MainScript : MonoBehaviour, IWinStreakSource
 
     private void Awake()
     {
-        if (QTE == null)
-            QTE = FindObjectOfType<QTEController>();
         PlayerController.gameObject.SetActive(false);
     }
 
@@ -156,8 +152,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     void Update()
     {
         _time += Time.deltaTime;
-        if(!QTE.IsRunning)
-            ChangeDissatisfactionValue();
+        ChangeDissatisfactionValue();
         if(tutorial == false)
             GameOver();
         if(Input.GetKeyDown("p"))
@@ -190,7 +185,7 @@ public class MainScript : MonoBehaviour, IWinStreakSource
     }
     private void GameOver()
     {
-        if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure && !QTE.IsRunning)
+        if (CurrentGameState != GameState.Success && CurrentGameState != GameState.Failure)
         {
 
             if (DissatisfactionValue >= 100)

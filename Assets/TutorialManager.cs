@@ -22,7 +22,6 @@ public class TutorialManager : MonoBehaviour {
     private bool qteexplained2 = false;
     private float timer;
     public MainScript mainScript;
-    public QTEController qtescript;
     public PlayerCollisionHandler collisionHandler;
     public Canvas bg;
     public Canvas Welcome1;
@@ -98,7 +97,7 @@ public class TutorialManager : MonoBehaviour {
 
 
 
-        if (doit == false && welcome && ordergenerated && ordersexplained && (generateExplained || itemcollisionExplained || clientcollisionexplained) && winstreakExplained && qteexplained2 && !qtescript.IsRunning)
+        if (doit == false && welcome && ordergenerated && ordersexplained && (generateExplained || itemcollisionExplained || clientcollisionexplained) && winstreakExplained && qteexplained2)
         {
 
             Time.timeScale = 0;
@@ -286,7 +285,6 @@ public class TutorialManager : MonoBehaviour {
             mainScript.GetPlayer().AddOrderItemOnPlate(orderToPick);
             mainScript.GetPlayer().AddOrderItemOnPlate(orderToPick);
         }
-        qtescript.TryRunCollisionQte();
         qteexplained2 = true;
     }
 

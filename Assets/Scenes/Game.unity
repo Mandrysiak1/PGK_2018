@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3709,7 +3709,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Main: {fileID: 2078970091}
   Player: {fileID: 2078970103}
-  QTE: {fileID: 2078970098}
   Orders: {fileID: 1755516341}
 --- !u!4 &1255018899
 Transform:
@@ -6015,10 +6014,7 @@ GameObject:
   - component: {fileID: 2078970092}
   - component: {fileID: 2078970091}
   - component: {fileID: 2078970096}
-  - component: {fileID: 2078970098}
   - component: {fileID: 2078970097}
-  - component: {fileID: 2078970100}
-  - component: {fileID: 2078970101}
   - component: {fileID: 2078970102}
   - component: {fileID: 2078970103}
   m_Layer: 0
@@ -6044,7 +6040,6 @@ MonoBehaviour:
   _time: 0
   Orders: {fileID: 1755516341}
   Player: {fileID: 2078970103}
-  QTE: {fileID: 2078970098}
   PlayerController: {fileID: 2075440670}
   Camera: {fileID: 1416592720}
 --- !u!65 &2078970092
@@ -6149,58 +6144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level: {fileID: 11400000, guid: 14de8438213264d70a7f2db5b7f42dbf, type: 2}
---- !u!114 &2078970098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078970090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b55e5f83ed1a44128edcb7b780b0bda8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TipQteChance: 5
-  MinimumTipAmount: 3
-  MaximumTipAmount: 5
-  Plate: {fileID: 2078970096}
-  Character: {fileID: 2075440670}
-  CatchBeerQte: {fileID: 114482264494314532, guid: 4decadec7344f4db4a7ecab033588c7e,
-    type: 2}
-  HodlQte: {fileID: 114564676190790120, guid: 16934a4479e12419986d9c55ebd078b3, type: 2}
-  PlateCatchStrategy: {fileID: 2078970100}
-  TipCatchStrategy: {fileID: 2078970101}
-  main: {fileID: 2078970091}
-  Key: 107
---- !u!114 &2078970100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078970090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f9c33e3d1804e0e97c4ee2aaa4b9c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnlyOneRandomItem: 0
-  Prefab: {fileID: 114721305437339630, guid: aa284eb79161f4e3d997fd6f103a1eaa, type: 2}
-  Plate: {fileID: 2078970096}
-  PlateUI: {fileID: 1988087359}
---- !u!114 &2078970101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078970090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032bf391abbe41d0ab56c59bba7897a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Amount: 4
-  Prefab: {fileID: 1147720628874518, guid: cb2385a90bc4a4995882fdf43afe4d3d, type: 2}
-  Origin: {fileID: 1864875897}
 --- !u!114 &2078970102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6212,7 +6155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82188a643c744f02bfa60dded4241665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QTE: {fileID: 2078970098}
   Main: {fileID: 2078970091}
   Plate: {fileID: 2078970096}
 --- !u!114 &2078970103

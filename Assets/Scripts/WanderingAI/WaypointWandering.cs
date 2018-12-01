@@ -22,7 +22,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private readonly float speedMultiplier = 2.3f;
     private readonly float startTime = 3.0f;
     private readonly float repeatRate = 3.0f;
-    private QTEController QTE;
     private PlayerCollisionHandler CollisionHandler;
 
     //animation
@@ -30,8 +29,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
     void Start ()
     {
-        if (QTE == null)
-            QTE = FindObjectOfType<QTEController>();
         if (CollisionHandler == null)
             CollisionHandler = FindObjectOfType<PlayerCollisionHandler>();
         agent = GetComponent<NavMeshAgent>();
