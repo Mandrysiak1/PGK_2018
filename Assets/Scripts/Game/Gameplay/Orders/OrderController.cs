@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class OrderController : MonoBehaviour
 {
@@ -109,6 +106,7 @@ public class OrderController : MonoBehaviour
         source.Mood = 1.0f;
         RemoveOrder(order);
         source.Refresh();
+        OrderFilled.Invoke(source, order);
     }
 
     private void RemoveOrder(Order order)
