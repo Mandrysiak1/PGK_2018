@@ -20,7 +20,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         get
         {
             var player = Main.GetPlayer();
-            return !player.Vulnerable;
+            return player.Vulnerable;
         }
     }
 
