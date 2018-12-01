@@ -263,7 +263,9 @@ public class TutorialManager : MonoBehaviour {
         Time.timeScale = 1;
         Winstreak2.gameObject.SetActive(false);
         bg.gameObject.SetActive(false);
-        mainScript.WinStreak += 2;
+
+        // HACKY: I should not use FindObjectOfType
+        FindObjectOfType<MonoWinStreakSource>().WinStreak += 2;
     }
 
     public void NextQTE1()

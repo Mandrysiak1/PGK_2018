@@ -420,6 +420,98 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 52468911}
   m_CullTransparentMesh: 0
+--- !u!1 &64088662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64088663}
+  - component: {fileID: 64088666}
+  - component: {fileID: 64088665}
+  - component: {fileID: 64088664}
+  - component: {fileID: 64088667}
+  m_Layer: 0
+  m_Name: Mechanics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64088663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64088662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2078970095}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64088664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64088662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8b8833e735411688e2d91c3166b3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Treshold: 0.25
+  IncreaseRate: 5
+  DissatisfactionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MoodBasedDissatisfaction+DissatisfactionEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  Context: {fileID: 1255018898}
+  Slider: {fileID: 1547977922}
+--- !u!114 &64088665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64088662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9d21872df7487a904e0702bdcb65fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Limit: 124
+  Main: {fileID: 2078970091}
+--- !u!114 &64088666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64088662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a0214ce327437b8dcbc9f8c5d5e312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Treshold: 100
+  Dissatisfaction: {fileID: 64088664}
+  Main: {fileID: 2078970091}
+--- !u!114 &64088667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64088662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa95f3bbc6a423a984ce181d46225ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddWinstreakKey: 112
+  WinStreak: {fileID: 2059631944}
 --- !u!1 &83142281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3314,7 +3406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1176121483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5792,6 +5884,7 @@ GameObject:
   - component: {fileID: 2059631943}
   - component: {fileID: 2059631942}
   - component: {fileID: 2059631946}
+  - component: {fileID: 2059631944}
   m_Layer: 0
   m_Name: WinStreakHandler
   m_TagString: Untagged
@@ -5810,6 +5903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67c87c958268274c952f66ce4837c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winStreakSource: {fileID: 2059631944}
   character: {fileID: 2075440670}
   plate: {fileID: 2078970096}
   speedPerkUI: {fileID: 1552247496}
@@ -5835,6 +5929,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059631944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059631941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90619170f5f34775bd5e2a9662281fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _WinStreak: 0
 --- !u!114 &2059631946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5846,6 +5952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882162ce0aedc60479e0ebbf7213246e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winStreakSource: {fileID: 2059631944}
   counter: {fileID: 274248964}
 --- !u!1 &2075440669
 GameObject:
@@ -6036,12 +6143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorial: 0
-  moodDecreaseValue: 0.2
-  _time: 0
-  Orders: {fileID: 1755516341}
+  Dissatisfaction: {fileID: 64088664}
   Player: {fileID: 2078970103}
   PlayerController: {fileID: 2075440670}
-  Camera: {fileID: 1416592720}
 --- !u!65 &2078970092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6105,7 +6209,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.9, y: 1, z: -20.630001}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 64088663}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

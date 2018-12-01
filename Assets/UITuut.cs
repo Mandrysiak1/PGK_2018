@@ -42,7 +42,6 @@ public class UITuut : MonoBehaviour
         EndGameCanvas.enabled = false;
         if (mainScript == null)
             mainScript = (MainScript)FindObjectOfType(typeof(MainScript));
-        mainScript.DissatisfactionChanged.AddListener(DissatisfactionChanged);
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
@@ -65,7 +64,6 @@ public class UITuut : MonoBehaviour
 
     private void DissatisfactionChanged(float arg0, float arg1)
     {
-        this.bigBar.value = mainScript.DissatisfactionValue;
     }
 
     // Update is called once per frame

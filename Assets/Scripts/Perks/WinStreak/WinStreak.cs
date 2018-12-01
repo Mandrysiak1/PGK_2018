@@ -10,9 +10,9 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class WinStreak : MonoBehaviour
 {
-
+    [SerializeField]
+    private MonoWinStreakSource winStreakSource;
     public ThirdPersonCharacter character;
-    public IWinStreakSource winStreakSource;
     public PlayerPlate plate;
     //PERKS_LIST
     Dictionary<IPerk, IPerkUi> perksUiBind = new Dictionary<IPerk, IPerkUi>();
@@ -42,7 +42,6 @@ public class WinStreak : MonoBehaviour
     {
         MainScript mainScript = FindObjectOfType<MainScript>();
         OrderSource orderSource = FindObjectOfType<OrderSource>();
-        winStreakSource = mainScript;
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WinStreakUI : MonoBehaviour {
 
-    IWinStreakSource winStreakSource;
+	[SerializeField]
+    private MonoWinStreakSource winStreakSource;
     public TextMeshProUGUI counter;
 	// Use this for initialization
 	void Start () {
-        winStreakSource = FindObjectOfType<MainScript>();
         winStreakSource.WinStreakChanged.AddListener(textChanger);
 	}
 
@@ -19,6 +19,6 @@ public class WinStreakUI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+
 	}
 }
