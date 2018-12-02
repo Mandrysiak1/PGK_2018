@@ -13,6 +13,9 @@ public class NewOrderNotification : Notification
         base.Start();
         GameContext.FindIfNull(ref Context);
 
+        if (Context == null)
+            return;
+
         foreach (OrderSource source in Sources)
         {
             OrderSource sourceCopy = source;
