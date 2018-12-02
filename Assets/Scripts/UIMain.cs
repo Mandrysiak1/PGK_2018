@@ -110,7 +110,7 @@ public class UIMain : MonoBehaviour
                 SuccessCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
-                Continue.gameObject.SetActive(true);
+                //Continue.gameObject.SetActive(true);
                 Time.timeScale = 1;
             }
         }
