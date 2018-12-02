@@ -12,6 +12,9 @@ public static class ListRandom
 
     public static T Random<T>(this IList<T> list, Random random)
     {
+        if (random == null)
+            random = _Random;
+
         int count = list.Count;
         if(count == 0)
             throw new ArgumentException("List is empty");
