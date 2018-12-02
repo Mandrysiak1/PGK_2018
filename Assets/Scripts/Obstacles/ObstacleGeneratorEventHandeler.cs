@@ -34,7 +34,7 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
             }
             else
             {
-                ;
+                prefabs = Resources.LoadAll("ObjectGeneratorStuffFortnit");
             }
         }
         var x = FindObjectOfType<ObstacleGenerator>();
@@ -53,7 +53,7 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
         System.Random rand = new System.Random();
 
         int x = rand.Next(xMin, xMax);
-        
+
         int z = rand.Next(zMin,zMax);
         Position = new Vector3(x, yValue, z);
         NavMeshHit hit;
