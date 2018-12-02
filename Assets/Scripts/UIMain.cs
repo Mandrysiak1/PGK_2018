@@ -45,7 +45,7 @@ public class UIMain : MonoBehaviour
         mainScript.GameStatusChanged.AddListener(GameStateChanged);
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
-        Continue.onClick.AddListener(ContinueGame);
+        //Continue.onClick.AddListener(ContinueGame);
         if (Flow.HasNextLevel())
         {
             NextLevel.onClick.AddListener(LoadNextLvl);
@@ -100,7 +100,7 @@ public class UIMain : MonoBehaviour
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
-                Continue.gameObject.SetActive(false);
+                //Continue.gameObject.SetActive(false);
                 Time.timeScale = 0;
             }
             else
