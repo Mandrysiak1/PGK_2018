@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class NewOrderNotification : Notification
 {
@@ -16,15 +17,12 @@ public class NewOrderNotification : Notification
         if (Context == null)
             return;
 
-        foreach (OrderSource source in Sources)
-        {
-            OrderSource sourceCopy = source;
-            Context.Orders.OrderAdded.AddListener(NewOrder);
-        }
+        Context.Orders.OrderAdded.AddListener(NewOrder);
     }
 
     private void NewOrder(OrderSource source, Order order)
     {
-        Show(string.Format(Format, source.name, order.Item.name, order.Size));
+        if(Sources.Contains(source))
+            Show(string.Format(Format, source.name, order.Item.name, order.Size));
     }
 }
