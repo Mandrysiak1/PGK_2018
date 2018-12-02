@@ -70,7 +70,6 @@ public class MainScript : MonoBehaviour
 
     private void Awake()
     {
-        PlayerController.gameObject.SetActive(false);
     }
 
     public void Start()
