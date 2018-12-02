@@ -13,11 +13,6 @@ namespace Game.Initialization
         // between scenes
         private static GameLevel CurrentLevel;
 
-        public static void StartTutorialLevel(GameLevel level)
-        {
-            StartLevel(level, "Tutorial");
-        }
-
         public static void StartLevel(GameLevel level, string gameScene = "Game")
         {
             CurrentLevel = level;
