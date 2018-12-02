@@ -24,6 +24,6 @@ public class SittingGuestAnimation : MonoBehaviour
 
     void Update ()
     {
-        animator.SetFloat("Mood", OrderSource.Mood * 100);
+        animator.SetFloat("Mood", OrderSource.Mood);
     }
 }
