@@ -14,7 +14,7 @@ public class GameContext : MonoBehaviour
         {
             context = FindObjectOfType<GameContext>();
             if (context == null)
-                Debug.LogError("Could not find GameContext!");
+                Debug.LogWarning("Could not find GameContext!");
         }
     }
 }
