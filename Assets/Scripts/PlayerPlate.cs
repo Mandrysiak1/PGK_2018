@@ -93,8 +93,9 @@ public class PlayerPlate : MonoBehaviour
             ++amount;
             ++CurrentCapacity;
             orderItemsOnPlate[item] = amount;
-
             OnItemAmountChanged.Invoke(item, amount, old);
+
+
         }
     }
 

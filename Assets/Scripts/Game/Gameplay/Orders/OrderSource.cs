@@ -41,7 +41,7 @@ public class OrderSource : MonoBehaviour
         }
     }
 
-    public bool IsActive { get; private set; }
+    public bool IsActive { get;  set; }
 
 
     private void Awake()

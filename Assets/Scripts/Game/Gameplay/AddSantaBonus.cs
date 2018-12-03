@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddSantaBonus : MonoBehaviour {
 
-    [SerializeField]
-    private OrderSource OrderSource;
-    [SerializeField]
-    private List<OrderItem> OrderItems;
+
+public class AddSantaBonus : MonoBehaviour {
 
     private GameContext Context;
 
+    [SerializeField]
+    private List<OrderSource> orderSources;
+    [SerializeField]
+    private OrderItem SantaOrder;
 
- 
-	void Start () {
+    void Start () {
 
         GameContext.FindIfNull(ref Context);
 
@@ -26,10 +26,19 @@ public class AddSantaBonus : MonoBehaviour {
         
         if(source == transform.GetComponent<OrderSource>())
         {
-
+            DiseableTable();
         }
 
     }
 
+    private void DiseableTable()
+    {
 
+        OrderSource order = orderSources.Random();
+    
+        order.Mood = 1.0f;
+        order.MoodDecreaseRate = 0.0f;
+        order.CurrentOrder = new Order(SantaOrder, 0.0f, 0);
+        order.IsActive = false;
+    }
 }
