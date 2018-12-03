@@ -8,9 +8,12 @@ public class OrderController : MonoBehaviour
 {
     [Serializable]
     public class OrderEvent : UnityEvent<OrderSource, Order> {}
+    public class OrderDecreasedEvent : UnityEvent {}
+
 
     public OrderEvent OrderAdded;
     public OrderEvent OrderFilled;
+    public OrderDecreasedEvent DecreasedEvent = new OrderDecreasedEvent();
 
     [SerializeField]
     private PlayerPlate Plate;
@@ -92,6 +95,9 @@ public class OrderController : MonoBehaviour
                 if (IsOrderFilled(order))
                     FillOrder(order);
                 Plate.RemoveItem(order.Item);
+                //
+                DecreasedEvent.Invoke();
+                //
                 source.Refresh();
                 return true;
             }
