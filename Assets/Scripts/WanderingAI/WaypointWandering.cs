@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
+[RequireComponent(typeof(Animator))]
 public class WaypointWandering : MonoBehaviour, IWandering {
 
     public NavMeshAgent agent;
@@ -24,6 +25,9 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private readonly float repeatRate = 3.0f;
     private PlayerCollisionHandler CollisionHandler;
 
+    private bool collidedWithPlayer = false;
+    private Animator animator;
+
     //animation
     //public ThirdPersonCharacter character;
 
@@ -36,6 +40,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         originalSpeed = agent.speed;
         InvokeRepeating("AddDynamic", startTime, repeatRate);
         transform.GetComponentInChildren<WanderingText>().text.enabled = false;
+        animator = GetComponent<Animator>();
     }
 
 	void Update () {
@@ -90,17 +95,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
                 originalSpeed = agent.speed;
                 agent.speed = originalSpeed * speedMultiplier;
             }
-            /*
-            else if (luck == 5)
-            {
-                agent.speed = 0f;
-                ren.material.color = Color.red;
-            }
-            */
-            else
-            {
-                ;
-            }
         }
     }
 
@@ -110,14 +104,30 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         {
             CollisionHandler.CustomerCollision(this);
             transform.GetComponentInChildren<WanderingText>().text.enabled = true;
-            StartCoroutine(wait());
+            StartCoroutine(StopBecauseOfPlayerCoroutine());
         }
     }
 
-    private IEnumerator wait()
+    // ppff
+    private IEnumerator StopBecauseOfPlayerCoroutine()
     {
-        yield return new WaitForSeconds(1.5f);
+        StopBecauseOfPlayer();
+        yield return new WaitForSeconds(1.0f);
         transform.GetComponentInChildren<WanderingText>().text.enabled = false;
+        ResumeBecauseOfPlayer();
+    }
+
+    private void StopBecauseOfPlayer()
+    {
+        animator.SetFloat("Angery", 0.4f);
+        collidedWithPlayer = true;
+        agent.speed = 0;
+    }
+    private void ResumeBecauseOfPlayer()
+    {
+        animator.SetFloat("Angery", 0.0f);
+        collidedWithPlayer = false;
+        agent.speed = originalSpeed;
     }
 
 }
