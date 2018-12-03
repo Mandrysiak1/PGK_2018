@@ -32,7 +32,7 @@ public class MainScript : MonoBehaviour
         {
             return gameState;
         }
-        private set
+        set
         {
             var temp = this.gameState;
             this.gameState = value;
