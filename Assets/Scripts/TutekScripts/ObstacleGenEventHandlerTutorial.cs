@@ -27,6 +27,11 @@ public class ObstacleGenEventHandlerTutorial : MonoBehaviour
 
     private void HandleObstacleGenerator()
     {
+        
+    }
+
+    public void GenerateObstacle()
+    {
         CalculatePosition();
         SpawnOnObject();
     }
@@ -45,9 +50,8 @@ public class ObstacleGenEventHandlerTutorial : MonoBehaviour
         Position.y = yValue;
     }
 
-    private void SpawnOnObject()
+    public void SpawnOnObject()
     {
-
         Instantiate(prefab, Position, Quaternion.Euler(0, 32.028f, 0));
 
     }
