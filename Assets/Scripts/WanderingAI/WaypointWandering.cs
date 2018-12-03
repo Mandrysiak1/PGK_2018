@@ -19,7 +19,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private bool isStopped = false;
     private float luck = 0f;
     private float originalSpeed;
-    private readonly float speedMultiplier = 2.3f;
+    public float speedMultiplier = 2.3f;
     private readonly float startTime = 3.0f;
     private readonly float repeatRate = 3.0f;
     private PlayerCollisionHandler CollisionHandler;
@@ -27,9 +27,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private bool collidedWithPlayer = false;
     private Animator animator;
     private float originalAnimationSpeed;
-
-    //animation
-    //public ThirdPersonCharacter character;
 
     void Start ()
     {
@@ -49,16 +46,6 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
 	void Update () {
         Wander();
-        /*
-        if(agent.remainingDistance > agent.stoppingDistance)
-        {
-            character.Move(agent.desiredVelocity, false, false);
-        }
-        else
-        {
-            character.Move(Vector3.zero, false, false);
-        }
-        */
     }
 
     public void Wander()
