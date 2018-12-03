@@ -38,7 +38,6 @@ public class PlayerPlate : MonoBehaviour
     }
 
 
-
     public int CurrentCapacity { get; private set; }
 
     public int UniqueItemCount
