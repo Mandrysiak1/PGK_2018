@@ -9,6 +9,7 @@ namespace Assets.PGKScripts.Enums
     {
         Playing,
         Failure,
-        Success
+        Success,
+        Paused
     }
 }

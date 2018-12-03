@@ -1,5 +1,7 @@
+using Assets.PGKScripts.Enums;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -8,13 +10,35 @@ public class PauseMenu : MonoBehaviour
 	private float m_TimeScaleRef = 1f;
     private float m_VolumeRef = 1f;
     private bool m_Paused;
+    public GameObject standardSetObject;
+    private MainScript mainScript;
 
-
+    public void ResetFirstButton()
+    {
+        //if(mainScript.CurrentGameState == Assets.PGKScripts.Enums.GameState.Playing)
+        //{
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(standardSetObject);
+        //}
+    }
+    private void Start()
+    {
+        m_MenuToggle = GetComponent<Toggle>();
+        this.mainScript = FindObjectOfType<MainScript>();
+        mainScript.GameStatusChanged.AddListener(GameStateChanged);
+    }
     void Awake()
     {
-        m_MenuToggle = GetComponent <Toggle> ();
+        //ResetFirstButton();
+        //m_MenuToggle = GetComponent <Toggle> ();
 	}
-
+    private void GameStateChanged(GameState prevS, GameState newS)
+    {
+        if (newS == GameState.Paused)
+        {
+            ResetFirstButton();
+        }
+    }
 
     private void MenuOn ()
     {
@@ -48,6 +72,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    /*
 
 #if !MOBILE_INPUT
 	void Update()
@@ -59,5 +84,6 @@ public class PauseMenu : MonoBehaviour
 		}
 	}
 #endif
+*/
 
 }

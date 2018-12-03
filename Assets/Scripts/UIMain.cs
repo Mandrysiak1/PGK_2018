@@ -29,7 +29,6 @@ public class UIMain : MonoBehaviour
     public Button Continue;
     public Canvas PauseCanvas;
     public Canvas SuccessCanvas;
-    bool gamePaused = false;
     int x = 2;
     float y = 4;
 
@@ -65,53 +64,59 @@ public class UIMain : MonoBehaviour
 
     private void GameStateChanged(GameState arg0, GameState arg1)
     {
-        EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
-                        + ". your score: " + mainScript.Score;
-
-        mainScript.ResetScore();
-        Time.timeScale = 0;
-
-        EndGameCanvas.enabled = true;
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if(arg1 == GameState.Success || arg1 == GameState.Failure)
         {
-            if (mainScript.CurrentGameState == GameState.Success)
+            EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
+                                    + ". your score: " + mainScript.Score;
+
+            mainScript.ResetScore();
+            Time.timeScale = 0;
+
+            EndGameCanvas.enabled = true;
+            if (SceneManager.GetActiveScene().buildIndex == 1)
             {
-                NextLvlCanv.enabled = true;
-            }
-            else
-            {
-                NextLvlCanv.enabled = false;
+                if (mainScript.CurrentGameState == GameState.Success)
+                {
+                    NextLvlCanv.enabled = true;
+                }
+                else
+                {
+                    NextLvlCanv.enabled = false;
+                }
             }
         }
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        EventSystem.current.SetSelectedGameObject(null);
+       
 
-        if (Input.GetButtonDown("PauseButton") && mainScript.CurrentGameState == GameState.Playing) //CHANGE FOR PAD
+        if (Input.GetButtonDown("PauseButton")) //CHANGE FOR PAD
         {
-            if (!gamePaused)
+            if (mainScript.CurrentGameState == GameState.Playing)
             {
-                gamePaused = true;
                 SuccessCanvas.enabled = false;
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
                 //Continue.gameObject.SetActive(false);
                 Time.timeScale = 0;
+
+                mainScript.CurrentGameState = GameState.Paused;
             }
-            else
+            else if(mainScript.CurrentGameState == GameState.Paused)
             {
-                gamePaused = false;
                 PauseCanvas.enabled = false;
                 SuccessCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
                 //Continue.gameObject.SetActive(true);
                 Time.timeScale = 1;
+
+                mainScript.CurrentGameState = GameState.Playing;
             }
         }
 
