@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour {
+
+    public class PlayerCollision : UnityEvent { }
+
+    public readonly PlayerCollision OnPlayerCollide = new PlayerCollision();
 
     private int points = 0;
 
@@ -14,16 +19,11 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Table"))
+        if (collision.gameObject.CompareTag("WanderingCustomer"))
         {
-            //Messenger.Broadcast("show id"); //TESTS
+            OnPlayerCollide.Invoke();
         }
-        if (other.gameObject.CompareTag("Bar"))
-        {
-           // Messenger.Broadcast("show id"); //TESTS
-        }
-        //other.gameObject.SetActive(false);
     }
 }
