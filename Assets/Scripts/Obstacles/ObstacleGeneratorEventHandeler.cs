@@ -34,7 +34,7 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
             }
             else
             {
-                prefabs = Resources.LoadAll("ObjectGeneratorStuffFortnit");
+                prefabs = Resources.LoadAll("ObjectGeneratorStuffChristmas");
             }
         }
         var x = FindObjectOfType<ObstacleGenerator>();
