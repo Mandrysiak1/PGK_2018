@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-[RequireComponent(typeof(Animator))]
 public class WaypointWandering : MonoBehaviour, IWandering {
 
     public NavMeshAgent agent;
@@ -40,7 +39,10 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         originalSpeed = agent.speed;
         InvokeRepeating("AddDynamic", startTime, repeatRate);
         transform.GetComponentInChildren<WanderingText>().text.enabled = false;
+        // I'm weary of it
         animator = GetComponent<Animator>();
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
 	void Update () {
