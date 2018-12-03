@@ -19,16 +19,14 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private bool isStopped = false;
     private float luck = 0f;
     private float originalSpeed;
-    private readonly float speedMultiplier = 2.3f;
+    public float speedMultiplier = 2.3f;
     private readonly float startTime = 3.0f;
     private readonly float repeatRate = 3.0f;
     private PlayerCollisionHandler CollisionHandler;
 
     private bool collidedWithPlayer = false;
     private Animator animator;
-
-    //animation
-    //public ThirdPersonCharacter character;
+    private float originalAnimationSpeed;
 
     void Start ()
     {
@@ -43,20 +41,11 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         animator = GetComponent<Animator>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+        originalAnimationSpeed = animator.speed;
     }
 
 	void Update () {
         Wander();
-        /*
-        if(agent.remainingDistance > agent.stoppingDistance)
-        {
-            character.Move(agent.desiredVelocity, false, false);
-        }
-        else
-        {
-            character.Move(Vector3.zero, false, false);
-        }
-        */
     }
 
     public void Wander()
@@ -83,6 +72,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         if (agent.speed != originalSpeed)
         {
             agent.speed = originalSpeed;
+            animator.speed = originalAnimationSpeed;
             isWalking = true;
             isRunning = false;
             luck = 0;
@@ -96,6 +86,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
                 isRunning = true;
                 originalSpeed = agent.speed;
                 agent.speed = originalSpeed * speedMultiplier;
+                animator.speed = originalAnimationSpeed * speedMultiplier;
             }
         }
     }
@@ -121,6 +112,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
     private void StopBecauseOfPlayer()
     {
+        animator.speed = originalAnimationSpeed;
         animator.SetFloat("Angery", 0.4f);
         collidedWithPlayer = true;
         agent.speed = 0;
