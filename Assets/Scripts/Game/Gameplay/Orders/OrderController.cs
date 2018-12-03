@@ -107,6 +107,7 @@ public class OrderController : MonoBehaviour
         RemoveOrder(order);
         source.Refresh();
         OrderFilled.Invoke(source, order);
+        
     }
 
     private void RemoveOrder(Order order)
@@ -117,6 +118,7 @@ public class OrderController : MonoBehaviour
         SourceToOrder.Remove(source);
         OrderToSource.Remove(order);
         source.Refresh();
+        
     }
 
     private bool IsOrderFilled(Order order)

@@ -6,40 +6,30 @@ using UnityEngine;
 public class AddSantaBonus : MonoBehaviour {
 
     [SerializeField]
-    private OrderController OrderController;
-
-    [SerializeField]
     private OrderSource OrderSource;
-
     [SerializeField]
     private List<OrderItem> OrderItems;
+
+    private GameContext Context;
+
+
  
 	void Start () {
 
-        OrderController.OrderFilled.AddListener(OnOrderFilled);
-        
-	}
+        GameContext.FindIfNull(ref Context);
+
+        Context.Orders.OrderFilled.AddListener(OnOrderFilled);
+    }
 
     private void OnOrderFilled(OrderSource source, Order order)
     {
         
-        if(CheckIfSantaRequest(order.Item))
+        if(source == transform.GetComponent<OrderSource>())
         {
 
         }
 
     }
 
-    private bool CheckIfSantaRequest(OrderItem item)
-    {
-        if (!OrderItems.Contains(item))
-        {
-            return false;
-        }else
-        {
-            return true;
-        }
-        
-    }
 
 }
