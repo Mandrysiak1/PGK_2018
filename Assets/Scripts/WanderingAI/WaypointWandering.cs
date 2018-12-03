@@ -26,6 +26,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
     private bool collidedWithPlayer = false;
     private Animator animator;
+    private float originalAnimationSpeed;
 
     //animation
     //public ThirdPersonCharacter character;
@@ -43,6 +44,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         animator = GetComponent<Animator>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+        originalAnimationSpeed = animator.speed;
     }
 
 	void Update () {
@@ -83,6 +85,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         if (agent.speed != originalSpeed)
         {
             agent.speed = originalSpeed;
+            animator.speed = originalAnimationSpeed;
             isWalking = true;
             isRunning = false;
             luck = 0;
@@ -96,6 +99,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
                 isRunning = true;
                 originalSpeed = agent.speed;
                 agent.speed = originalSpeed * speedMultiplier;
+                animator.speed = originalAnimationSpeed * speedMultiplier;
             }
         }
     }
@@ -121,6 +125,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
 
     private void StopBecauseOfPlayer()
     {
+        animator.speed = originalAnimationSpeed;
         animator.SetFloat("Angery", 0.4f);
         collidedWithPlayer = true;
         agent.speed = 0;
