@@ -32,6 +32,19 @@ public class AddSantaBonus : MonoBehaviour {
         
         if(source == transform.GetComponent<OrderSource>())
         {
+
+            bool end  = false;
+            while(!end)
+            {
+                OrderSource newOne = orderSources.Random();
+                if(newOne != x)
+                {
+                    x = newOne;
+                    end = true;
+                }
+               
+            }
+
             x = orderSources.Random();
             if (OnSantaInfo != null)
             {
@@ -49,11 +62,15 @@ public class AddSantaBonus : MonoBehaviour {
     private void DiseableTable()
     {
     
-        x.Mood = 1.0f;
-        x.MoodDecreaseRate = 0.0f;
-        x.CurrentOrder = new Order(SantaOrder, 0.0f,100);
+        if(x != null)
+        {
+            x.Mood = 1.0f;
+            x.MoodDecreaseRate = 0.0f;
+            x.CurrentOrder = new Order(SantaOrder, 0.0f, 100);
 
 
-        
+        }
+
+
     }
 }
