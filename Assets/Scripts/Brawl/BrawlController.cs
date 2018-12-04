@@ -108,6 +108,12 @@ public class BrawlController : MonoBehaviour
         {
             source.Mood = 0.0f;
         }
+
+        var UIS = FindObjectsOfType<OrderSourceUI>();
+        foreach (var ui in UIS)
+        {
+            ui.gameObject.SetActive(false);
+        }
     }
 
     private void DisableWanderers()
