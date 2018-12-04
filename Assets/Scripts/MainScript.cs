@@ -91,7 +91,7 @@ public class MainScript : MonoBehaviour
     public void GameOver()
     {
         PlayerController.gameObject.SetActive(false);
-        CurrentGameState = GameState.Success;
+        CurrentGameState = GameState.Failure;
         Player.ResetPlate();
     }
 }
