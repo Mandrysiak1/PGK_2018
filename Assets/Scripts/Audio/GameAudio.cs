@@ -10,9 +10,10 @@ public class GameAudio : MonoBehaviour {
     public PlayerPlate playerPlate;
     public AudioSource beerOpenSound;
     public AudioSource putDownSound;
-   // private MainScript mainScript;
-	// Use this for initialization
-	void Start () {
+    public AudioSource nopeSound;
+    // private MainScript mainScript;
+    // Use this for initialization
+    void Start () {
         playerController.OnPlayerCollide.AddListener(PlayerCollided);
         if (playerPlate == null)
             playerPlate = FindObjectOfType<PlayerPlate>();
@@ -20,8 +21,14 @@ public class GameAudio : MonoBehaviour {
         collisionHandler = FindObjectOfType<PlayerCollisionHandler>();
         orderController = FindObjectOfType<OrderController>();
         orderController.DecreasedEvent.AddListener(OrderDecreased);
+        orderController.UnableEvent.AddListener(Unable);
         collisionHandler.OnCollisionC += OnCustomerCollision;
         collisionHandler.OnCollisionI += OnItemCollision;
+    }
+
+    private void Unable()
+    {
+        nopeSound.Play();
     }
 
     private void OrderDecreased()
