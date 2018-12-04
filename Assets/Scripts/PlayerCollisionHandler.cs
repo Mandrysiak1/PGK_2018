@@ -29,9 +29,12 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         if(IsVulnerable)
         {
-            Plate.RemoveRandomItem();
-            if (OnCollisionI != null)
-                OnCollisionI();
+            if (!Plate.Empty)
+            {
+                Plate.RemoveRandomItem();
+                if (OnCollisionI != null)
+                    OnCollisionI();
+            }
         }
     }
 
@@ -39,9 +42,12 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         if(IsVulnerable)
         {
-            Plate.RemoveAll();
-            if (OnCollisionC != null)
-                OnCollisionC();
+            if(!Plate.Empty)
+            {
+                Plate.RemoveAll();
+                if (OnCollisionC != null)
+                    OnCollisionC();
+            }
         }
     }
 }
