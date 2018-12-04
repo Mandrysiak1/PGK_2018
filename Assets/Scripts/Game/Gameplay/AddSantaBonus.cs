@@ -26,6 +26,7 @@ public class AddSantaBonus : MonoBehaviour {
         
         if(source == transform.GetComponent<OrderSource>())
         {
+            Debug.Log("kill me pls");
             DiseableTable();
         }
 
@@ -38,7 +39,7 @@ public class AddSantaBonus : MonoBehaviour {
     
         order.Mood = 1.0f;
         order.MoodDecreaseRate = 0.0f;
-        order.CurrentOrder = new Order(SantaOrder, 0.0f, 0);
-        order.IsActive = false;
+        order.CurrentOrder = new Order(SantaOrder, 0.0f,100);
+        
     }
 }
