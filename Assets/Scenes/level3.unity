@@ -746,8 +746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2b7796d8d843d3af394fea81ef0537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Minimum: 5.9
-  Maximum: 12
+  Minimum: 27.7
+  Maximum: 50
 --- !u!1001 &55732516
 Prefab:
   m_ObjectHideFlags: 0
@@ -12183,7 +12183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2b7796d8d843d3af394fea81ef0537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Minimum: 8
+  Minimum: 1.7
   Maximum: 25
 --- !u!1001 &937000135
 Prefab:
@@ -22854,6 +22854,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 114361625267309486, guid: ca25d9173366a494797ca19461646685,
+        type: 2}
+      propertyPath: Insults.Array.data[0]
+      value: OH NO! There wil be no christmas this year!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca25d9173366a494797ca19461646685, type: 2}
   m_IsPrefabAsset: 0
@@ -23835,7 +23840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2b7796d8d843d3af394fea81ef0537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Minimum: 12
+  Minimum: 1.7
   Maximum: 50
 --- !u!1001 &1420839106
 Prefab:
