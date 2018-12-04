@@ -17,7 +17,7 @@ public class FailGameWhenDissatisfactionExceeded : MonoBehaviour
 
     private void DissatisfactionChanged(float current, float old)
     {
-        if (current > Treshold)
+        if (current >= Treshold - 0.1f)
         {
             Main.GameOver();
         }
