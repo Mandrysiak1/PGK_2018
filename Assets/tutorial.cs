@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.PGKScripts.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ public class tutorial : MonoBehaviour {
         /*orderSource.Mood = 0;
         gimmebeer.sw = true;*/
 	}
-	
+
 	void Update ()
     {
         if(flags[0] == false)
@@ -40,7 +41,7 @@ public class tutorial : MonoBehaviour {
                 KeysCanvas.enabled = false;
                 flags[1] = true;
             }
-           
+
         }
         if (flags[1] == true && flags[2] == false)
         {
@@ -71,7 +72,7 @@ public class tutorial : MonoBehaviour {
             {
                 spawnObject();
                 flags[7] = true;
-                
+
             }
         }
         if (flags[7] == true && flags[8] == false)
@@ -92,7 +93,7 @@ public class tutorial : MonoBehaviour {
         }
         if (flags[9] == true)
         {
-            if (orderSource.CurrentOrder == null) ms.GameOver();
+            if (orderSource.CurrentOrder == null) ms.GameOver(GameState.Success);
         }
 
 
@@ -108,11 +109,11 @@ public class tutorial : MonoBehaviour {
             return true;
         }
         return false;
-        
+
     }
 
 
-    
+
     void FirstOrder()
     {
         gimmebeer.sw = true;
@@ -133,7 +134,7 @@ public class tutorial : MonoBehaviour {
     {
         orderSource.Mood = 0;
         gimmebeer.sw = true;
-        
+
     }
 
 }
