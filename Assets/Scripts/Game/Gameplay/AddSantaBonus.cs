@@ -14,6 +14,10 @@ public class AddSantaBonus : MonoBehaviour {
     [SerializeField]
     private OrderItem SantaOrder;
 
+
+    public delegate void SantaInfo();
+    public event SantaInfo OnSantaInfo;
+
     void Start () {
 
         GameContext.FindIfNull(ref Context);
@@ -26,7 +30,6 @@ public class AddSantaBonus : MonoBehaviour {
         
         if(source == transform.GetComponent<OrderSource>())
         {
-            Debug.Log("kill me pls");
             DiseableTable();
         }
 
@@ -40,6 +43,11 @@ public class AddSantaBonus : MonoBehaviour {
         order.Mood = 1.0f;
         order.MoodDecreaseRate = 0.0f;
         order.CurrentOrder = new Order(SantaOrder, 0.0f,100);
+
+        if(OnSantaInfo != null)
+        {
+            OnSantaInfo();
+        }
         
     }
 }
