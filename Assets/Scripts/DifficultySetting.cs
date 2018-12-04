@@ -28,12 +28,12 @@ public class DifficultySetting : MonoBehaviour
     }
     public void Update()
     {
-        if (PlayerPrefs.HasKey("isTutorialEnabled"))
+        /*if (PlayerPrefs.HasKey("isTutorialEnabled"))
         {
             if (PlayerPrefs.GetInt("isTutorialEnabled") == 1) TutIndicator.text = "disable tutorial";
             else TutIndicator.text = "enable tutorial";
         }
-        else TutIndicator.text = "disable tutorial";
+        else TutIndicator.text = "disable tutorial";*/
     }
 
     public void SetEasy()
@@ -55,13 +55,14 @@ public class DifficultySetting : MonoBehaviour
 
     public void ToggleTutorial()
     {
-        if (PlayerPrefs.HasKey("isTutorialEnabled"))
+        /*if (PlayerPrefs.HasKey("isTutorialEnabled"))
         {
             PlayerPrefs.SetInt("isTutorialEnabled", (1 - PlayerPrefs.GetInt("isTutorialEnabled")));
         }
         else PlayerPrefs.SetInt("isTutorialEnabled", 0);
         //int xd = PlayerPrefs.GetInt("isTutorialEnabled");
-        //Debug.Log(xd);
+        //Debug.Log(xd);*/
+        SceneManager.LoadScene("BestTutorial");
     }
 
 

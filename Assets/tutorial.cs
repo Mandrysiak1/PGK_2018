@@ -84,7 +84,11 @@ public class tutorial : MonoBehaviour {
         }
         if (flags[8] == true && flags[9] == false)
         {
-            if (orderSource.CurrentOrder != null) flags[9] = true;
+            if (orderSource.CurrentOrder != null)
+            {
+                flags[9] = true;
+                barExplain.enabled = true;
+            }
         }
         if (flags[9] == true)
         {
@@ -129,9 +133,7 @@ public class tutorial : MonoBehaviour {
     {
         orderSource.Mood = 0;
         gimmebeer.sw = true;
-        if (orderSource.CurrentOrder != null && orderSource.Mood <= 0.25f)
-            barExplain.enabled = true;
-        else barExplain.enabled = false;
+        
     }
 
 }
