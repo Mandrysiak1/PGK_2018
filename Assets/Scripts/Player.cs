@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
     {
         Plate.RemoveItem(x);
         System.Random rnd = new System.Random();
-        UpgradeClass.Tip += rnd.Next(3);
     }
 
     public void AddOrderItemOnPlate(OrderItem x)

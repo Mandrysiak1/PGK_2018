@@ -11,6 +11,7 @@ namespace Game.Initialization
         {
             Source.clip = level.Music;
             Source.time = 0;
+            Source.volume = level.Volume;
             Source.Play();
         }
     }

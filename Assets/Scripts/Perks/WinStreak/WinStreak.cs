@@ -93,7 +93,8 @@ public class WinStreak : MonoBehaviour
     {
         foreach (var kv in perksUiBind)
         {
-            if(kv.Key.MinimumToActivate + initialWinStreak <= newWs)
+            //if(kv.Key.MinimumToActivate + initialWinStreak <= newWs)
+            if(newWs >= kv.Key.MinimumToActivate)
             {
                 if (!kv.Key.Availible && !kv.Key.Active)
                 {
@@ -121,28 +122,32 @@ public class WinStreak : MonoBehaviour
         {
             if (kv.Key.Availible && !kv.Key.Active)
             {
-                if (kv.Key.Name == "SpeedPerk" && Input.GetButton("Perk_1"))
+                if (kv.Key.Name == "SpeedPerk" && Input.GetButtonDown("Perk_1"))
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
                     StartCoroutine(PerkRoutine(kv.Key, playerStandardSpeed,
                         playerStandardSpeed * speedMultiplier));
-                    initialWinStreak = winStreakSource.WinStreak;
+                    // initialWinStreak = winStreakSource.WinStreak;
+                    winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
                 }
-                if (kv.Key.Name == "HoldPerk" && Input.GetButton("Perk_2"))
+                if (kv.Key.Name == "HoldPerk" && Input.GetButtonDown("Perk_2"))
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
                     StartCoroutine(PerkRoutine(kv.Key, playerStandardHold, holdMultiplier));
-                    initialWinStreak = winStreakSource.WinStreak;
+                    //  initialWinStreak = winStreakSource.WinStreak;
+                    winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
                 }
-                if (kv.Key.Name == "NoDropPerk" && Input.GetButton("Perk_3"))
+                if (kv.Key.Name == "NoDropPerk" && Input.GetButtonDown("Perk_3"))
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
                     StartCoroutine(PerkRoutine(kv.Key, true, false));
-                    initialWinStreak = winStreakSource.WinStreak;
+                    //  initialWinStreak = winStreakSource.WinStreak;
+                    winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
                 }
+                
             }
         }
     }

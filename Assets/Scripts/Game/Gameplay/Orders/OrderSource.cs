@@ -19,6 +19,8 @@ public class OrderSource : MonoBehaviour
     private OrderCondition[] OrderCondition;
     [Tooltip("If false only one condition must be met")]
     public bool AllOrderConditionsMustBeMet = true;
+    [SerializeField]
+    private GameObject SittingGuests;
 
     [Serializable]
     public class MoodEvent : UnityEvent<float> {}
@@ -79,6 +81,8 @@ public class OrderSource : MonoBehaviour
             if (ActivationCondition.IsMeet())
             {
                 IsActive = true;
+                if(SittingGuests != null)
+                    SittingGuests.SetActive(true);
                 OnActivate.Invoke();
             }
         }

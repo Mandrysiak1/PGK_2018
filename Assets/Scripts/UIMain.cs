@@ -153,7 +153,7 @@ public class UIMain : MonoBehaviour
     {
         UpgradeClass.endgamecanvas = EndGameCanvas.enabled;
         UpgradeClass.nextlvlcanvas = NextLvlCanv.enabled;
-        EndGameCanvas.enabled = false;
+        //EndGameCanvas.gameObject.SetActive(false);
         NextLvlCanv.enabled = false;
         MainCanvas.enabled = false;
         GameObject Customers = GameObject.Find("Customers");
