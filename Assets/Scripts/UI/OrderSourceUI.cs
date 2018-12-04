@@ -36,19 +36,22 @@ public class OrderSourceUI : MonoBehaviour
         bool active = Source.IsActive;
         Order order = Source.CurrentOrder;
         bool hasOrder = order != null;
-
-        ItemUI.gameObject.SetActive(active && hasOrder);
-        MoodUI.gameObject.SetActive(active);
-
-        if (active)
+        if(ItemUI != null)
         {
-            if (hasOrder)
-            {
-                ItemUI.Item = order.Item;
-                ItemUI.Amount = order.Size - order.FilledSize;
-            }
+            ItemUI.gameObject.SetActive(active && hasOrder);
+            MoodUI.gameObject.SetActive(active);
 
-            MoodUI.Mood = Source.Mood;
+            if (active)
+            {
+                if (hasOrder)
+                {
+                    ItemUI.Item = order.Item;
+                    ItemUI.Amount = order.Size - order.FilledSize;
+                }
+
+                MoodUI.Mood = Source.Mood;
+            }
         }
+       
     }
 }
