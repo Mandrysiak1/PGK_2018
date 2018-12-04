@@ -18,6 +18,8 @@ public class AddSantaBonus : MonoBehaviour {
     public delegate void SantaInfo();
     public event SantaInfo OnSantaInfo;
 
+
+    private OrderSource x;
     void Start () {
 
         GameContext.FindIfNull(ref Context);
@@ -30,24 +32,28 @@ public class AddSantaBonus : MonoBehaviour {
         
         if(source == transform.GetComponent<OrderSource>())
         {
-            DiseableTable();
+            x = orderSources.Random();
+            if (OnSantaInfo != null)
+            {
+                OnSantaInfo();
+            }
         }
 
     }
 
+    private void Update()
+    {
+        DiseableTable();
+    }
+
     private void DiseableTable()
     {
-
-        OrderSource order = orderSources.Random();
     
-        order.Mood = 1.0f;
-        order.MoodDecreaseRate = 0.0f;
-        order.CurrentOrder = new Order(SantaOrder, 0.0f,100);
+        x.Mood = 1.0f;
+        x.MoodDecreaseRate = 0.0f;
+        x.CurrentOrder = new Order(SantaOrder, 0.0f,100);
 
-        if(OnSantaInfo != null)
-        {
-            OnSantaInfo();
-        }
+
         
     }
 }
