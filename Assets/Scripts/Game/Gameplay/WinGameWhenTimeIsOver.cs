@@ -1,6 +1,7 @@
+using Assets.PGKScripts.Enums;
 using UnityEngine;
 
-public class FailGameWhenTimeIsOver : MonoBehaviour
+public class WinGameWhenTimeIsOver : MonoBehaviour
 {
     public float Limit = 124;
 
@@ -30,7 +31,7 @@ public class FailGameWhenTimeIsOver : MonoBehaviour
 
         if (Timer > Limit)
         {
-            Main.GameOver();
+            Main.GameOver(GameState.Success);
         }
     }
 }

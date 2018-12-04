@@ -88,10 +88,10 @@ public class MainScript : MonoBehaviour
         return Player;
     }
 
-    public void GameOver()
+    public void GameOver(GameState state = GameState.Failure)
     {
         PlayerController.gameObject.SetActive(false);
-        CurrentGameState = GameState.Failure;
+        CurrentGameState = state;
         Player.ResetPlate();
     }
 }

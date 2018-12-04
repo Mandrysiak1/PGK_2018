@@ -9,7 +9,7 @@ public class Cheats : MonoBehaviour
     [SerializeField]
     private MonoWinStreakSource WinStreak;
     [SerializeField]
-    private FailGameWhenTimeIsOver Time;
+    private WinGameWhenTimeIsOver Time;
 
     private void Update()
     {
