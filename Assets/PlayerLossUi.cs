@@ -37,7 +37,7 @@ public class PlayerLossUi : MonoBehaviour {
     {
         if(ordersize>pp.getItemCount())
         {
-            txt.text = "Lost all :(";
+            txt.text = "Lost " + ordersize + " :(";
             PlayerLoss.enabled = true;
         }
         
