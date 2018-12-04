@@ -70,7 +70,6 @@ public class UIMain : MonoBehaviour
                                     + ". your score: " + mainScript.Score;
 
             mainScript.ResetScore();
-            Time.timeScale = 0;
 
             EndGameCanvas.enabled = true;
             if (SceneManager.GetActiveScene().buildIndex == 1)
@@ -85,14 +84,14 @@ public class UIMain : MonoBehaviour
                 }
             }
         }
-        
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
 
         if (Input.GetButtonDown("PauseButton")) //CHANGE FOR PAD
         {
