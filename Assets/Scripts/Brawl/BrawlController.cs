@@ -56,7 +56,7 @@ public class BrawlController : MonoBehaviour
             return;
         }
 
-        if (old != current && current == GameState.Failure)
+        if (old == GameState.Playing && current == GameState.Failure)
         {
             StartCoroutine(RunBrawl());
         }
@@ -64,6 +64,7 @@ public class BrawlController : MonoBehaviour
 
     private IEnumerator RunBrawl()
     {
+        Debug.Log("BRAWL TIME!");
         Time.timeScale = 1.0f;
 
         MenuCanvas.gameObject.SetActive(false);
