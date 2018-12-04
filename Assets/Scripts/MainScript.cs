@@ -90,6 +90,8 @@ public class MainScript : MonoBehaviour
 
     public void GameOver(GameState state = GameState.Failure)
     {
+        if (state == GameState.Success)
+            Time.timeScale = 0.0f;
         PlayerController.gameObject.SetActive(false);
         CurrentGameState = state;
         Player.ResetPlate();

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MoodBasedDissatisfaction : MonoBehaviour
 {
+    public float Maximum = 100.0f;
     public float Treshold = 0.25f;
     public float IncreaseRate = 5.0f;
 
@@ -24,6 +25,8 @@ public class MoodBasedDissatisfaction : MonoBehaviour
             var old = _Dissatisfaction;
             if (old != value)
             {
+                if (value > Maximum)
+                    value = Maximum;
                 _Dissatisfaction = value;
                 DissatisfactionChanged.Invoke(value, old);
                 Slider.value = value;
