@@ -5,19 +5,30 @@ public class BarScriptTutorial : MonoBehaviour
     [SerializeField]
     private GameContext Context;
 
-    public Canvas barCanvas;
-
+    public Canvas barCanvasPickup;
+    public Canvas barCanvasHelp;
     private bool hasPlayer = false;
     public OrderItem orderToPick;
+    public OrderSource orderSource;
+    public PlayerPlate playerPlate;
 
     void Start()
     {
         GameContext.FindIfNull(ref Context);
-        barCanvas.enabled = false;
+        barCanvasPickup.enabled = false;
+        barCanvasHelp.enabled = false;
     }
 
     void Update()
     {
+
+        if (orderSource.CurrentOrder != null && hasPlayer == false && playerPlate.GetItemQuantityOnPlate(orderToPick) < (orderSource.CurrentOrder.Size- orderSource.CurrentOrder.FilledSize)) barCanvasHelp.enabled = true;
+        else barCanvasHelp.enabled = false;
+        if (orderSource.CurrentOrder != null && hasPlayer == true && playerPlate.GetItemQuantityOnPlate(orderToPick) < (orderSource.CurrentOrder.Size - orderSource.CurrentOrder.FilledSize))
+        {
+            barCanvasPickup.enabled = true;
+        }
+        else barCanvasPickup.enabled = false;
         if (Input.GetButtonDown("ReturnItemOnBar") && hasPlayer && orderToPick != null)
         {
             Context.Player.RemoveBeer(orderToPick);
@@ -26,13 +37,17 @@ public class BarScriptTutorial : MonoBehaviour
         {
             Context.Player.AddOrderItemOnPlate(orderToPick);
         }
+
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             hasPlayer = true;
-            barCanvas.enabled = true;
+            
+                
         }
     }
 
@@ -41,7 +56,8 @@ public class BarScriptTutorial : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasPlayer = false;
-            barCanvas.enabled = false;
+
+            
         }
     }
 }

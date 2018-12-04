@@ -147,4 +147,14 @@ public class PlayerPlate : MonoBehaviour
             }
         }
     }
+
+    public int getItemCount()
+    {
+        int i = 0;
+        foreach(var item in orderItemsOnPlate)
+        {
+            i += item.Value;
+        }
+        return i;
+    }
 }
