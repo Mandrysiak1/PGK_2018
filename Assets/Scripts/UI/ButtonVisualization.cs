@@ -27,6 +27,9 @@ public abstract class ButtonVisualization : MonoBehaviour
     private bool IsGamepadPresent()
     {
         string[] names = Input.GetJoystickNames();
-        return names.Length > 0 && !string.IsNullOrEmpty(names[0]);
+        foreach (string name in names)
+            if (!string.IsNullOrEmpty(name))
+                return true;
+        return false;
     }
 }
