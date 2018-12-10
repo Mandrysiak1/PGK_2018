@@ -4,6 +4,7 @@ public class Cheats : MonoBehaviour
 {
     public KeyCode AddWinstreakKey = KeyCode.P;
     public KeyCode DecreaseTime = KeyCode.O;
+    public KeyCode AddTip = KeyCode.L;
     public int TimeDecrease = 5;
 
     [SerializeField]
@@ -21,6 +22,11 @@ public class Cheats : MonoBehaviour
         if (Input.GetKeyDown(DecreaseTime))
         {
             Time.Limit -= TimeDecrease;
+        }
+
+        if (Input.GetKeyDown(AddTip))
+        {
+            UpgradeClass.Tip += 10;
         }
     }
 }
