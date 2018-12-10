@@ -220,8 +220,7 @@ public class UIMain : MonoBehaviour
         MenuActivated = false;
 
         Time.timeScale = 1;
-        //SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Shop", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }
 
 }

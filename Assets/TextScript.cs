@@ -29,6 +29,14 @@ public class TextScript : MonoBehaviour {
             Mariotxt.alpha = 100;
         }
     }
+    private void Start()
+    {
+        ResetFirstButton();
+    }
+    private void Awake()
+    {
+        ResetFirstButton();
+    }
 
     public void Return()
     {
