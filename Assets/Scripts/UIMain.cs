@@ -72,6 +72,12 @@ public class UIMain : MonoBehaviour
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
         //Continue.onClick.AddListener(ContinueGame);
+        ResetButtonsEndGame();
+
+    }
+
+    private void ResetButtonsEndGame()
+    {
         if (Flow.HasNextLevel())
         {
             NextLevel.onClick.AddListener(LoadNextLvl);
@@ -83,8 +89,8 @@ public class UIMain : MonoBehaviour
         {
             NextLevel.gameObject.SetActive(false);
             GoToShop.gameObject.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
         }
-
     }
 
     private void MenuActivationListener(bool arg0)
@@ -110,22 +116,22 @@ public class UIMain : MonoBehaviour
     {
         if(arg1 == GameState.Success || arg1 == GameState.Failure)
         {
-            EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
+            EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + mainScript.Score;
 
             mainScript.ResetScore();
 
             EndGameCanvas.enabled = true;
-            if (SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                if (mainScript.CurrentGameState == GameState.Success)
+            //if (SceneManager.GetActiveScene().buildIndex == 1)
+            //{
+                if (arg1 == GameState.Success)
                 {
                     NextLvlCanv.enabled = true;
                     SuccesCanvas.enabled = true;
                 }
-                else if(mainScript.CurrentGameState == GameState.Failure)
+                else if(arg1 == GameState.Failure)
                 {
-                    FailureCanvas.enabled = true;    
+                    FailureCanvas.enabled = true;   
                 }
                 else
                 {
@@ -133,7 +139,7 @@ public class UIMain : MonoBehaviour
                     FailureCanvas.enabled = false;
                     SuccesCanvas.enabled = false;
                 }
-            }
+           // }
         }
 
 
@@ -194,6 +200,7 @@ public class UIMain : MonoBehaviour
     {
         Time.timeScale = 1;
         Flow.StartNextLevel();
+        mainScript.CurrentGameState = GameState.Playing;
     }
     private void ContinueGame()
     {
