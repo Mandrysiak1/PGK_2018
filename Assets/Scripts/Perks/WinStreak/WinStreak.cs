@@ -122,7 +122,7 @@ public class WinStreak : MonoBehaviour
         {
             if (kv.Key.Availible && !kv.Key.Active)
             {
-                if (kv.Key.Name == "SpeedPerk" && Input.GetButtonDown("Perk_1"))
+                if (kv.Key.Name == "SpeedPerk" && (Input.GetButtonDown("Perk_1") || Input.GetAxis("QTE_DPAD_H") < -0.5f))
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
@@ -131,7 +131,7 @@ public class WinStreak : MonoBehaviour
                     // initialWinStreak = winStreakSource.WinStreak;
                     winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
                 }
-                if (kv.Key.Name == "HoldPerk" && Input.GetButtonDown("Perk_2"))
+                if (kv.Key.Name == "HoldPerk" && (Input.GetButtonDown("Perk_2") || Input.GetAxis("QTE_DPAD_V") > 0.5f))
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
@@ -139,7 +139,7 @@ public class WinStreak : MonoBehaviour
                     //  initialWinStreak = winStreakSource.WinStreak;
                     winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
                 }
-                if (kv.Key.Name == "NoDropPerk" && Input.GetButtonDown("Perk_3"))
+                if (kv.Key.Name == "NoDropPerk" && (Input.GetButtonDown("Perk_3") || Input.GetAxis("QTE_DPAD_H") > 0.5f))
                 {
                     kv.Key.Availible = false;
                     kv.Key.Active = true;
