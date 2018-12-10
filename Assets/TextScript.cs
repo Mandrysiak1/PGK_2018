@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,6 +12,12 @@ public class TextScript : MonoBehaviour {
     public TextMeshProUGUI Beertxt;
     public TextMeshProUGUI Speedtxt;
     public TextMeshProUGUI Mariotxt;
+    public GameObject standardSetObject;
+    public void ResetFirstButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(standardSetObject);
+    }
     private void Update()
     {
         txt.text = UpgradeClass.Tip.ToString();
@@ -27,6 +34,11 @@ public class TextScript : MonoBehaviour {
     {
         SceneManager.UnloadSceneAsync("Shop");
         UpgradeClass.exited = true;
+        UIMain uimain = FindObjectOfType<UIMain>();
+        uimain.MenuActivated = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(uimain.GoToShop.gameObject);
+
     }
     public void StarPurchase()
     {

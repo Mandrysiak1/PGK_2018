@@ -49,11 +49,13 @@ public class MainMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         DiffMenu.SetActive(true);
+        DiffMenu.GetComponent<DifficultySetting>().ResetFirstButton();
     }
 
     public void ChangeLevel()
     {
         gameObject.SetActive(false);
         Level.SetActive(true);
+        Level.GetComponent<LevelSettings>().ResetFirstButton();
     }
 }

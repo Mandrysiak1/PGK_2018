@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ using UnityEngine.UI;
 
 public class UIMain : MonoBehaviour
 {
+
+    public class MenuActivation : UnityEvent<bool> { }
+
     [SerializeField]
     private GameFlowController Flow;
 
@@ -28,13 +32,36 @@ public class UIMain : MonoBehaviour
     public Button GoToShop;
     public Button Continue;
     public Canvas PauseCanvas;
-    public Canvas SuccessCanvas;
+    public Canvas EndGameMenuCanvas;
+    public Canvas FailureCanvas;
+    public Canvas SuccesCanvas;
+    public GameObject MenuConatiner;
+    
+    public MenuActivation menuActiveStatusEvent = new MenuActivation();
+    bool _menuActivated;
+    public bool MenuActivated
+    {
+        get
+        {
+            return _menuActivated;
+        }
+        set
+        {
+            this._menuActivated = value;
+            menuActiveStatusEvent.Invoke(value);
+        }
+    }
     int x = 2;
     float y = 4;
 
     // Use this for initialization
     void Start()
     {
+        menuActiveStatusEvent.AddListener(MenuActivationListener);
+
+        FailureCanvas.enabled = false;
+        SuccesCanvas.enabled = false;
+
         PauseCanvas.enabled = false;
 
         Time.timeScale = 1;
@@ -60,6 +87,23 @@ public class UIMain : MonoBehaviour
 
     }
 
+    private void MenuActivationListener(bool arg0)
+    {
+        switch(arg0)
+        {
+            case true:
+                this.MenuConatiner.SetActive(true);
+                break;
+            case false:
+                this.MenuConatiner.SetActive(false);
+                break;
+        }
+    }
+
+    private void Awake()
+    {
+        MenuConatiner.SetActive(true);
+    }
 
 
     private void GameStateChanged(GameState arg0, GameState arg1)
@@ -77,10 +121,17 @@ public class UIMain : MonoBehaviour
                 if (mainScript.CurrentGameState == GameState.Success)
                 {
                     NextLvlCanv.enabled = true;
+                    SuccesCanvas.enabled = true;
+                }
+                else if(mainScript.CurrentGameState == GameState.Failure)
+                {
+                    FailureCanvas.enabled = true;    
                 }
                 else
                 {
                     NextLvlCanv.enabled = false;
+                    FailureCanvas.enabled = false;
+                    SuccesCanvas.enabled = false;
                 }
             }
         }
@@ -97,7 +148,7 @@ public class UIMain : MonoBehaviour
         {
             if (mainScript.CurrentGameState == GameState.Playing)
             {
-                SuccessCanvas.enabled = false;
+                EndGameMenuCanvas.enabled = false;
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
@@ -109,7 +160,7 @@ public class UIMain : MonoBehaviour
             else if(mainScript.CurrentGameState == GameState.Paused)
             {
                 PauseCanvas.enabled = false;
-                SuccessCanvas.enabled = true;
+                EndGameMenuCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
                 //Continue.gameObject.SetActive(true);
@@ -160,14 +211,17 @@ public class UIMain : MonoBehaviour
         if (Customers != null)
             Customers.SetActive(false);
         GameObject Obstacles = GameObject.Find("Obstacles");
+
         if (Obstacles != null)
         {
             Obstacles.SetActive(false);
             Obstacles.GetComponent<ObstacleGenerator>().CancelInvoke();
         }
+        MenuActivated = false;
 
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
+        //SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Shop", LoadSceneMode.Additive);
     }
 
 }
