@@ -100,6 +100,7 @@ public class WinStreak : MonoBehaviour
                 {
                     kv.Value.Show("", new Color(0, 255, 0));
                     kv.Key.Availible = true;
+                    kv.Value.Availible = true;
                     Debug.Log("###### WINSTREAK ##### " + kv.Key.Name + " availible.");
                 }
             }
@@ -130,6 +131,7 @@ public class WinStreak : MonoBehaviour
                         playerStandardSpeed * speedMultiplier));
                     // initialWinStreak = winStreakSource.WinStreak;
                     winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
+                    kv.Value.Availible = false;
                 }
                 if (kv.Key.Name == "HoldPerk" && (Input.GetButtonDown("Perk_2") || Input.GetAxis("QTE_DPAD_V") > 0.5f))
                 {
@@ -138,6 +140,7 @@ public class WinStreak : MonoBehaviour
                     StartCoroutine(PerkRoutine(kv.Key, playerStandardHold, holdMultiplier));
                     //  initialWinStreak = winStreakSource.WinStreak;
                     winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
+                    kv.Value.Availible = false;
                 }
                 if (kv.Key.Name == "NoDropPerk" && (Input.GetButtonDown("Perk_3") || Input.GetAxis("QTE_DPAD_H") > 0.5f))
                 {
@@ -146,6 +149,7 @@ public class WinStreak : MonoBehaviour
                     StartCoroutine(PerkRoutine(kv.Key, true, false));
                     //  initialWinStreak = winStreakSource.WinStreak;
                     winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
+                    kv.Value.Availible = false;
                 }
                 
             }
@@ -156,6 +160,7 @@ public class WinStreak : MonoBehaviour
         duringCountdown = true;
         for (int i = value; i >= 0; i--)
         {
+            perkUi.PerkStarted = true;
             perkUi.Show(i.ToString(), new Color(255, 0, 0));
             yield return new WaitForSeconds(1);
         }

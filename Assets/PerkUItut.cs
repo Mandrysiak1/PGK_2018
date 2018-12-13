@@ -12,6 +12,14 @@ namespace Assets.Scripts.Perks.UI
         public Button keyButton;
         public string Name { get; set; }
 
+        public bool Availible { get; set; }
+
+        public bool PerkStarted
+        {
+            get;
+            set;
+        }
+
         public void Start()
         {
             Disable();
