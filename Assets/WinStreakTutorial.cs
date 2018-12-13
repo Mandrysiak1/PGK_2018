@@ -97,7 +97,7 @@ public class WinStreakTutorial : MonoBehaviour
             {
                 if (!kv.Key.Availible && !kv.Key.Active)
                 {
-                    kv.Value.Show("", new Color(0, 255, 0));
+                    kv.Value.Show("");
                     kv.Key.Availible = true;
                     Debug.Log("###### WINSTREAK ##### " + kv.Key.Name + " availible.");
                 }
@@ -151,7 +151,7 @@ public class WinStreakTutorial : MonoBehaviour
         duringCountdown = true;
         for (int i = value; i >= 0; i--)
         {
-            perkUi.Show(i.ToString(), new Color(255, 0, 0));
+            perkUi.Show(i.ToString());
             yield return new WaitForSeconds(1);
         }
         yield return new WaitForSeconds(0.1f);

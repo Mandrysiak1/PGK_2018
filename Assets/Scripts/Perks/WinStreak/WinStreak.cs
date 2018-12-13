@@ -10,12 +10,75 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class WinStreak : MonoBehaviour
 {
+    public class PerkTuple
+    {
+        public PerkUI UI { get; set; }
+        public Perk Perk { get; set; }
+        public bool Availible
+        {
+            get
+            {
+                return UI.Availible && Perk.Availible && !Perk.Active;
+            }
+            set
+            {
+                if(value == false)
+                {
+                    UI.Availible = false;
+                    Perk.Availible = false;
+                }
+                else
+                {
+                    if(!Perk.Active)
+                    {
+                        UI.Availible = true;
+                        Perk.Availible = true;
+                        UI.Show("");
+                    }
+                }
+            }
+        }
+        public bool Active
+        {
+            get
+            {
+                return UI.PerkStarted && Perk.Active;
+            }
+            set
+            {
+                if(value == true )
+                {
+                    if(this.Availible)
+                    {
+                        UI.PerkStarted = true;
+                        Perk.Active = true;
+                        this.Availible = false;
+                    }
+                }
+                else
+                {
+                    UI.PerkStarted = false;
+                    Perk.Active = false;
+                }
+            }
+        }
+        public PerkTuple(PerkUI perkui, Perk perk) { this.Perk = perk; this.UI = perkui; }
+        public void Disable()
+        {
+            UI.Disable();
+            Perk.Active = false;
+            Perk.Availible = false;
+        }
+    }
+
+
     [SerializeField]
     private MonoWinStreakSource winStreakSource;
     public ThirdPersonCharacter character;
     public PlayerPlate plate;
     //PERKS_LIST
-    Dictionary<IPerk, IPerkUi> perksUiBind = new Dictionary<IPerk, IPerkUi>();
+    //Dictionary<IPerk, IPerkUi> perksUiBind = new Dictionary<IPerk, IPerkUi>();
+    Dictionary<string, PerkTuple> perksUiBind = new Dictionary<string, PerkTuple>();
 
     public PerkUI speedPerkUI;
     public PerkUI holdPerkUI;
@@ -24,12 +87,16 @@ public class WinStreak : MonoBehaviour
     // SPEED PERK
     public static int speedPerkActivateMinimum = 2;
     public float speedMultiplier = 1.5f;
+    public string SpeedPerkName { get { return "SpeedPerk"; } }
     // HOLD PERK
     public int holdMultiplier = 2;
     public int holdPerkActivateMinimum = 5;
+    public string HoldPerkName { get { return "HoldPerk"; } }
+
     //
     // NO LOSE PERK
     public static int noLoseActivateMinimum = 8;
+    public string NoDropPerkName { get { return "NoDropPerk"; } }
     //
     public int perkMaxTime = 10;
     private float playerStandardSpeed = 0f;
@@ -50,68 +117,44 @@ public class WinStreak : MonoBehaviour
         var holdPerk = new Perk(
             new HoldModif(plate),
             holdPerkActivateMinimum);
-        holdPerk.Name = "HoldPerk";
+        holdPerk.Name = HoldPerkName;
         holdPerk.Quantity = 30;
-        perksUiBind.Add(holdPerk, holdPerkUI);
+        perksUiBind.Add(holdPerk.Name, new PerkTuple(holdPerkUI, holdPerk));
 
         playerStandardSpeed = character.getm_MoveSpeedMultiplier();
         var speedPerk = new Perk(
             new SpeedModif(character),
             speedPerkActivateMinimum);
-        speedPerk.Name = "SpeedPerk";
+        speedPerk.Name = SpeedPerkName;
         speedPerk.Quantity = 15;
-        perksUiBind.Add(speedPerk, speedPerkUI);
+        perksUiBind.Add(speedPerk.Name, new PerkTuple(speedPerkUI, speedPerk));
 
         var noDropPerk = new Perk(
             new NoLoseModif(player),
             noLoseActivateMinimum);
-        noDropPerk.Name = "NoDropPerk";
+        noDropPerk.Name = NoDropPerkName;
         noDropPerk.Quantity = 20;
-        perksUiBind.Add(noDropPerk, noDropPerkUI);
+        perksUiBind.Add(noDropPerk.Name, new PerkTuple(noDropPerkUI, noDropPerk));
     }
-    private void DisablePerk(IPerk perk)
-    {
-        perk.Availible = false;
-        perksUiBind[perk].Disable();
-        perk.Active = false;
-    }
-    private IEnumerator PerkRoutine(IPerk perk, object original_val, object modified)
-    {
-        perk.Invoke(modified);
-        StartCoroutine(CountDown(perk.Quantity, perksUiBind[perk]));
-        foreach (var kv in perksUiBind)
-        {
-            if (perk.Name != kv.Key.Name && kv.Key.Availible)
-                DisablePerk(kv.Key);
-        }
-        while (duringCountdown)
-            yield return new WaitForSeconds(0.1f);
-        perk.Invoke(original_val);
-        DisablePerk(perk);
-    }
+
     private void WinStreakChanged(int oldWs, int newWs)
     {
-        foreach (var kv in perksUiBind)
+        if(newWs == 0)
         {
-            //if(kv.Key.MinimumToActivate + initialWinStreak <= newWs)
-            if(newWs >= kv.Key.MinimumToActivate)
+            foreach(var kvp in perksUiBind)
             {
-                if (!kv.Key.Availible && !kv.Key.Active)
-                {
-                    kv.Value.Show("", new Color(0, 255, 0));
-                    kv.Key.Availible = true;
-                    kv.Value.Availible = true;
-                    Debug.Log("###### WINSTREAK ##### " + kv.Key.Name + " availible.");
-                }
+                kvp.Value.Availible = false;
             }
         }
-        if (newWs == 0)
+
+        foreach(var kvp in perksUiBind)
         {
-            foreach (var kv in perksUiBind)
+            if(!kvp.Value.Active)
             {
-                if(!kv.Key.Active)
-                    DisablePerk(kv.Key);
-                initialWinStreak = 0;
+                if(newWs > kvp.Value.Perk.MinimumToActivate)
+                {
+                    kvp.Value.Availible = true;
+                }
             }
         }
     }
@@ -119,52 +162,51 @@ public class WinStreak : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var kv in perksUiBind)
+        
+    }
+
+    public void TryActivateSpeed()
+    {
+        PerkTuple tuple = perksUiBind[SpeedPerkName];
+        StartCoroutine(PerkCouroutine(tuple, playerStandardSpeed * speedMultiplier, playerStandardSpeed));
+    }
+    public void TryActivateHold()
+    {
+        PerkTuple tuple = perksUiBind[HoldPerkName];
+        StartCoroutine(PerkCouroutine(tuple, playerStandardHold * holdMultiplier, playerStandardHold));
+    }
+    public void TryActivateInv()
+    {
+        PerkTuple tuple = perksUiBind[NoDropPerkName];
+        StartCoroutine(PerkCouroutine(tuple, false, true));
+    }
+    public IEnumerator PerkCouroutine(PerkTuple perkTuple, object start, object end)
+    {
+        if (perkTuple.Availible)
         {
-            if (kv.Key.Availible && !kv.Key.Active)
+            perkTuple.Active = true;
+            winStreakSource.WinStreak -= perkTuple.Perk.MinimumToActivate;
+            perkTuple.Perk.Invoke(start);
+            StartCoroutine(Countdown(perkTuple));
+            while (perkTuple.Active)
             {
-                if (kv.Key.Name == "SpeedPerk" && (Input.GetButtonDown("Perk_1") || Input.GetAxis("QTE_DPAD_H") < -0.5f))
-                {
-                    kv.Key.Availible = false;
-                    kv.Key.Active = true;
-                    StartCoroutine(PerkRoutine(kv.Key, playerStandardSpeed,
-                        playerStandardSpeed * speedMultiplier));
-                    // initialWinStreak = winStreakSource.WinStreak;
-                    winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
-                    kv.Value.Availible = false;
-                }
-                if (kv.Key.Name == "HoldPerk" && (Input.GetButtonDown("Perk_2") || Input.GetAxis("QTE_DPAD_V") > 0.5f))
-                {
-                    kv.Key.Availible = false;
-                    kv.Key.Active = true;
-                    StartCoroutine(PerkRoutine(kv.Key, playerStandardHold, holdMultiplier));
-                    //  initialWinStreak = winStreakSource.WinStreak;
-                    winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
-                    kv.Value.Availible = false;
-                }
-                if (kv.Key.Name == "NoDropPerk" && (Input.GetButtonDown("Perk_3") || Input.GetAxis("QTE_DPAD_H") > 0.5f))
-                {
-                    kv.Key.Availible = false;
-                    kv.Key.Active = true;
-                    StartCoroutine(PerkRoutine(kv.Key, true, false));
-                    //  initialWinStreak = winStreakSource.WinStreak;
-                    winStreakSource.WinStreak -= kv.Key.MinimumToActivate;
-                    kv.Value.Availible = false;
-                }
-                
+                yield return new WaitForSeconds(0.1f);
             }
+            perkTuple.Perk.Invoke(end);
+            if (winStreakSource.WinStreak >= perkTuple.Perk.MinimumToActivate)
+                perkTuple.Availible = true;
         }
     }
-    private IEnumerator CountDown(int value, IPerkUi perkUi)
+
+    private IEnumerator Countdown(PerkTuple tuple)
     {
-        duringCountdown = true;
-        for (int i = value; i >= 0; i--)
+        for(int i = tuple.Perk.Quantity; i >= 0; i--)
         {
-            perkUi.PerkStarted = true;
-            perkUi.Show(i.ToString(), new Color(255, 0, 0));
-            yield return new WaitForSeconds(1);
+            tuple.UI.Show(i.ToString());
+            yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(0.1f);
-        duringCountdown = false;
+        tuple.Active = false;
+        tuple.Disable();
     }
 }

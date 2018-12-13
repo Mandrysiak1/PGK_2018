@@ -36,6 +36,10 @@ namespace Assets.PGKScripts.Perks.WinStreak
                 return false;
             return this.Name == ((Perk)obj).Name;
         }
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
         public static bool operator==(Perk a, Perk b)
         {
             return a.Equals(b);

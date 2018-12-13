@@ -10,7 +10,6 @@ namespace Assets.Scripts.Perks.UI
         public RawImage icon;
         public RawImage glowIcon;
         public Text caption;
-        private Color textColor;
         public Button keyButton;
         private bool availible = false;
         public bool Availible
@@ -22,10 +21,10 @@ namespace Assets.Scripts.Perks.UI
             set
             {
                 availible = value;
-                if (value == true)
-                    PerkStarted = false;
+                this.Disable();
             }
         }
+
         private bool perkStarted = false;
         public bool PerkStarted
         {
@@ -36,10 +35,9 @@ namespace Assets.Scripts.Perks.UI
             set
             {
                 perkStarted = value;
-                if (value == true)
-                    ChangeTransparency(0);
             }
         }
+
         public string Name { get; set; }
 
         public void Start()
@@ -82,24 +80,22 @@ namespace Assets.Scripts.Perks.UI
         public void Disable()
         {
             icon.enabled = false;
-            ChangeTransparency(0);
+            glowIcon.enabled = false;
             caption.enabled = false;
             caption.text = "";
             keyButton.gameObject.SetActive(false);
-            textColor = caption.color;
         }
 
-        public void Show(string status, Color color)
+        public void Show(string status)
         {
+            if(PerkStarted)
+                ChangeTransparency(0);
             icon.enabled = true;
+            glowIcon.enabled = true;
             caption.enabled = true;
             keyButton.gameObject.SetActive(true);
             caption.text = status.ToString();
-            if (!color.Equals(textColor))
-            {
-                textColor = color;
-                caption.color = color;
-            }
+            caption.color = Color.green;
         }
     }
 }

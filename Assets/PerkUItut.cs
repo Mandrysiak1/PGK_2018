@@ -40,18 +40,15 @@ namespace Assets.Scripts.Perks.UI
             textColor = caption.color;
         }
 
-        public void Show(string status, Color color)
+        public void Show(string status)
         {
             icon.enabled = true;
             caption.enabled = true;
             tutcaption.enabled = true;
             keyButton.gameObject.SetActive(true);
             caption.text = status.ToString();
-            if (!color.Equals(textColor))
-            {
-                textColor = color;
-                caption.color = color;
-            }
+                textColor = Color.green;
+                caption.color = textColor;
         }
     }
 }
