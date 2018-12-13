@@ -5,7 +5,7 @@ public class WinGameWhenTimeIsOver : MonoBehaviour
 {
     public float Limit = 124;
 
-    private float Timer;
+    public float Timer { get; set; }
 
     [SerializeField]
     private TimerUI UI;

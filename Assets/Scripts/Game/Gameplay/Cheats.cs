@@ -21,7 +21,8 @@ public class Cheats : MonoBehaviour
 
         if (Input.GetKeyDown(DecreaseTime))
         {
-            Time.Limit -= TimeDecrease;
+            //Time.Limit -= TimeDecrease;
+            Time.Timer += TimeDecrease;
         }
 
         if (Input.GetKeyDown(AddTip))

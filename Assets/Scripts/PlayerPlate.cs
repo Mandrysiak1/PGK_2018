@@ -7,7 +7,20 @@ using Random = System.Random;
 
 public class PlayerPlate : MonoBehaviour
 {
-    public int maximumCapacityMultiplier = 1;
+    private int maxCapMultiplier = 1;
+    public int MaximumCapacityMultiplier
+    {
+        get
+        {
+            return maxCapMultiplier;
+        }
+        set
+        {
+            var tempVal = this.MaximumCapacity;
+            this.maxCapMultiplier = value;
+            OnMaximumCapacityChanged.Invoke(this.MaximumCapacity, tempVal);
+        }
+    }
     /// <summary>
     /// <para>item</para>
     /// <para>current item amount</para>
@@ -27,7 +40,7 @@ public class PlayerPlate : MonoBehaviour
 
     public int MaximumCapacity
     {
-        get { return maximumCapacityMultiplier * (_MaximumCapacity + UpgradeClass.BeerModif); }
+        get { return MaximumCapacityMultiplier * (_MaximumCapacity + UpgradeClass.BeerModif); }
         set
         {
             int old = _MaximumCapacity;

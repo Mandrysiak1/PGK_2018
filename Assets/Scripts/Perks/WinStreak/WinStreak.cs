@@ -5,6 +5,7 @@ using Assets.Scripts.Perks.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 
@@ -71,10 +72,13 @@ public class WinStreak : MonoBehaviour
         }
     }
 
+    public class WinStreakPerkEvent : UnityEvent<string> { } 
 
     [SerializeField]
     private MonoWinStreakSource winStreakSource;
     public ThirdPersonCharacter character;
+    public WinStreakPerkEvent OnPerkActivated = new WinStreakPerkEvent();
+    public WinStreakPerkEvent OnPerkAvailible = new WinStreakPerkEvent();
     public PlayerPlate plate;
     //PERKS_LIST
     //Dictionary<IPerk, IPerkUi> perksUiBind = new Dictionary<IPerk, IPerkUi>();
@@ -112,7 +116,7 @@ public class WinStreak : MonoBehaviour
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
-        playerStandardHold = plate.maximumCapacityMultiplier;
+        playerStandardHold = plate.MaximumCapacityMultiplier;
 
         var holdPerk = new Perk(
             new HoldModif(plate),
@@ -137,6 +141,16 @@ public class WinStreak : MonoBehaviour
         perksUiBind.Add(noDropPerk.Name, new PerkTuple(noDropPerkUI, noDropPerk));
     }
 
+    private void MakeAvailible(PerkTuple tuple, int WS)
+    {
+        if (WS > tuple.Perk.MinimumToActivate)
+        {
+            if (!tuple.Availible)
+                OnPerkAvailible.Invoke(tuple.Perk.Name);
+            tuple.Availible = true;
+        }
+    }
+
     private void WinStreakChanged(int oldWs, int newWs)
     {
         if(newWs == 0)
@@ -151,15 +165,11 @@ public class WinStreak : MonoBehaviour
         {
             if(!kvp.Value.Active)
             {
-                if(newWs > kvp.Value.Perk.MinimumToActivate)
-                {
-                    kvp.Value.Availible = true;
-                }
+                MakeAvailible(kvp.Value, newWs);
             }
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -185,6 +195,7 @@ public class WinStreak : MonoBehaviour
         if (perkTuple.Availible)
         {
             perkTuple.Active = true;
+            OnPerkActivated.Invoke(perkTuple.Perk.Name);
             winStreakSource.WinStreak -= perkTuple.Perk.MinimumToActivate;
             perkTuple.Perk.Invoke(start);
             StartCoroutine(Countdown(perkTuple));
@@ -194,7 +205,7 @@ public class WinStreak : MonoBehaviour
             }
             perkTuple.Perk.Invoke(end);
             if (winStreakSource.WinStreak >= perkTuple.Perk.MinimumToActivate)
-                perkTuple.Availible = true;
+                MakeAvailible(perkTuple, winStreakSource.WinStreak);
         }
     }
 

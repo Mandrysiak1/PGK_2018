@@ -47,13 +47,6 @@ public class MainScript : MonoBehaviour
             return Player.BeersHandedOut;
         }
     }
-    public int Score
-    {
-        get
-        {
-            return (int)(100 - Dissatisfaction.Dissatisfaction) + 2 * BeersHandedOut;
-        }
-    }
 
     [SerializeField]
     private MoodBasedDissatisfaction Dissatisfaction;
@@ -78,7 +71,7 @@ public class MainScript : MonoBehaviour
         UpgradeClass.exited = false;
     }
 
-    internal void ResetScore()
+    internal void ResetBeersHandedOut()
     {
         Player.ResetBeersHandedOut();
     }

@@ -27,6 +27,7 @@ public class UITuut : MonoBehaviour
     public Canvas GuestArrived;
     public Canvas witchUI;
     public Button gotonextlvl;
+    public ScoreSystem scoreSystem;
     bool gamePaused = false;
     int x = 2;
     float y = 4;
@@ -53,9 +54,9 @@ public class UITuut : MonoBehaviour
     private void GameStateChanged(GameState arg0, GameState arg1)
     {
         EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
-                        + ". your score: " + mainScript.Score;
-
-        mainScript.ResetScore();
+                        + ". your score: " + scoreSystem.Score;
+        scoreSystem.ResetScore();
+        mainScript.ResetBeersHandedOut();
         Time.timeScale = 0;
 
         EndGameCanvas.enabled = true;

@@ -45,7 +45,7 @@ public class WinStreakTutorial : MonoBehaviour
         winStreakSource.WinStreakChanged.AddListener(WinStreakChanged);
 
         var player = mainScript.GetPlayer();
-        playerStandardHold = plate.maximumCapacityMultiplier;
+        playerStandardHold = plate.MaximumCapacityMultiplier;
 
         var holdPerk = new Perk(
             new HoldModif(plate),

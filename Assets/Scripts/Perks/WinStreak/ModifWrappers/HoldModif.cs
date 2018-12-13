@@ -16,7 +16,7 @@ namespace Assets.PGKScripts.Perks.WinStreak.ModifWrappers
 
         public void Modify(object newValue)
         {
-            this.plate.maximumCapacityMultiplier = (int)newValue;
+            this.plate.MaximumCapacityMultiplier = (int)newValue;
         }
     }
 }

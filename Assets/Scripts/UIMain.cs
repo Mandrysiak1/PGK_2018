@@ -36,6 +36,7 @@ public class UIMain : MonoBehaviour
     public Canvas FailureCanvas;
     public Canvas SuccesCanvas;
     public GameObject MenuConatiner;
+    public ScoreSystem scoreSystem;
     
     public MenuActivation menuActiveStatusEvent = new MenuActivation();
     bool _menuActivated;
@@ -117,9 +118,10 @@ public class UIMain : MonoBehaviour
         if(arg1 == GameState.Success || arg1 == GameState.Failure)
         {
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
-                                    + ". your score: " + mainScript.Score;
-
-            mainScript.ResetScore();
+                                    + ". your score: " + scoreSystem.Score;
+        
+            scoreSystem.ResetScore();
+            mainScript.ResetBeersHandedOut();
 
             EndGameCanvas.enabled = true;
             //if (SceneManager.GetActiveScene().buildIndex == 1)

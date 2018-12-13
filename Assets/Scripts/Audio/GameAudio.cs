@@ -10,7 +10,10 @@ public class GameAudio : MonoBehaviour {
     public PlayerPlate playerPlate;
     public AudioSource beerOpenSound;
     public AudioSource putDownSound;
+    public AudioSource shooshSound;
+    public AudioSource dingWinStreakSound;
     public AudioSource nopeSound;
+    public WinStreak winStreakScript;
     // private MainScript mainScript;
     // Use this for initialization
     void Start () {
@@ -24,6 +27,18 @@ public class GameAudio : MonoBehaviour {
         orderController.UnableEvent.AddListener(Unable);
         collisionHandler.OnCollisionC += OnCustomerCollision;
         collisionHandler.OnCollisionI += OnItemCollision;
+        winStreakScript.OnPerkActivated.AddListener(OnPerkActivated);
+        winStreakScript.OnPerkAvailible.AddListener(OnPerkAvailible);
+    }
+
+    private void OnPerkAvailible(string arg0)
+    {
+        dingWinStreakSound.Play();
+    }
+
+    private void OnPerkActivated(string arg0)
+    {
+        shooshSound.Play();
     }
 
     private void Unable()
