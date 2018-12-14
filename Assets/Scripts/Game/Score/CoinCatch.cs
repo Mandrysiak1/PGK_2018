@@ -12,13 +12,21 @@ public class CoinCatch : MonoBehaviour {
     public GameObject parent;
     public Quaternion rotation;
     public float coinUpTime = 50f;
-
     public GameObject coinObj;
-    int tipMemory = 0;
+
 	// Use this for initialization
 	void Start()
     {
         rotation = Quaternion.Euler(0, 0, 0);
+        UpgradeClass.OnTipChanged.AddListener(TipChanged);
+    }
+
+    private void TipChanged(int newTip, int oldTip)
+    {
+        if(newTip > oldTip)
+        {
+            StartCoroutine(CoinUp(newTip - oldTip));
+        }
     }
 
     public IEnumerator CoinUp(int times)
@@ -37,12 +45,8 @@ public class CoinCatch : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update () {
-        if (UpgradeClass.Tip > tipMemory)
-        {
-            StartCoroutine(CoinUp(UpgradeClass.Tip - tipMemory));
-            tipMemory = UpgradeClass.Tip;
-        }
+    void Update ()
+    {
             
 	}
 }

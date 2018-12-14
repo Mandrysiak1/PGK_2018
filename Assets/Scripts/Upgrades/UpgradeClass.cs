@@ -2,12 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 public static class UpgradeClass {
-
+    public class TipEvent : UnityEvent<int, int> { }
+    public static TipEvent OnTipChanged = new TipEvent();
     public static int preGameTip;
-    public static int Tip=0;
+    public static int tip = 0;
+
+    public static int Tip
+    {
+        get
+        {
+            return tip;
+        }
+        set
+        {
+            var old = tip;
+            tip = value;
+            OnTipChanged.Invoke(tip, old);
+        }
+    }
+
     public static float SpeedModif = 0f;
     public static int BeerModif = 0;
     public static int BeerTimes = 1;
