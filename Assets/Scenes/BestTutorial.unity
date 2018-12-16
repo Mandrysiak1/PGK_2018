@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427147, b: 0.56452364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7495,7 +7495,7 @@ Prefab:
     - target: {fileID: 224836579505158018, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114847786243286862, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
@@ -12177,7 +12177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleRequests:
-  - {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
+  - {fileID: 754569682}
   _Mood: 1
   MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
@@ -12200,6 +12200,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: OrderSource+OrderEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &754569682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 754569680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356a9583706f4c0eafbd63fcd3cc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAmount: 3
+  MaximumAmount: 3
+  Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &754569683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26435,6 +26449,16 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: OrderController+OrderEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OrderUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: OrderController+OrderChange, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  UpdateNotPossible:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   Plate: {fileID: 2078970096}
   Sources: {fileID: 1755516343}
 --- !u!114 &1755516342
