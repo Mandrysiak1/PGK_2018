@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class GameContext : MonoBehaviour
 {
-    // TODO: Remove MainScript entirely
-    public MainScript Main;
+    public GameSettings Settings;
     public Player Player;
     public OrderController Orders;
 

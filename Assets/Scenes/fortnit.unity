@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427147, b: 0.56452364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7580,6 +7580,8 @@ GameObject:
   - component: {fileID: 467022891}
   - component: {fileID: 467022892}
   - component: {fileID: 467022893}
+  - component: {fileID: 467022894}
+  - component: {fileID: 467022895}
   m_Layer: 0
   m_Name: AdnitionalTable2
   m_TagString: Untagged
@@ -7619,7 +7621,7 @@ MonoBehaviour:
   - {fileID: 467022893}
   _Mood: 1
   MoodDecreaseRate: 0.02
-  ActivationCondition: {fileID: 467022892}
+  ActivationCondition: {fileID: 467022895}
   OrderCondition:
   - {fileID: 467022891}
   AllOrderConditionsMustBeMet: 1
@@ -7678,6 +7680,32 @@ MonoBehaviour:
   MinimumAmount: 1
   MaximumAmount: 5
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
+--- !u!114 &467022894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 467022888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305524766ec941c19c52277d1f72a5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Difficulty: 1
+--- !u!114 &467022895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 467022888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0e7f4ccf424f67a621c49fc312ae04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Conditions:
+  - {fileID: 467022892}
+  - {fileID: 467022894}
 --- !u!1001 &469204263
 Prefab:
   m_ObjectHideFlags: 0
