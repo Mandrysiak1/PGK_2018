@@ -8,13 +8,13 @@ public class OrderController : MonoBehaviour
 {
     [Serializable]
     public class OrderEvent : UnityEvent<OrderSource, Order> {}
-    public class OrderChange : UnityEvent<OrderSource, Order> {}
-
+    [Serializable]
+    public class OrderChange : UnityEvent<OrderSource, Order, float> {}
 
     public OrderEvent OrderAdded;
     public OrderEvent OrderFilled;
-    public OrderChange OrderUpdated = new OrderChange();
-    public OrderChange UnableEvent = new OrderChange();
+    public OrderChange OrderUpdated;
+    public UnityEvent UpdateNotPossible;
 
     [SerializeField]
     private PlayerPlate Plate;
@@ -105,7 +105,7 @@ public class OrderController : MonoBehaviour
                 return true;
             }
         }
-        UnableEvent.Invoke(source, order);
+        UpdateNotPossible.Invoke();
         return false;
     }
 

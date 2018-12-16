@@ -24,7 +24,7 @@ public class GameAudio : MonoBehaviour {
         collisionHandler = FindObjectOfType<PlayerCollisionHandler>();
         orderController = FindObjectOfType<OrderController>();
         orderController.OrderUpdated.AddListener(OrderDecreased);
-        orderController.UnableEvent.AddListener(Unable);
+        orderController.UpdateNotPossible.AddListener(Unable);
         collisionHandler.OnCollisionC += OnCustomerCollision;
         collisionHandler.OnCollisionI += OnItemCollision;
         winStreakScript.OnPerkActivated.AddListener(OnPerkActivated);
@@ -41,7 +41,7 @@ public class GameAudio : MonoBehaviour {
         shooshSound.Play();
     }
 
-    private void Unable(OrderSource source, Order order)
+    private void Unable()
     {
         nopeSound.Play();
     }
