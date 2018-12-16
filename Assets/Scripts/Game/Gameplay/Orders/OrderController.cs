@@ -112,7 +112,6 @@ public class OrderController : MonoBehaviour
     private void FillOrder(Order order)
     {
         OrderSource source = OrderToSource[order];
-        source.Mood = 1.0f;
         RemoveOrder(order);
         source.Refresh();
         OrderFilled.Invoke(source, order);
