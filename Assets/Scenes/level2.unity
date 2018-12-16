@@ -19174,7 +19174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleRequests:
-  - {fileID: 0}
+  - {fileID: 1151708796}
   _Mood: 1
   MoodDecreaseRate: 0.01
   ActivationCondition: {fileID: 0}
@@ -19210,6 +19210,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minimum: 5
   Maximum: 10
+--- !u!114 &1151708796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1151708793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356a9583706f4c0eafbd63fcd3cc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAmount: 1
+  MaximumAmount: 5
+  Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!1 &1155219353 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 122398, guid: f950b0ae81304e64297da5068592b6ef,
@@ -25967,6 +25981,7 @@ GameObject:
   - component: {fileID: 1270834809}
   - component: {fileID: 1497489604}
   - component: {fileID: 1497489605}
+  - component: {fileID: 1497489606}
   m_Layer: 0
   m_Name: TableWitch
   m_TagString: Untagged
@@ -25986,7 +26001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleRequests:
-  - {fileID: 0}
+  - {fileID: 1497489606}
   _Mood: 1
   MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
@@ -26022,6 +26037,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minimum: 13
   Maximum: 25
+--- !u!114 &1497489606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497489603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356a9583706f4c0eafbd63fcd3cc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAmount: 1
+  MaximumAmount: 1
+  Item: {fileID: 11400000, guid: 0605031c8e7dcb64fa4d43f76a3bf229, type: 2}
 --- !u!1001 &1498237089
 Prefab:
   m_ObjectHideFlags: 0
@@ -26911,7 +26940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleRequests:
-  - {fileID: 0}
+  - {fileID: 1554179064}
   _Mood: 1
   MoodDecreaseRate: 0.01
   ActivationCondition: {fileID: 0}
@@ -26947,6 +26976,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minimum: 5
   Maximum: 10
+--- !u!114 &1554179064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1554179061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356a9583706f4c0eafbd63fcd3cc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAmount: 1
+  MaximumAmount: 5
+  Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!4 &1557371554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4100958930717480, guid: 4c6c270f6e9bafd4badeef37e350e9d9,
@@ -29963,7 +30006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleRequests:
-  - {fileID: 0}
+  - {fileID: 1736987263}
   _Mood: 1
   MoodDecreaseRate: 0.01
   ActivationCondition: {fileID: 0}
@@ -29999,6 +30042,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minimum: 5
   Maximum: 10
+--- !u!114 &1736987263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1736987260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356a9583706f4c0eafbd63fcd3cc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAmount: 1
+  MaximumAmount: 5
+  Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!4 &1738210498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 448680, guid: 08664425fe4b55a438efa73476965e3a,
@@ -33055,7 +33112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PossibleRequests:
-  - {fileID: 0}
+  - {fileID: 1903119467}
   _Mood: 1
   MoodDecreaseRate: 0.01
   ActivationCondition: {fileID: 0}
@@ -33091,6 +33148,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minimum: 5
   Maximum: 10
+--- !u!114 &1903119467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1903119464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356a9583706f4c0eafbd63fcd3cc76fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAmount: 1
+  MaximumAmount: 5
+  Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!1 &1903530995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 175994, guid: cc5bbe9f0660748459e20869e0e46794,
