@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DifficultySetting : MonoBehaviour
 {
-
+    public GameSettings Settings;
     public GameObject MainMenu;
 
     public TMPro.TextMeshProUGUI TutIndicator;
@@ -38,12 +38,12 @@ public class DifficultySetting : MonoBehaviour
 
     public void SetEasy()
     {
-        PlayerPrefs.SetFloat("difficultyKey", 0.3f);
+        Settings.Difficulty = GameDifficulty.Easy;
     }
 
     public void SetHard()
     {
-        PlayerPrefs.SetFloat("difficultyKey", 0.8f);
+        Settings.Difficulty = GameDifficulty.Hard;
     }
 
     public void ReturnToMM()
