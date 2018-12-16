@@ -49,8 +49,6 @@ public class MainScript : MonoBehaviour
     }
 
     [SerializeField]
-    private MoodBasedDissatisfaction Dissatisfaction;
-    [SerializeField]
     private Player Player;
     [SerializeField]
     private ThirdPersonCharacter PlayerController;
