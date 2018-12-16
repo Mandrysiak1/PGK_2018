@@ -19,7 +19,7 @@ public class tutorial : MonoBehaviour {
     private bool[] flags = new bool[10];
     void Start ()
     {
-        barExplain.enabled = false;
+        //barExplain.enabled = false;
         KeysCanvas.enabled = true;
         /*orderSource.Mood = 0;
         gimmebeer.sw = true;*/
@@ -88,7 +88,7 @@ public class tutorial : MonoBehaviour {
             if (orderSource.CurrentOrder != null)
             {
                 flags[9] = true;
-                barExplain.enabled = true;
+                //barExplain.enabled = true;
             }
         }
         if (flags[9] == true)
