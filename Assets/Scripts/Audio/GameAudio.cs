@@ -46,7 +46,7 @@ public class GameAudio : MonoBehaviour {
         nopeSound.Play();
     }
 
-    private void OrderDecreased(OrderSource source, Order order)
+    private void OrderDecreased(OrderSource source, Order order, float previousProgress)
     {
         putDownSound.Play();
     }

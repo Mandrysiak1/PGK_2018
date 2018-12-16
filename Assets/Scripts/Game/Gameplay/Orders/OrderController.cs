@@ -89,6 +89,7 @@ public class OrderController : MonoBehaviour
         Order order = GetOrderForSource(source);
         if (order != null)
         {
+            float previousProgress = order.Progress;
             bool wasUpdated = order.TryFill(new OrderContext
             {
                 Plate = Plate
@@ -97,7 +98,7 @@ public class OrderController : MonoBehaviour
             if (wasUpdated)
             {
                 source.Refresh();
-                OrderUpdated.Invoke(source, order);
+                OrderUpdated.Invoke(source, order, previousProgress);
                 if (order.IsFilled)
                 {
                     FillOrder(order);
