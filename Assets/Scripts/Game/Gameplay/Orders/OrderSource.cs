@@ -38,7 +38,7 @@ public class OrderSource : MonoBehaviour
         get { return _Mood; }
         set
         {
-            _Mood = value;
+            _Mood = Mathf.Clamp(value, 0.0f, 1.0f);
             OnMoodChanged.Invoke(value);
         }
     }
