@@ -20,7 +20,7 @@ public class ItemOrderRequest : OrderRequest
 
     public class BasicOrder : Order
     {
-        public override float FillRate
+        public override float Progress
         {
             get { return (float)FilledAmount / Amount; }
         }

@@ -21,9 +21,9 @@ public class CompositeOrderRequest : OrderRequest
             Orders = orders.ToList();
         }
 
-        public override float FillRate
+        public override float Progress
         {
-            get { return Orders.Average(order => order.FillRate); }
+            get { return Orders.Average(order => order.Progress); }
         }
 
         public override bool IsFilled
