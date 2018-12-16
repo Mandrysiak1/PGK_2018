@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NewOrderNotification : Notification
 {
-    public string Format = "{0} has made an order for {2} {1}!";
+    public string Format = "{0} has made an order!";
     [SerializeField]
     private OrderSource[] Sources;
 
@@ -23,6 +23,6 @@ public class NewOrderNotification : Notification
     private void NewOrder(OrderSource source, Order order)
     {
         if(Sources.Contains(source))
-            Show(string.Format(Format, source.name, order.Item.name, order.Size));
+            Show(string.Format(Format, source.name, "", ""));
     }
 }

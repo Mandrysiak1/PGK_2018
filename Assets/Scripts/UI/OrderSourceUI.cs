@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
+using UnityEngine;
 
 public class OrderSourceUI : MonoBehaviour
 {
@@ -6,10 +9,15 @@ public class OrderSourceUI : MonoBehaviour
     private OrderSource Source;
 
     [SerializeField]
-    private OrderItemWithAmountUI ItemUI;
+    private OrderItemWithAmountUI ItemPrefab;
 
     [SerializeField]
     private MoodUI MoodUI;
+
+    [SerializeField]
+    private Transform ItemsParent;
+
+    private List<OrderItemWithAmountUI> Items = new List<OrderItemWithAmountUI>();
 
 
     private void Start()
@@ -18,6 +26,7 @@ public class OrderSourceUI : MonoBehaviour
             Source = gameObject.GetComponentInParent<OrderSource>();
         Source.OnOrderChanged.AddListener(OnOrderChange);
         Source.OnMoodChanged.AddListener(OnMoodChange);
+        gameObject.AddComponent<CancelOutParentsScale>();
         Refresh();
     }
 
@@ -36,22 +45,36 @@ public class OrderSourceUI : MonoBehaviour
         bool active = Source.IsActive;
         Order order = Source.CurrentOrder;
         bool hasOrder = order != null;
-        if(ItemUI != null)
+
+        MoodUI.gameObject.SetActive(active);
+
+        if (active)
         {
-            ItemUI.gameObject.SetActive(active && hasOrder);
-            MoodUI.gameObject.SetActive(active);
-
-            if (active)
+            int item = 0;
+            if (hasOrder)
             {
-                if (hasOrder)
-                {
-                    ItemUI.Item = order.Item;
-                    ItemUI.Amount = order.Size - order.FilledSize;
-                }
+                OrderVisualization visualization = order.Visualize();
 
-                MoodUI.Mood = Source.Mood;
+                foreach (KeyValuePair<OrderItem, int> kv in visualization.Items)
+                {
+                    if (item >= Items.Count)
+                        CreateNewItem();
+                    Items[item].gameObject.SetActive(true);
+                    Items[item].Item = kv.Key;
+                    Items[item].Amount = kv.Value;
+                    ++item;
+                }
             }
+            for(int i = item; i < Items.Count; i++)
+                Items[i].gameObject.SetActive(false);
+
+            MoodUI.Mood = Source.Mood;
         }
-       
+    }
+
+    private void CreateNewItem()
+    {
+        GameObject obj = Instantiate(ItemPrefab.gameObject, ItemsParent);
+        Items.Add(obj.GetComponent<OrderItemWithAmountUI>());
     }
 }

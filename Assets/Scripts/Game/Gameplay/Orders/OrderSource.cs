@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class OrderSource : MonoBehaviour
 {
-    public List<OrderItem> PossibleRequests = new List<OrderItem>();
+    public List<OrderRequest> PossibleRequests = new List<OrderRequest>();
     [SerializeField]
     private float _Mood = 1.0f;
 

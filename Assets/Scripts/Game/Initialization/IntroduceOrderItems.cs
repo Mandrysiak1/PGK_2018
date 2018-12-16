@@ -15,9 +15,10 @@ namespace Game.Initialization
                 .SelectMany(s => s.PossibleRequests)
                 .Distinct();
 
-            foreach (OrderItem item in possibleItems)
+            foreach (OrderRequest possible in possibleItems)
             {
-                PlateUI.IntroduceItem(item);
+                foreach(OrderItem item in possible.IntroduceItems)
+                    PlateUI.IntroduceItem(item);
             }
         }
 

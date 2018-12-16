@@ -1,76 +1,55 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
-
-
-public class AddSantaBonus : MonoBehaviour {
-
-    private GameContext Context;
+public class AddSantaBonus : MonoBehaviour
+{
+    public UnityEvent OnSantaInfo;
 
     [SerializeField]
     private List<OrderSource> orderSources;
     [SerializeField]
     private OrderItem SantaOrder;
 
+    private GameContext Context;
+    private HashSet<OrderSource> DisabledSources = new HashSet<OrderSource>();
 
-    public delegate void SantaInfo();
-    public event SantaInfo OnSantaInfo;
-
-
-    private OrderSource x;
-    void Start () {
-
+    void Start ()
+    {
         GameContext.FindIfNull(ref Context);
-
         Context.Orders.OrderFilled.AddListener(OnOrderFilled);
     }
 
     private void OnOrderFilled(OrderSource source, Order order)
     {
-        
         if(source == transform.GetComponent<OrderSource>())
         {
+            bool allSourcesAreAlreadyDisabled = orderSources.All(IsAlreadyDisabled);
 
-            bool end  = false;
-            while(!end)
+            if (!allSourcesAreAlreadyDisabled)
             {
-                OrderSource newOne = orderSources.Random();
-                if(newOne != x)
-                {
-                    x = newOne;
-                    end = true;
-                }
-               
-            }
-
-            x = orderSources.Random();
-            if (OnSantaInfo != null)
-            {
-                OnSantaInfo();
+                DisableRandomTable();
+                OnSantaInfo.Invoke();
             }
         }
 
     }
 
-    private void Update()
+    private bool IsAlreadyDisabled(OrderSource source)
     {
-        DiseableTable();
+        return DisabledSources.Contains(source);
     }
 
-    private void DiseableTable()
+    private void DisableRandomTable()
     {
-    
-        if(x != null)
-        {
-            x.Mood = 1.0f;
-            x.MoodDecreaseRate = 0.0f;
-            x.CurrentOrder = new Order(SantaOrder, 0.0f, 100);
-
-
-        }
-
-
+        OrderSource source = orderSources.Except(DisabledSources).ToList().Random();
+        source.CurrentOrder = new ItemOrderRequest.BasicOrder(SantaOrder, 1);
+        source.Refresh();
+        source.enabled = false;
+        DisabledSources.Add(source);
     }
+
 }

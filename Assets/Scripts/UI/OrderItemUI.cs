@@ -10,16 +10,16 @@ public class OrderItemUI : MonoBehaviour
 
     protected bool Dirty = true;
 
-    private void Update()
+    protected void Update()
     {
         if (Dirty)
         {
-            RefreshImage();
+            Refresh();
             Dirty = false;
         }
     }
 
-    protected void RefreshImage()
+    protected virtual void Refresh()
     {
         if (_Item == null)
             Image.sprite = null;
