@@ -30,6 +30,11 @@ public class ItemOrderRequest : OrderRequest
             get { return Amount == FilledAmount; }
         }
 
+        public override int UpdatesToFill
+        {
+            get { return Amount - FilledAmount; }
+        }
+
         protected OrderItem Item;
         protected int Amount;
         protected int FilledAmount;
@@ -64,7 +69,7 @@ public class ItemOrderRequest : OrderRequest
         {
             return new OrderVisualization
             {
-                Items = new Dictionary<OrderItem, int>{{Item, Amount - FilledAmount}}
+                Items = new Dictionary<OrderItem, int>{{Item, UpdatesToFill}}
             };
         }
     }

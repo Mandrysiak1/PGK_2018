@@ -7236,6 +7236,7 @@ GameObject:
   - component: {fileID: 1755516343}
   - component: {fileID: 1755516345}
   - component: {fileID: 1755516346}
+  - component: {fileID: 1755516347}
   m_Layer: 0
   m_Name: OrderManager
   m_TagString: Untagged
@@ -7264,6 +7265,16 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: OrderController+OrderEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OrderUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: OrderController+OrderChange, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  UpdateNotPossible:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   Plate: {fileID: 2078970096}
   Sources: {fileID: 1755516343}
 --- !u!114 &1755516342
@@ -7322,11 +7333,25 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1755516340}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c01729161764c5b82ddcff64e3fece0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Context: {fileID: 1255018898}
+--- !u!114 &1755516347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755516340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70704c510e3147b09fddbd3f0ba1c990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoodPerOrder: 0.25
+  CompletionMoodBonus: 0.75
   Context: {fileID: 1255018898}
 --- !u!1 &1769452600
 GameObject:

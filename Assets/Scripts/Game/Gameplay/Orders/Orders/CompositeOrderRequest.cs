@@ -31,6 +31,11 @@ public class CompositeOrderRequest : OrderRequest
             get { return Orders.All(order => order.IsFilled); }
         }
 
+        public override int UpdatesToFill
+        {
+            get { return Orders.Sum(order => order.UpdatesToFill); }
+        }
+
         public override bool CanBeFilled(OrderContext context)
         {
             return Orders.Any(order => order.CanBeFilled(context));
