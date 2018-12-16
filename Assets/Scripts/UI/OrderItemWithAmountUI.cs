@@ -11,14 +11,15 @@ public class OrderItemWithAmountUI : OrderItemUI
     [SerializeField]
     private TextMeshProUGUI Text;
 
-    private void Update()
+    protected new void Update()
     {
-        if (Dirty)
-        {
-            Text.text = string.Format(AmountFormat, _Amount);
-            RefreshImage();
-            Dirty = false;
-        }
+        base.Update();
+    }
+
+    protected override void Refresh()
+    {
+        base.Refresh();
+        Text.text = string.Format(AmountFormat, _Amount);
     }
 
     public int Amount
@@ -26,8 +27,11 @@ public class OrderItemWithAmountUI : OrderItemUI
         get { return _Amount; }
         set
         {
-            _Amount = value;
-            Dirty = true;
+            if (_Amount != value)
+            {
+                Dirty = true;
+                _Amount = value;
+            }
         }
     }
 }

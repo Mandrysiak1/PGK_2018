@@ -13,7 +13,7 @@ public class OrderController : MonoBehaviour
 
     public OrderEvent OrderAdded;
     public OrderEvent OrderFilled;
-    public OrderChange DecreasedEvent = new OrderChange();
+    public OrderChange OrderUpdated = new OrderChange();
     public OrderChange UnableEvent = new OrderChange();
 
     [SerializeField]
@@ -89,17 +89,19 @@ public class OrderController : MonoBehaviour
         Order order = GetOrderForSource(source);
         if (order != null)
         {
-            int amountOnPlate = Plate.GetItemQuantityOnPlate(order.Item);
-            if (amountOnPlate > 0)
+            bool wasUpdated = order.TryFill(new OrderContext
             {
-                order.FilledSize++;
-                if (IsOrderFilled(order))
-                    FillOrder(order);
-                Plate.RemoveItem(order.Item);
-                //
-                DecreasedEvent.Invoke();
-                //
+                Plate = Plate
+            });
+
+            if (wasUpdated)
+            {
                 source.Refresh();
+                OrderUpdated.Invoke();
+                if (order.IsFilled)
+                {
+                    FillOrder(order);
+                }
                 return true;
             }
         }
@@ -114,7 +116,7 @@ public class OrderController : MonoBehaviour
         RemoveOrder(order);
         source.Refresh();
         OrderFilled.Invoke(source, order);
-        
+
     }
 
     private void RemoveOrder(Order order)
@@ -125,12 +127,15 @@ public class OrderController : MonoBehaviour
         SourceToOrder.Remove(source);
         OrderToSource.Remove(order);
         source.Refresh();
-        
+
     }
 
-    private bool IsOrderFilled(Order order)
+    public bool CanFillOrder(OrderSource source)
     {
-        return order.FilledSize == order.Size;
-    }
+        Order order = GetOrderForSource(source);
+        if (order == null)
+            return false;
 
+        return order.CanBeFilled(new OrderContext {Plate = Plate });
+    }
 }

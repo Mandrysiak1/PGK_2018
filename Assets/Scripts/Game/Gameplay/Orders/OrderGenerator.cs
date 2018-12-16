@@ -14,7 +14,7 @@ public class OrderGenerator : MonoBehaviour
     {
         foreach (OrderSource source in Controller.FreeSources)
         {
-            if (source.CanIssueOrder(Controller))
+            if (source.enabled && source.CanIssueOrder(Controller))
             {
                 GenerateOrder(source);
                 Debug.LogFormat("New order for {0}!", source.name);
@@ -24,9 +24,8 @@ public class OrderGenerator : MonoBehaviour
 
     private void GenerateOrder(OrderSource source)
     {
-        OrderItem item = source.PossibleRequests.Random();
-        int size = UnityEngine.Random.Range(1, item.MaximumOrderSize + 1);
-        Order order = new Order(item, Time.time, size);
+        OrderRequest request = source.PossibleRequests.Random();
+        Order order = request.MakeOrder();
         Controller.AddOrder(source, order);
     }
 }

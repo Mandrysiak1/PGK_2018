@@ -23,7 +23,7 @@ public class GameAudio : MonoBehaviour {
         playerPlate.OnItemAmountChanged.AddListener(BeerAmountChanged);
         collisionHandler = FindObjectOfType<PlayerCollisionHandler>();
         orderController = FindObjectOfType<OrderController>();
-        orderController.DecreasedEvent.AddListener(OrderDecreased);
+        orderController.OrderUpdated.AddListener(OrderDecreased);
         orderController.UnableEvent.AddListener(Unable);
         collisionHandler.OnCollisionC += OnCustomerCollision;
         collisionHandler.OnCollisionI += OnItemCollision;

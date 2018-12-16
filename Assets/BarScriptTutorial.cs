@@ -21,10 +21,10 @@ public class BarScriptTutorial : MonoBehaviour
 
     void Update()
     {
-
-        if (orderSource.CurrentOrder != null && hasPlayer == false && playerPlate.GetItemQuantityOnPlate(orderToPick) < (orderSource.CurrentOrder.Size- orderSource.CurrentOrder.FilledSize)) barCanvasHelp.enabled = true;
+        bool willFill = Context.Orders.CanFillOrder(orderSource);
+        if (orderSource.CurrentOrder != null && hasPlayer == false && willFill) barCanvasHelp.enabled = true;
         else barCanvasHelp.enabled = false;
-        if (orderSource.CurrentOrder != null && hasPlayer == true && playerPlate.GetItemQuantityOnPlate(orderToPick) < (orderSource.CurrentOrder.Size - orderSource.CurrentOrder.FilledSize))
+        if (orderSource.CurrentOrder != null && hasPlayer == true && willFill)
         {
             barCanvasPickup.enabled = true;
         }
@@ -46,8 +46,8 @@ public class BarScriptTutorial : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasPlayer = true;
-            
-                
+
+
         }
     }
 
@@ -57,7 +57,7 @@ public class BarScriptTutorial : MonoBehaviour
         {
             hasPlayer = false;
 
-            
+
         }
     }
 }

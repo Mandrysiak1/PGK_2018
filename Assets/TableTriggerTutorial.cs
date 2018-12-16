@@ -20,10 +20,12 @@ public class TableTriggerTutorial : MonoBehaviour
 
     void Update()
     {
-        if (Source.CurrentOrder != null && PlayerInRange == false && playerPlate.GetItemQuantityOnPlate(orderToPick) >= (Source.CurrentOrder.Size - Source.CurrentOrder.FilledSize))
+        bool willUpdate = Context.Orders.CanFillOrder(Source);
+
+        if (Source.CurrentOrder != null && PlayerInRange == false && willUpdate)
             DeliverHere.enabled = true;
         else DeliverHere.enabled = false;
-        if (Source.CurrentOrder != null && PlayerInRange == true && playerPlate.GetItemQuantityOnPlate(orderToPick) >= (Source.CurrentOrder.Size - Source.CurrentOrder.FilledSize))
+        if (Source.CurrentOrder != null && PlayerInRange == true && willUpdate)
         {
             PressE.enabled = true;
         }

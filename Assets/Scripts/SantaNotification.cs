@@ -10,8 +10,8 @@ public class SantaNotification : Notification {
     {
         base.Start();
         var x = FindObjectOfType<AddSantaBonus>();
-        x.OnSantaInfo += OnActivate;
-   
+        x.OnSantaInfo.AddListener(OnActivate);
+
     }
 
     private void OnActivate()
