@@ -496,13 +496,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64088663}
-  - component: {fileID: 64088666}
   - component: {fileID: 64088665}
-  - component: {fileID: 64088664}
   - component: {fileID: 64088668}
   - component: {fileID: 64088667}
   - component: {fileID: 64088669}
-  - component: {fileID: 64088670}
   - component: {fileID: 64088671}
   m_Layer: 0
   m_Name: Mechanics
@@ -526,27 +523,6 @@ Transform:
   m_Father: {fileID: 2078970095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &64088664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 64088662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a8b8833e735411688e2d91c3166b3d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Maximum: 100
-  Treshold: 0.25
-  IncreaseRate: 5
-  DissatisfactionChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: MoodBasedDissatisfaction+DissatisfactionEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  Context: {fileID: 1255018898}
-  Slider: {fileID: 1547977922}
 --- !u!114 &64088665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,20 +536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Limit: 122
   UI: {fileID: 1209477370}
-  Main: {fileID: 2078970091}
---- !u!114 &64088666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 64088662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a0214ce327437b8dcbc9f8c5d5e312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Treshold: 100
-  Dissatisfaction: {fileID: 64088664}
   Main: {fileID: 2078970091}
 --- !u!114 &64088667
 MonoBehaviour:
@@ -620,19 +582,6 @@ MonoBehaviour:
   TipMin: 1
   TipMax: 3
   Orders: {fileID: 1755516341}
---- !u!114 &64088670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 64088662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c301fd9568744f9ea0479429f2bf23f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WinStreakSource: {fileID: 2059631944}
-  Dissatisfaction: {fileID: 64088664}
 --- !u!114 &64088671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,6 +1473,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 376463573}
+  - component: {fileID: 376463574}
+  - component: {fileID: 376463578}
+  - component: {fileID: 376463577}
+  - component: {fileID: 376463576}
+  - component: {fileID: 376463575}
   m_Layer: 0
   m_Name: Hard
   m_TagString: Untagged
@@ -1544,6 +1498,81 @@ Transform:
   m_Father: {fileID: 64088663}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &376463574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376463572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8b8833e735411688e2d91c3166b3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Maximum: 100
+  Treshold: 0.25
+  IncreaseRate: 5
+  DissatisfactionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MoodBasedDissatisfaction+DissatisfactionEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  Context: {fileID: 1255018898}
+  Slider: {fileID: 1547977922}
+--- !u!114 &376463575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376463572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70704c510e3147b09fddbd3f0ba1c990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoodPerOrder: 0.1
+  CompletionMoodBonus: 0.5
+  Context: {fileID: 1255018898}
+--- !u!114 &376463576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376463572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0354bfe9037c48ad8a8d53c5d5250867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Orders: {fileID: 1755516341}
+  RateMultiplier: 2
+--- !u!114 &376463577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376463572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c301fd9568744f9ea0479429f2bf23f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WinStreakSource: {fileID: 2059631944}
+  Dissatisfaction: {fileID: 376463574}
+--- !u!114 &376463578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376463572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a0214ce327437b8dcbc9f8c5d5e312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Treshold: 100
+  Dissatisfaction: {fileID: 376463574}
+  Main: {fileID: 2078970091}
 --- !u!1 &401961476
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,6 +5094,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1182453748}
+  - component: {fileID: 1182453749}
+  - component: {fileID: 1182453753}
+  - component: {fileID: 1182453752}
+  - component: {fileID: 1182453751}
+  - component: {fileID: 1182453750}
   m_Layer: 0
   m_Name: Easy
   m_TagString: Untagged
@@ -5085,6 +5119,81 @@ Transform:
   m_Father: {fileID: 64088663}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1182453749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1182453747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8b8833e735411688e2d91c3166b3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Maximum: 100
+  Treshold: 0.25
+  IncreaseRate: 2.5
+  DissatisfactionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MoodBasedDissatisfaction+DissatisfactionEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  Context: {fileID: 1255018898}
+  Slider: {fileID: 1547977922}
+--- !u!114 &1182453750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1182453747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70704c510e3147b09fddbd3f0ba1c990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoodPerOrder: 0.25
+  CompletionMoodBonus: 0.75
+  Context: {fileID: 1255018898}
+--- !u!114 &1182453751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1182453747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0354bfe9037c48ad8a8d53c5d5250867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Orders: {fileID: 1755516341}
+  RateMultiplier: 1
+--- !u!114 &1182453752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1182453747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c301fd9568744f9ea0479429f2bf23f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WinStreakSource: {fileID: 2059631944}
+  Dissatisfaction: {fileID: 1182453749}
+--- !u!114 &1182453753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1182453747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a0214ce327437b8dcbc9f8c5d5e312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Treshold: 100
+  Dissatisfaction: {fileID: 1182453749}
+  Main: {fileID: 2078970091}
 --- !u!1 &1209477366
 GameObject:
   m_ObjectHideFlags: 0
@@ -7307,9 +7416,6 @@ GameObject:
   - component: {fileID: 1755516342}
   - component: {fileID: 1755516341}
   - component: {fileID: 1755516343}
-  - component: {fileID: 1755516345}
-  - component: {fileID: 1755516346}
-  - component: {fileID: 1755516347}
   m_Layer: 0
   m_Name: OrderManager
   m_TagString: Untagged
@@ -7387,45 +7493,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1755516345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1755516340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0354bfe9037c48ad8a8d53c5d5250867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Orders: {fileID: 1755516341}
-  RateMultiplier: 1
---- !u!114 &1755516346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1755516340}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c01729161764c5b82ddcff64e3fece0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Context: {fileID: 1255018898}
---- !u!114 &1755516347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1755516340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70704c510e3147b09fddbd3f0ba1c990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoodPerOrder: 0.25
-  CompletionMoodBonus: 0.75
-  Context: {fileID: 1255018898}
 --- !u!1 &1769452600
 GameObject:
   m_ObjectHideFlags: 0
@@ -8686,7 +8753,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorial: 0
-  Dissatisfaction: {fileID: 64088664}
   Player: {fileID: 2078970103}
   PlayerController: {fileID: 2075440670}
 --- !u!65 &2078970092
