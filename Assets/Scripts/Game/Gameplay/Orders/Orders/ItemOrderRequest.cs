@@ -11,11 +11,6 @@ public class ItemOrderRequest : OrderRequest
 
     public OrderItem Item;
 
-    public override IEnumerable<OrderItem> IntroduceItems
-    {
-        get { yield return Item; }
-    }
-
     public override Order MakeOrder()
     {
         int amount = Random.Range(MinimumAmount, MaximumAmount + 1);

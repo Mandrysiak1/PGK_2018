@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,14 +11,14 @@ namespace Game.Initialization
 
         private void IntroduceAll(GameLevel level, LevelScene levelScene)
         {
-            OrderSource[] sources = FindObjectsOfType<OrderSource>();
-            var possibleItems = sources
-                .SelectMany(s => s.PossibleRequests)
-                .Distinct();
+            OrderItem[] possibleItems = FindObjectsOfType<BarScript>()
+                .Select(s => s.orderToPick)
+                .Distinct()
+                .ToArray();
 
-            foreach (OrderRequest possible in possibleItems)
+            foreach (OrderItem item in possibleItems)
             {
-                foreach(OrderItem item in possible.IntroduceItems)
+                if(item != null)
                     PlateUI.IntroduceItem(item);
             }
         }

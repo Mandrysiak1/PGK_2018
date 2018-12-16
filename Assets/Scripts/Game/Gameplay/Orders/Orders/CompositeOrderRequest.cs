@@ -7,14 +7,6 @@ public class CompositeOrderRequest : OrderRequest
     [SerializeField]
     private List<OrderRequest> Requests;
 
-    public override IEnumerable<OrderItem> IntroduceItems
-    {
-        get
-        {
-            return Requests.SelectMany(request => request.IntroduceItems);
-        }
-    }
-
     public override Order MakeOrder()
     {
         return new CompositeOrder(Requests.Select(request => request.MakeOrder()));
