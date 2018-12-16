@@ -8,7 +8,7 @@ public class OrderController : MonoBehaviour
 {
     [Serializable]
     public class OrderEvent : UnityEvent<OrderSource, Order> {}
-    public class OrderChange : UnityEvent {}
+    public class OrderChange : UnityEvent<OrderSource, Order> {}
 
 
     public OrderEvent OrderAdded;
@@ -97,7 +97,7 @@ public class OrderController : MonoBehaviour
             if (wasUpdated)
             {
                 source.Refresh();
-                OrderUpdated.Invoke();
+                OrderUpdated.Invoke(source, order);
                 if (order.IsFilled)
                 {
                     FillOrder(order);
@@ -105,14 +105,13 @@ public class OrderController : MonoBehaviour
                 return true;
             }
         }
-        UnableEvent.Invoke();
+        UnableEvent.Invoke(source, order);
         return false;
     }
 
     private void FillOrder(Order order)
     {
         OrderSource source = OrderToSource[order];
-        source.Mood = 1.0f;
         RemoveOrder(order);
         source.Refresh();
         OrderFilled.Invoke(source, order);

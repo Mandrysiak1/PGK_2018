@@ -5,7 +5,7 @@
     /// 0 - player did not do anything
     /// 1 - order fully completed
     /// </summary>
-    public abstract float FillRate { get; }
+    public abstract float Progress { get; }
     public abstract bool IsFilled { get; }
 
     public abstract bool CanBeFilled(OrderContext context);

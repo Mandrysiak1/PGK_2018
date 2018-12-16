@@ -41,12 +41,12 @@ public class GameAudio : MonoBehaviour {
         shooshSound.Play();
     }
 
-    private void Unable()
+    private void Unable(OrderSource source, Order order)
     {
         nopeSound.Play();
     }
 
-    private void OrderDecreased()
+    private void OrderDecreased(OrderSource source, Order order)
     {
         putDownSound.Play();
     }
@@ -72,7 +72,7 @@ public class GameAudio : MonoBehaviour {
     private void PlayerCollided()
     {
         collideAudio.Play();
-       
+
     }
 
     // Update is called once per frame
