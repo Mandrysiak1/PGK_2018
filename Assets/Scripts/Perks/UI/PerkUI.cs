@@ -11,7 +11,7 @@ namespace Assets.Scripts.Perks.UI
         public RawImage glowIcon;
         public Text caption;
         public Button keyButton;
-        private bool availible = false;
+        protected bool availible = false;
         public bool Availible
         {
             get
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Perks.UI
             }
         }
 
-        private bool perkStarted = false;
+        protected bool perkStarted = false;
         public bool PerkStarted
         {
             get
@@ -46,17 +46,17 @@ namespace Assets.Scripts.Perks.UI
             this.StartCoroutine(BloomEffect());
         }
 
-        private void ChangeTransparency(float value)
+        protected void ChangeTransparency(float value)
         {
             var tempCol = glowIcon.color;
             tempCol.a = value;
             glowIcon.color = tempCol;
         }
-        private float Balance(float v)
+        protected float Balance(float v)
         {
             return Mathf.Sin(v);
         }
-        private IEnumerator BloomEffect()
+        protected IEnumerator BloomEffect()
         {
             float c = 0;
             while(true)
@@ -77,7 +77,7 @@ namespace Assets.Scripts.Perks.UI
             
         }
 
-        public void Disable()
+        public virtual void Disable()
         {
             icon.enabled = false;
             glowIcon.enabled = false;
@@ -86,7 +86,7 @@ namespace Assets.Scripts.Perks.UI
             keyButton.gameObject.SetActive(false);
         }
 
-        public void Show(string status)
+        public virtual void Show(string status)
         {
             if(PerkStarted)
                 ChangeTransparency(0);

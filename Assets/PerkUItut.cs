@@ -1,54 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Reflection;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Perks.UI
 {
-    public class PerkUItut : MonoBehaviour, IPerkUi
+    public class PerkUItut : PerkUI
     {
-        public RawImage icon;
-        public Text caption;
-        public Text tutcaption;
-        private Color textColor;
-        public Button keyButton;
-        public string Name { get; set; }
+        public TextMeshProUGUI tutex;
 
-        public bool Availible { get; set; }
-
-        public bool PerkStarted
+        public override void Disable()
         {
-            get;
-            set;
-        }
-
-        public void Start()
-        {
-            Disable();
-        }
-
-        public void Update()
-        {
-
-        }
-
-        public void Disable()
-        {
+            tutex.enabled = false;
             icon.enabled = false;
+            glowIcon.enabled = false;
             caption.enabled = false;
-            tutcaption.enabled = false;
             caption.text = "";
             keyButton.gameObject.SetActive(false);
-            textColor = caption.color;
         }
 
-        public void Show(string status)
+        public override void Show(string status)
         {
+            if (PerkStarted)
+                ChangeTransparency(0);
             icon.enabled = true;
+            glowIcon.enabled = true;
             caption.enabled = true;
-            tutcaption.enabled = true;
             keyButton.gameObject.SetActive(true);
             caption.text = status.ToString();
-                textColor = Color.green;
-                caption.color = textColor;
+            caption.color = Color.green;
+            tutex.enabled = true;
         }
     }
 }

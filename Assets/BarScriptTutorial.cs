@@ -7,7 +7,7 @@ public class BarScriptTutorial : MonoBehaviour
 
     public Canvas barCanvasPickup;
     public Canvas barCanvasHelp;
-    private bool hasPlayer = false;
+    public bool hasPlayer = false;
     public OrderItem orderToPick;
     public OrderSource orderSource;
     public PlayerPlate playerPlate;
@@ -21,14 +21,7 @@ public class BarScriptTutorial : MonoBehaviour
 
     void Update()
     {
-        bool willFill = Context.Orders.CanFillOrder(orderSource);
-        if (orderSource.CurrentOrder != null && hasPlayer == false && willFill) barCanvasHelp.enabled = true;
-        else barCanvasHelp.enabled = false;
-        if (orderSource.CurrentOrder != null && hasPlayer == true && willFill)
-        {
-            barCanvasPickup.enabled = true;
-        }
-        else barCanvasPickup.enabled = false;
+        
         if (Input.GetButtonDown("ReturnItemOnBar") && hasPlayer && orderToPick != null)
         {
             Context.Player.RemoveBeer(orderToPick);
