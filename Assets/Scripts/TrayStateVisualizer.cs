@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TrayStateVisualizer : MonoBehaviour {
 
+    private OrderItem lastOrder = null;
     public PlayerPlate playerPlate;
     public WinStreak winStreaks;
     public TextMeshProUGUI ShowString;
@@ -30,13 +31,15 @@ public class TrayStateVisualizer : MonoBehaviour {
 
     private void ChangeViewMax(int arg0, int arg1)
     {
-        SetShowString(current, arg0);
         this.max = arg0;
+        SetShowString(current, this.max);
+        
     }
 
     private void ChangeViewItem(OrderItem arg0, int arg1, int arg2)
     {
-        SetShowString(arg1, max);
+        current = playerPlate.getItemCount();
+        SetShowString(current, this.max);
     }
 
     void Update () {
