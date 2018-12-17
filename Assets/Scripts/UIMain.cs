@@ -127,7 +127,6 @@ public class UIMain : MonoBehaviour
             MenuActivated = true;
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + scoreSystem.Score;
-        
             scoreSystem.ResetScore();
             mainScript.ResetBeersHandedOut();
 
