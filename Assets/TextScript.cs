@@ -46,6 +46,7 @@ public class TextScript : MonoBehaviour {
         uimain.MenuActivated = true;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(uimain.GoToShop.gameObject);
+        uimain.BackFromShop();
 
     }
     public void StarPurchase()

@@ -45,6 +45,7 @@ public class UIMain : MonoBehaviour
     public List<Button> buttonsSelectableList = new List<Button>();
 
     bool _menuActivated;
+    bool _inShop = false;
     public bool MenuActivated
     {
         get
@@ -59,6 +60,11 @@ public class UIMain : MonoBehaviour
     }
     int x = 2;
     float y = 4;
+
+    internal void BackFromShop()
+    {
+        if (_inShop) _inShop = false;
+    }
 
     // Use this for initialization
     void Start()
@@ -78,17 +84,20 @@ public class UIMain : MonoBehaviour
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
         //Continue.onClick.AddListener(ContinueGame);
-        SetButtons();
+        SetButtons(true);
 
     }
 
-    private void SetButtons()
+    private void SetButtons(bool init)
     {
         if (Flow.HasNextLevel())
         {
-            NextLevel.onClick.AddListener(LoadNextLvl);
+            if(init)
+            {
+                NextLevel.onClick.AddListener(LoadNextLvl);
+                GoToShop.onClick.AddListener(LoadShop);
+            }
             NextLevel.gameObject.SetActive(true);
-            GoToShop.onClick.AddListener(LoadShop);
             GoToShop.gameObject.SetActive(true);
         }
         else
@@ -125,6 +134,7 @@ public class UIMain : MonoBehaviour
         if(arg1 == GameState.Success || arg1 == GameState.Failure)
         {
             MenuActivated = true;
+            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + scoreSystem.Score;
             scoreSystem.ResetScore();
@@ -157,13 +167,17 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsInList(EventSystem.current.currentSelectedGameObject))
+        if(!_inShop)
         {
-            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+            if (!IsInList(EventSystem.current.currentSelectedGameObject))
+            {
+                EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+            }
+            if (mainScript.CurrentGameState == GameState.Paused
+                    && !IsInPause(EventSystem.current.currentSelectedGameObject))
+                EventSystem.current.SetSelectedGameObject(Restart.gameObject);
         }
-        if (mainScript.CurrentGameState == GameState.Paused
-                && !IsInPause(EventSystem.current.currentSelectedGameObject))
-            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+        
 
         if (Input.GetButtonDown("PauseButton")) //CHANGE FOR PAD
         {
@@ -246,6 +260,7 @@ public class UIMain : MonoBehaviour
         Time.timeScale = 1;
         
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
+        _inShop = true;
     }
     private bool IsInList(GameObject go)
     {

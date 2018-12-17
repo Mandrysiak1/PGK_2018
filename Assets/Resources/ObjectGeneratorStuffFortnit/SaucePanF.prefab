@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 33524316341860862}
   - component: {fileID: 65607800871288368}
   - component: {fileID: 114587631768031902}
+  - component: {fileID: 54536823138976190}
   m_Layer: 0
   m_Name: SaucePanF
   m_TagString: Obstacle
@@ -162,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923922254101324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5399852, y: -0.663, z: -42.736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4597616837833372}
@@ -255,6 +256,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931588956076480}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54536823138976190
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923922254101324}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65607800871288368
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -327,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32db4f8b8ed8b6444b083b344786d18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QTE: {fileID: 0}
+  PlayerCollisionHandler: {fileID: 0}
 --- !u!114 &114600774288617528
 MonoBehaviour:
   m_ObjectHideFlags: 1
