@@ -32,9 +32,13 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
             {
                 prefabs = Resources.LoadAll("ObjectGeneratorStuffFortnit");
             }
-            else
+            else if(scenes[i].name == "level3")
             {
                 prefabs = Resources.LoadAll("ObjectGeneratorStuffChristmas");
+            }
+            else
+            {
+                prefabs = Resources.LoadAll("ObjectGeneratorStuffWoods");
             }
         }
         var x = FindObjectOfType<ObstacleGenerator>();
