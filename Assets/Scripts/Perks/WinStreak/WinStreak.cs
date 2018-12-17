@@ -143,7 +143,7 @@ public class WinStreak : MonoBehaviour
 
     private void MakeAvailible(PerkTuple tuple, int WS)
     {
-        if (WS > tuple.Perk.MinimumToActivate)
+        if (WS >= tuple.Perk.MinimumToActivate)
         {
             if (!tuple.Availible)
                 OnPerkAvailible.Invoke(tuple.Perk.Name);
@@ -153,12 +153,15 @@ public class WinStreak : MonoBehaviour
 
     private void WinStreakChanged(int oldWs, int newWs)
     {
-        if(newWs == 0)
+        foreach(var kvp in perksUiBind)
         {
-            foreach(var kvp in perksUiBind)
+            if (newWs == 0)
             {
-                kvp.Value.Availible = false;
+                if(kvp.Value.Availible)
+                    kvp.Value.Availible = false;
             }
+            if (newWs < kvp.Value.Perk.MinimumToActivate)
+                kvp.Value.Availible = false;
         }
 
         foreach(var kvp in perksUiBind)
