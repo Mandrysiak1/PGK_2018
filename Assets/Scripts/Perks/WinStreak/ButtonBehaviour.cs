@@ -14,18 +14,18 @@ public class ButtonBehaviour : MonoBehaviour {
 	void Update ()
     {
         //SPEED PERK
-        if ((Input.GetButtonDown("Perk_1") || Input.GetAxis("QTE_DPAD_H") < -0.5f))
+        if ((Input.GetButtonDown("Perk_1") || Input.GetAxis("TriggerLeft") > 0.5f))
         {
             this.ActivateSpeed();
         }
         //HOLD PERK
-        if ((Input.GetButtonDown("Perk_2") || Input.GetAxis("QTE_DPAD_V") > 0.5f))
+        if ((Input.GetButtonDown("Perk_2") || Input.GetAxis("TriggerRight") > 0.5f))
         {
             this.ActivateHold();
         }
 
         //INV PERK
-        if ((Input.GetButtonDown("Perk_3") || Input.GetAxis("QTE_DPAD_H") > 0.5f))
+        if ((Input.GetButtonDown("Perk_3") || Input.GetButtonDown("LB")))
         {
             this.ActivateInv();
         }
