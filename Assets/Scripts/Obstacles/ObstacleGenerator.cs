@@ -78,7 +78,7 @@ public class ObstacleGenerator : MonoBehaviour
     private void CheckIfEventHappens()
     {
 
-        if (Random.Range(0, 101) <= NormalizedChanceOfEvent)
+        //if (Random.Range(0, 101) <= NormalizedChanceOfEvent)
         {
             if (OnGenerateObstacle != null)
             {
