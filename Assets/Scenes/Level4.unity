@@ -15274,15 +15274,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4430151540654778, guid: 8575136039de953429462a2d62d64eb4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 12.255
+      value: 11.431
       objectReference: {fileID: 0}
     - target: {fileID: 4430151540654778, guid: 8575136039de953429462a2d62d64eb4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.969223
+      value: 10.969
       objectReference: {fileID: 0}
     - target: {fileID: 4430151540654778, guid: 8575136039de953429462a2d62d64eb4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.548
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 4430151540654778, guid: 8575136039de953429462a2d62d64eb4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -16971,7 +16971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Minimum: 6.5
-  Maximum: 26.4
+  Maximum: 30.1
 --- !u!114 &771340207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16998,7 +16998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 1
+  MaximumAmount: 2
   Item: {fileID: 11400000, guid: 4c6c665122452a740b9194d1d6d90d50, type: 2}
 --- !u!1001 &771753723
 Prefab:
@@ -19727,7 +19727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Minimum: 4.8
-  Maximum: 14.7
+  Maximum: 21.4
 --- !u!114 &871743191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19754,7 +19754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 1
+  MaximumAmount: 2
   Item: {fileID: 11400000, guid: 4c6c665122452a740b9194d1d6d90d50, type: 2}
 --- !u!1001 &876717584
 Prefab:
@@ -35097,7 +35097,8 @@ MonoBehaviour:
   _Mood: 1
   MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
-  OrderCondition: []
+  OrderCondition:
+  - {fileID: 1573881725}
   AllOrderConditionsMustBeMet: 1
   SittingGuests: {fileID: 0}
   OnActivate:
@@ -35126,8 +35127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2b7796d8d843d3af394fea81ef0537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Minimum: 5.7
-  Maximum: 22.6
+  Minimum: 12.8
+  Maximum: 30.4
 --- !u!114 &1573881726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35141,7 +35142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinimumAmount: 1
   MaximumAmount: 5
-  Item: {fileID: 0}
+  Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &1573881727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35154,7 +35155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 1
+  MaximumAmount: 2
   Item: {fileID: 11400000, guid: 4c6c665122452a740b9194d1d6d90d50, type: 2}
 --- !u!1001 &1576588726
 Prefab:
@@ -36817,7 +36818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 1
+  MaximumAmount: 2
   Item: {fileID: 11400000, guid: 4c6c665122452a740b9194d1d6d90d50, type: 2}
 --- !u!1 &1643440189
 GameObject:
