@@ -105,8 +105,8 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(new Vector3(
                 (((float)rand.NextDouble() - 0.5f) * 2 * ThrowPowerVariation) * ThrowPower,
-                (((float)rand.NextDouble() - 0.5f) * 2 * ThrowPowerVariation) * ThrowPower,
-                ((float)rand.NextDouble() * ThrowPowerVariation + 1) * ThrowPower * ThrowYPowerMultiplier
+                ((float)rand.NextDouble() * ThrowPowerVariation + 1) * ThrowPower * ThrowYPowerMultiplier,
+                (((float)rand.NextDouble() - 0.5f) * 2 * ThrowPowerVariation) * ThrowPower
                 ));
         }
     }
