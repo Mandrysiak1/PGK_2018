@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Ivonalvl3 : MonoBehaviour
+public class Ivonalvl4 : MonoBehaviour
 {
     float time = 0f;
     public Image background;
@@ -46,17 +46,17 @@ public class Ivonalvl3 : MonoBehaviour
             {
                 //StopCoroutine(TypeText());
                 bullshitspewingoutofcharactersmouthholyshitbarbecue.text = "";
-                message = "My elves are busy making new toys... They are hungry and exhausted... It's hopeless! We have to call off the Christmas Eve!";
+                message = "Braaaaaaaaaaaaains?";
 
                 flags[1] = true;
                 StartCoroutine(TypeText());
                 //Time.timeScale = 1;
             }
-            if (message == bullshitspewingoutofcharactersmouthholyshitbarbecue.text && flags[1] == true && flags[2] == false) 
+            if (message == bullshitspewingoutofcharactersmouthholyshitbarbecue.text && flags[1] == true && flags[2] == false)
             {
                 //StopCoroutine(TypeText());
                 bullshitspewingoutofcharactersmouthholyshitbarbecue.text = "";
-                message = "Or... maybe you can help us? Please, take care of my little helpers and bring me the gifts that I am asking for, can you? We cannot disappoint the children!";
+                message = "BRAAAAAAAAAAAAAAINS!";
 
                 flags[2] = true;
                 StartCoroutine(TypeText());
