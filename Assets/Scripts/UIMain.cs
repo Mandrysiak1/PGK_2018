@@ -37,6 +37,7 @@ public class UIMain : MonoBehaviour
     public Canvas SuccesCanvas;
     public GameObject MenuConatiner;
     public ScoreSystem scoreSystem;
+    public OrderGenerator orderGenerator;
     
     public MenuActivation menuActiveStatusEvent = new MenuActivation();
     bool _menuActivated;
@@ -59,7 +60,7 @@ public class UIMain : MonoBehaviour
     void Start()
     {
         menuActiveStatusEvent.AddListener(MenuActivationListener);
-
+        MenuActivated = false;
         FailureCanvas.enabled = false;
         SuccesCanvas.enabled = false;
 
@@ -73,11 +74,11 @@ public class UIMain : MonoBehaviour
         Restart.onClick.AddListener(RestartTheGame);
         MainMenu.onClick.AddListener(ExitToMainMenu);
         //Continue.onClick.AddListener(ContinueGame);
-        ResetButtonsEndGame();
+        SetButtons();
 
     }
 
-    private void ResetButtonsEndGame()
+    private void SetButtons()
     {
         if (Flow.HasNextLevel())
         {
@@ -100,16 +101,18 @@ public class UIMain : MonoBehaviour
         {
             case true:
                 this.MenuConatiner.SetActive(true);
+                orderGenerator.enabled = false;
                 break;
             case false:
                 this.MenuConatiner.SetActive(false);
+                orderGenerator.enabled = true;
                 break;
         }
     }
 
     private void Awake()
     {
-        MenuConatiner.SetActive(true);
+        //MenuConatiner.SetActive(true);
     }
 
 
@@ -117,6 +120,7 @@ public class UIMain : MonoBehaviour
     {
         if(arg1 == GameState.Success || arg1 == GameState.Failure)
         {
+            MenuActivated = true;
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + scoreSystem.Score;
         
@@ -150,12 +154,11 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (Input.GetButtonDown("PauseButton")) //CHANGE FOR PAD
         {
             if (mainScript.CurrentGameState == GameState.Playing)
             {
+                MenuActivated = true;
                 EndGameMenuCanvas.enabled = false;
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
@@ -167,6 +170,7 @@ public class UIMain : MonoBehaviour
             }
             else if(mainScript.CurrentGameState == GameState.Paused)
             {
+                MenuActivated = false;
                 PauseCanvas.enabled = false;
                 EndGameMenuCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
@@ -229,6 +233,7 @@ public class UIMain : MonoBehaviour
         MenuActivated = false;
 
         Time.timeScale = 1;
+        
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }
 
