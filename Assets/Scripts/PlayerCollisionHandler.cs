@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerCollisionHandler : MonoBehaviour
@@ -43,6 +44,19 @@ public class PlayerCollisionHandler : MonoBehaviour
         if(IsVulnerable)
         {
             if(!Plate.Empty)
+            {
+                Plate.RemoveAll();
+                if (OnCollisionC != null)
+                    OnCollisionC();
+            }
+        }
+    }
+
+    internal void CustomerCollision(WanderAndChase wanderandchase)
+    {
+        if (IsVulnerable)
+        {
+            if (!Plate.Empty)
             {
                 Plate.RemoveAll();
                 if (OnCollisionC != null)

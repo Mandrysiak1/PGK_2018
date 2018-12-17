@@ -32744,7 +32744,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1407810648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81825aff04611245a1916861449794a, type: 3}
+  m_Script: {fileID: 11500000, guid: bd5e0d1b4c1371f419aeed9f00166055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
@@ -32759,7 +32759,16 @@ MonoBehaviour:
   - {fileID: 1050398277}
   - {fileID: 497207057}
   - {fileID: 1301675800}
-  speedMultiplier: 1.5
+  - {fileID: 1261865726}
+  - {fileID: 1298442297}
+  - {fileID: 2089945134}
+  - {fileID: 1901806223}
+  - {fileID: 1151881111}
+  - {fileID: 289669248}
+  - {fileID: 255869065}
+  - {fileID: 1884857311}
+  speedMultiplier: 2.3
+  chaseRadius: 8
 --- !u!195 &1407810651
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -38242,12 +38251,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1631955530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81825aff04611245a1916861449794a, type: 3}
+  m_Script: {fileID: 11500000, guid: bd5e0d1b4c1371f419aeed9f00166055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   wandererRadius: 3
   wayPoints:
+  - {fileID: 2056198694}
+  - {fileID: 1352784176}
+  - {fileID: 807983233}
+  - {fileID: 1359469900}
+  - {fileID: 993596081}
+  - {fileID: 1496720327}
+  - {fileID: 1050398277}
+  - {fileID: 497207057}
+  - {fileID: 1301675800}
   - {fileID: 1261865726}
   - {fileID: 1298442297}
   - {fileID: 2089945134}
@@ -38256,7 +38274,8 @@ MonoBehaviour:
   - {fileID: 289669248}
   - {fileID: 255869065}
   - {fileID: 1884857311}
-  speedMultiplier: 1.5
+  speedMultiplier: 2.3
+  chaseRadius: 10
 --- !u!195 &1631955533
 NavMeshAgent:
   m_ObjectHideFlags: 0

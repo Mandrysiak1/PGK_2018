@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using QTE;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityStandardAssets.Characters.ThirdPerson;
 
-public class WaypointWandering : MonoBehaviour, IWandering {
+public class WanderAndChase : MonoBehaviour, IWandering {
 
     public NavMeshAgent agent;
     public float wandererRadius = 3f;
@@ -28,8 +27,17 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     private Animator animator;
     private float originalAnimationSpeed;
 
-    void Start ()
+    //
+    private GameObject player;
+    private GameContext gameContext;
+    [SerializeField]
+    private float chaseRadius = 5;
+    private bool hasPlayer = false;
+    void Start()
     {
+        GameContext.FindIfNull(ref gameContext);
+    
+
         if (CollisionHandler == null)
             CollisionHandler = FindObjectOfType<PlayerCollisionHandler>();
         agent = GetComponent<NavMeshAgent>();
@@ -44,8 +52,47 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         originalAnimationSpeed = animator.speed;
     }
 
-	void Update () {    
-        Wander();
+    void Update()
+    {
+        lookForPlayer();
+;
+        if (hasPlayer)
+        {
+            ChasePlayer();
+            Debug.Log("kutas");
+        }
+        else
+        {
+            Debug.Log("aaaaa");
+            Wander();
+        }
+
+    }
+
+    private void ChasePlayer()
+    {
+        agent.SetDestination(player.transform.position);
+
+      ;
+    }
+
+    private void lookForPlayer()
+    {
+        player =  GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
+        {
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance <= chaseRadius)
+            {
+                hasPlayer = true;
+            }
+            else
+            {
+                hasPlayer = false;
+            }
+        }
+        
+       
     }
 
     public void Wander()
@@ -79,7 +126,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         }
         else
         {
-            luck = Random.Range(1, 11);
+            luck = UnityEngine.Random.Range(1, 11);
             if (luck < 6 && luck != 0)
             {
                 isWalking = false;
@@ -102,6 +149,10 @@ public class WaypointWandering : MonoBehaviour, IWandering {
     }
 
     // ppff
+    // ppff
+    // ppff
+    // ppff
+    // ppff
     private IEnumerator StopBecauseOfPlayerCoroutine()
     {
         StopBecauseOfPlayer();
@@ -123,5 +174,5 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         collidedWithPlayer = false;
         agent.speed = originalSpeed;
     }
-
 }
+
