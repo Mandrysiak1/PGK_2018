@@ -9,10 +9,6 @@ using UnityEngine.SceneManagement;
 public class ObstacleGeneratorEventHandeler : MonoBehaviour
 {
     [SerializeField]
-    private int xMin, xMax, zMin, zMax;
-    [SerializeField]
-    private float yValue;
-    [SerializeField]
     private List<GameObject> sittingGuests;
     [SerializeField]
     private float ThrowPower = 110.0f;
@@ -84,9 +80,6 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
         float height = ThrowYOffset;
         Vector3 sittingGuestTopPosition = sittingGuest.transform.position + new Vector3(0, height, 0);
 
-        int x = rand.Next(xMin, xMax);
-        int z = rand.Next(zMin,zMax);
-
         Position = sittingGuestTopPosition;// new Vector3(x, yValue, z);
         //NavMeshHit hit;
         //NavMesh.SamplePosition(Position, out hit, 10, -1);
@@ -96,7 +89,7 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
 
     private void SpawnOnObject()
     {
-        int whatToSpawn = UnityEngine.Random.Range(0, prefabs.Length);
+        int whatToSpawn = rand.Next(0, prefabs.Length - 1);
 
         UnityEngine.Object spawned = Instantiate(prefabs[whatToSpawn], Position, Quaternion.Euler(0, 32.028f, 0));
         GameObject gameObject = spawned as GameObject;
