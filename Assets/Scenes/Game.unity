@@ -3894,7 +3894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamepadSprite: {fileID: 21300000, guid: df1cdba1d3b016d40820b5604b03b737, type: 3}
+  GamepadSprite: {fileID: 21300000, guid: 61b26b83e45c2a94296c738d5bdf37a5, type: 3}
 --- !u!1 &898681918
 GameObject:
   m_ObjectHideFlags: 0
@@ -4423,7 +4423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamepadSprite: {fileID: 21300000, guid: 3a32d4dc61eec2b4bb8cba10132a6380, type: 3}
+  GamepadSprite: {fileID: 21300000, guid: 0e5b842d31520f347bd024295f3ab3d1, type: 3}
 --- !u!1 &1054898956
 GameObject:
   m_ObjectHideFlags: 0
@@ -5497,7 +5497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamepadSprite: {fileID: 21300000, guid: b2f01411aa6553045a8f1334466a8b3f, type: 3}
+  GamepadSprite: {fileID: 21300000, guid: a400fd24babfdf543bf84b0d5a49cdca, type: 3}
 --- !u!1 &1255018897
 GameObject:
   m_ObjectHideFlags: 0
@@ -6970,6 +6970,11 @@ MonoBehaviour:
   MenuConatiner: {fileID: 1883915785}
   scoreSystem: {fileID: 1899919395}
   orderGenerator: {fileID: 1755516342}
+  buttonsSelectableList:
+  - {fileID: 401961477}
+  - {fileID: 658401242}
+  - {fileID: 1669751907}
+  - {fileID: 590132895}
 --- !u!1 &1728133491
 GameObject:
   m_ObjectHideFlags: 0
@@ -7992,8 +7997,8 @@ MonoBehaviour:
   winStreakSource: {fileID: 2059631944}
   winGameWhenTimeIsOver: {fileID: 64088665}
   accumulatedWinStreak: 0
+  accumulatedTip: 0
   coinScoreMultiplier: 3
-  timeBonusCap: 100
 --- !u!1 &1988087357
 GameObject:
   m_ObjectHideFlags: 0

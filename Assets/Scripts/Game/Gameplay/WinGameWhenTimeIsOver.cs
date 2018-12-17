@@ -31,7 +31,8 @@ public class WinGameWhenTimeIsOver : MonoBehaviour
 
         if (Timer > Limit)
         {
-            Main.GameOver(GameState.Success);
+            if(Main.CurrentGameState != GameState.Success && Main.CurrentGameState != GameState.Failure)
+                Main.GameOver(GameState.Success);
         }
     }
 }

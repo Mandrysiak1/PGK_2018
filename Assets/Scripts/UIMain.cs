@@ -1,6 +1,7 @@
 ﻿using Assets.PGKScripts.Enums;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
@@ -40,6 +41,9 @@ public class UIMain : MonoBehaviour
     public OrderGenerator orderGenerator;
     
     public MenuActivation menuActiveStatusEvent = new MenuActivation();
+
+    public List<Button> buttonsSelectableList = new List<Button>();
+
     bool _menuActivated;
     public bool MenuActivated
     {
@@ -123,7 +127,6 @@ public class UIMain : MonoBehaviour
             MenuActivated = true;
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + scoreSystem.Score;
-        
             scoreSystem.ResetScore();
             mainScript.ResetBeersHandedOut();
 
@@ -154,6 +157,14 @@ public class UIMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsInList(EventSystem.current.currentSelectedGameObject))
+        {
+            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+        }
+        if (mainScript.CurrentGameState == GameState.Paused
+                && !IsInPause(EventSystem.current.currentSelectedGameObject))
+            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+
         if (Input.GetButtonDown("PauseButton")) //CHANGE FOR PAD
         {
             if (mainScript.CurrentGameState == GameState.Playing)
@@ -236,5 +247,17 @@ public class UIMain : MonoBehaviour
         
         SceneManager.LoadSceneAsync("Shop", LoadSceneMode.Additive);
     }
-
+    private bool IsInList(GameObject go)
+    {
+        foreach(var el in buttonsSelectableList)
+        {
+            if (el.gameObject.Equals(go))
+                return true;
+        }
+        return false;
+    }
+    private bool IsInPause(GameObject go)
+    {
+        return go.Equals(Restart.gameObject) || go.Equals(MainMenu.gameObject);
+    }
 }
