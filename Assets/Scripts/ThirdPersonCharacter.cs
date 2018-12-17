@@ -15,6 +15,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_MoveSpeedMultiplier = 1f;
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
+        [SerializeField] float MaxAirboneMovingSpeed = 1.3f;
+        [SerializeField] float AirboneMovingAcceleration = 100.0f;
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
@@ -84,6 +86,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			else
 			{
 				HandleAirborneMovement();
+                m_Rigidbody.AddRelativeForce(move * AirboneMovingAcceleration);
+                Vector2 move2D = new Vector2(m_Rigidbody.velocity.x, m_Rigidbody.velocity.z);
+                if (move2D.magnitude > MaxAirboneMovingSpeed)
+                {
+                    move2D = Vector2.ClampMagnitude(move2D, MaxAirboneMovingSpeed);
+                    m_Rigidbody.velocity = new Vector3(move2D.x, m_Rigidbody.velocity.y, move2D.y);
+                }
 			}
 
 			ScaleCapsuleForCrouching(crouch);
@@ -143,6 +152,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
+
 			}
 
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
