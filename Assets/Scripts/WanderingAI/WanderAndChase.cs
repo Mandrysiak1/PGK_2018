@@ -59,11 +59,9 @@ public class WanderAndChase : MonoBehaviour, IWandering {
         if (hasPlayer)
         {
             ChasePlayer();
-            Debug.Log("kutas");
         }
         else
         {
-            Debug.Log("aaaaa");
             Wander();
         }
 
