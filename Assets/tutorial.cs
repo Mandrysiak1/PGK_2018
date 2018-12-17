@@ -57,7 +57,7 @@ public class tutorial : MonoBehaviour {
         {
             bg.enabled = true;
             bartender.enabled = true;
-            bartenderspeech.text = "Come over to the bar and pick up 5 beers. You can put down the beer by pressing 'R' if you ever need to.";
+            bartenderspeech.text = "Come over to the bar and pick up 5 beers. You can put down the beer by pressing 'R' or 'X' on gamepad if you ever need to.";
             bartenderspeech.enabled = true;
             flags[2] = true;
         }
