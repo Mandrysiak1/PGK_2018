@@ -52,8 +52,7 @@ public class UIMainTut : MonoBehaviour
     {
         if (arg1 == GameState.Success || arg1 == GameState.Failure)
         {
-            EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose")
-                                    + ". your score: " + scoreSystem.Score;
+            EndGameText.text = "you " + (mainScript.CurrentGameState == GameState.Success ? "win" : "lose");
             scoreSystem.ResetScore();
             mainScript.ResetBeersHandedOut();
             Time.timeScale = 0;

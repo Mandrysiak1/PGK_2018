@@ -93,7 +93,7 @@ public class tutorial : MonoBehaviour {
         {
             flags[6] = true;
             ManageBarCanvas();
-            bartenderspeech.text = "The guests start getting upset if you make them wait for too long. We're just practicing though, so don't worry. Go again. Practice makes perfect, right?";
+            bartenderspeech.text = "The guests start getting upset if you make them wait for too long. Their mood is represented by emoji floating above them. We're just practicing though, so don't worry. Go again. Practice makes perfect, right?";
             FirstOrder();
         }
         if (flags[6] == true && flags[7] == false)
@@ -148,12 +148,12 @@ public class tutorial : MonoBehaviour {
         if(flags[13]==true && flags[14]==false)
         {
             spawnObject();
-            bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? Good thing I'm not the one mopping the floor. It's you : ^) You'll drop one beer if you slip on it, so watch out.";
+            bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? You'll drop one beer if you slip on it, so watch out.";
             flags[14] = true;
         }
         if (flags[14] == true && flags[15] == false)
         {
-            if (wait12s(ref time))
+            if (wait15s(ref time))
             {
                 bartenderspeech.text = "Oh right. The \"final task\". Let's see how you doin' it under pressure. When clients are angry, the bar at the top fills up. When it fills, we ALL DIE. Total mayhem. I'll give you some time to prepare for it.";
                 flags[15] = true;
@@ -161,7 +161,7 @@ public class tutorial : MonoBehaviour {
         }
         if(flags[15]==true && flags[20]==false)
         {
-            if (wait10s(ref time)) flags[20] = true;
+            if (wait12s(ref time)) flags[20] = true;
         }
         if(flags[20]==true && flags[21] == false)
         {
@@ -189,6 +189,7 @@ public class tutorial : MonoBehaviour {
             ManageBarCanvas();
             if (orderSource.CurrentOrder == null)
             {
+                winstreak.WinStreak += 1;
                 DisableBarCanvas();
                 flags[19] = true;
                 bartenderspeech.text = "We're alive! Good job. You're ready for the real deal. Peak hours with angry people demanding alcohol. 2 minutes. What could go wrong aye?";
@@ -196,6 +197,9 @@ public class tutorial : MonoBehaviour {
         }
         if(flags[19]==true && wait10s(ref time))
         {
+            bg.enabled = false;
+            bartender.enabled = false;
+            bartenderspeech.enabled = false;
             ms.GameOver(GameState.Success);
         }
         /*if (flags[8] == true && flags[9] == false)
