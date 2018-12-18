@@ -56,7 +56,7 @@ public class Ivonalvl4 : MonoBehaviour
             {
                 //StopCoroutine(TypeText());
                 bullshitspewingoutofcharactersmouthholyshitbarbecue.text = "";
-                message = "BRAAAAAAAAAAAAINS!";
+                message = "BRAAAAAAAAAAAAAAINS!";
 
                 flags[2] = true;
                 StartCoroutine(TypeText());
