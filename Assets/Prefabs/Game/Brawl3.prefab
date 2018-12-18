@@ -1422,6 +1422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4120099925155506}
   - component: {fileID: 95070767158768032}
+  - component: {fileID: 114202052536201550}
   m_Layer: 0
   m_Name: Elf_fightingA
   m_TagString: Untagged
@@ -2334,7 +2335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1791094523278062
 GameObject:
   m_ObjectHideFlags: 1
@@ -2389,6 +2390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4804319603542246}
   - component: {fileID: 95838144013839022}
+  - component: {fileID: 114155972905925728}
   m_Layer: 0
   m_Name: Elf_fightingB
   m_TagString: Untagged
@@ -3812,8 +3814,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198521476249758}
-  m_LocalRotation: {x: 0.3204775, y: 0.35273188, z: -0.13001353, w: 0.86946595}
-  m_LocalPosition: {x: 105.83089, y: 7.130497, z: -112.58833}
+  m_LocalRotation: {x: -0.33038193, y: -0.34614706, z: 0.13172945, w: -0.8681459}
+  m_LocalPosition: {x: 107.96853, y: 4.599227, z: -110.374054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4398894297068318}
@@ -4669,15 +4671,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1785555035463966}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 101.07, y: 1.028, z: -60.52}
+  m_LocalRotation: {x: -0, y: -0.2583554, z: -0, w: 0.96604997}
+  m_LocalPosition: {x: 96.369, y: 1.0279999, z: -63.984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4804319603542246}
   - {fileID: 4120099925155506}
   m_Father: {fileID: 4611879211747210}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -29.945002, z: 0}
 --- !u!4 &4678488325430338
 Transform:
   m_ObjectHideFlags: 1
@@ -5674,7 +5676,7 @@ Animator:
   m_GameObject: {fileID: 1798017939560914}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e1345f231bddd7a488397fb5ca71c0cb, type: 3}
-  m_Controller: {fileID: 9100000, guid: f0ca12d88ea8fc74b9382625b15ab1be, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7315f2149a1d3a140ba3fb3fc599777c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -5701,6 +5703,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114155972905925728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1798017939560914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772cbc3298ffb4429f16f4b63870595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartState: 0
+  AnimationOffset: 0
+--- !u!114 &114202052536201550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501494625900076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772cbc3298ffb4429f16f4b63870595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartState: 0
+  AnimationOffset: 0
 --- !u!114 &114361625267309486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5712,12 +5740,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c0942e1f0149c081b7bf17ad1e7a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variants:
-  - {fileID: 1785555035463966}
-  - {fileID: 1591432378057230}
+  Variants: {fileID: 1241093961289632}
   CameraPosition: {fileID: 4397567255766992}
   Insults:
-  - WHERE IS MY CAKE?!
+  - OH NO! There wilL be no christmas this year!
   StartSound: {fileID: 8300000, guid: 9c5ca09e790fe4e51b965a90ad35825a, type: 3}
 --- !u!137 &137118962031614104
 SkinnedMeshRenderer:

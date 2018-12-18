@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38074008, b: 0.35872707, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -745,6 +745,21 @@ Prefab:
       propertyPath: Punches
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114978451225602990, guid: 7991a2fec6a594093811c58f562c6edc,
+        type: 2}
+      propertyPath: LoseCanvas
+      value: 
+      objectReference: {fileID: 560254109}
+    - target: {fileID: 114978451225602990, guid: 7991a2fec6a594093811c58f562c6edc,
+        type: 2}
+      propertyPath: EndGameUI
+      value: 
+      objectReference: {fileID: 1883915785}
+    - target: {fileID: 114978451225602990, guid: 7991a2fec6a594093811c58f562c6edc,
+        type: 2}
+      propertyPath: UIMainObject
+      value: 
+      objectReference: {fileID: 1696156338}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7991a2fec6a594093811c58f562c6edc, type: 2}
   m_IsPrefabAsset: 0
@@ -7995,7 +8010,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1883915785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 

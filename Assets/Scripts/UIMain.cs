@@ -133,7 +133,8 @@ public class UIMain : MonoBehaviour
     {
         if(arg1 == GameState.Success || arg1 == GameState.Failure)
         {
-            MenuActivated = true;
+            if(arg1 == GameState.Success)
+                MenuActivated = true;
             EventSystem.current.SetSelectedGameObject(Restart.gameObject);
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + scoreSystem.Score;

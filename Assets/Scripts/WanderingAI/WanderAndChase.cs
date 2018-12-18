@@ -68,7 +68,7 @@ public class WanderAndChase : MonoBehaviour, IWandering {
     }
 
     private void ChasePlayer()
-    {
+    {if(player != null)
         agent.SetDestination(player.transform.position);
 
       ;
