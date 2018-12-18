@@ -118,7 +118,7 @@ public class tutorial : MonoBehaviour {
         }
         if(flags[9] == true && flags[10] == false)
         {
-            if (Input.GetButton("Perk_1") || Input.GetButton("Perk_2") || Input.GetButton("Perk_3"))  
+            if (Input.GetButton("Perk_1") || Input.GetButton("Perk_2") || Input.GetButton("Perk_3") || Input.GetAxis("TriggerLeft") > 0f || Input.GetAxis("TriggerLeft") > 0f || Input.GetButtonDown("LB"))
             {
                 bartenderspeech.text = "Fast as sanic and strong as Pudzian. Remember though, with great power comes great responsibility. Now now, deliver the beer, the clients are waiting.";
                 ManageBarCanvas();
