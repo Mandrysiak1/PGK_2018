@@ -17,6 +17,22 @@ public class GamepadSpriteImageChanger : ButtonVisualization
     }
     protected override void Refresh()
     {
-        image.sprite = GamepadMode ? GamepadSprite : keySprite;
+        //image.sprite = GamepadMode ? GamepadSprite : keySprite;
+        if (GamepadMode == true)
+        {
+            image.sprite = GamepadSprite;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            image.sprite = keySprite;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
     }
 }
