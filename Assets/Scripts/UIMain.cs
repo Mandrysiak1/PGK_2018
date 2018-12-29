@@ -146,12 +146,16 @@ public class UIMain : MonoBehaviour
             //{
                 if (arg1 == GameState.Success)
                 {
-                    NextLvlCanv.enabled = true;
-                    SuccesCanvas.enabled = true;
+                    //NextLvlCanv.enabled = true;
+                NextLvlCanv.gameObject.SetActive(true);
+                SuccesCanvas.enabled = true;
                 }
                 else if(arg1 == GameState.Failure)
                 {
-                    FailureCanvas.enabled = true;   
+                    Restart.transform.position = GoToShop.transform.position;
+                    MainMenu.transform.position = NextLevel.transform.position;
+                    FailureCanvas.enabled = true;
+                    NextLvlCanv.gameObject.SetActive(false);
                 }
                 else
                 {

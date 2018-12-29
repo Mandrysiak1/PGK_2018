@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class Ivonalvl2 : MonoBehaviour
 {
@@ -9,14 +10,17 @@ public class Ivonalvl2 : MonoBehaviour
     public Image XboxKey;
     public Text bullshitspewingoutofcharactersmouthholyshitbarbecue;
     public Image charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong;
+    public TextMeshProUGUI E;
     string message;
     public float letterPaused = 0.1f;
     bool[] flags = new bool[99];
     // Use this for initialization
     void Start()
     {
+        E = XboxKey.GetComponentInChildren<TextMeshProUGUI>();
         background.enabled = false;
         XboxKey.enabled = false;
+        E.enabled = true;
         charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong.enabled = false;
         bullshitspewingoutofcharactersmouthholyshitbarbecue.enabled = false;
 
@@ -35,6 +39,7 @@ public class Ivonalvl2 : MonoBehaviour
             bullshitspewingoutofcharactersmouthholyshitbarbecue.text = "";
             background.enabled = true;
             XboxKey.enabled = true;
+            E.enabled = false;
             charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong.enabled = true;
             bullshitspewingoutofcharactersmouthholyshitbarbecue.enabled = true;
             //Call the function and expect yield to return
@@ -56,6 +61,7 @@ public class Ivonalvl2 : MonoBehaviour
                 //StopCoroutine(TypeText());
                 background.enabled = false;
                 XboxKey.enabled = false;
+                E.enabled = false;
                 charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong.enabled = false;
                 bullshitspewingoutofcharactersmouthholyshitbarbecue.enabled = false;
                 Time.timeScale = 1;

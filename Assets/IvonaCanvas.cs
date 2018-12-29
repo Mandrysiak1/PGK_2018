@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class IvonaCanvas : MonoBehaviour {
     float time = 0f;
@@ -8,6 +9,7 @@ public class IvonaCanvas : MonoBehaviour {
     public Image XboxKey;
     public Text bullshitspewingoutofcharactersmouthholyshitbarbecue;
     public Image charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong;
+    public TextMeshProUGUI E;
     string message;
     public float letterPaused = 0.1f;
     bool flag;
@@ -16,6 +18,7 @@ public class IvonaCanvas : MonoBehaviour {
     {
         background.enabled = false;
         XboxKey.enabled = false;
+        E.enabled = true;
         charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong.enabled = false;
         bullshitspewingoutofcharactersmouthholyshitbarbecue.enabled = false;
 
@@ -46,6 +49,7 @@ public class IvonaCanvas : MonoBehaviour {
                 //StopCoroutine(TypeText());
                 background.enabled = false;
                 XboxKey.enabled = false;
+                E.enabled = false;
                 charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong.enabled = false;
                 bullshitspewingoutofcharactersmouthholyshitbarbecue.enabled = false;
                 Time.timeScale = 1;
