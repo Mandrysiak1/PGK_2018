@@ -36,6 +36,7 @@ public class UIMain : MonoBehaviour
     public Canvas EndGameMenuCanvas;
     public Canvas FailureCanvas;
     public Canvas SuccesCanvas;
+    public Canvas PauseCanvasBackground;
     public GameObject MenuConatiner;
     public ScoreSystem scoreSystem;
     public OrderGenerator orderGenerator;
@@ -73,7 +74,7 @@ public class UIMain : MonoBehaviour
         MenuActivated = false;
         FailureCanvas.enabled = false;
         SuccesCanvas.enabled = false;
-
+        PauseCanvasBackground.enabled = false;
         PauseCanvas.enabled = false;
 
         Time.timeScale = 1;
@@ -193,6 +194,7 @@ public class UIMain : MonoBehaviour
                 EndGameCanvas.enabled = true;
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
+                PauseCanvasBackground.enabled = true;
                 //Continue.gameObject.SetActive(false);
                 Time.timeScale = 0;
 
@@ -202,6 +204,7 @@ public class UIMain : MonoBehaviour
             {
                 MenuActivated = false;
                 PauseCanvas.enabled = false;
+                PauseCanvasBackground.enabled = false;
                 EndGameMenuCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
