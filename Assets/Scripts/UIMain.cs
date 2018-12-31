@@ -136,7 +136,7 @@ public class UIMain : MonoBehaviour
         {
             if(arg1 == GameState.Success)
                 MenuActivated = true;
-            EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+            //EventSystem.current.SetSelectedGameObject(Restart.gameObject);
             EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose")
                                     + ". your score: " + scoreSystem.Score;
             scoreSystem.ResetScore();
@@ -148,11 +148,13 @@ public class UIMain : MonoBehaviour
                 if (arg1 == GameState.Success)
                 {
                     //NextLvlCanv.enabled = true;
-                NextLvlCanv.gameObject.SetActive(true);
-                SuccesCanvas.enabled = true;
+                    EventSystem.current.SetSelectedGameObject(GoToShop.gameObject);
+                    NextLvlCanv.gameObject.SetActive(true);
+                    SuccesCanvas.enabled = true;
                 }
                 else if(arg1 == GameState.Failure)
                 {
+                    EventSystem.current.SetSelectedGameObject(Restart.gameObject);
                     Restart.transform.position = GoToShop.transform.position;
                     MainMenu.transform.position = NextLevel.transform.position;
                     FailureCanvas.enabled = true;
@@ -177,7 +179,10 @@ public class UIMain : MonoBehaviour
         {
             if (!IsInList(EventSystem.current.currentSelectedGameObject))
             {
-                EventSystem.current.SetSelectedGameObject(Restart.gameObject);
+                if (mainScript.CurrentGameState == GameState.Success)
+                    EventSystem.current.SetSelectedGameObject(GoToShop.gameObject);
+                else
+                    EventSystem.current.SetSelectedGameObject(Restart.gameObject);
             }
             if (mainScript.CurrentGameState == GameState.Paused
                     && !IsInPause(EventSystem.current.currentSelectedGameObject))
