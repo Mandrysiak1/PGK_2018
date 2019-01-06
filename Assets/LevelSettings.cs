@@ -4,9 +4,8 @@ using UnityEngine.EventSystems;
 
 public class LevelSettings : MonoBehaviour
 {
-
     [SerializeField]
-    private LevelFlow LevelFlow;
+    private GameFlowController GameFlow;
 
     public GameObject MainMenu;
 
@@ -27,31 +26,31 @@ public class LevelSettings : MonoBehaviour
     }
     private void Awake()
     {
-        Level1 = LevelFlow.GetFirstLevel();
-        Level2 = LevelFlow.GetNextLevel(Level1);
-        Level3 = LevelFlow.GetNextLevel(Level2);
-        Level4 = LevelFlow.GetNextLevel(Level3);
+        Level1 = GameFlow.Flow.GetFirstLevel();
+        Level2 = GameFlow.Flow.GetNextLevel(Level1);
+        Level3 = GameFlow.Flow.GetNextLevel(Level2);
+        Level4 = GameFlow.Flow.GetNextLevel(Level3);
         ResetFirstButton();
     }
 
     public void Load1()
     {
-        LevelLoader.StartLevel(Level1);
+        GameFlow.StartLevel(Level1);
     }
 
     public void Load2()
     {
-        LevelLoader.StartLevel(Level2);
+        GameFlow.StartLevel(Level2);
     }
 
     public void Load3()
     {
-        LevelLoader.StartLevel(Level3);
+        GameFlow.StartLevel(Level3);
     }
 
     public void Load4()
     {
-        LevelLoader.StartLevel(Level4);
+        GameFlow.StartLevel(Level4);
     }
 
     public void ReturnToMM()
