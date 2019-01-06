@@ -19,7 +19,7 @@ namespace Assets.Scripts.Perks.UI
             keyButton.gameObject.SetActive(false);
         }
 
-        public override void Show(PerkStatus status, int time = 0)
+        public override void Show(PerkStatus status, float time = 0, float topTime = 0)
         {
             if (PerkStarted)
                 ChangeTransparency(0);

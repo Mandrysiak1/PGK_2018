@@ -217,7 +217,7 @@ public class WinStreak : MonoBehaviour
     {
         for(int i = tuple.Perk.Quantity; i >= 0; i--)
         {
-            tuple.UI.Show(PerkStatus.Running, i);
+            tuple.UI.Show(PerkStatus.Running, i, tuple.Perk.Quantity);
             yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(0.1f);

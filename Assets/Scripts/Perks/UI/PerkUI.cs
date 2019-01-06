@@ -12,6 +12,7 @@ namespace Assets.Scripts.Perks.UI
         public RawImage glowIcon;
         public RawImage grayIcon;
         public Button keyButton;
+        public Image progressBar;
         protected bool availible = false;
         public bool Availible
         {
@@ -84,9 +85,11 @@ namespace Assets.Scripts.Perks.UI
             glowIcon.enabled = false;
             grayIcon.enabled = true;
             keyButton.gameObject.SetActive(false);
+            progressBar.fillAmount = 1;
+            progressBar.enabled = false;
         }
 
-        public virtual void Show(PerkStatus status, int time = 0)
+        public virtual void Show(PerkStatus status, float time = 0, float topTime = 10)
         {
             if(PerkStarted)
                 ChangeTransparency(0);
@@ -94,9 +97,24 @@ namespace Assets.Scripts.Perks.UI
             icon.enabled = true;
             glowIcon.enabled = true;
             if(status == PerkStatus.Running)
-                keyButton.gameObject.SetActive(false);
+            {
+                progressBar.enabled = true;
+                if (keyButton.gameObject.activeInHierarchy)
+                    keyButton.gameObject.SetActive(false);
+                if(time != 0.0f)
+                {
+                    progressBar.fillAmount = time / topTime;
+                }
+                else
+                {
+                    progressBar.fillAmount = 0;
+                }
+            }
             else
-                keyButton.gameObject.SetActive(true);
+            {
+                if(!keyButton.gameObject.activeInHierarchy)
+                    keyButton.gameObject.SetActive(true);
+            }
         }
     }
 }
