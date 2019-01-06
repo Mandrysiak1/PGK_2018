@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityStandardAssets.Characters.ThirdPerson;
+using Assets.Scripts.Perks.Interfaces;
 
 
 public class WinStreak : MonoBehaviour
@@ -34,7 +35,7 @@ public class WinStreak : MonoBehaviour
                     {
                         UI.Availible = true;
                         Perk.Availible = true;
-                        UI.Show("");
+                        UI.Show(PerkStatus.Standard);
                     }
                 }
             }
@@ -216,7 +217,7 @@ public class WinStreak : MonoBehaviour
     {
         for(int i = tuple.Perk.Quantity; i >= 0; i--)
         {
-            tuple.UI.Show(i.ToString());
+            tuple.UI.Show(PerkStatus.Running, i);
             yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(0.1f);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Perks.Interfaces;
+using System.Collections;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace Assets.Scripts.Perks.UI
     {
         public RawImage icon;
         public RawImage glowIcon;
-        public Text caption;
+        public RawImage grayIcon;
         public Button keyButton;
         protected bool availible = false;
         public bool Availible
@@ -81,21 +82,21 @@ namespace Assets.Scripts.Perks.UI
         {
             icon.enabled = false;
             glowIcon.enabled = false;
-            caption.enabled = false;
-            caption.text = "";
+            grayIcon.enabled = true;
             keyButton.gameObject.SetActive(false);
         }
 
-        public virtual void Show(string status)
+        public virtual void Show(PerkStatus status, int time = 0)
         {
             if(PerkStarted)
                 ChangeTransparency(0);
+            grayIcon.enabled = false;
             icon.enabled = true;
             glowIcon.enabled = true;
-            caption.enabled = true;
-            keyButton.gameObject.SetActive(true);
-            caption.text = status.ToString();
-            caption.color = Color.green;
+            if(status == PerkStatus.Running)
+                keyButton.gameObject.SetActive(false);
+            else
+                keyButton.gameObject.SetActive(true);
         }
     }
 }

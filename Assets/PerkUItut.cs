@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Perks.Interfaces;
+using System.Collections;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
@@ -15,21 +16,16 @@ namespace Assets.Scripts.Perks.UI
             tutex.enabled = false;
             icon.enabled = false;
             glowIcon.enabled = false;
-            caption.enabled = false;
-            caption.text = "";
             keyButton.gameObject.SetActive(false);
         }
 
-        public override void Show(string status)
+        public override void Show(PerkStatus status, int time = 0)
         {
             if (PerkStarted)
                 ChangeTransparency(0);
             icon.enabled = true;
             glowIcon.enabled = true;
-            caption.enabled = true;
             keyButton.gameObject.SetActive(true);
-            caption.text = status.ToString();
-            caption.color = Color.green;
             tutex.enabled = true;
         }
     }
