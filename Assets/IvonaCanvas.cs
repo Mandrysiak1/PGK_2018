@@ -8,6 +8,8 @@ public class IvonaCanvas : MonoBehaviour {
     float time = 0f;
     [SerializeField]
     private List<string> Messages;
+    [SerializeField]
+    private List<AudioSource> audioSources;
     private int correntMessage = 0;
     public Image background;
     public Image black;
@@ -28,9 +30,6 @@ public class IvonaCanvas : MonoBehaviour {
         E.enabled = true;
         image.enabled = false;
         textField.enabled = false;
-
-
-
     }
 
     void Update()
@@ -55,10 +54,12 @@ public class IvonaCanvas : MonoBehaviour {
             ui.enabled = false;
             //Call the function and expect yield to return
             coroutine1 = StartCoroutine(TypeText());
-
+            audioSources[correntMessage].Play();
         }
         if (Input.GetButtonDown("Submit") && flag == true) 
         {
+            if(correntMessage < Messages.Count )
+                audioSources[correntMessage].Stop();
             correntMessage++;
             if (Input.GetButtonDown("Submit") && flag == true && correntMessage == Messages.Count)
             {
@@ -70,15 +71,15 @@ public class IvonaCanvas : MonoBehaviour {
                 image.enabled = false;
                 textField.enabled = false;
                 Time.timeScale = 1;
-            }else 
+            }
+            else 
             if (correntMessage <= Messages.Count)
             {
                 StopCoroutine(coroutine1);
                 textField.text = "";
                 message = Messages[correntMessage];
                 coroutine1 = StartCoroutine(TypeText());
-
-
+                audioSources[correntMessage].Play();
             }
         }
     }
