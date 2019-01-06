@@ -6,7 +6,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TextScript : MonoBehaviour {
+public class TextScript : MonoBehaviour
+{
+    [SerializeField]
+    private SaveSystem Save;
 
     public Text txt;
     public TextMeshProUGUI Beertxt;
@@ -52,13 +55,16 @@ public class TextScript : MonoBehaviour {
     public void StarPurchase()
     {
         UpgradeClass.MarioStar();
+        Save.Sync();
     }
     public void BeerPurchase()
     {
         UpgradeClass.ChangeMaxBeer();
+        Save.Sync();
     }
     public void SpeedPurchase()
     {
         UpgradeClass.ChangeSpeedModif();
+        Save.Sync();
     }
 }

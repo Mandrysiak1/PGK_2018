@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427147, b: 0.56452364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Context: {fileID: 0}
   orderToPick: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
+  mainScript: {fileID: 0}
 --- !u!4 &11517048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4273688157869604, guid: 3161759af5fd0904f867f436ee0d91fc,
@@ -6230,6 +6231,8 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.85
   m_AnimSpeedMultiplier: 0.85
   m_GroundCheckDistance: 0.3
+  MaxAirboneMovingSpeed: 1.3
+  AirboneMovingAcceleration: 100
 --- !u!114 &939845471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6616,6 +6619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fbf10ea131bd54b9d044fb1002067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Save: {fileID: 11400000, guid: 40f9ce1632b594ddcb4c389aa9bbc8b2, type: 2}
   txt: {fileID: 1662158116}
   Beertxt: {fileID: 679547572}
   Speedtxt: {fileID: 1004130739}
