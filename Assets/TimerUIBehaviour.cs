@@ -9,8 +9,11 @@ public class TimerUIBehaviour : MonoBehaviour {
     public WinGameWhenTimeIsOver timer;
     public Image glowIcon;
     public Image icon;
-    public float timerPulsateTime = 10;
+    public float timerPulsateTime = 20;
     private bool bloomInitialized = false;
+
+    private Coroutine bloomCoroutine;
+
 	// Use this for initialization
 	void Start () {
         if (timer == null)
@@ -25,15 +28,20 @@ public class TimerUIBehaviour : MonoBehaviour {
             if(!bloomInitialized)
             {
                 glowIcon.enabled = true;
-                StartCoroutine(BloomEffect());
+                bloomCoroutine = StartCoroutine(BloomEffect());
             }
         }
         else
         {
             if (bloomInitialized)
+            {
                 glowIcon.enabled = false;
+                StopCoroutine(bloomCoroutine);
+            }
         }
-	}
+        icon.fillAmount = Mathf.Abs(timer.Limit - timer.Timer) / timer.Limit;
+
+    }
 
     protected IEnumerator BloomEffect()
     {
