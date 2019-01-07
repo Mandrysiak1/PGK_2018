@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000088, guid: 0f6501bfb00af0b4e9e62e3e2d7d9f7a,
+  m_LightingDataAsset: {fileID: 112000072, guid: 97d13e1e3a512444cb0c0e5b617f0b2e,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -2754,7 +2754,7 @@ Prefab:
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.44
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
@@ -4838,11 +4838,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10829968, guid: b31201a66f5cad74eb0b268df378ae18, type: 2}
       propertyPath: m_Range
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 10878982, guid: b31201a66f5cad74eb0b268df378ae18, type: 2}
       propertyPath: m_Range
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b31201a66f5cad74eb0b268df378ae18, type: 2}
@@ -11961,7 +11961,7 @@ Prefab:
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.63
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
@@ -11996,7 +11996,7 @@ Prefab:
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 3.08
+      value: 2.98
       objectReference: {fileID: 0}
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
@@ -20417,7 +20417,7 @@ MonoBehaviour:
   - {fileID: 935787108}
   - {fileID: 935787109}
   _Mood: 1
-  MoodDecreaseRate: 0.1
+  MoodDecreaseRate: 0.08
   ActivationCondition: {fileID: 935787110}
   OrderCondition:
   - {fileID: 935787107}
@@ -20463,7 +20463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &935787109
 MonoBehaviour:
@@ -20477,7 +20477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &935787110
 MonoBehaviour:
@@ -20828,7 +20828,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 950009051}
-  - component: {fileID: 950009050}
   - component: {fileID: 950009052}
   m_Layer: 0
   m_Name: ObstacleGenerator
@@ -20837,22 +20836,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &950009050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 950009049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7758f37b403b8af49936749218420854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sittingGuests: []
-  ThrowPower: 110
-  ThrowPowerVariation: 0.25
-  ThrowYOffset: 0.5
-  ThrowYPowerMultiplier: 2
 --- !u!4 &950009051
 Transform:
   m_ObjectHideFlags: 0
@@ -24160,7 +24143,7 @@ MonoBehaviour:
   - {fileID: 1096031366}
   - {fileID: 1096031367}
   _Mood: 1
-  MoodDecreaseRate: 0.035
+  MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
   OrderCondition:
   - {fileID: 1096031364}
@@ -24193,7 +24176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &1096031367
 MonoBehaviour:
@@ -24207,7 +24190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!1001 &1096475546
 Prefab:
@@ -30422,7 +30405,7 @@ ParticleSystem:
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.78
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -30475,7 +30458,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.16
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -30525,7 +30508,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    maxLights: 20
+    maxLights: 10
   TrailModule:
     enabled: 0
     mode: 0
@@ -33582,6 +33565,21 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.2307703
       objectReference: {fileID: 0}
+    - target: {fileID: 198613835509712646, guid: d8a3982d045f8e74d9df34be3e13c13b,
+        type: 2}
+      propertyPath: LightsModule.rangeCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198613835509712646, guid: d8a3982d045f8e74d9df34be3e13c13b,
+        type: 2}
+      propertyPath: LightsModule.intensityCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198613835509712646, guid: d8a3982d045f8e74d9df34be3e13c13b,
+        type: 2}
+      propertyPath: LightsModule.maxLights
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8a3982d045f8e74d9df34be3e13c13b, type: 2}
   m_IsPrefabAsset: 0
@@ -36506,7 +36504,7 @@ MonoBehaviour:
   - {fileID: 1418145673}
   - {fileID: 1418145674}
   _Mood: 1
-  MoodDecreaseRate: 0.1
+  MoodDecreaseRate: 0.08
   ActivationCondition: {fileID: 1418145675}
   OrderCondition:
   - {fileID: 1418145672}
@@ -36552,7 +36550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &1418145674
 MonoBehaviour:
@@ -36566,7 +36564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &1418145675
 MonoBehaviour:
@@ -39692,7 +39690,7 @@ Prefab:
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.65
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 224314732736270846, guid: e141f7f47505f46acb40c5e2da0ceb4a,
         type: 2}
@@ -42490,6 +42488,14 @@ Prefab:
     - target: {fileID: 457194, guid: 5f8ab9c7ee6dbd043b21535eae1b7a37, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10898946, guid: 5f8ab9c7ee6dbd043b21535eae1b7a37, type: 2}
+      propertyPath: m_Range
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10898946, guid: 5f8ab9c7ee6dbd043b21535eae1b7a37, type: 2}
+      propertyPath: m_Intensity
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f8ab9c7ee6dbd043b21535eae1b7a37, type: 2}
@@ -46384,7 +46390,7 @@ MonoBehaviour:
   - {fileID: 1857208112}
   - {fileID: 1857208113}
   _Mood: 1
-  MoodDecreaseRate: 0.035
+  MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
   OrderCondition:
   - {fileID: 1857208111}
@@ -46430,7 +46436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &1857208113
 MonoBehaviour:
@@ -46444,7 +46450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!1 &1859413289
 GameObject:
@@ -57226,7 +57232,7 @@ MonoBehaviour:
   - {fileID: 2133864780}
   - {fileID: 2133864781}
   _Mood: 1
-  MoodDecreaseRate: 0.035
+  MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
   OrderCondition:
   - {fileID: 2133864779}
@@ -57272,7 +57278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &2133864781
 MonoBehaviour:
@@ -57286,7 +57292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!1 &2135348467
 GameObject:

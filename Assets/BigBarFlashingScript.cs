@@ -8,7 +8,6 @@ public class BigBarFlashingScript : MonoBehaviour {
     public Slider bigBar;
     public RawImage glow;
     bool shouldFlash = false;
-
     private float initialValue = 0;
 
 	void Start () {
@@ -42,6 +41,13 @@ public class BigBarFlashingScript : MonoBehaviour {
                 if (c >= 3.14)
                     c = 0;
                 ChangeTransparency(Balance(c));
+                if(bigBar.value <= initialValue)
+                {
+                    initialValue = bigBar.value;
+                    ChangeTransparency(0);
+                    c = 0;
+                    shouldFlash = false;
+                }
             }
             yield return null;
         }
@@ -62,7 +68,6 @@ public class BigBarFlashingScript : MonoBehaviour {
                 shouldFlash = false;
             }
         }
-
         initialValue = value;
     }
 
