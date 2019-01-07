@@ -20417,7 +20417,7 @@ MonoBehaviour:
   - {fileID: 935787108}
   - {fileID: 935787109}
   _Mood: 1
-  MoodDecreaseRate: 0.1
+  MoodDecreaseRate: 0.08
   ActivationCondition: {fileID: 935787110}
   OrderCondition:
   - {fileID: 935787107}
@@ -20463,7 +20463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &935787109
 MonoBehaviour:
@@ -20477,7 +20477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &935787110
 MonoBehaviour:
@@ -20828,7 +20828,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 950009051}
-  - component: {fileID: 950009050}
   - component: {fileID: 950009052}
   m_Layer: 0
   m_Name: ObstacleGenerator
@@ -20837,22 +20836,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &950009050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 950009049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7758f37b403b8af49936749218420854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sittingGuests: []
-  ThrowPower: 110
-  ThrowPowerVariation: 0.25
-  ThrowYOffset: 0.5
-  ThrowYPowerMultiplier: 2
 --- !u!4 &950009051
 Transform:
   m_ObjectHideFlags: 0
@@ -24160,7 +24143,7 @@ MonoBehaviour:
   - {fileID: 1096031366}
   - {fileID: 1096031367}
   _Mood: 1
-  MoodDecreaseRate: 0.035
+  MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
   OrderCondition:
   - {fileID: 1096031364}
@@ -24193,7 +24176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &1096031367
 MonoBehaviour:
@@ -24207,7 +24190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!1001 &1096475546
 Prefab:
@@ -36506,7 +36489,7 @@ MonoBehaviour:
   - {fileID: 1418145673}
   - {fileID: 1418145674}
   _Mood: 1
-  MoodDecreaseRate: 0.1
+  MoodDecreaseRate: 0.08
   ActivationCondition: {fileID: 1418145675}
   OrderCondition:
   - {fileID: 1418145672}
@@ -36552,7 +36535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &1418145674
 MonoBehaviour:
@@ -36566,7 +36549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!114 &1418145675
 MonoBehaviour:
@@ -46384,7 +46367,7 @@ MonoBehaviour:
   - {fileID: 1857208112}
   - {fileID: 1857208113}
   _Mood: 1
-  MoodDecreaseRate: 0.035
+  MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
   OrderCondition:
   - {fileID: 1857208111}
@@ -46430,7 +46413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &1857208113
 MonoBehaviour:
@@ -46444,7 +46427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!1 &1859413289
 GameObject:
@@ -57226,7 +57209,7 @@ MonoBehaviour:
   - {fileID: 2133864780}
   - {fileID: 2133864781}
   _Mood: 1
-  MoodDecreaseRate: 0.035
+  MoodDecreaseRate: 0.02
   ActivationCondition: {fileID: 0}
   OrderCondition:
   - {fileID: 2133864779}
@@ -57272,7 +57255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: 022e7b5c9e7e9d54d97c93d461db5c97, type: 2}
 --- !u!114 &2133864781
 MonoBehaviour:
@@ -57286,7 +57269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumAmount: 1
-  MaximumAmount: 5
+  MaximumAmount: 4
   Item: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
 --- !u!1 &2135348467
 GameObject:
