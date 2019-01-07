@@ -20,6 +20,12 @@ public class GlowingScript : MonoBehaviour {
                 outlines[i].OutlineColor = color;
                 outlines[i].OutlineWidth = 1f;
             }
+            else if (objects[i].tag == "SignElement")
+            {
+                outlines[i].enabled = true;
+                outlines[i].OutlineColor = color;
+                outlines[i].OutlineWidth = 2f;
+            }
             else
             {
                 outlines[i].enabled = false;
@@ -37,6 +43,11 @@ public class GlowingScript : MonoBehaviour {
                     outlines[i].OutlineColor = Color.red;
                     outlines[i].OutlineWidth = 2f;
                 }
+                else if (objects[i].tag == "SignElement")
+                {
+                    outlines[i].OutlineColor = Color.white;
+                    outlines[i].OutlineWidth = 2f;
+                }
                 else
                 {
                     outlines[i].enabled = true;
@@ -51,6 +62,11 @@ public class GlowingScript : MonoBehaviour {
                 {
                     outlines[i].OutlineColor = color;
                     outlines[i].OutlineWidth = 1f;
+                }
+                else if (objects[i].tag == "SignElement")
+                {
+                    outlines[i].OutlineColor = color;
+                    outlines[i].OutlineWidth = 2f;
                 }
                 else
                 {
