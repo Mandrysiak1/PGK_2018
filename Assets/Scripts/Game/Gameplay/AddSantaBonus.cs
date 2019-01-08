@@ -16,8 +16,8 @@ public class AddSantaBonus : MonoBehaviour
     private OrderItem SantaOrder;
     [SerializeField]
     private float disableTime = 60;
-    
-    
+
+
     private GameContext Context;
     private HashSet<OrderSource> DisabledSources = new HashSet<OrderSource>();
     private float time = 0;
@@ -33,6 +33,7 @@ public class AddSantaBonus : MonoBehaviour
         time += Time.deltaTime;
         if(time >= disableTime)
         {
+            time = 0;
             disableSanta();
             SantaFailure.Invoke();
         }
@@ -56,8 +57,8 @@ public class AddSantaBonus : MonoBehaviour
 
     private void disableSanta()
     {
-        
         transform.GetComponent<OrderSource>().enabled = false;
+        enabled = false;
 
         transform.Find("Table UI").gameObject.SetActive(false);
     }
