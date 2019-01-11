@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Assets.PGKScripts.Enums;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +14,15 @@ public class tutorial : MonoBehaviour {
     public MonoWinStreakSource winstreak;
     public ActivationOrderCondition gimmebeer;
     public PlayerPlate playerplate;
-    public Text barExplain;
     public ObstacleGenEventHandlerTutorial gen;
     public MainScript ms;
+    public List<Perkele> IvonaHoldingCompany;
     public Image bg;
     public Image bartender;
-    public Text bartenderspeech;
+    //public TextMeshProUGUI bartenderspeech;
+    public TextMeshProUGUI spid;
+    public TextMeshProUGUI hold;
+    public TextMeshProUGUI star;
     private float time=0;
     public AudioSource itsa_me;
     private bool[] flags = new bool[99];
@@ -27,10 +31,18 @@ public class tutorial : MonoBehaviour {
     {
         //barExplain.enabled = false;
         KeysCanvas.enabled = true;
+        spid.enabled = false;
+        hold.enabled = false;
+        star.enabled = false;
+        foreach(Perkele perkele in IvonaHoldingCompany)
+        {
+            perkele.DisableIt();
+        }
+        IvonaHoldingCompany[0].MyStart();
         //bg.enabled = false;
         /*orderSource.Mood = 0;
         gimmebeer.sw = true;*/
-	}
+    }
 
 	void Update ()
     {
@@ -43,12 +55,12 @@ public class tutorial : MonoBehaviour {
         }
         if (flags[0] == true && flags[1] == false)
         {
-            if (wait10s(ref time))
+            if (wait5s(ref time))
             {
                 KeysCanvas.enabled = false;
                 bg.enabled = false;
                 bartender.enabled = false;
-                bartenderspeech.enabled = false;
+                //bartenderspeech.enabled = false;
                 flags[1] = true;
             }
 
@@ -57,8 +69,10 @@ public class tutorial : MonoBehaviour {
         {
             bg.enabled = true;
             bartender.enabled = true;
-            bartenderspeech.text = "Come over to the bar and pick up 5 beers. You can put down the beer by pressing 'R' or 'X' on gamepad if you ever need to.";
-            bartenderspeech.enabled = true;
+            if (playerplate.getItemCount() < 5)
+                IvonaHoldingCompany[1].MyStart();
+            //bartenderspeech.text = "Come over to the bar and pick up 5 beers. You can put down the beer by pressing 'R' or 'X' on gamepad if you ever need to.";
+            //bartenderspeech.enabled = true;
             flags[2] = true;
         }
         if(flags[2]==true&&flags[3]==false)
@@ -66,9 +80,11 @@ public class tutorial : MonoBehaviour {
             ManageBarCanvas();
             if (playerplate.getItemCount() >= 5)
             {
+                IvonaHoldingCompany[1].DisableIt();
                 DisableBarCanvas();
                 flags[3] = true;
-                bartenderspeech.text = "Great. Now deliver the beer to our customers. Maybe you'll get a tip if they're nice. You can spend it on various upgrades after completing a level. Just don't bump into anyone, everything will fall off your plate.";
+                IvonaHoldingCompany[2].MyStart();
+                // bartenderspeech.text = "Great. Now deliver the beer to our customers. Maybe you'll get a tip if they're nice. You can spend it on various upgrades after completing a level. Just don't bump into anyone, everything will fall off your plate.";
 
                 FirstOrder();
             }
@@ -85,7 +101,7 @@ public class tutorial : MonoBehaviour {
             {
                 DisableBarCanvas();
                 flags[5] = true;
-                winstreak.WinStreak += 1;
+                //winstreak.WinStreak += 1;
             }
             
         }
@@ -93,7 +109,8 @@ public class tutorial : MonoBehaviour {
         {
             flags[6] = true;
             ManageBarCanvas();
-            bartenderspeech.text = "The guests start getting upset if you make them wait for too long. Their mood is represented by emoji floating above them. We're just practicing though, so don't worry. Go again. Practice makes perfect, right?";
+            IvonaHoldingCompany[3].MyStart();
+            //bartenderspeech.text = "The guests start getting upset if you make them wait for too long. Their mood is represented by emoji floating above them. We're just practicing though, so don't worry. Go again. Practice makes perfect, right?";
             FirstOrder();
         }
         if (flags[6] == true && flags[7] == false)
@@ -108,19 +125,28 @@ public class tutorial : MonoBehaviour {
             {
                 DisableBarCanvas();
                 flags[8] = true;
-                winstreak.WinStreak += 14;
+                //winstreak.WinStreak += 14;
             }
         }
         if (flags[8]== true && flags[9] == false)
         {
             flags[9] = true;
-            bartenderspeech.text = "You have acquired your first winstreak! You receive 1 point after completing orders without pissing off our guests. Use one now. Or more if you want. Up to you.";
+            IvonaHoldingCompany[4].MyStart();
+            //bartenderspeech.text = "You have acquired your first winstreak! You receive 1 point after completing orders without pissing off our guests. Use one now. Or more if you want. Up to you.";
+            spid.enabled = true;
+            hold.enabled = true;
+            star.enabled = true;
         }
         if(flags[9] == true && flags[10] == false)
         {
             if (Input.GetButton("Perk_1") || Input.GetButton("Perk_2") || Input.GetButton("Perk_3") || Input.GetAxis("TriggerLeft") > 0f || Input.GetAxis("TriggerLeft") > 0f || Input.GetButtonDown("LB"))
             {
-                bartenderspeech.text = "Fast as sanic and strong as Pudzian. Remember though, with great power comes great responsibility. Now now, deliver the beer, the clients are waiting.";
+                IvonaHoldingCompany[4].DisableIt();
+                spid.enabled = false;
+                hold.enabled = false;
+                star.enabled = false;
+                IvonaHoldingCompany[5].MyStart();
+                //bartenderspeech.text = "Fast as sanic and strong as Pudzian. Remember though, with great power comes great responsibility. Now now, deliver the beer, the clients are waiting.";
                 ManageBarCanvas();
                 FirstOrder();
                 flags[10] = true;
@@ -138,7 +164,8 @@ public class tutorial : MonoBehaviour {
             {
                 DisableBarCanvas();
                 flags[12] = true;
-                bartenderspeech.text = "Looks like you're cut out for it, damn. There's one final task before I'll give you my Seal of Approval\u2122"+".";
+                IvonaHoldingCompany[6].MyStart();
+                //bartenderspeech.text = "Looks like you're cut out for it, damn. There's one final task before I'll give you my Seal of Approval\u2122"+".";
             }
         }
         if(flags[12]==true && flags[13]==false)
@@ -148,14 +175,16 @@ public class tutorial : MonoBehaviour {
         if(flags[13]==true && flags[14]==false)
         {
             spawnObject();
-            bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? You'll drop one beer if you slip on it, so watch out.";
+            IvonaHoldingCompany[7].MyStart();
+            //bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? You'll drop one beer if you slip on it, so watch out.";
             flags[14] = true;
         }
         if (flags[14] == true && flags[15] == false)
         {
             if (wait15s(ref time))
             {
-                bartenderspeech.text = "Oh right. The \"final task\". Let's see how you doin' it under pressure. When clients are angry, the bar at the top fills up. When it fills, we ALL DIE. Total mayhem. I'll give you some time to prepare for it.";
+                IvonaHoldingCompany[8].MyStart();
+                //bartenderspeech.text = "Oh right. The \"final task\". Let's see how you doin' it under pressure. When clients are angry, the bar at the top fills up. When it fills, we ALL DIE. Total mayhem. I'll give you some time to prepare for it.";
                 flags[15] = true;
             }
         }
@@ -175,7 +204,8 @@ public class tutorial : MonoBehaviour {
         if(flags[16]==true && flags[17]==false)
         {
             ManageBarCanvas();
-            bartenderspeech.text = "Ready? GO GO GO RUN FOREST";
+            IvonaHoldingCompany[9].MyStart();
+            //bartenderspeech.text = "Ready? GO GO GO RUN FOREST";
             LastOrder();
             flags[17] = true;
         }
@@ -189,17 +219,19 @@ public class tutorial : MonoBehaviour {
             ManageBarCanvas();
             if (orderSource.CurrentOrder == null)
             {
-                winstreak.WinStreak += 1;
+                IvonaHoldingCompany[9].DisableIt();
+                //winstreak.WinStreak += 1;
                 DisableBarCanvas();
                 flags[19] = true;
-                bartenderspeech.text = "We're alive! Good job. You're ready for the real deal. Peak hours with angry people demanding alcohol. 2 minutes. What could go wrong aye?";
+                IvonaHoldingCompany[10].MyStart();
+                //bartenderspeech.text = "We're alive! Good job. You're ready for the real deal. Peak hours with angry people demanding alcohol. 2 minutes. What could go wrong aye?";
             }
         }
         if(flags[19]==true && wait10s(ref time))
         {
             bg.enabled = false;
             bartender.enabled = false;
-            bartenderspeech.enabled = false;
+            //bartenderspeech.enabled = false;
             ms.GameOver(GameState.Success);
         }
         /*if (flags[8] == true && flags[9] == false)
