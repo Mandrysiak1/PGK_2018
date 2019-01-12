@@ -200,9 +200,9 @@ GameObject:
   - component: {fileID: 6287748}
   - component: {fileID: 6287747}
   - component: {fileID: 6287746}
-  - component: {fileID: 6287750}
   - component: {fileID: 6287751}
   - component: {fileID: 6287749}
+  - component: {fileID: 6287752}
   m_Layer: 0
   m_Name: BarScript
   m_TagString: Bar
@@ -295,21 +295,6 @@ MonoBehaviour:
   orderToPick: {fileID: 11400000, guid: c998a1126fb6fd24fb9baafa778cabf9, type: 2}
   orderSource: {fileID: 754569681}
   playerPlate: {fileID: 2078970096}
---- !u!114 &6287750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 6287744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e9e3782827d9146b965ce081522103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 399047759}
-  - {fileID: 599462860}
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &6287751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +310,23 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &6287752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6287744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e491f345c69e3634e95980ea99f07648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasPlayer: 0
+  objects:
+  - {fileID: 399047759}
+  - {fileID: 599462860}
+  outlines: []
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &10870785
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Come over to the bar and pick up 5 beers. You can put down the beer by pressing
     'R' or 'X' on gamepad if you ever need to.
@@ -463,6 +466,7 @@ MonoBehaviour:
   image: {fileID: 555145426}
   E: {fileID: 527680242}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &17965086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2108,10 +2112,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 69.15
-  m_fontSizeBase: 100
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -2126,7 +2130,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2146,7 +2150,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 66.13495, y: 5.1789856, z: 141.2698, w: 6.4360037}
+  m_margin: {x: 49.386147, y: 5.1789856, z: 124.520966, w: 6.4360037}
   m_textInfo:
     textComponent: {fileID: 0}
     characterCount: 7
@@ -3842,8 +3846,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -74.2, y: 10.08}
+  m_SizeDelta: {x: -399.4, y: -80.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &208466659
 MonoBehaviour:
@@ -5920,6 +5924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - You have acquired your first winstreak! You receive 1 point after completing orders
     without pissing off our guests. Use one now.
@@ -5929,6 +5934,7 @@ MonoBehaviour:
   image: {fileID: 489387898}
   E: {fileID: 454399277}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &347597944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8654,6 +8660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Ready? GO GO GO RUN FOREST!
   background: {fileID: 905006463}
@@ -8662,6 +8669,7 @@ MonoBehaviour:
   image: {fileID: 905006463}
   E: {fileID: 701588396}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &419799152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8818,7 +8826,7 @@ Prefab:
         type: 2}
       propertyPath: TableScript
       value: 
-      objectReference: {fileID: 1130987397}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57b1a596d53f46468dcf5c3867bfb4a, type: 2}
   m_IsPrefabAsset: 0
@@ -10850,6 +10858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Oh right. The "final task". Let's see how you doin' it under pressure. When clients
     are angry, the bar at the top fills up. When it fills, we ALL DIE. Total mayhem.
@@ -10860,6 +10869,7 @@ MonoBehaviour:
   image: {fileID: 915075675}
   E: {fileID: 1464524203}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &546325476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15264,7 +15274,7 @@ RectTransform:
   - {fileID: 469153684}
   - {fileID: 1920308246}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20543,6 +20553,7 @@ GameObject:
   - component: {fileID: 1072751888}
   - component: {fileID: 1072751891}
   - component: {fileID: 1072751890}
+  - component: {fileID: 1072751892}
   - component: {fileID: 1072751889}
   m_Layer: 0
   m_Name: HoldPerkButton
@@ -20559,7 +20570,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1072751887}
   m_LocalRotation: {x: 0.000000029802319, y: -4.6566123e-10, z: 2.3283062e-10, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.24}
+  m_LocalPosition: {x: 0, y: 0, z: -0.199}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1246725810}
@@ -20567,7 +20578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.37, y: -0.34}
+  m_AnchoredPosition: {x: 0, y: -0.376}
   m_SizeDelta: {x: 2.1799, y: 1.1692}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1072751889
@@ -20648,6 +20659,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1072751887}
   m_CullTransparentMesh: 0
+--- !u!114 &1072751892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1072751887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1d4a246a855d9488091782b0cfd1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamepadSprite: {fileID: 21300000, guid: 91d700dd77571874b8672c4c2c1460aa, type: 3}
 --- !u!1 &1079225181 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 178732, guid: 2b4300b00a04c7f43a4a97c065115606,
@@ -21441,12 +21464,12 @@ RectTransform:
   m_Children:
   - {fileID: 1382484550}
   m_Father: {fileID: 1237350911}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37.429, y: 65.579}
-  m_SizeDelta: {x: 373.51, y: 85.8}
+  m_AnchoredPosition: {x: 22, y: 68.6}
+  m_SizeDelta: {x: 373.51, y: 103.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128057294
 MonoBehaviour:
@@ -21534,10 +21557,9 @@ GameObject:
   - component: {fileID: 1130987400}
   - component: {fileID: 1130987399}
   - component: {fileID: 1130987398}
-  - component: {fileID: 1130987397}
-  - component: {fileID: 1130987402}
   - component: {fileID: 1130987404}
   - component: {fileID: 1130987403}
+  - component: {fileID: 1130987405}
   m_Layer: 0
   m_Name: Table_trigger
   m_TagString: Table
@@ -21545,19 +21567,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1130987397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130987396}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28ddb165ff634c43b5151b989b73d79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Context: {fileID: 0}
-  Source: {fileID: 754569681}
 --- !u!136 &1130987398
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21626,20 +21635,6 @@ Transform:
   m_Father: {fileID: 1345553097}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0.634, z: 0}
---- !u!114 &1130987402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130987396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e9e3782827d9146b965ce081522103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 904171789}
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1130987403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21673,6 +21668,22 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &1130987405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1130987396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e491f345c69e3634e95980ea99f07648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasPlayer: 0
+  objects:
+  - {fileID: 904171789}
+  outlines: []
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1132328940
 GameObject:
   m_ObjectHideFlags: 0
@@ -23950,6 +23961,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1916789723}
   - {fileID: 1821884170}
   - {fileID: 1128057293}
   m_Father: {fileID: 748122957}
@@ -26049,10 +26061,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
-  m_fontSizeBase: 100
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -26087,7 +26099,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 123.14738, y: 10.235068, z: 265.2035, w: 33.326897}
+  m_margin: {x: 99.04339, y: 23.355518, z: 241.09955, w: 41.44913}
   m_textInfo:
     textComponent: {fileID: 0}
     characterCount: 9
@@ -27063,6 +27075,11 @@ Prefab:
     - {fileID: 64444620856799292, guid: 03491713ef1e6004fa6e9b1245ee0b95, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 03491713ef1e6004fa6e9b1245ee0b95, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1429666435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1183418746376618, guid: ff1240ace39c66049848a26168f30747,
+    type: 2}
+  m_PrefabInternal: {fileID: 1598504985}
 --- !u!1001 &1431792372
 Prefab:
   m_ObjectHideFlags: 0
@@ -27755,12 +27772,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8893e6a0078f2a4b8e4bb37aad0634a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sittingGuest: {fileID: 1429666435}
+  ThrowPower: 150
+  ThrowPowerVariation: 0
+  ThrowYOffset: 0.5
+  ThrowYPowerMultiplier: 2
   prefab: {fileID: 1211962421900522, guid: e8e7b529b3be7d44d880b42b60c130fe, type: 2}
-  xMin: -215
-  xMax: -200
-  zMin: -310
-  zMax: -305
-  yValue: -622.8849
 --- !u!1 &1478575044
 GameObject:
   m_ObjectHideFlags: 0
@@ -28439,15 +28456,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Oh shoot! Looks like someone dropped a frying pan over there! Where did they even
-    get it from? You'll drop one beer if you slip on it, so watch out.
+    get it from? You'll drop one item if you slip on it, so watch out.
   background: {fileID: 1897066865}
   XboxKey: {fileID: 49791026}
   textField: {fileID: 1405038516}
   image: {fileID: 1897066865}
   E: {fileID: 1661926958}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &1496564945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29536,7 +29555,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1585179322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -29830,7 +29849,7 @@ Prefab:
         type: 2}
       propertyPath: TableScript
       value: 
-      objectReference: {fileID: 1130987397}
+      objectReference: {fileID: 0}
     - target: {fileID: 95733440793599140, guid: ff1240ace39c66049848a26168f30747,
         type: 2}
       propertyPath: m_ApplyRootMotion
@@ -29977,6 +29996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - So, you are the new waiter that the boss' hired? You look like a slob but I'm
     required to at least give you a chance. Usually your task is to deliver beers
@@ -29987,6 +30007,7 @@ MonoBehaviour:
   image: {fileID: 1382894964}
   E: {fileID: 2022449177}
   letterPaused: 0.015
+  activated: 0
 --- !u!1001 &1601808577
 Prefab:
   m_ObjectHideFlags: 0
@@ -31646,6 +31667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Looks like you're cut out for it, damn. There's one final task before I'll give
     you my Seal of ApprovalTM.
@@ -31655,6 +31677,7 @@ MonoBehaviour:
   image: {fileID: 2077319361}
   E: {fileID: 1943773927}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &1707345947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33465,11 +33488,11 @@ RectTransform:
   m_Children:
   - {fileID: 113817784}
   m_Father: {fileID: 1237350911}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37.43, y: 146.50002}
+  m_AnchoredPosition: {x: 22, y: 143.08}
   m_SizeDelta: {x: 294.14, y: 69.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1821884171
@@ -33818,6 +33841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Fast as sanic and strong as Pudzian. Remember though, with great power comes great
     responsibility. Now now, deliver the beer, the clients are waiting.
@@ -33827,6 +33851,7 @@ MonoBehaviour:
   image: {fileID: 1048628677}
   E: {fileID: 1196936093}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &1825602591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34229,8 +34254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -56.32, y: 0}
-  m_SizeDelta: {x: -112.64, y: 0}
+  m_AnchoredPosition: {x: -41.25, y: 0}
+  m_SizeDelta: {x: -209.79, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1842918425
 MonoBehaviour:
@@ -34304,7 +34329,7 @@ Transform:
   - {fileID: 419799150}
   - {fileID: 1858014374}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1851433905 stripped
 Transform:
@@ -34517,6 +34542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - We're alive! Good job. You're ready for the real deal. Peak hours with angry people
     demanding alcohol. 2 minutes. What could go wrong, aye?
@@ -34526,6 +34552,7 @@ MonoBehaviour:
   image: {fileID: 1856970181}
   E: {fileID: 2135607544}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &1858014376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35213,6 +35240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - The guests start getting upset if you make them wait for too long. Their mood
     is represented by emoji floating above them. We're just practicing though, so
@@ -35223,6 +35251,7 @@ MonoBehaviour:
   image: {fileID: 120601709}
   E: {fileID: 1085981218}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &1886382494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35937,6 +35966,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4020717497503734, guid: 116bb782fc074544ea65474dc7355f53,
     type: 2}
   m_PrefabInternal: {fileID: 623149267}
+--- !u!1 &1916789722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916789723}
+  - component: {fileID: 1916789725}
+  - component: {fileID: 1916789724}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1916789723
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1916789722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1237350911}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.9, y: -10.5}
+  m_SizeDelta: {x: 1181.8, y: 696.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1916789724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1916789722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.42745098}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1916789725
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1916789722}
+  m_CullTransparentMesh: 0
 --- !u!1 &1920255414
 GameObject:
   m_ObjectHideFlags: 0
@@ -37752,6 +37850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f696da8656562f4aa1a0e646d6f3c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScript: {fileID: 2078970091}
   Messages:
   - Great. Now deliver the beer to our customers. Maybe you'll get a tip if they're
     nice. You can spend it on various upgrades after completing a level. Just don't
@@ -37762,6 +37861,7 @@ MonoBehaviour:
   image: {fileID: 1394303697}
   E: {fileID: 557795174}
   letterPaused: 0.015
+  activated: 0
 --- !u!114 &2021443186
 MonoBehaviour:
   m_ObjectHideFlags: 0

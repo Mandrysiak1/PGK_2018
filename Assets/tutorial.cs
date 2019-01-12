@@ -36,7 +36,7 @@ public class tutorial : MonoBehaviour {
         star.enabled = false;
         foreach(Perkele perkele in IvonaHoldingCompany)
         {
-            perkele.DisableIt();
+            perkele.DisableCanvas();
         }
         IvonaHoldingCompany[0].MyStart();
         //bg.enabled = false;
@@ -53,34 +53,44 @@ public class tutorial : MonoBehaviour {
                 flags[0] = true;
             }
         }
-        if (flags[0] == true && flags[1] == false)
+        if (flags[0] == true && flags[51] == false)
         {
-            if (wait5s(ref time))
+            if (wait8s(ref time))
             {
                 KeysCanvas.enabled = false;
                 bg.enabled = false;
                 bartender.enabled = false;
                 //bartenderspeech.enabled = false;
-                flags[1] = true;
+                flags[51] = true;
             }
 
+        }
+
+        if (flags[51] == true && flags[1] == false)
+        {
+            if(IvonaHoldingCompany[0].activated==false)
+            {
+                flags[1] = true;
+            }
         }
         if (flags[1] == true && flags[2] == false)
         {
             bg.enabled = true;
             bartender.enabled = true;
+            IvonaHoldingCompany[0].DisableDisabling();
             if (playerplate.getItemCount() < 5)
                 IvonaHoldingCompany[1].MyStart();
             //bartenderspeech.text = "Come over to the bar and pick up 5 beers. You can put down the beer by pressing 'R' or 'X' on gamepad if you ever need to.";
             //bartenderspeech.enabled = true;
             flags[2] = true;
         }
+        
         if(flags[2]==true&&flags[3]==false)
         {
             ManageBarCanvas();
             if (playerplate.getItemCount() >= 5)
             {
-                IvonaHoldingCompany[1].DisableIt();
+                IvonaHoldingCompany[1].DisableCanvas();
                 DisableBarCanvas();
                 flags[3] = true;
                 IvonaHoldingCompany[2].MyStart();
@@ -170,10 +180,11 @@ public class tutorial : MonoBehaviour {
         }
         if(flags[12]==true && flags[13]==false)
         {
-            if (wait5s(ref time)) flags[13] = true;
+            if (wait8s(ref time)) flags[13] = true;
         }
         if(flags[13]==true && flags[14]==false)
         {
+            IvonaHoldingCompany[6].DisableIt();
             spawnObject();
             IvonaHoldingCompany[7].MyStart();
             //bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? You'll drop one beer if you slip on it, so watch out.";
@@ -183,6 +194,7 @@ public class tutorial : MonoBehaviour {
         {
             if (wait15s(ref time))
             {
+                IvonaHoldingCompany[7].DisableIt();
                 IvonaHoldingCompany[8].MyStart();
                 //bartenderspeech.text = "Oh right. The \"final task\". Let's see how you doin' it under pressure. When clients are angry, the bar at the top fills up. When it fills, we ALL DIE. Total mayhem. I'll give you some time to prepare for it.";
                 flags[15] = true;
@@ -194,6 +206,7 @@ public class tutorial : MonoBehaviour {
         }
         if(flags[20]==true && flags[21] == false)
         {
+            IvonaHoldingCompany[8].DisableIt();
             itsa_me.Play();
             flags[21] = true;
         }

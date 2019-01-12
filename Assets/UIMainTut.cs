@@ -178,9 +178,10 @@ public class UIMainTut : MonoBehaviour
                 EndGameCanvas.GetComponent<Image>().enabled = false;
                 PauseCanvas.enabled = true;
                 //Continue.gameObject.SetActive(false);
+                mainScript.CurrentGameState = GameState.Paused;
                 Time.timeScale = 0;
 
-                mainScript.CurrentGameState = GameState.Paused;
+                
             }
             else if (mainScript.CurrentGameState == GameState.Paused)
             {
@@ -189,10 +190,10 @@ public class UIMainTut : MonoBehaviour
                 EndGameMenuCanvas.enabled = true;
                 EndGameCanvas.enabled = false;
                 EndGameCanvas.GetComponent<Image>().enabled = true;
+                mainScript.CurrentGameState = GameState.Playing;
                 //Continue.gameObject.SetActive(true);
                 Time.timeScale = 1;
 
-                mainScript.CurrentGameState = GameState.Playing;
             }
         }
 
