@@ -40,6 +40,7 @@ public class TimerUIBehaviour : MonoBehaviour {
             }
         }
         icon.fillAmount = Mathf.Abs(timer.Limit - timer.Timer) / timer.Limit;
+        glowIcon.fillAmount = Mathf.Abs(timer.Limit - timer.Timer) / timer.Limit;
 
     }
 

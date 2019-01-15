@@ -5,13 +5,14 @@ using TMPro;
 
 public class Ivonalvl2 : MonoBehaviour
 {
+    [SerializeField]
+    private string message;
     float time = 0f;
     public Image background;
     public Image XboxKey;
     public Text bullshitspewingoutofcharactersmouthholyshitbarbecue;
     public Image charactersdirtyassfacewhatthehellwhyarethesevariablenamessolong;
     public TextMeshProUGUI E;
-    string message;
     public float letterPaused = 0.1f;
     bool[] flags = new bool[99];
     // Use this for initialization
@@ -51,7 +52,7 @@ public class Ivonalvl2 : MonoBehaviour
             {
                 //StopCoroutine(TypeText());
                 bullshitspewingoutofcharactersmouthholyshitbarbecue.text = "";
-                message = "And you will help me! Bring me the potions or face the wrath of my skeletal putties!";
+                //message = "And you will help me! Bring me the potions or face the wrath of my skeletal putties!";
                 flags[1] = true;
                 StartCoroutine(TypeText());
                 //Time.timeScale = 1;

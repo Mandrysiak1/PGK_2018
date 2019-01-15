@@ -13,6 +13,7 @@ public class LevelSettings : MonoBehaviour
     private GameLevel Level2;
     private GameLevel Level3;
     private GameLevel Level4;
+    private GameLevel Level5;
 
     public GameObject standardSetObject;
     public void ResetFirstButton()
@@ -30,6 +31,7 @@ public class LevelSettings : MonoBehaviour
         Level2 = GameFlow.Flow.GetNextLevel(Level1);
         Level3 = GameFlow.Flow.GetNextLevel(Level2);
         Level4 = GameFlow.Flow.GetNextLevel(Level3);
+        Level5 = GameFlow.Flow.GetNextLevel(Level4);
         ResetFirstButton();
     }
 
@@ -51,6 +53,11 @@ public class LevelSettings : MonoBehaviour
     public void Load4()
     {
         GameFlow.StartLevel(Level4);
+    }
+
+    public void Load5()
+    {
+        GameFlow.StartLevel(Level5);
     }
 
     public void ReturnToMM()
