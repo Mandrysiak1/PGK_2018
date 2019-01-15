@@ -39,8 +39,6 @@ public class BarScriptTutorial : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasPlayer = true;
-
-
         }
     }
 
@@ -49,8 +47,6 @@ public class BarScriptTutorial : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasPlayer = false;
-
-
         }
     }
 }

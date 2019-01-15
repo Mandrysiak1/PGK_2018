@@ -11,7 +11,7 @@ public class TableTriggerTutorial : MonoBehaviour
     public Canvas PressE;
     public OrderItem orderToPick;
 
-    private bool PlayerInRange = false;
+    public bool PlayerInRange = false;
 
     void Start()
     {
