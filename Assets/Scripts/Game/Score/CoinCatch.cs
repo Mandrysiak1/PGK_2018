@@ -37,11 +37,9 @@ public class CoinCatch : MonoBehaviour {
             Vector3 screenPoint = target.transform.position + new Vector3(0, 0, 5);
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
             GameObject img = Instantiate(coinObj, startPosition, rotation);
-          //  img.transform.SetParent(parent.transform);
             img.transform.DOMove(worldPos, coinUpTime).OnComplete( () => Destroy(img) );
-            //img.transform.DORotate(Vector3.right * 50 * Time.deltaTime, 50);
             img.transform.DOShakeRotation(2*coinUpTime);
-            img.transform.DOShakeScale(2 * coinUpTime);
+            img.transform.DOScale(15f, coinUpTime);
             yield return new WaitForSeconds(0.4f);
         }
         yield return null;
