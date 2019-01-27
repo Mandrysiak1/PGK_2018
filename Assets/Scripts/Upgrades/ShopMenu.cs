@@ -1,8 +1,20 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ShopMenu : MonoBehaviour
 {
     public ShopProductItemUI PlateCapacity, Speed, Invulnerability;
+
+    public void Quit()
+    {
+        SceneManager.UnloadSceneAsync("Shop");
+        UpgradeClass.exited = true;
+        UIMain uimain = FindObjectOfType<UIMain>();
+        uimain.MenuActivated = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        uimain.BackFromShop();
+    }
 
     private void Start()
     {
