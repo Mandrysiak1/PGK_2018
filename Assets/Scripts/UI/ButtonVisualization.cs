@@ -7,7 +7,7 @@ public abstract class ButtonVisualization : MonoBehaviour
 
     private void Update()
     {
-        bool newGamepadMode = IsGamepadPresent();
+        bool newGamepadMode = GamepadHelper.IsGamepadPresent();
         if (newGamepadMode != GamepadMode)
         {
             _Dirty = true;
@@ -23,13 +23,4 @@ public abstract class ButtonVisualization : MonoBehaviour
     }
 
     protected abstract void Refresh();
-
-    private bool IsGamepadPresent()
-    {
-        string[] names = Input.GetJoystickNames();
-        foreach (string name in names)
-            if (!string.IsNullOrEmpty(name))
-                return true;
-        return false;
-    }
 }
