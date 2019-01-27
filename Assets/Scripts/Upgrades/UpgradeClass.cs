@@ -35,6 +35,17 @@ public static class UpgradeClass {
     public static bool Vulnerable = true;
     public static bool invulnerabilityPurchased = false;
 
+    public static void Reset()
+    {
+        Tip = 0;
+        SpeedModif = 0.0f;
+        BeerModif = 0;
+        BeerTimes = 1;
+        SpeedTimes = 1;
+        Vulnerable = true;
+        invulnerabilityPurchased = false;
+    }
+
     public static void ChangeSpeedModif()
     {
         int cost = 5*SpeedTimes;

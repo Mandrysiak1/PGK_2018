@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Beerfest/Save System")]
 public class SaveSystem : ScriptableObject
 {
+    public bool Enabled = true;
     [SerializeField]
     private GameSettings Settings;
 
@@ -13,6 +14,9 @@ public class SaveSystem : ScriptableObject
 
     public void Sync()
     {
+        if (!Enabled)
+            return;
+
         if (!IsLoaded)
         {
             Load();
@@ -55,7 +59,7 @@ public class SaveSystem : ScriptableObject
 
     private void Load()
     {
-        UpgradeClass.LoadTips(PlayerPrefs.GetInt(KeyPrefix + "Tip", UpgradeClass.Tip)); // wywo³ywanie eventu powodowa³o ¿e, po restrcie wyœwietla³a siê animacja lec¹cych monet np 20;
+        UpgradeClass.LoadTips(PlayerPrefs.GetInt(KeyPrefix + "Tip", UpgradeClass.Tip)); // wywoï¿½ywanie eventu powodowaï¿½o ï¿½e, po restrcie wyï¿½wietlaï¿½a siï¿½ animacja lecï¿½cych monet np 20;
         //UpgradeClass.Tip = PlayerPrefs.GetInt(KeyPrefix + "Tip", UpgradeClass.Tip);
         UpgradeClass.SpeedModif = PlayerPrefs.GetFloat(KeyPrefix + "Speed", UpgradeClass.SpeedModif);
         UpgradeClass.BeerModif = PlayerPrefs.GetInt(KeyPrefix + "Beers", UpgradeClass.BeerModif);
@@ -64,3 +68,4 @@ public class SaveSystem : ScriptableObject
         UpgradeClass.invulnerabilityPurchased = PlayerPrefs.GetInt(KeyPrefix + "Invulnerability", UpgradeClass.invulnerabilityPurchased ? 1 : 0) == 1;
     }
 }
+

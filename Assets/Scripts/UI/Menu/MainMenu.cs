@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        UpgradeClass.Reset();
         StartFirstLevel();
     }
 
