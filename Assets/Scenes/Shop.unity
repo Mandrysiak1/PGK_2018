@@ -3887,6 +3887,7 @@ GameObject:
   - component: {fileID: 592066452}
   - component: {fileID: 592066451}
   - component: {fileID: 592066454}
+  - component: {fileID: 592066455}
   m_Layer: 5
   m_Name: Plate
   m_TagString: Untagged
@@ -4007,6 +4008,18 @@ MonoBehaviour:
   ColorAvailable: {r: 0.28773585, g: 0.5, b: 0.28773585, a: 1}
   Text: {fileID: 332723080}
   Button: {fileID: 592066451}
+--- !u!114 &592066455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 592066449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd945dccd76c4c638ef4d5ce66a52af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventSystem: {fileID: 1447077516}
 --- !u!1 &599462860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1559263397894798, guid: 6fb13811a50b8984397daa92809837d3,
@@ -7830,8 +7843,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
+  m_HorizontalAxis: QTE_DPAD_H
+  m_VerticalAxis: QTE_DPAD_V
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
