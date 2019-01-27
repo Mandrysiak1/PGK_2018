@@ -5,6 +5,7 @@ public class RotateBehaviour : MonoBehaviour {
 
     public Vector3 RotationAmount;
 
+    public Rigidbody rb;
 	// Use this for initialization
 	void Start () 
     {
@@ -14,6 +15,6 @@ public class RotateBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        transform.Rotate(RotationAmount * Time.deltaTime);
-	}
+
+    }
 }

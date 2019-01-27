@@ -13,11 +13,11 @@ public class CoinCatch : MonoBehaviour {
     public Quaternion rotation;
     public float coinUpTime = 50f;
     public GameObject coinObj;
+    
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
     {
-        rotation = Quaternion.Euler(0, 0, 0);
         UpgradeClass.OnTipChanged.AddListener(TipChanged);
     }
 
@@ -34,10 +34,14 @@ public class CoinCatch : MonoBehaviour {
         while(times-- > 0)
         {
             Vector3 startPosition = startPoint.transform.position;
-            Vector3 targetPos = target.transform.position;
+            Vector3 screenPoint = target.transform.position + new Vector3(0, 0, 5);
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
             GameObject img = Instantiate(coinObj, startPosition, rotation);
-            img.transform.SetParent(parent.transform);
-            img.transform.DOMove(targetPos, coinUpTime).OnComplete( () => Destroy(img) );
+          //  img.transform.SetParent(parent.transform);
+            img.transform.DOMove(worldPos, coinUpTime).OnComplete( () => Destroy(img) );
+            //img.transform.DORotate(Vector3.right * 50 * Time.deltaTime, 50);
+            img.transform.DOShakeRotation(2*coinUpTime);
+            img.transform.DOShakeScale(2 * coinUpTime);
             yield return new WaitForSeconds(0.4f);
         }
         yield return null;

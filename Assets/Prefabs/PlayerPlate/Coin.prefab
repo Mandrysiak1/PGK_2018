@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224174952858474922}
   - component: {fileID: 212763091134881422}
+  - component: {fileID: 114398627440891468}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -27,6 +28,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114398627440891468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014786090194532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d76f126a3ee55b47941d995328659d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationAmount: {x: 2, y: 1, z: 4}
 --- !u!212 &212763091134881422
 SpriteRenderer:
   m_ObjectHideFlags: 1
