@@ -9,12 +9,22 @@ public class ShopProductItemUI : MonoBehaviour
     public Color ColorAvailable = Color.green;
     public Action BuyAction;
 
+    public string ValueString, CostString;
+
     [SerializeField]
-    public TextMeshProUGUI Text;
+    private TextMeshProUGUI ValueText;
+    [SerializeField]
+    private TextMeshProUGUI Text;
     [SerializeField]
     private Button Button;
 
     private bool _Available = false;
+
+    public void SetValues(int current, int cost, int increment)
+    {
+        ValueText.text = string.Format(ValueString, current);
+        Text.text = string.Format(CostString, increment, cost);
+    }
 
     public bool Inactive
     {

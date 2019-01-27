@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -26,15 +27,27 @@ public class ShopMenu : MonoBehaviour
         int tip = UpgradeClass.Tip;
         int capacityCost = 10 * UpgradeClass.BeerTimes;
         PlateCapacity.Available = tip > capacityCost;
-        PlateCapacity.BuyAction = UpgradeClass.ChangeMaxBeer;
+        PlateCapacity.BuyAction = Buy(UpgradeClass.ChangeMaxBeer);
+        PlateCapacity.SetValues(5 + UpgradeClass.BeerTimes, capacityCost, 1);
 
         int speedCost = 5 * UpgradeClass.SpeedTimes;
         Speed.Available = tip > speedCost;
-        Speed.BuyAction = UpgradeClass.ChangeSpeedModif;
+        Speed.BuyAction = Buy(UpgradeClass.ChangeSpeedModif);
+        Speed.SetValues(UpgradeClass.SpeedTimes, speedCost, 1);
 
         int invulnerabilityCost = 1000;
         Invulnerability.Available = tip > invulnerabilityCost;
         Invulnerability.Inactive = !UpgradeClass.invulnerabilityPurchased;
-        Invulnerability.BuyAction = UpgradeClass.MarioStar;
+        Invulnerability.BuyAction = Buy(UpgradeClass.MarioStar);
+        Invulnerability.SetValues(0, invulnerabilityCost, 0);
+    }
+
+    private Action Buy(Action performUpgrade)
+    {
+        return () =>
+        {
+            performUpgrade();
+            Refresh();
+        };
     }
 }
