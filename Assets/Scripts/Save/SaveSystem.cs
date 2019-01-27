@@ -55,7 +55,8 @@ public class SaveSystem : ScriptableObject
 
     private void Load()
     {
-        UpgradeClass.Tip = PlayerPrefs.GetInt(KeyPrefix + "Tip", UpgradeClass.Tip);
+        UpgradeClass.LoadTips(PlayerPrefs.GetInt(KeyPrefix + "Tip", UpgradeClass.Tip)); // wywo³ywanie eventu powodowa³o ¿e, po restrcie wyœwietla³a siê animacja lec¹cych monet np 20;
+        //UpgradeClass.Tip = PlayerPrefs.GetInt(KeyPrefix + "Tip", UpgradeClass.Tip);
         UpgradeClass.SpeedModif = PlayerPrefs.GetFloat(KeyPrefix + "Speed", UpgradeClass.SpeedModif);
         UpgradeClass.BeerModif = PlayerPrefs.GetInt(KeyPrefix + "Beers", UpgradeClass.BeerModif);
         UpgradeClass.BeerTimes = PlayerPrefs.GetInt(KeyPrefix + "BeerTimes", UpgradeClass.BeerTimes);

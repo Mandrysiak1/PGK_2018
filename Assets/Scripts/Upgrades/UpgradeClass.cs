@@ -45,7 +45,10 @@ public static class UpgradeClass {
             SpeedTimes++;
         }
     }
-
+    public static void LoadTips(int value)
+    {
+        tip = value;
+    }
     public static void ChangeMaxBeer()
     {
         int cost = 10 * BeerTimes;

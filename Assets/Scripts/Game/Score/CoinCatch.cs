@@ -21,8 +21,11 @@ public class CoinCatch : MonoBehaviour {
         UpgradeClass.OnTipChanged.AddListener(TipChanged);
     }
 
+
+
     private void TipChanged(int newTip, int oldTip)
     {
+      
         if(newTip > oldTip)
         {
             StartCoroutine(CoinUp(newTip - oldTip));
