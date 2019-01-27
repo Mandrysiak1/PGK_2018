@@ -1,10 +1,12 @@
 ﻿using Assets.PGKScripts;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ObstacleGeneratorEventHandeler : MonoBehaviour
 {
@@ -101,7 +103,17 @@ public class ObstacleGeneratorEventHandeler : MonoBehaviour
                 ((float)rand.NextDouble() * ThrowPowerVariation + 1) * ThrowPower * ThrowYPowerMultiplier,
                 (((float)rand.NextDouble() - 0.5f) * 2 * (ThrowPowerVariation + 1)) * ThrowPower
                 ));
-        }
+            gameObject.GetComponentInChildren<GlowingScript>().enabled = false;
+            
+            StartCoroutine(WaitForWarningSignToFade(gameObject));
+        }  
+    }
+
+    IEnumerator WaitForWarningSignToFade(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(0.25f);
+        gameObject.GetComponentInChildren<Image>().enabled = false;
+        gameObject.GetComponentInChildren<GlowingScript>().enabled = true;
     }
 
     private Bounds GetTotalMeshFilterBounds(Transform objectTransform)
