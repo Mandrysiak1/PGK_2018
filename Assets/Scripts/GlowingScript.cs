@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GlowingScript : MonoBehaviour {
 
@@ -34,7 +35,8 @@ public class GlowingScript : MonoBehaviour {
     }
 
 	void Update () {
-		if(hasPlayer)
+        Vector3 move;
+        if (hasPlayer)
         {
             for (int i = 0; i < objects.Length; i++)
             {
@@ -42,6 +44,10 @@ public class GlowingScript : MonoBehaviour {
                 {
                     outlines[i].OutlineColor = Color.red;
                     outlines[i].OutlineWidth = 2f;
+                    move = new Vector3(0, 0.95f, 0);
+                    objects[i].transform.parent.GetComponentInChildren<Image>().transform.rotation = Quaternion.Euler(25, 0, 0);
+                    objects[i].transform.parent.GetComponentInChildren<Image>().transform.position = objects[i].transform.position + move;
+                    objects[i].transform.parent.GetComponentInChildren<Image>().enabled = true;
                 }
                 else if (objects[i].tag == "SignElement")
                 {
@@ -62,6 +68,7 @@ public class GlowingScript : MonoBehaviour {
                 {
                     outlines[i].OutlineColor = color;
                     outlines[i].OutlineWidth = 1f;
+                    objects[i].transform.parent.GetComponentInChildren<Image>().enabled = false;
                 }
                 else if (objects[i].tag == "SignElement")
                 {

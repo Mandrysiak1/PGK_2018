@@ -36,7 +36,9 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         //agent.updateRotation = false;
         originalSpeed = agent.speed;
         InvokeRepeating("AddDynamic", startTime, repeatRate);
-        transform.GetComponentInChildren<WanderingText>().text.enabled = false;
+        var wanderingText = transform.GetComponentInChildren<WanderingText>();
+        if(wanderingText != null && wanderingText.text != null)
+            wanderingText.text.enabled = false;
         // I'm weary of it
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -44,7 +46,7 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         originalAnimationSpeed = animator.speed;
     }
 
-	void Update () {    
+	void Update () {
         Wander();
     }
 
@@ -72,7 +74,8 @@ public class WaypointWandering : MonoBehaviour, IWandering {
         if (agent.speed != originalSpeed)
         {
             agent.speed = originalSpeed;
-            animator.speed = originalAnimationSpeed;
+            if(animator != null)
+                animator.speed = originalAnimationSpeed;
             isWalking = true;
             isRunning = false;
             luck = 0;
@@ -86,7 +89,8 @@ public class WaypointWandering : MonoBehaviour, IWandering {
                 isRunning = true;
                 originalSpeed = agent.speed;
                 agent.speed = originalSpeed * speedMultiplier;
-                animator.speed = originalAnimationSpeed * speedMultiplier;
+                if(animator != null)
+                    animator.speed = originalAnimationSpeed * speedMultiplier;
             }
         }
     }
