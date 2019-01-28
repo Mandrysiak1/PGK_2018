@@ -107,7 +107,14 @@ public class MainScript : MonoBehaviour
         if (state == GameState.Failure)
         {
             PauseController.enabled = false;
-            Brawl.RunBrawl(DefeatMenu);
+            if (Brawl != null)
+            {
+                Brawl.RunBrawl(DefeatMenu);
+            }
+            else
+            {
+                DefeatMenu();
+            }
         }
         else if(state == GameState.Success)
         {

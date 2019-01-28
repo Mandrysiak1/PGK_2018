@@ -25,7 +25,10 @@ public class EndMenu : MonoBehaviour
 
     public void DoContinue()
     {
-        Flow.LoadShop();
+        if(UpgradeClass.Tip > 0)
+            Flow.LoadShop();
+        else
+            Flow.StartNextLevel();
     }
 
     public void DoRestart()

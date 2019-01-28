@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Assets.PGKScripts.Enums;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class tutorial : MonoBehaviour {
-
+public class tutorial : MonoBehaviour
+{
+    public GameFlowController Flow;
     public Canvas KeysCanvas;
     public BarScriptTutorial bst;
     public OrderSource firstTable;
@@ -85,7 +87,7 @@ public class tutorial : MonoBehaviour {
             //bartenderspeech.enabled = true;
             flags[2] = true;
         }
-        
+
         if(flags[2]==true&&flags[3]==false)
         {
             ManageBarCanvas();
@@ -107,7 +109,7 @@ public class tutorial : MonoBehaviour {
             {
                 flags[4] = true;
             }
-            
+
         }
         if (flags[4] == true && flags[5] == false)
         {
@@ -119,7 +121,7 @@ public class tutorial : MonoBehaviour {
                 flags[5] = true;
                 //winstreak.WinStreak += 1;
             }
-            
+
         }
         if (flags[5] == true && flags[6] == false && wait2s(ref time) == true)
         {
@@ -135,7 +137,7 @@ public class tutorial : MonoBehaviour {
             if (firstTable.CurrentOrder != null)
             {
                 flags[7] = true;
-                
+
             }
         }
         if (flags[7] == true && flags[8] == false)
@@ -263,7 +265,7 @@ public class tutorial : MonoBehaviour {
                 //bartenderspeech.enabled = false;
                 ms.GameOver(GameState.Success);
             }
-            
+
         }
         /*if (flags[8] == true && flags[9] == false)
         {
@@ -411,6 +413,16 @@ public class tutorial : MonoBehaviour {
     {
         bst.barCanvasHelp.enabled = false;
         bst.barCanvasPickup.enabled = false;
+    }
+
+    public void Continue()
+    {
+        Flow.StartFirstLevel();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("BestTutorial");
     }
 
 }
