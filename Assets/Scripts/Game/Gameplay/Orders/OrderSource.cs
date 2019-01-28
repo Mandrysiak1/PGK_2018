@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.PGKScripts.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -44,11 +45,13 @@ public class OrderSource : MonoBehaviour
     }
 
     public bool IsActive { get;  set; }
+    private MainScript Main;
 
 
     private void Awake()
     {
         IsActive = ActivationCondition == null;
+        Main = FindObjectOfType<MainScript>();
     }
 
     public bool CanIssueOrder(OrderController orders)
@@ -74,8 +77,13 @@ public class OrderSource : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void Update()
     {
+        // ugly
+        // but works
+        if(Main != null && Main.CurrentGameState != GameState.Playing)
+            return;
+
         if (!IsActive)
         {
             if (ActivationCondition.IsMeet())
