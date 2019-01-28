@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ShopMenu : MonoBehaviour
 {
+    [SerializeField]
+    private GameFlowController Flow;
+
     public ShopProductItemUI PlateCapacity, Speed, Invulnerability;
 
     public void Quit()
     {
-        SceneManager.UnloadSceneAsync("Shop");
+        Flow.StartNextLevel();
     }
 
     private void Start()
