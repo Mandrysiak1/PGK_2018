@@ -16,7 +16,7 @@ public class BigBarFlashingScript : MonoBehaviour {
             bigBar = this.GetComponentInParent<Slider>();
         }
         ChangeTransparency(0);
-        bigBar.onValueChanged.AddListener(handleValueChanged);
+        //bigBar.onValueChanged.AddListener(handleValueChanged);
         this.StartCoroutine(Flash());
     }
 
@@ -37,17 +37,16 @@ public class BigBarFlashingScript : MonoBehaviour {
         {
             if (shouldFlash)
             {
+                Debug.Log("Flashing ... ");
                 c += Time.deltaTime * 5;
                 if (c >= 3.14)
                     c = 0;
                 ChangeTransparency(Balance(c));
-                if(bigBar.value <= initialValue)
-                {
-                    initialValue = bigBar.value;
-                    ChangeTransparency(0);
+            }
+            else
+            {
+                if (c != 0)
                     c = 0;
-                    shouldFlash = false;
-                }
             }
             yield return null;
         }
@@ -59,6 +58,8 @@ public class BigBarFlashingScript : MonoBehaviour {
             if(shouldFlash == false)
             {
                 shouldFlash = true;
+
+                Debug.Log("Started flashing ... ");
             }
         }
         else
@@ -66,13 +67,16 @@ public class BigBarFlashingScript : MonoBehaviour {
             if (shouldFlash == true)
             {
                 shouldFlash = false;
+                initialValue = bigBar.value;
+                ChangeTransparency(0);
             }
         }
         initialValue = value;
     }
 
 
-    void Update () {
-		
+    void Update ()
+    {
+        handleValueChanged(bigBar.value);
 	}
 }
