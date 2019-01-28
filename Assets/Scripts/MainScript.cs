@@ -80,6 +80,12 @@ public class MainScript : MonoBehaviour
     {
         UpgradeClass.preGameTip = UpgradeClass.Tip;
         UpgradeClass.exited = false;
+        PauseController.OnPaused.AddListener(OnPaused);
+    }
+
+    private void OnPaused(bool paused)
+    {
+        CurrentGameState = paused ? GameState.Paused : GameState.Playing;
     }
 
     internal void ResetBeersHandedOut()
@@ -102,7 +108,8 @@ public class MainScript : MonoBehaviour
         PlayerController.gameObject.SetActive(false);
         CurrentGameState = state;
         Gui.SetActive(false);
-        Player.ResetPlate();
+        if(state != GameState.Paused)
+            Player.ResetPlate();
 
         if (state == GameState.Failure)
         {
