@@ -52,6 +52,13 @@ public class GameFlowController : ScriptableObject
     {
         return Flow.GetNextLevel(CurrentLevel) != null;
     }
+    public bool isLevel4()
+    {
+        if (Flow.GetNextLevel(Flow.GetNextLevel(CurrentLevel)) == null)
+            return true;
+        else
+            return false;
+    }
 
     public void LoadShop()
     {
