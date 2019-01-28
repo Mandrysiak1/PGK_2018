@@ -46,21 +46,24 @@ public class Perkele : MonoBehaviour
             {
                 if (ui == null)
                     ui = GameObject.Find("MainCanvas").GetComponent<Canvas>();
-                if (TableTrigger == null && message != "Ready? GO GO GO RUN FOREST!")
+                if (TableTrigger == null)
                 {
                     TableTrigger = GameObject.Find("Table_trigger");
                     if (TableTrigger != null)
                     {
                         TableTriggerTutorial TTT = TableTrigger.GetComponent<TableTriggerTutorial>();
                         GlowingScriptTutorial GST = TableTrigger.GetComponent<GlowingScriptTutorial>();
-                        TableTrigger.SetActive(false);
-                        GST.hasPlayer = false;
-                        foreach (Outline o in GST.outlines)
+                        if(Messages[0] != "Ready? GO GO GO RUN FOREST!")
                         {
-                            o.enabled = false;
+                            TableTrigger.SetActive(false);
+                            GST.hasPlayer = false;
+                            foreach (Outline o in GST.outlines)
+                            {
+                                o.enabled = false;
+                            }
+                            TTT.PlayerInRange = false;
+                            TTT.PressE.enabled = false;
                         }
-                        TTT.PlayerInRange = false;
-                        TTT.PressE.enabled = false;
                     }
 
                 }

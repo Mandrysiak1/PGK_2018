@@ -9,10 +9,11 @@ public class tutorial : MonoBehaviour {
 
     public Canvas KeysCanvas;
     public BarScriptTutorial bst;
-    public OrderSource orderSource;
-    public OrderCondition orderCondition;
+    public OrderSource firstTable;
+    public OrderSource secondTable;
     public MonoWinStreakSource winstreak;
     public ActivationOrderCondition gimmebeer;
+    public ActivationOrderCondition gimmebeer2;
     public PlayerPlate playerplate;
     public ObstacleGenEventHandlerTutorial gen;
     public MainScript ms;
@@ -48,14 +49,14 @@ public class tutorial : MonoBehaviour {
     {
         if(flags[0] == false)
         {
-            if (Input.GetAxis("Horizontal") > 0f || Input.GetAxis("Vertical") > 0f)
+            if (Input.GetAxis("Horizontal") > 0.1f || Input.GetAxis("Vertical") > 0.1f)
             {
                 flags[0] = true;
             }
         }
         if (flags[0] == true && flags[51] == false)
         {
-            if (wait8s(ref time))
+            if (wait4s(ref time))
             {
                 KeysCanvas.enabled = false;
                 bg.enabled = false;
@@ -102,20 +103,25 @@ public class tutorial : MonoBehaviour {
         if (flags[3] == true && flags[4] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder != null) flags[4] = true;
+            if (firstTable.CurrentOrder != null)
+            {
+                flags[4] = true;
+            }
+            
         }
         if (flags[4] == true && flags[5] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder == null)
+            if (firstTable.CurrentOrder == null)
             {
+                firstTable.Mood = 1.0f;
                 DisableBarCanvas();
                 flags[5] = true;
                 //winstreak.WinStreak += 1;
             }
             
         }
-        if (flags[5] == true && flags[6] == false)
+        if (flags[5] == true && flags[6] == false && wait2s(ref time) == true)
         {
             flags[6] = true;
             ManageBarCanvas();
@@ -126,13 +132,18 @@ public class tutorial : MonoBehaviour {
         if (flags[6] == true && flags[7] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder != null) flags[7] = true;
+            if (firstTable.CurrentOrder != null)
+            {
+                flags[7] = true;
+                
+            }
         }
         if (flags[7] == true && flags[8] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder == null)
+            if (firstTable.CurrentOrder == null)
             {
+                firstTable.Mood = 1.0f;
                 DisableBarCanvas();
                 flags[8] = true;
                 //winstreak.WinStreak += 14;
@@ -165,13 +176,14 @@ public class tutorial : MonoBehaviour {
         if (flags[10] == true && flags[11] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder != null) flags[11] = true;
+            if (firstTable.CurrentOrder != null) flags[11] = true;
         }
         if (flags[11] == true && flags[12] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder == null)
+            if (firstTable.CurrentOrder == null)
             {
+                firstTable.Mood = 1.0f;
                 DisableBarCanvas();
                 flags[12] = true;
                 IvonaHoldingCompany[6].MyStart();
@@ -180,19 +192,19 @@ public class tutorial : MonoBehaviour {
         }
         if(flags[12]==true && flags[13]==false)
         {
-            if (wait8s(ref time)) flags[13] = true;
+            if (IvonaHoldingCompany[6].activated == false) flags[13] = true;
         }
         if(flags[13]==true && flags[14]==false)
         {
-            IvonaHoldingCompany[6].DisableIt();
-            spawnObject();
+            //IvonaHoldingCompany[6].DisableIt();
+            //spawnObject();
             IvonaHoldingCompany[7].MyStart();
             //bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? You'll drop one beer if you slip on it, so watch out.";
             flags[14] = true;
         }
-        if (flags[14] == true && flags[15] == false)
+        if (flags[14] == true && IvonaHoldingCompany[7].activated==false && flags[15] == false)
         {
-            if (wait15s(ref time))
+            if (wait8s(ref time))
             {
                 IvonaHoldingCompany[7].DisableIt();
                 IvonaHoldingCompany[8].MyStart();
@@ -200,9 +212,9 @@ public class tutorial : MonoBehaviour {
                 flags[15] = true;
             }
         }
-        if(flags[15]==true && flags[20]==false)
+        if(flags[15]==true && flags[20]==false && IvonaHoldingCompany[8].activated==false)
         {
-            if (wait12s(ref time)) flags[20] = true;
+            if (wait5s(ref time)) flags[20] = true;
         }
         if(flags[20]==true && flags[21] == false)
         {
@@ -225,14 +237,16 @@ public class tutorial : MonoBehaviour {
         if (flags[17] == true && flags[18] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder != null) flags[18] = true;
+            if (firstTable.CurrentOrder != null) flags[18] = true;
         }
         if (flags[18] == true && flags[19] == false)
         {
             ManageBarCanvas();
-            if (orderSource.CurrentOrder == null)
+            if (firstTable.CurrentOrder == null && secondTable.CurrentOrder == null)
             {
                 IvonaHoldingCompany[9].DisableIt();
+                firstTable.Mood = 1.0f;
+                secondTable.Mood = 1.0f;
                 //winstreak.WinStreak += 1;
                 DisableBarCanvas();
                 flags[19] = true;
@@ -240,12 +254,16 @@ public class tutorial : MonoBehaviour {
                 //bartenderspeech.text = "We're alive! Good job. You're ready for the real deal. Peak hours with angry people demanding alcohol. 2 minutes. What could go wrong aye?";
             }
         }
-        if(flags[19]==true && wait10s(ref time))
+        if(flags[19]==true && IvonaHoldingCompany[10].activated == false)
         {
-            bg.enabled = false;
-            bartender.enabled = false;
-            //bartenderspeech.enabled = false;
-            ms.GameOver(GameState.Success);
+            if(wait2s(ref time)==true)
+            {
+                bg.enabled = false;
+                bartender.enabled = false;
+                //bartenderspeech.enabled = false;
+                ms.GameOver(GameState.Success);
+            }
+            
         }
         /*if (flags[8] == true && flags[9] == false)
         {
@@ -371,8 +389,10 @@ public class tutorial : MonoBehaviour {
 
     void LastOrder()
     {
-        orderSource.Mood = 0;
+        firstTable.Mood = 0;
+        secondTable.Mood = 0;
         gimmebeer.sw = true;
+        gimmebeer2.sw = true;
 
     }
 

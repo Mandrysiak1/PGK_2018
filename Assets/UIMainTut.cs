@@ -26,9 +26,6 @@ public class UIMainTut : MonoBehaviour
     public Canvas EndGameCanvas;
     public Button Restart;
     public Button MainMenu;
-    public Canvas NextLvlCanv;
-    public Button NextLevel;
-    public Button GoToShop;
     public Button Continue;
     public Canvas PauseCanvas;
     public Canvas EndGameMenuCanvas;
@@ -67,6 +64,7 @@ public class UIMainTut : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        EndGameText.enabled = false;
         menuActiveStatusEvent.AddListener(MenuActivationListener);
         MenuActivated = false;
         FailureCanvas.enabled = false;
@@ -91,8 +89,6 @@ public class UIMainTut : MonoBehaviour
 
 
 
-            NextLevel.gameObject.SetActive(false);
-            GoToShop.gameObject.SetActive(false);
             EventSystem.current.SetSelectedGameObject(Restart.gameObject);
         
     }
@@ -122,19 +118,18 @@ public class UIMainTut : MonoBehaviour
     {
         if (arg1 == GameState.Success || arg1 == GameState.Failure)
         {
-            if (arg1 == GameState.Success)
+            //if (arg1 == GameState.Success)
                 MenuActivated = true;
             EventSystem.current.SetSelectedGameObject(Restart.gameObject);
-            //EndGameText.text = "you " + (arg1 == GameState.Success ? "win" : "lose");
+            EndGameText.text = "tutorial " + (arg1 == GameState.Success ? "completed" : "failed");
             scoreSystem.ResetScore();
             mainScript.ResetBeersHandedOut();
-
+            EndGameText.enabled = true;
             EndGameCanvas.enabled = true;
             //if (SceneManager.GetActiveScene().buildIndex == 1)
             //{
             if (arg1 == GameState.Success)
             {   
-                NextLvlCanv.enabled = true;
                 SuccesCanvas.enabled = true;
             }
             else if (arg1 == GameState.Failure)
@@ -143,7 +138,6 @@ public class UIMainTut : MonoBehaviour
             }
             else
             {
-                NextLvlCanv.enabled = false;
                 FailureCanvas.enabled = false;
                 SuccesCanvas.enabled = false;
             }
@@ -200,7 +194,6 @@ public class UIMainTut : MonoBehaviour
         if (UpgradeClass.exited)
         {
             EndGameCanvas.enabled = true;
-            if (UpgradeClass.nextlvlcanvas) NextLvlCanv.enabled = true;
             UpgradeClass.exited = false;
         }
     }
@@ -230,9 +223,7 @@ public class UIMainTut : MonoBehaviour
     void LoadShop()
     {
         UpgradeClass.endgamecanvas = EndGameCanvas.enabled;
-        UpgradeClass.nextlvlcanvas = NextLvlCanv.enabled;
         //EndGameCanvas.gameObject.SetActive(false);
-        NextLvlCanv.enabled = false;
         MainCanvas.enabled = false;
         GameObject Customers = GameObject.Find("Customers");
         if (Customers != null)

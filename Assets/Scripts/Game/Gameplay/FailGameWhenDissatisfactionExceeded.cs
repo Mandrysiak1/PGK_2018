@@ -19,7 +19,7 @@ public class FailGameWhenDissatisfactionExceeded : MonoBehaviour
     {
         if (current >= Treshold - 0.1f)
         {
-            Main.GameOver();
+            Main.GameOver(Assets.PGKScripts.Enums.GameState.Failure);
         }
     }
 }
