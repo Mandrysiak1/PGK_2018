@@ -21,6 +21,9 @@ public class EndMenu : MonoBehaviour
     private GameObject Restart;
 
     [SerializeField]
+    private GameObject Quit;
+
+    [SerializeField]
     private EventSystem EventSystem = null;
 
     public void DoContinue()
@@ -54,10 +57,12 @@ public class EndMenu : MonoBehaviour
         Text.text = string.Format(format, score);
         gameObject.SetActive(true);
 
-        Continue.SetActive(isVictory);
+        if(Continue != null)
+            Continue.SetActive(isVictory);
         if (isVictory)
         {
-            EventSystem.SetSelectedGameObject(Continue);
+            GameObject toSelect = Continue != null ? Continue : Quit;
+            EventSystem.SetSelectedGameObject(toSelect);
         }
         else
         {
