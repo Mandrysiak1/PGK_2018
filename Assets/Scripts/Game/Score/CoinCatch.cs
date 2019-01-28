@@ -42,7 +42,7 @@ public class CoinCatch : MonoBehaviour {
             GameObject img = Instantiate(coinObj, startPosition, rotation);
             //Vector3 posoffset = new Vector3(-5f, 0, 0);
             img.transform.DOMove(target.transform.position, coinUpTime).OnComplete( () => Destroy(img) );
-            img.transform.DOShakeRotation(2*coinUpTime);
+            img.transform.DOShakeRotation(1.5f*coinUpTime);
             img.transform.DOScale(30f, coinUpTime);
             yield return new WaitForSeconds(0.4f);
         }
