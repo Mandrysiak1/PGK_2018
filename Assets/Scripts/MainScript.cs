@@ -14,16 +14,24 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class MainScript : MonoBehaviour
 {
-    #region EventClasses
-    //event classes
     public class GameStatusEvent : UnityEvent<GameState, GameState> { }
-    public class DissatisfactionEvent : UnityEvent<float, float> { }
-
-
-    //end of event classes
-    #endregion
     public GameStatusEvent GameStatusChanged { get; set; }
     public bool tutorial = false;
+
+    [SerializeField]
+    private GameObject Gui;
+
+    [SerializeField]
+    private EndMenu EndMenu;
+
+    [SerializeField]
+    private BrawlController Brawl;
+
+    [SerializeField]
+    private ScoreSystem Score;
+
+    [SerializeField]
+    private PauseController PauseController;
 
     private GameState gameState = GameState.Playing;
     public GameState CurrentGameState
@@ -63,6 +71,11 @@ public class MainScript : MonoBehaviour
     {
     }
 
+    private void OnDestroy()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     public void Start()
     {
         UpgradeClass.preGameTip = UpgradeClass.Tip;
@@ -81,11 +94,36 @@ public class MainScript : MonoBehaviour
 
     public void GameOver(GameState state = GameState.Failure)
     {
+        if (state == CurrentGameState)
+            return;
+
         if (state == GameState.Success)
             Time.timeScale = 0.0f;
         PlayerController.gameObject.SetActive(false);
         CurrentGameState = state;
+        Gui.SetActive(false);
         Player.ResetPlate();
+
+        if (state == GameState.Failure)
+        {
+            PauseController.enabled = false;
+            Brawl.RunBrawl(DefeatMenu);
+        }
+        else if(state == GameState.Success)
+        {
+            PauseController.enabled = false;
+            WinMenu();
+        }
+    }
+
+    private void DefeatMenu()
+    {
+        EndMenu.Show(false, Score.Score);
+    }
+
+    private void WinMenu()
+    {
+        EndMenu.Show(true, Score.Score);
     }
 }
 

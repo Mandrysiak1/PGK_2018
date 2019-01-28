@@ -2,6 +2,7 @@
 
 public class Player : MonoBehaviour
 {
+	public bool Interactive = true;
     public int BeersHandedOut { get; private set; }
     public bool Vulnerable = true;
 

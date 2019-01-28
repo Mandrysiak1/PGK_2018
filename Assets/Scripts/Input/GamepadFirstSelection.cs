@@ -5,7 +5,7 @@ public class GamepadFirstSelection : MonoBehaviour
 {
     public EventSystem EventSystem;
 
-    private void Start()
+    private void OnEnable()
     {
         if (GamepadHelper.IsGamepadPresent())
         {

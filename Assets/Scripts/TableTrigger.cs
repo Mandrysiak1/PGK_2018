@@ -16,7 +16,7 @@ public class TableTrigger : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Submit") && PlayerInRange)
+        if (Input.GetButtonDown("Submit") && PlayerInRange && Context.Player.Interactive)
         {
             Context.Orders.TryUpdateOrderSource(Source);
         }

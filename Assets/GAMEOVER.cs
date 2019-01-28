@@ -9,10 +9,10 @@ public class GAMEOVER : MonoBehaviour {
 	void Start () {
         main = FindObjectOfType<MainScript>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -21,6 +21,7 @@ public class GAMEOVER : MonoBehaviour {
         {
             Debug.Log("asd fpd;sgn fkpadfngd");
             main.GameOver();
+	        enabled = false;
         }
     }
 }

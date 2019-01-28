@@ -21,7 +21,12 @@ public class MenuContent : MonoBehaviour
 
     public virtual void Disable()
     {
-        gameObject.SetActive(false);
+        if (EventSystem == null)
+            EventSystem = FindObjectOfType<EventSystem>();
+        if (EventSystem != null && EventSystem.currentSelectedGameObject == FirstSelection)
+            EventSystem.SetSelectedGameObject(null);
+        if(gameObject != null)
+            gameObject.SetActive(false);
     }
 
 

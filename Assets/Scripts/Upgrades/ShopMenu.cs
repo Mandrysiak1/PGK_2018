@@ -10,11 +10,6 @@ public class ShopMenu : MonoBehaviour
     public void Quit()
     {
         SceneManager.UnloadSceneAsync("Shop");
-        UpgradeClass.exited = true;
-        UIMain uimain = FindObjectOfType<UIMain>();
-        uimain.MenuActivated = true;
-        EventSystem.current.SetSelectedGameObject(null);
-        uimain.BackFromShop();
     }
 
     private void Start()

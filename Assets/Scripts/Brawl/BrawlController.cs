@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Assets.PGKScripts.Enums;
 using Game.Initialization;
@@ -10,21 +11,6 @@ public class BrawlController : MonoBehaviour
     public float PunchDelay = 3.0f;
     [SerializeField]
     private LevelLoadEvent OnLevelLoad;
-
-    [SerializeField]
-    private UIMain UIMainObject;
-
-    [SerializeField]
-    private MainScript Main;
-
-    [SerializeField]
-    private Canvas MenuCanvas;
-
-    [SerializeField]
-    private Canvas MainCanvas;
-
-    [SerializeField]
-    private Canvas LoseCanvas;
 
     [SerializeField]
     private Camera Camera;
@@ -43,7 +29,6 @@ public class BrawlController : MonoBehaviour
     private void Start()
     {
         OnLevelLoad.LevelLoaded.AddListener(OnLevelLoaded);
-        Main.GameStatusChanged.AddListener(GameStateChanged);
         Brawl = FindObjectOfType<Brawl>();
     }
 
@@ -54,36 +39,22 @@ public class BrawlController : MonoBehaviour
 
     }
 
-    private void GameStateChanged(GameState old, GameState current)
+    public void RunBrawl(Action onFinish)
     {
-        if (Brawl == null)
-        {
-            Debug.LogWarning("No brawl!");
-            return;
-        }
-
-        if (old == GameState.Playing && current == GameState.Failure)
-        {
-            StartCoroutine(RunBrawl());
-        }
+        StartCoroutine(_RunBrawl(onFinish));
     }
 
-    private IEnumerator RunBrawl()
+    private IEnumerator _RunBrawl(Action onFinish)
     {
         Debug.Log("BRAWL TIME!");
         Time.timeScale = 1.0f;
 
-        MenuCanvas.gameObject.SetActive(false);
-        MainCanvas.gameObject.SetActive(false);
-        LoseCanvas.gameObject.SetActive(false);
-        UIMainObject.MenuActivated = false;
         Insult.text = "";
         Insult.gameObject.SetActive(true);
 
         Fade.ApplySourceColor();
 
         yield return new WaitForSeconds(1.0f);
-        UIMainObject.MenuActivated = false;
 
         Fade.Animate();
         DisableWanderers();
@@ -93,25 +64,16 @@ public class BrawlController : MonoBehaviour
         Punch.PlayOneShot(Brawl.StartSound);
 
         yield return new WaitForSeconds(1.0f);
-        UIMainObject.MenuActivated = false;
-        /*for (int i = 0; i < Punches; i++)
-        {
-            Punch.Play();
-            Insult.text = Brawl.Insults.Random();
-            if(i != Punches - 1)
-                yield return new WaitForSeconds(PunchDelay);
-        }*/
 
         yield return new WaitForSeconds(4.0f);
 
+        Fade.SourceColor.a = 0.5f;
         Fade.AnimateReverse();
 
         yield return new WaitForSeconds(Fade.AnimationTime);
 
         Time.timeScale = 0.0f;
-        MenuCanvas.gameObject.SetActive(true);
-        LoseCanvas.gameObject.SetActive(true);
-        UIMainObject.MenuActivated = true;
+        onFinish();
     }
 
     private void SetNegativeMood()
