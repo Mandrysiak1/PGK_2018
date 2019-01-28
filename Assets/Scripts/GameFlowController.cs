@@ -13,6 +13,9 @@ public class GameFlowController : ScriptableObject
     [SerializeField]
     private SceneReference Shop;
 
+    [SerializeField]
+    private SceneReference GameEnd;
+
     private GameLevel CurrentLevel;
 
     public void LoadMainMenu()
@@ -52,12 +55,10 @@ public class GameFlowController : ScriptableObject
     {
         return Flow.GetNextLevel(CurrentLevel) != null;
     }
-    public bool isLevel4()
+
+    public void LoadGameEnd()
     {
-        if (Flow.GetNextLevel(Flow.GetNextLevel(CurrentLevel)) == null)
-            return true;
-        else
-            return false;
+        SceneManager.LoadScene(GameEnd.SceneName);
     }
 
     public void LoadShop()

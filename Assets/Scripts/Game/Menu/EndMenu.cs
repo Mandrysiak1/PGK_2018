@@ -28,10 +28,21 @@ public class EndMenu : MonoBehaviour
 
     public void DoContinue()
     {
-        if(UpgradeClass.Tip > 0 &&  Flow.isLevel4() == false)
-            Flow.LoadShop();
+        if (Flow.HasNextLevel())
+        {
+            if (UpgradeClass.Tip > 0)
+            {
+                Flow.LoadShop();
+            }
+            else
+            {
+                Flow.StartNextLevel();
+            }
+        }
         else
-            Flow.StartNextLevel();
+        {
+            Flow.LoadGameEnd();
+        }
     }
 
     public void DoRestart()
