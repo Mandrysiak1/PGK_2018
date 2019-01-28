@@ -24,17 +24,17 @@ public class ShopMenu : MonoBehaviour
     {
         int tip = UpgradeClass.Tip;
         int capacityCost = 10 * UpgradeClass.BeerTimes;
-        PlateCapacity.Available = tip > capacityCost;
+        PlateCapacity.Available = tip >= capacityCost;
         PlateCapacity.BuyAction = Buy(UpgradeClass.ChangeMaxBeer);
-        PlateCapacity.SetValues(5 + UpgradeClass.BeerTimes, capacityCost, 1);
+        PlateCapacity.SetValues(5 + UpgradeClass.BeerModif, capacityCost, 1);
 
         int speedCost = 5 * UpgradeClass.SpeedTimes;
-        Speed.Available = tip > speedCost;
+        Speed.Available = tip >= speedCost;
         Speed.BuyAction = Buy(UpgradeClass.ChangeSpeedModif);
         Speed.SetValues(UpgradeClass.SpeedTimes, speedCost, 1);
 
         int invulnerabilityCost = 1000;
-        Invulnerability.Available = tip > invulnerabilityCost;
+        Invulnerability.Available = tip >= invulnerabilityCost;
         Invulnerability.Inactive = !UpgradeClass.invulnerabilityPurchased;
         Invulnerability.BuyAction = Buy(UpgradeClass.MarioStar);
         Invulnerability.SetValues(0, invulnerabilityCost, 0);
