@@ -199,7 +199,7 @@ public class tutorial : MonoBehaviour
         if(flags[13]==true && flags[14]==false)
         {
             //IvonaHoldingCompany[6].DisableIt();
-            //spawnObject();
+            spawnObject();
             IvonaHoldingCompany[7].MyStart();
             //bartenderspeech.text = "Oh shoot! Looks like someone dropped a frying pan over there! Where did they even get it from? You'll drop one beer if you slip on it, so watch out.";
             flags[14] = true;
