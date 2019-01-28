@@ -44,10 +44,6 @@ public class EndMenu : MonoBehaviour
         Flow.LoadMainMenu();
     }
 
-    private void Awake()
-    {
-    }
-
     public void Show(bool isVictory, int score)
     {
         if (EventSystem == null)
@@ -57,7 +53,15 @@ public class EndMenu : MonoBehaviour
         Text.text = string.Format(format, score);
         gameObject.SetActive(true);
 
-        if(Continue != null)
+        if (GamepadHelper.IsGamepadPresent())
+        {
+            SelectButton(isVictory);
+        }
+    }
+
+    private void SelectButton(bool isVictory)
+    {
+        if (Continue != null)
             Continue.SetActive(isVictory);
         if (isVictory)
         {
