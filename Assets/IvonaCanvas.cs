@@ -58,8 +58,11 @@ public class IvonaCanvas : MonoBehaviour {
         }
         if (Input.GetButtonDown("Submit") && flag == true) 
         {
-            if(correntMessage < Messages.Count )
-                audioSources[correntMessage].Stop();
+            if (correntMessage < audioSources.Count)
+            {
+                if (correntMessage < Messages.Count)
+                    audioSources[correntMessage].Stop();
+            }
             correntMessage++;
             if (Input.GetButtonDown("Submit") && flag == true && correntMessage == Messages.Count)
             {
@@ -79,7 +82,14 @@ public class IvonaCanvas : MonoBehaviour {
                 textField.text = "";
                 message = Messages[correntMessage];
                 coroutine1 = StartCoroutine(TypeText());
-                audioSources[correntMessage].Play();
+                if (correntMessage < audioSources.Count)
+                {
+                    audioSources[correntMessage].Play();
+                }  
+                else
+                {
+                    ;
+                }
             }
         }
     }
